@@ -1,51 +1,68 @@
-# CookBook
+<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-Страницы: 
+## Laravel 8 and React 17 boilerplate
+There are two different ways to run this demo
 
-    • Главная (тизеры блюд)
-    • Страница блюда (ингредиенты, рецепт, фото, видео, комменты...)
-    • Список авторов (сортировка по алфавиту, по рейтингу, по кол-ву блюд);
-        по клику на имя автора открываются его блюда (списком или тизерами, как на главной)
-    • Форма добавления блюда (шаги с фото?)
-    • Авторизация / регистрация
-    • Личный кабинет юзера? (мои блюда, избранное, редактирование блюда)
+Please follow the guide.
+
+## Prerequisite
+
+1. Make sure you have [composer](https://getcomposer.org/download/) installed.
+2. Make sure you have latest stable version of [node](https://nodejs.org/en/download/) installed.
+
+### Option 1
+
+1. `git clone`
+2. `create a .env file copy content from .env.example and update the values`
+3. `composer install && composer update`
+4. `php artisan cron:refresh-database`
+5. `npm install && npm run dev`
+6. `php artisan key:gen`
+7. `php artisan serve`
+
+### Option 2
+
+## Prerequisite
+Make sure you have [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) installed on you machine.
+
+1. `git clone`
+2. `create a .env file copy content from .env.docker and do not make any change`
+
+run following command in terminal / power shell
+```
+docker-compose up -d
+```
+
+when docker will finish building the containers, access the "laravel-react-app" container using following command
+
+`docker exec -it lr_app sh`
+
+now you will be inside container
+
+run following commands
+1. `composer install && composer update`
+2. `php artisan cron:refresh-database`
+3. `php artisan key:gen`
+4. `npm install && npm run dev`
+
+open browser and check the following address
+
+`http://localhost:8100`
+
+TODO:
+
+- [x] Add Redux
+- [x] Add Laravel Sanctum for authentication
+- [x] User Login
+- [x] User Register
+- [x] Users Crud
+- [x] Articles Crud
+- [x] Form validation Client and Server
+- [ ] Reset Password
+- [x] Tests
+- [x] Upgrade to Laravel 7
+- [x] Upgrade to React 16.13
+- [x] docker
 
 
-Страница блюда:
-
-    • Основное фото
-    • Название категории
-    • Название блюда
-    • Короткое описание? (“Классическое блюдо средиземноморской кухни, идеально с белым вином.”)
-    • Рейтинг
-    • Сложность
-    • Автор
-    • Ингредиенты с кол-вом
-    • Рецепт по шагам (с фото?)
-    • Видео?
-    • Комментарии
-
-
-Вопросы:
-
-    калорийность?
-    время приготовления?
-    теги (фильтрация по тегам – “бекон”, “грузинская кухня”, “без мяса”)?
-    фильтры, расширенный поиск (блюда со сложностью 2, блюда с рейтингом от 3 до 5, блюда с калорийностью не более N и тегом “без мяса”)?
-    добавление блюда в избранное?
-    лайки?
-    принадлежность блюда к одной или нескольким категориям? (“суп с копчёным лососем” - супы и/или рыбные блюда?)
-
-
-Аналоги:
-
-    https://1000.menu/catalog/myaso-i-myasoproduktj - 30К блюд, 240К юзеров, мощный функционал
-
-    https://1000.menu/cooking/30519-myaso-v-smetane-v-duxovke - оттуда же, страница блюда, куча фичей
-
-    http://www.topglobus.ru/kulinarnaja-kniga-recepty-online-mjasnye-bljuda?p=12&l= - слабее, но тоже полезно посмотреть
-
-    http://coolinaripg.herokuapp.com/recipes - аналог со стажировки в GB (заметил его только на втором туре голосования за идеи проектов
-
-    https://eda.ru/recepty/russkaya-kuhnya/supy 
 
