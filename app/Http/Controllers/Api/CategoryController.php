@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        return Category::all();
+
+        $categories = Category::all();
+        return  $this->handleResponse($categories);
     }
 
     /**
@@ -31,7 +32,7 @@ class CategoryController extends Controller
         $category = new Category($request->validated());
         $category->save();
 
-        return response()->json($category, 201);
+        return $this->handleResponse($category, 201);
     }
 
     /**
@@ -43,7 +44,8 @@ class CategoryController extends Controller
      */
     public function show(Request $request, $id)
     {
-        return Category::findOrFail($id);
+        $category = Category::findOrFail($id);
+        return  $this->handleResponse($category->toArray());
     }
 
     /**
@@ -60,7 +62,7 @@ class CategoryController extends Controller
         $data = $request->validated();
         $category->update($data);
 
-        return response()->json($category, 200);
+        return $this->handleResponse($category, 'Updated');
     }
 
     /**
@@ -75,6 +77,6 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return response([], 200);
+        return $this->handleResponse($category, 'Deleted');
     }
 }
