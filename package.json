@@ -25,7 +25,7 @@
     "font-awesome": "^4.7.0",
     "history": "^5.0.0",
     "jquery": "^3.5.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -37,7 +37,8 @@
     "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "ree-validate": "^3.3.2"
+    "ree-validate": "^3.3.2",
+    "webpack": "^5.44.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -57,8 +58,8 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-webpack-plugin": "^2.4.3",
-    "laravel-mix": "^6.0.11",
-    "postcss": "^8.2.4",
+    "laravel-mix": "^6.0.25",
+    "postcss": "^8.3.5",
     "redux-logger": "^3.0.6",
     "remove-files-webpack-plugin": "^1.4.4",
     "resolve-url-loader": "^3.1.2",
