@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 
-class CategoryController extends BaseController
+class CategoryController extends Controller
 {
+    use ApiResponder;
+
     /**
      * Display a listing of the resource.
      *

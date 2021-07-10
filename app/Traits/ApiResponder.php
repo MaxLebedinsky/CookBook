@@ -1,14 +1,9 @@
 <?php
 
+namespace App\Traits;
 
-namespace App\Http\Controllers\API;
-
-use App\Http\Controllers\Controller as Controller;
-
-
-class BaseController extends Controller
+trait ApiResponder
 {
-
     public function handleResponse($result, $msg = '')
     {
         $res = [
