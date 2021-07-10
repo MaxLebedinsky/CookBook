@@ -185,3 +185,139 @@ Response
 
 
 
+**_Рецепты:_**
+
+**Весь список**
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request GET ```/api/v1/dishes```
+
+Response
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "title": "Sint dolores error quidem expedita.",
+            "img": "/assets/img/1.jpg",
+            "description": "Lorem ipsum dolor sit",
+            "pubdate": "2021-07-10 23:12:59",
+            "user_id": 2,
+            "category_id": 1,
+            "views": 234
+        },
+        {
+          "id": 2,
+          "title": "Lorem ipsum dolor sit.",
+          "img": "/assets/img/2.jpg",
+          "description": "Lorem ipsum dolor sit",
+          "pubdate": "2021-07-10 22:12:59",
+          "user_id": 3,
+          "category_id": 5,
+          "views": 213 
+        }
+    ],
+    "message": ""
+}
+```
+
+
+**Один рецепт**
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request GET ```/api/v1/dishes/{id}```
+
+Response
+```json
+{
+    "success": true,
+    "data": {
+        "id": 2,
+        "title": "Lorem ipsum dolor sit.",
+        "img": "/assets/img/2.jpg",
+        "description": "Lorem ipsum dolor sit",
+        "pubdate": "2021-07-10 22:12:59",
+        "user_id": 3,
+        "category_id": 5,
+        "views": 213
+    },
+"message": ""
+}
+```
+
+
+**Новый рецепт**
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request POST ```/api/v1/dishes/```
+Fields: ```title, img, description, user_id, category_id```
+
+Response
+```json
+{
+    "success": true,
+    "data": {
+        "id": 2,
+        "title": "Lorem ipsum dolor sit.",
+        "img": "/assets/img/2.jpg",
+        "description": "Lorem ipsum dolor sit",
+        "pubdate": "2021-07-10 22:12:59",
+        "user_id": 3,
+        "category_id": 5,
+        "views": 213
+    },
+  "message": 201
+}
+```
+
+
+**Обновление полей**
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request PUT|PATCH ```/api/v1/dishes/{id}```
+Fields: ```title```
+
+Response
+```json
+{
+    "success": true,
+    "data": {
+        "id": 2,
+        "title": "Куриное рагу.",
+        "img": "/assets/img/2.jpg",
+        "description": "Lorem ipsum dolor sit",
+        "pubdate": "2021-07-10 22:12:59",
+        "user_id": 3,
+        "category_id": 5,
+        "views": 213
+    },
+  "message": "Updated"
+}
+```
+
+
+**Удаление рецепта**
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request DELETE ```/api/v1/dishes/{id}```
+
+Response
+```json
+{
+    "success": true,
+    "data": {},
+    "message": "Deleted"
+}
+```
+
+
+
