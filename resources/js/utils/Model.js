@@ -1,16 +1,4 @@
-/* ============
- * Model
- * ============
- *
- * The base model.
- *
- * Model are used to map the data
- * and help in avoiding code repetition
- * For instance,
- * if we need to get user full name by joining first and last name
- * or if we want to manipulate user dates
- * we can write a function
- */
+
 import moment from 'moment'
 import _ from 'lodash'
 
