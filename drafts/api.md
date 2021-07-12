@@ -314,10 +314,143 @@ Response
 ```json
 {
     "success": true,
-    "data": {},
+    "data": {
+        "id": 2,
+        "title": "Lorem ipsum dolor sit.",
+        "img": "/assets/img/2.jpg",
+        "description": "Lorem ipsum dolor sit",
+        "pubdate": "2021-07-10 22:12:59",
+        "user_id": 3,
+        "category_id": 5,
+        "views": 213
+    },
     "message": "Deleted"
 }
 ```
 
 
 
+**_Ингредиенты:_**
+
+**Весь список**
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request GET ```/api/v1/dishes/{id}/ingredients```
+
+Response
+```json
+{
+  "success": true,
+  "data": {
+    "3": {
+      "id": 4,
+      "ingredients_name": "упитанная курочка",
+      "quantity": 5,
+      "measure": "тушка",
+      "dish_id": 98
+    },
+    "9": {
+      "id": 10,
+      "ingredients_name": "соль",
+      "quantity": 9,
+      "measure": "чайная ложка",
+      "dish_id": 98
+    }
+  },
+  "message": ""
+} 
+```
+
+
+**Один ингредиент**
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request GET ```/api/v1/dishes/{id}/ingredients/{id}
+
+Response
+```json
+{
+  "success": true,
+  "data": {
+    "id": 4,
+    "ingredients_name": "упитанная курочка",
+    "quantity": 5,
+    "measure": "тушка",
+    "dish_id": 98
+  },
+  "message": ""
+}
+```
+
+
+**Новый ингредиент**
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request POST ```/api/v1/dishes/{id}/ingredients```
+Fields: ```ingredients_name, quantity, measure```
+
+Response
+```json
+{
+  "success": true,
+  "data": {
+    "ingredients_name": "Тестовый ингредиент",
+    "quantity": "34",
+    "measure": "Тестовая мера измерения",
+    "dish_id": 98,
+    "id": 51
+  },
+  "message": 201
+} 
+```
+
+
+**Обновление полей**
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request PUT|PATCH ```/api/v1/dishes/{id}/ingredients/{id}```
+Fields: ```ingredients_name```
+
+Response
+```json
+{
+    "success": true,
+    "data": {
+        "id": 4,
+        "ingredients_name": "Тестовый ингредиент (изменен)",
+        "quantity": "34",
+        "measure": "Тестовая мера измерения",
+        "dish_id": 98
+    },
+    "message": "Updated"
+}
+```
+
+
+**Удаление рецепта**
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request DELETE ```/api/v1/dishes/{id}/ingredients/{id}```
+
+Response
+```json
+{
+    "success": true,
+    "data": {
+        "id": 4,
+        "ingredients_name": "Тестовый ингредиент (изменен)",
+        "quantity": "34",
+        "measure": "Тестовая мера измерения",
+        "dish_id": 98
+    },
+  "message": "Deleted"
+}
+```
