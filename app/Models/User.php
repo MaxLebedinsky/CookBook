@@ -91,4 +91,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function dishes(): HasMany
+    {
+        return $this->hasMany(Dish::class);
+    }
 }
