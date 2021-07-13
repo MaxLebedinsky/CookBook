@@ -27,8 +27,7 @@ class DishTableSeeder extends Seeder
 
     protected function generateData(): array
     {
-        $data = [];
-        $data[] = [
+        $data = [
             'title' => $this->faker->sentence(10),
             'img' => $this->faker->randomDigitNotNull() . '.' . $this->faker->randomElement(['jpg', 'png']),
             'description' => $this->faker->paragraph(10),

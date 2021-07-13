@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DishRequest extends FormRequest
+class IngredientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class DishRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:250',
-            'img' => 'required|file|mimes:jpg,png',
-            'description' => 'required|string|min:20|max:1000',
-            'category_id'=> 'required|integer',
+            'ingredients_name' => 'required|string|min:2|max:250',
+            'quantity'=> 'required|integer',
+            'measure'=> 'required|string|min:2|max:250',
         ];
     }
 }
