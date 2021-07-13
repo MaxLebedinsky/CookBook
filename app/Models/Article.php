@@ -10,6 +10,43 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * App\Models\Article
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $title
+ * @property string $slug
+ * @property string $description
+ * @property string $content
+ * @property bool $published
+ * @property \Illuminate\Support\Carbon|null $published_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\ArticleFactory factory(...$parameters)
+ * @method static Builder|Article mine(int $user_id)
+ * @method static Builder|Article newModelQuery()
+ * @method static Builder|Article newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Article onlyTrashed()
+ * @method static Builder|Article published()
+ * @method static Builder|Article query()
+ * @method static Builder|Article whereContent($value)
+ * @method static Builder|Article whereCreatedAt($value)
+ * @method static Builder|Article whereDeletedAt($value)
+ * @method static Builder|Article whereDescription($value)
+ * @method static Builder|Article whereId($value)
+ * @method static Builder|Article wherePublished($value)
+ * @method static Builder|Article wherePublishedAt($value)
+ * @method static Builder|Article whereSlug($value)
+ * @method static Builder|Article whereTitle($value)
+ * @method static Builder|Article whereUpdatedAt($value)
+ * @method static Builder|Article whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|Article withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Article withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Article extends Model
 {
     // use soft delete instead of permanent delete

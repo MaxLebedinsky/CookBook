@@ -6,8 +6,6 @@
 
     <title>{{'Laravel 8 with React 17 Boilerplate'}}</title>
 
-    <!-- Styles -->
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
