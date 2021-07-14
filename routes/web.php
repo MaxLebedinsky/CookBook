@@ -11,6 +11,12 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::view( '/{any}', 'index')->where('any', '.*');
+Auth::routes();
+
+Route::get( '/{any}', function () {
+    return view('index');
+})->where('any', '.*');
+
