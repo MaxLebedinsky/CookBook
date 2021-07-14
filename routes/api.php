@@ -42,9 +42,9 @@ Route::group(["prefix" => "{$api_version}"], function () {
         ->group(base_path('routes/api/dishes.php'));
 });
 
-Route::any('/{any}', function () {
+Route::any('/{any?}', function () {
     return response()->json([
         'success' => false,
-        'message' => 'Resource not found',
+        'message' => 'Endpoint not found',
     ], 404);
-})->name('api.any.404');
+})->where('any', '.*');
