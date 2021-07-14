@@ -13,17 +13,19 @@ export const TEST_DISH = {
 
 export const DishCard = (props) => {
     const {dish} = {...props};
-    console.log(dish.name);
+    const clickHandler = () => {
+        // здесь будет вызов компонента Dish c id = dish.id
+        console.log(`calling component Dish with id=${dish.id}`)
+    };
     return (
-        <div className="dish-card">
-            <img src={dish.photo} alt={dish.name} width="140"></img>
+        <div className="dish-card" onClick={clickHandler}>
+            <img src={dish.photo} alt={dish.name} width="140"/>
             <div className="dish-card-desc">
                 <h3>{dish.name}</h3>
                 <p>{dish.category}</p>
                 <p>Автор: {dish.author}</p>
                 <p>Сложность: {dish.level}</p>
                 <p>Рейтинг: {dish.rating}</p>
-                <button>Подробнее</button>
             </div>
         </div>
     );
