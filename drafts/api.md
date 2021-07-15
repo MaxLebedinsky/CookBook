@@ -3,7 +3,7 @@ API
 
 **Login**
 
-Request POST /api/v1/login
+Request POST /api/v1/auth/login
 x-www-form-urlencoded
 email, password
 
@@ -12,9 +12,7 @@ Response
 {
     "success": true,
     "data": {
-        "token": "8|JDMhJVJdFqOljlViwylboLozIUeesSWvi5z4v1XI",
-        "name": "DSerov",
-        "is_admin": false
+        "token": "8|JDMhJVJdFqOljlViwylboLozIUeesSWvi5z4v1XI"
     },
     "message": "User logged-in!"
 }
@@ -23,7 +21,7 @@ Response
 
 **Register**
 
-Request POST /api/v1/register
+Request POST /api/v1/auth/register
 
 x-www-form-urlencoded
 name, email, password, confirm_password
@@ -46,7 +44,7 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/logout```
+Request POST ```/api/v1/auth/logout```
 
 Response
 ```json
@@ -64,6 +62,32 @@ Response
         "updated_at": "2021-07-09T16:16:17.000000Z"
     },
     "message": "User successfully logout!"
+}
+```
+
+**Current User**
+
+Header: 
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request POST ```/api/v1/auth/me```
+
+Response
+```json
+{
+    "success": true,
+    "data": {
+        "id": 56,
+        "name": "name_qwe",
+        "email": "qwe@qwe.ru2",
+        "phone": null,
+        "about": null,
+        "is_admin": false,
+        "email_verified_at": null,
+        "created_at": "2021-07-09T16:16:17.000000Z",
+        "updated_at": "2021-07-09T16:16:17.000000Z"
+    },
+    "message": ""
 }
 ```
 

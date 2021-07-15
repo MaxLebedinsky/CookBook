@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +18,10 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $auth = Auth::user();
-            $success['token'] = $auth->createToken('LaravelSanctumAuth')->plainTextToken;
-            $success['name'] = $auth->name;
-            $success['is_admin'] = $auth->is_admin;
-
-            return $this->handleResponse($success, 'User logged-in!');
+            $data = [
+                'token' => $request->user()->createToken('LaravelSanctumAuth')->plainTextToken,
+            ];
+            return $this->handleResponse($data, 'Login successful');
         } else {
             return $this->handleError('Unauthorised.', ['error' => 'Unauthorised']);
         }
