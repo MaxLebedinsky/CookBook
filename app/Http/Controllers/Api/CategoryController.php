@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Traits\ApiResponder;
-use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
@@ -15,14 +16,11 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return mixed
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        $categories = Category::all();
-        return  $this->handleResponse($categories);
+        return new CategoryCollection(Category::all());
     }
 
     /**
@@ -30,26 +28,25 @@ class CategoryController extends Controller
      *
      * @param CategoryRequest $request
      * @return \Illuminate\Http\Response
+     * @throws \Throwable
      */
     public function store(CategoryRequest $request)
     {
         $category = new Category($request->validated());
-        $category->save();
+        $category->saveOrFail();
 
-        return $this->handleResponse($category, 201);
+        return $this->handleResponse(new CategoryResource($category), 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return Category|Category[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     * @return CategoryResource
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return  $this->handleResponse($category->toArray());
+        return new CategoryResource(Category::findOrFail($id));
     }
 
     /**
@@ -62,11 +59,10 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $category = Category::findOrFail($id);
-
         $data = $request->validated();
         $category->update($data);
 
-        return $this->handleResponse($category, 'Updated');
+        return $this->handleResponse(new CategoryResource($category), 'Updated');
     }
 
     /**
@@ -78,9 +74,7 @@ class CategoryController extends Controller
     public function delete($id)
     {
         $category = Category::findOrFail($id);
-
         $category->delete();
-
-        return $this->handleResponse($category, 'Deleted');
+        return $this->handleResponse([], 'Deleted');
     }
 }
