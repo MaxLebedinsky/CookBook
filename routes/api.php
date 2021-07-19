@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +17,6 @@ use Illuminate\Support\Facades\Route;
 $api_version = config('api.api_version');
 
 Route::group(["prefix" => "{$api_version}"], function () {
-    Route::post('login', [AuthController::class, 'login'])->middleware(['guest']);
-    Route::post('register', [AuthController::class, 'register'])->middleware(['guest']);
-    Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
-
     // register auth routes
     Route::prefix('auth')
         ->group(base_path('routes/api/auth.php'));
@@ -42,9 +37,9 @@ Route::group(["prefix" => "{$api_version}"], function () {
         ->group(base_path('routes/api/dishes.php'));
 });
 
-Route::any('/{any}', function () {
+Route::any('/{any?}', function () {
     return response()->json([
         'success' => false,
-        'message' => 'Resource not found',
+        'message' => 'Endpoint not found',
     ], 404);
-})->name('api.any.404');
+})->where('any', '.*');
