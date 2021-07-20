@@ -26,7 +26,7 @@ class DropPubdateColumnIntoDishesTable extends Migration
     public function down()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->date('pubdate');
+            $table->date('pubdate')->nullable();
         });
     }
 }
