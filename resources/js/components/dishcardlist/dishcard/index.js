@@ -4,7 +4,7 @@ import { Card, CardContent, CardMedia, makeStyles, Typography } from '@material-
 import { DishRating } from './dishrating';
 import { DishLevel } from './dishlevel';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 300,
         maxWidth: 370,
@@ -17,28 +17,60 @@ const useStyles = makeStyles(() => ({
         boxSizing: 'border-box',
         boxShadow: '2px 2px 10px rgba(0,0,0,0.3)',
         cursor: 'pointer',
+        '&:hover': {
+            boxShadow: '4px 4px 15px rgba(0,0,0,0.4)',
+        },
     },
     image: {
         width: 130,
-        // height: 100,
     },
     title: {
         fontWeight: 700,
-        marginBottom: 8
+        marginBottom: 6,
+        lineHeight: '1.3em',
     },
     desc: {
         padding: 0,
         margin: "0 0 0 10px",
+        '&:last-child': {
+            paddingBottom: 10,
+        },
     },
     data: {
         fontSize: '0.8em',
         lineHeight: '1.8em',
-    }
+    },
+
+    // media queries:
+    [theme.breakpoints.down('374')]: {
+        root: {
+            flexDirection: 'column',
+            alignItems: 'center',
+            maxWidth: 300,
+        },
+        title: {
+            marginTop: 10,
+        },
+        desc: {
+            [theme.breakpoints.down('374')]: {
+                textAlign: 'center',
+              },
+        },
+    },
+    [theme.breakpoints.up('425')]: {
+        root: {
+            maxWidth: 400
+        },
+        desc : {
+            marginLeft: 20,
+        },
+    },
 }));
 
+// тестовые данные; в "боевом" режиме будут передаваться из компонента DishCardList
 export const TEST_DISH = {
     id: 1,
-    name: "Мясо по-французски",
+    name: "Мясо по-французски с сыром и картофелем",
     category: "Мясные блюда",
     author: "Иванов",
     level: 2,
@@ -49,6 +81,7 @@ export const TEST_DISH = {
     pubdate: "2021-07-10 23:12:59",
 };
 
+// преобразование данных из поля pubdate в строку вида "23.12.2020 17:53"
 const getDateString = (string) => {
     let date = new Date(Date.parse(string));
     return(`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
