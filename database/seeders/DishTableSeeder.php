@@ -29,11 +29,13 @@ class DishTableSeeder extends Seeder
     {
         $data = [
             'title' => $this->faker->sentence(10),
-            'img' => $this->faker->randomDigitNotNull() . '.' . $this->faker->randomElement(['jpg', 'png']),
+            'big_img' => $this->faker->imageUrl(640, 480, 'dishes', true),
+            'small_img' => $this->faker->imageUrl(130, 100, 'dishes', true),
             'description' => $this->faker->paragraph(10),
-            'user_id' => $this->faker->numberBetween(0,10),
-            'category_id' => $this->faker->numberBetween(0,10),
+            'user_id' => $this->faker->numberBetween(1,50),
+            'category_id' => $this->faker->numberBetween(1,10),
             'views' => $this->faker->randomNumber(3, false),
+            'rating' => $this->faker->randomFloat(2, 0, 5),
             'created_at' => $this->faker->date('Y-m-d') . ' ' . $this->faker->time('H:i:s'),
         ];
 
