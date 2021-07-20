@@ -12,7 +12,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 const useStyles = makeStyles(() => ({
     button: {
         backgroundColor: '#757de8',
-    },
+        padding:'4px',
+        minWidth:0,
+        marginRight:'8px'
+    }
 }));
 
 const StyledMenu = withStyles({
@@ -72,14 +75,13 @@ const SearchField = () => {
                 <form className="search-form">
                     <SearchIcon className="search-icon"/>
                     <input className='filter-icon-input' type="text" placeholder="Search ..."/>
-                    <div>
                         <Button
                             className={classes.button}
                             aria-controls="customized-menu"
                             aria-haspopup="true"
                             onClick={handleClick}
                         >
-                            <FilterIcon/>
+                            <FilterIcon />
                         </Button>
                         <StyledMenu
                             id="customized-menu"
@@ -88,14 +90,16 @@ const SearchField = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                                {categories.map((category, index) => (
-                                        <StyledMenuItem key={index}>
-                                            <ListItemText  primary={category.name}/>
-                                        </StyledMenuItem>
-                                    )
-                                )}
+                            {categories.map((category, index) => (
+                                    <StyledMenuItem key={index}>
+                                        <ListItemText
+                                            onClick={handleClose}
+                                            primary={category.name}/>
+                                    </StyledMenuItem>
+                                )
+                            )}
                         </StyledMenu>
-                    </div>
+
                 </form>
             </div>
         </div>

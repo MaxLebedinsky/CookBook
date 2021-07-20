@@ -6,15 +6,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import {makeStyles} from '@material-ui/core/styles';
 import Logo from './logo'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
     toolbar: {
         display:'block',
-        width: '50%',
+        width: '70%',
         minHeight: 128,
         margin: '0 auto',
+        [theme.breakpoints.up('md')]: {
+            width: '50%',
+        },
     }
 }));
 
