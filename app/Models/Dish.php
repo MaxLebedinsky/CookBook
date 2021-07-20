@@ -79,4 +79,12 @@ class Dish extends Model
     {
         return $this->hasMany(Ingredient::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function dishSteps(): HasMany
+    {
+        return $this->hasMany(DishStep::class);
+    }
 }

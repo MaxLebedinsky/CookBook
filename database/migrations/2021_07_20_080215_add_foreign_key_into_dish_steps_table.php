@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropPubdateColumnIntoDishesTable extends Migration
+class AddForeignKeyIntoDishStepsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class DropPubdateColumnIntoDishesTable extends Migration
      */
     public function up()
     {
-        Schema::table('dishes', function (Blueprint $table) {
-            $table->dropColumn('pubdate');
+        Schema::table('dish_steps', function (Blueprint $table) {
+            $table->foreign('dish_id')->references('id')->on('dishes');
         });
     }
 
@@ -25,8 +25,8 @@ class DropPubdateColumnIntoDishesTable extends Migration
      */
     public function down()
     {
-        Schema::table('dishes', function (Blueprint $table) {
-            $table->date('pubdate')->nullable();
+        Schema::table('dish_steps', function (Blueprint $table) {
+            $table->dropForeign('dish_steps_dish_id_foreign');
         });
     }
 }

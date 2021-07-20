@@ -35,6 +35,9 @@ Route::group(["prefix" => "{$api_version}"], function () {
     // register dishes routes
     Route::prefix('dishes')
         ->group(base_path('routes/api/dishes.php'));
+    // register full-dishes routes
+    Route::prefix('full-dishes')
+        ->group(base_path('routes/api/fullDishes.php'));
 });
 
 Route::any('/{any?}', function () {
