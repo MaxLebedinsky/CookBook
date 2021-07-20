@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     // media queries:
-    [theme.breakpoints.down('374')]: {
+    [theme.breakpoints.down(374)]: {
         root: {
             flexDirection: 'column',
             alignItems: 'center',
@@ -52,12 +52,10 @@ const useStyles = makeStyles((theme) => ({
             marginTop: 10,
         },
         desc: {
-            [theme.breakpoints.down('374')]: {
-                textAlign: 'center',
-              },
+            textAlign: 'center',
         },
     },
-    [theme.breakpoints.up('425')]: {
+    [theme.breakpoints.up(425)]: {
         root: {
             maxWidth: 400
         },
@@ -114,8 +112,8 @@ export const DishCard = (props) => {
                     <Typography 
                         color="textSecondary" 
                         className={classes.data}>
-                        Рейтинг: <DishRating rating={dish.rating}/><br/>
-                        Сложность: <DishLevel level={dish.level}/><br/>
+                        Рейтинг:<DishRating rating={dish.rating}/><br/>
+                        Сложность:<DishLevel level={dish.level}/><br/>
                         <b><u>{dish.category}</u></b><br/>
                         Автор: <b><u>{dish.author}</u></b><br/>
                         Опубликовано: {getDateString(dish.pubdate)}

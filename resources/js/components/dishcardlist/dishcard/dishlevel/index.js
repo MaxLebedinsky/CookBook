@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     },
     ratingStars: {
       margin: '0 7px',
+      top: '0.2em',
     },
   });
 
