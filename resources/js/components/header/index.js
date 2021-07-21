@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import {alpha, makeStyles} from '@material-ui/core/styles';
+import { alpha, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import classNames from 'classnames'
@@ -63,30 +63,30 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={ classes.root }>
             <AppBar position="static">
-                <Logo/>
-                <Toolbar className={classes.toolbar}>
-                    <div className={classNames(classes.search, classes.title)}>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon/>
+                <Logo />
+                <Toolbar className={ classes.toolbar }>
+                    <div className={ classNames(classes.search, classes.title) }>
+                        <div className={ classes.search }>
+                            <div className={ classes.searchIcon }>
+                                <SearchIcon />
                             </div>
                             <InputBase
                                 fullWidth="true"
                                 placeholder="Search…"
-                                classes={{
+                                classes={ {
                                     root: classes.inputRoot,
                                     input: classes.inputInput,
-                                }}
-                                inputProps={{'aria-label': 'search'}}
+                                } }
+                                inputProps={ { 'aria-label': 'search' } }
                             />
                         </div>
                     </div>
                 </Toolbar>
             </AppBar>
         </div>
-);
+    );
 }
 
 export default Header

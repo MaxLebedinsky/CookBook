@@ -1,30 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./styles.css"
 import { DishCard } from './dishcard';
 
-const API_URL = 'http://localhost:8000/api/v1/dishes';
 
 export const DishCardList = () => {
 
+   const [dishes, setDishes] = useState()
+
+   const getDishes = () =>
+      window.axios.get('/dishes')
+         .then(json => setDishes(json.data.data))
+
    useEffect(() => {
-      fetch(API_URL, {
-         type: 'GET',
-         headers: {
-            'Access-Control-Allow-Origin': '*',
-         },
-      })
-         .then(response => {
-            console.log(response);
-            return response.json();
-         })
-         .then(data => console.log(data))
+      getDishes()
    }, [])
+
+   console.log(dishes)
 
    return (
       <ul className="list">
-         <li className="list-item">
-            <DishCard />
-         </li>
+         { dishes.map((dish) => (
+            <li className="list-item" key={ dish.id }>
+               <DishCard dish={ dish } />
+            </li>
+         )) }
       </ul>
    )
 }

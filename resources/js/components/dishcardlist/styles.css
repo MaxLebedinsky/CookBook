@@ -1,4 +1,16 @@
 .list {
-   border: 1px solid black;
    padding: 5px;
+   list-style: none;
+}
+
+.list-item {
+   margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+   .list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+   }
 }
