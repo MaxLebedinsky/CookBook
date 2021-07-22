@@ -1,0 +1,44 @@
+body {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.dish-card {
+    max-width: 400px;
+    padding: 10px;
+    margin: 0 auto;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+}
+
+.dish-card-desc {
+    width: 100%;
+}
+
+.dish-card img {
+    display: block;
+    margin-right: 20px;
+}
+
+.dish-card-desc p {
+    margin: 0 0 6px 0;
+}
+
+.dish-card-desc p:last-of-type {
+    margin-bottom: 20px;
+}
+
+.dish-card h3 {
+    margin: 0 0 10px 0;
+}
+
+.dish-card-desc button {
+    display: block;
+    margin: 0 15px 0 auto;
+    margin-top: 15px;
+}
+
+
+
