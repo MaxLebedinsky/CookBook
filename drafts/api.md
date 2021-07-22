@@ -504,7 +504,7 @@ Response
         "user_id": 24,
         "category_id": 9,
         "views": 435,
-        "rating": 4.019999999999999573674358543939888477325439453125
+        "rating": 4.019999999999999573674358543939888477325439453125,
         "complexity": 3,
         "created_at": "2015-07-28T20:35:18.000000Z"
       },
@@ -590,7 +590,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/full-dishes/{id}
+Request GET ```/api/v1/full-dishes/{id}```
 
 Response
 ```json
@@ -607,7 +607,7 @@ Response
         "user_id": 24,
         "category_id": 9,
         "views": 435,
-        "rating": 4.019999999999999573674358543939888477325439453125
+        "rating": 4.019999999999999573674358543939888477325439453125,
         "complexity": 3,
         "created_at": "2015-07-28T20:35:18.000000Z"
       },
@@ -708,7 +708,7 @@ Response
         "user_id": 24,
         "category_id": 9,
         "views": 435,
-        "rating": 4.019999999999999573674358543939888477325439453125
+        "rating": 4.019999999999999573674358543939888477325439453125,
         "complexity": 3,
         "created_at": "2015-07-28T20:35:18.000000Z"
       },
@@ -788,10 +788,12 @@ Response
 
 
 **Обновление полей полного рецепта**
+
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
 Request PUT|PATCH ```/api/v1/full-dishes/{id}```
+
 Fields: ```dish.title```
 
 Response
@@ -809,7 +811,7 @@ Response
         "user_id": 24,
         "category_id": 9,
         "views": 435,
-        "rating": 4.019999999999999573674358543939888477325439453125
+        "rating": 4.019999999999999573674358543939888477325439453125,
         "complexity": 3,
         "created_at": "2015-07-28T20:35:18.000000Z"
       },
@@ -889,6 +891,7 @@ Response
 
 
 **Удаление рецепта**
+
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
