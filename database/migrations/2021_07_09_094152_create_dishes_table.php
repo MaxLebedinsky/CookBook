@@ -18,7 +18,7 @@ class CreateDishesTable extends Migration
             $table->string('title');
             $table->string('img');
             $table->text('description');
-            $table->date('pubdate');
+            $table->date('pubdate')->nullable();
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('category_id');
             $table->unsignedBigInteger('views')->nullable();

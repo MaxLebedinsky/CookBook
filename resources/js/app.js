@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import Layout from "./components/layout";
 
-
 render((<Provider store={ store }>
     <Layout>
     </Layout>

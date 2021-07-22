@@ -19,13 +19,17 @@ class IngredientsTableSeeder extends Seeder
     {
         $this->faker = $faker;
 
-        for ($i = 1; $i <= 50; $i++) {
-            DB::table('ingredients')
-                ->insert($this->generateData());
+        for ($i = 1; $i <= 100; $i++) {
+            $ingredientsCount = mt_rand(3, 5);
+
+            for ($k = 1; $k <= $ingredientsCount; $k++) {
+                DB::table('ingredients')
+                    ->insert($this->generateData($i));
+            }
         }
     }
 
-    protected function generateData(): array
+    protected function generateData(int $dish_id): array
     {
         $data = [
             'ingredients_name' => $this->faker->randomElement([
@@ -38,12 +42,12 @@ class IngredientsTableSeeder extends Seeder
             ]),
             'quantity' => $this->faker->randomDigitNotNull(),
             'measure' => $this->faker->randomElement([
-                'тушка',
-                'столовая ложка',
-                'чайная ложка',
-                'стакан',
+                'кг.',
+                'г.',
+                'ч.л',
+                'ст.л',
             ]),
-            'dish_id' => $this->faker->numberBetween(1,100),
+            'dish_id' => $dish_id,
             'created_at' => $this->faker->date('Y-m-d') . ' ' . $this->faker->time('H:i:s'),
         ];
 
