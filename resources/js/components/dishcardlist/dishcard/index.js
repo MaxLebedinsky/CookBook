@@ -76,7 +76,7 @@ export const TEST_DISH = {
     // photo: "https://via.placeholder.com/130x100",
     photo: "https://eda.ru/img/eda/-x900i/s1.eda.ru/StaticContent/Photos/160406123417/160413162850/p_O.jpg",
     // photo: '../../../../images/dishes/1/main.jpg',
-    pubdate: "2021-07-10 23:12:59",
+    created_at: "2021-07-10 23:12:59",
 };
 
 // преобразование данных из поля pubdate в строку вида "23.12.2020 17:53"
@@ -103,20 +103,20 @@ export const DishCard = (props) => {
             onClick={(event) => clickHandler(event)}>    
                 <CardMedia className={classes.image}
                     component="img"
-                    alt={dish.title}
-                    image='https://via.placeholder.com/130x100'
+                    alt={dish.dish.title}
+                    image={dish.dish.small_img}
                 />
                 <CardContent className={classes.desc}>
                     <Typography component="h3" className={classes.title}>
-                        {dish.title}
+                        {dish.dish.title}
                     </Typography>
                     <Typography 
                         color="textSecondary" 
                         className={classes.data}>
-                        Рейтинг:<DishRating rating={TEST_DISH.rating}/><br/>
-                        Сложность:<DishComplexity complexity={TEST_DISH.complexity}/><br/>
-                        <b><u>Мясные блюда</u></b><br/>
-                        Автор: <b><u>Иванов</u></b><br/>
+                        Рейтинг:<DishRating rating={dish.dish.rating}/><br/>
+                        Сложность:<DishComplexity complexity={dish.dish.complexity}/><br/>
+                        <b><u>{dish.category.name}</u></b><br/>
+                        Автор: <b><u>{dish.author.name}</u></b><br/>
                         Опубликовано: {getDateString(TEST_DISH.pubdate)}
                     </Typography>
                 </CardContent>

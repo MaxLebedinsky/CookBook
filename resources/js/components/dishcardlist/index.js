@@ -8,8 +8,9 @@ export const DishCardList = () => {
    const [dishes, setDishes] = useState([])
 
    const getDishes = () =>
-      window.axios.get('/dishes')
-         .then(json => setDishes(json.data.data))
+      window.axios.get('/full-dishes')
+         .then(json => setDishes(Object.values(json.data.data)))
+
 
    useEffect(() => {
       getDishes()
@@ -20,7 +21,7 @@ export const DishCardList = () => {
    return (
       <ul className="list">
          { dishes.map((dish) => (
-            <li className="list-item" key={ dish.id }>
+            <li className="list-item" key={ dish.dish.id }>
                <DishCard dish={ dish } />
             </li>
          )) }
