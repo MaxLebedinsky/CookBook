@@ -45,10 +45,10 @@ class Dish extends Model
         'user_id',
         'category_id',
         'views',
+        'created_at',
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
     ];
 

@@ -27,17 +27,20 @@ class FullDishController extends Controller
 
         try {
             foreach ($dishes as $dish) {
-                $fullDishes[$dish->id]['dish'] = $dish;
-
                 $ingredients = Ingredient::where('dish_id', $dish->id)->get();
                 $dish_steps = DishStep::where('dish_id', $dish->id)->get();
                 $author = User::where('id', $dish->user_id)->first();
                 $category = Category::where('id', $dish->category_id)->first();
 
-                $fullDishes[$dish->id]['ingredients'] = $ingredients;
-                $fullDishes[$dish->id]['dishSteps'] = $dish_steps;
-                $fullDishes[$dish->id]['author'] = $author;
-                $fullDishes[$dish->id]['category'] = $category;
+                $fullDish = collect([
+                    'dish' => $dish,
+                    'ingredients' =>$ingredients,
+                    'dish_steps' =>$dish_steps,
+                    'author' =>$author,
+                    'category' =>$category,
+                ]);
+
+                $fullDishes[] = $fullDish;
             }
         } catch (\Exception $e) {
             return $this->handleError('error', [], 404);
@@ -70,7 +73,6 @@ class FullDishController extends Controller
     public function show(Request $request, int $id)
     {
         try {
-            $fullDish = [];
             $dish = Dish::findOrFail($id);
 
             $ingredients = Ingredient::where('dish_id', $dish->id)->get();
@@ -78,11 +80,13 @@ class FullDishController extends Controller
             $author = User::where('id', $dish->user_id)->first();
             $category = Category::where('id', $dish->category_id)->first();
 
-            $fullDish['dish'] = $dish;
-            $fullDish['ingredients'] = $ingredients;
-            $fullDish['dishSteps'] = $dish_steps;
-            $fullDish['author'] = $author;
-            $fullDish['category'] = $category;
+            $fullDish = collect([
+                'dish' => $dish,
+                'ingredients' =>$ingredients,
+                'dish_steps' =>$dish_steps,
+                'author' =>$author,
+                'category' =>$category,
+            ]);
         } catch (\Exception $e) {
             return $this->handleError('error', [], 404);
         }
@@ -116,31 +120,27 @@ class FullDishController extends Controller
 
     public function delete(int $id)
     {
-        $fullDish = [];
+        $dish = Dish::findOrFail($id);
 
         try {
-            $dish = Dish::findOrFail($id);
-            $ingredients = Ingredient::where('dish_id', $dish->id)->get();
-            $dish_steps = DishStep::where('dish_id', $dish->id)->get();
-            $author = User::where('id', $dish->user_id)->first();
-            $category = Category::where('id', $dish->category_id)->first();
+            $fullDish = collect([
+                'dish' => $dish,
+                'ingredients' => Ingredient::where('dish_id', $dish->id)->get(),
+                'dish_steps' => DishStep::where('dish_id', $dish->id)->get(),
+                'author' => User::where('id', $dish->user_id)->first(),
+                'category' => Category::where('id', $dish->category_id)->first(),
+            ]);
 
-            $fullDish['dish'] = $dish;
-            $fullDish['ingredients'] = $ingredients;
-            $fullDish['dishSteps'] = $dish_steps;
-            $fullDish['author'] = $author;
-            $fullDish['category'] = $category;
-
-            $ingredientsIds = $this->getItemIds($ingredients);
-            $dishStepIds = $this->getItemIds($dish_steps);
+            $ingredientsIds = $this->getItemIds($fullDish['ingredients']);
+            $dishStepIds = $this->getItemIds($fullDish['dish_steps']);
 
             DB::transaction(function () use ($id, $ingredientsIds, $dishStepIds) {
-                Dish::destroy($id);
                 Ingredient::destroy($ingredientsIds);
                 DishStep::destroy($dishStepIds);
+                Dish::destroy($id);
             });
         } catch (\Exception $e) {
-            return $this->handleError('error', [], 404);
+            return $this->handleError('error', [], 500);
         }
 
         return $this->handleResponse($fullDish, 'Deleted');
