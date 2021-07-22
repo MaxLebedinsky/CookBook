@@ -9,7 +9,7 @@ export const DishCardList = () => {
 
    const getDishes = () =>
       window.axios.get('/full-dishes')
-         .then(json => setDishes(Object.values(json.data.data)))
+         .then(json => setDishes(json.data.data))
 
 
    useEffect(() => {

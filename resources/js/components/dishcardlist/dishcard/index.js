@@ -4,6 +4,9 @@ import { Card, CardContent, CardMedia, makeStyles, Typography } from '@material-
 import { DishRating } from './dishrating';
 import { DishComplexity } from './dishcomplexity';
 
+const MAX_TITLE_LENGTH = 50;
+const MAX_CAT_NAME_LENGTH = 35;
+
 const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 300,
@@ -81,7 +84,6 @@ export const TEST_DISH = {
 
 // преобразование данных из поля pubdate в строку вида "23.12.2020 17:53"
 const getDateString = (string) => {
-    console.log(string);
     let date = new Date(Date.parse(string));
     return(`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
      ${date.getHours()}:${date.getMinutes()}`);
@@ -94,7 +96,7 @@ export const DishCard = (props) => {
         if (!event.target.classList.contains('MuiRating-label')&&
             !event.target.classList.contains('MuiRating-visuallyhidden')) 
         // здесь будет вызов компонента Dish c id = dish.id
-        console.log(`calling component Dish with id=${dish.id}`);
+        console.log(`calling component Dish with id=${dish.dish.id}`);
     };
     
     return (
@@ -108,16 +110,16 @@ export const DishCard = (props) => {
                 />
                 <CardContent className={classes.desc}>
                     <Typography component="h3" className={classes.title}>
-                        {dish.dish.title}
+                        {dish.dish.title.slice(0, MAX_TITLE_LENGTH - 1)}
                     </Typography>
                     <Typography 
                         color="textSecondary" 
                         className={classes.data}>
-                        Рейтинг:<DishRating rating={dish.dish.rating}/><br/>
+                        Рейтинг:<DishRating rating={+dish.dish.rating.toFixed(1)}/><br/>
                         Сложность:<DishComplexity complexity={dish.dish.complexity}/><br/>
-                        <b><u>{dish.category.name}</u></b><br/>
+                        <b><u>{dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1)}</u></b><br/>
                         Автор: <b><u>{dish.author.name}</u></b><br/>
-                        Опубликовано: {getDateString(TEST_DISH.pubdate)}
+                        Опубликовано: {getDateString(dish.dish.created_at)}
                     </Typography>
                 </CardContent>
         </Card>
