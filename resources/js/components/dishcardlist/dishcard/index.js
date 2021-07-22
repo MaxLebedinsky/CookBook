@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import { Card, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import { DishRating } from './dishrating';
-import { DishLevel } from './dishlevel';
+import { DishComplexity } from './dishcomplexity';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,7 +71,7 @@ export const TEST_DISH = {
     name: "Мясо по-французски с сыром и картофелем",
     category: "Мясные блюда",
     author: "Иванов",
-    level: 2,
+    complexity: 2,
     rating: 3.4,
     // photo: "https://via.placeholder.com/130x100",
     photo: "https://eda.ru/img/eda/-x900i/s1.eda.ru/StaticContent/Photos/160406123417/160413162850/p_O.jpg",
@@ -81,6 +81,7 @@ export const TEST_DISH = {
 
 // преобразование данных из поля pubdate в строку вида "23.12.2020 17:53"
 const getDateString = (string) => {
+    console.log(string);
     let date = new Date(Date.parse(string));
     return(`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
      ${date.getHours()}:${date.getMinutes()}`);
@@ -102,21 +103,21 @@ export const DishCard = (props) => {
             onClick={(event) => clickHandler(event)}>    
                 <CardMedia className={classes.image}
                     component="img"
-                    alt={dish.name}
-                    image={dish.photo}
+                    alt={dish.title}
+                    image='https://via.placeholder.com/130x100'
                 />
                 <CardContent className={classes.desc}>
                     <Typography component="h3" className={classes.title}>
-                        {dish.name}
+                        {dish.title}
                     </Typography>
                     <Typography 
                         color="textSecondary" 
                         className={classes.data}>
-                        Рейтинг:<DishRating rating={dish.rating}/><br/>
-                        Сложность:<DishLevel level={dish.level}/><br/>
-                        <b><u>{dish.category}</u></b><br/>
-                        Автор: <b><u>{dish.author}</u></b><br/>
-                        Опубликовано: {getDateString(dish.pubdate)}
+                        Рейтинг:<DishRating rating={TEST_DISH.rating}/><br/>
+                        Сложность:<DishComplexity complexity={TEST_DISH.complexity}/><br/>
+                        <b><u>Мясные блюда</u></b><br/>
+                        Автор: <b><u>Иванов</u></b><br/>
+                        Опубликовано: {getDateString(TEST_DISH.pubdate)}
                     </Typography>
                 </CardContent>
         </Card>

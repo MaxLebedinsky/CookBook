@@ -23,8 +23,8 @@ const StyledRating = withStyles ({
   },
 })(Rating);
 
-export const DishLevel = (props) => {
-  const value = {...props}.level
+export const DishComplexity = (props) => {
+  const value = {...props}.complexity
   const classes = useStyles();
 
   return (
@@ -33,7 +33,7 @@ export const DishLevel = (props) => {
           readOnly={true}
           max={3}
           icon={<StopIcon fontSize="inherit" />}
-          name="level"
+          name="complexity"
           value={value}
           size="small"
       />
