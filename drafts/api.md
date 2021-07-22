@@ -505,6 +505,8 @@ Response
         "category_id": 9,
         "views": 435,
         "rating": 4.019999999999999573674358543939888477325439453125
+        "complexity": 3,
+        "created_at": "2015-07-28T20:35:18.000000Z"
       },
       "ingredients": [
         {
@@ -606,6 +608,8 @@ Response
         "category_id": 9,
         "views": 435,
         "rating": 4.019999999999999573674358543939888477325439453125
+        "complexity": 3,
+        "created_at": "2015-07-28T20:35:18.000000Z"
       },
       "ingredients": [
         {
@@ -705,6 +709,8 @@ Response
         "category_id": 9,
         "views": 435,
         "rating": 4.019999999999999573674358543939888477325439453125
+        "complexity": 3,
+        "created_at": "2015-07-28T20:35:18.000000Z"
       },
       "ingredients": [
         {
@@ -804,6 +810,8 @@ Response
         "category_id": 9,
         "views": 435,
         "rating": 4.019999999999999573674358543939888477325439453125
+        "complexity": 3,
+        "created_at": "2015-07-28T20:35:18.000000Z"
       },
       "ingredients": [
         {
@@ -901,7 +909,9 @@ Response
         "user_id": 24,
         "category_id": 9,
         "views": 435,
-        "rating": 4.019999999999999573674358543939888477325439453125
+        "rating": 4.019999999999999573674358543939888477325439453125,
+        "complexity": 3,
+        "created_at": "2015-07-28T20:35:18.000000Z"
       },
       "ingredients": [
         {
