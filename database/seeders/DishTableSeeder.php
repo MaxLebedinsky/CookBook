@@ -36,6 +36,7 @@ class DishTableSeeder extends Seeder
             'category_id' => $this->faker->numberBetween(1,10),
             'views' => $this->faker->randomNumber(3, false),
             'rating' => $this->faker->randomFloat(2, 0, 5),
+            'complexity' => $this->faker->numberBetween(1, 3),
             'created_at' => $this->faker->date('Y-m-d') . ' ' . $this->faker->time('H:i:s'),
         ];
 
