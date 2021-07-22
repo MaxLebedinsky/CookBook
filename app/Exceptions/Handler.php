@@ -34,7 +34,7 @@ class Handler extends ExceptionHandler
      * @param \Throwable $exception
      * @return void
      *
-     * @throws \Exception
+     * @throws Throwable
      */
     public function report(Throwable $exception)
     {
@@ -53,7 +53,10 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof ModelNotFoundException) {
-            return \Route::respondWithRoute('api.any.404');
+            return response()->json([
+                'success' => false,
+                'message' => 'Resource not found',
+            ], 404);
         }
         return parent::render($request, $exception);
     }
@@ -69,7 +72,7 @@ class Handler extends ExceptionHandler
     {
         return response()->json([
             'success' => false,
-            'message' => 'Unauthenticated.',
+            'message' => 'Unauthenticated',
         ], 401);
     }
 }

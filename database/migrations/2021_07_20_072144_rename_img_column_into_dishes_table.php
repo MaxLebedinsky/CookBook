@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropPubdateColumnIntoDishesTable extends Migration
+class RenameImgColumnIntoDishesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class DropPubdateColumnIntoDishesTable extends Migration
     public function up()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->dropColumn('pubdate');
+            $table->renameColumn('img', 'big_img');
         });
     }
 
@@ -26,7 +26,7 @@ class DropPubdateColumnIntoDishesTable extends Migration
     public function down()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->date('pubdate')->nullable();
+            $table->renameColumn('big_img', 'img');
         });
     }
 }
