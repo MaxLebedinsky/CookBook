@@ -482,12 +482,12 @@ Response
 
 **_Полный рецепт:_**
 
-**Весь список**
+**Постраничный список**
 
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/full-dishes```
+Request GET ```/api/v1/full-dishes/pages/{page}```
 
 Response
 ```json
@@ -890,7 +890,7 @@ Response
 ```
 
 
-**Удаление рецепта**
+**Удаление полного рецепта**
 
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
