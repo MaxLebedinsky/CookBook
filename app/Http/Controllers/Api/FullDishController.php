@@ -10,7 +10,6 @@ use App\Models\{
     User,
     Category
 };
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
@@ -20,28 +19,32 @@ class FullDishController extends Controller
 {
     use ApiResponder;
 
-    public function index()
+    public function index(int $currentPage)
     {
-        $fullDishes = [];
-        $dishes = Dish::all();
+        $currPage = $currentPage ?? 1;
+        $per_page = Dish::PER_PAGE;
+        $skip = $per_page * ($currPage - 1);
+
+        $dishes = Dish::skip($skip)
+            ->take($per_page)
+            ->get();
+
+        $fullDishes =[];
 
         try {
             foreach ($dishes as $dish) {
-                $ingredients = Ingredient::where('dish_id', $dish->id)->get();
-                $dish_steps = DishStep::where('dish_id', $dish->id)->get();
-                $author = User::where('id', $dish->user_id)->first();
-                $category = Category::where('id', $dish->category_id)->first();
 
                 $fullDish = collect([
                     'dish' => $dish,
-                    'ingredients' =>$ingredients,
-                    'dish_steps' =>$dish_steps,
-                    'author' =>$author,
-                    'category' =>$category,
+                    'ingredients' => Ingredient::where('dish_id', $dish->id)->get(),
+                    'dish_steps' => DishStep::where('dish_id', $dish->id)->get(),
+                    'author' => User::where('id', $dish->user_id)->first(),
+                    'category' => Category::where('id', $dish->category_id)->first()
                 ]);
 
                 $fullDishes[] = $fullDish;
             }
+
         } catch (\Exception $e) {
             return $this->handleError('error', [], 404);
         }
