@@ -37,6 +37,8 @@ class Dish extends Model
 {
     use HasFactory;
 
+    const PER_PAGE = 2;
+
     protected $fillable = [
         'title',
         'img',
