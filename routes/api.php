@@ -23,9 +23,6 @@ Route::group(["prefix" => "{$api_version}"], function () {
     // register users routes
     Route::prefix('users')
         ->group(base_path('routes/api/users.php'));
-    // register articles routes
-    Route::prefix('articles')
-        ->group(base_path('routes/api/articles.php'));
     // register categories routes
     Route::prefix('categories')
         ->group(base_path('routes/api/categories.php'));
@@ -35,9 +32,12 @@ Route::group(["prefix" => "{$api_version}"], function () {
     // register dishes routes
     Route::prefix('dishes')
         ->group(base_path('routes/api/dishes.php'));
-    // register full-dishes routes
+    // register full-dish routes
     Route::prefix('full-dishes')
         ->group(base_path('routes/api/fullDishes.php'));
+    // register full-dishes by category routes
+    Route::prefix('categories')
+        ->group(base_path('routes/api/fullDishesByCategory.php'));
 });
 
 Route::any('/{any?}', function () {

@@ -32,21 +32,35 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Dish whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Dish whereViews($value)
  * @mixin \Eloquent
+ * @property string $big_img
+ * @property string $small_img
+ * @property float $rating
+ * @property int $complexity
+ * @property-read \App\Models\Category $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DishStep[] $dishSteps
+ * @property-read int|null $dish_steps_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Ingredient[] $ingredients
+ * @property-read int|null $ingredients_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Dish whereBigImg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Dish whereComplexity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Dish whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Dish whereSmallImg($value)
  */
 class Dish extends Model
 {
     use HasFactory;
 
-    const PER_PAGE = 2;
-
     protected $fillable = [
         'title',
-        'img',
+        'big_img',
+        'small_img',
         'description',
-        'pubdate',
         'user_id',
         'category_id',
         'views',
+        'rating',
+        'complexity',
         'created_at',
     ];
 

@@ -8,7 +8,8 @@ use App\Models\{
     Ingredient,
     DishStep,
     User,
-    Category
+    Category,
+    Measure
 };
 use Illuminate\Support\Facades\DB;
 use App\Traits\ApiResponder;
@@ -19,37 +20,19 @@ class FullDishController extends Controller
 {
     use ApiResponder;
 
-    public function index(int $currentPage)
+    public function index()
     {
-        $currPage = $currentPage ?? 1;
-        $per_page = Dish::PER_PAGE;
-        $skip = $per_page * ($currPage - 1);
+        $dishes = Dish::all();
 
-        $dishes = Dish::skip($skip)
-            ->take($per_page)
-            ->get();
+        return $this->getFullDishes($dishes);
 
-        $fullDishes =[];
+    }
 
-        try {
-            foreach ($dishes as $dish) {
+    public function getByCategoryId(int $categoryId)
+    {
+        $dishes = Dish::where('category_id', $categoryId)->get();
 
-                $fullDish = collect([
-                    'dish' => $dish,
-                    'ingredients' => Ingredient::where('dish_id', $dish->id)->get(),
-                    'dish_steps' => DishStep::where('dish_id', $dish->id)->get(),
-                    'author' => User::where('id', $dish->user_id)->first(),
-                    'category' => Category::where('id', $dish->category_id)->first()
-                ]);
-
-                $fullDishes[] = $fullDish;
-            }
-
-        } catch (\Exception $e) {
-            return $this->handleError('error', [], 404);
-        }
-
-        return $this->handleResponse($fullDishes);
+        return $this->getFullDishes($dishes);
     }
 
     public function store(DishRequest $request)
@@ -85,7 +68,11 @@ class FullDishController extends Controller
 
             $fullDish = collect([
                 'dish' => $dish,
-                'ingredients' =>$ingredients,
+                'ingredients' => Ingredient::addSelect(['measure' => Measure::select('name')
+                        ->whereColumn('measure_id', 'measures.id')
+                    ])
+                    ->where('dish_id', $dish->id)
+                    ->get(),
                 'dish_steps' =>$dish_steps,
                 'author' =>$author,
                 'category' =>$category,
@@ -158,5 +145,34 @@ class FullDishController extends Controller
         }
 
         return $itemIds;
+    }
+
+    private function getFullDishes($dishes)
+    {
+        $fullDishes =[];
+
+        try {
+            foreach ($dishes as $dish) {
+
+                $fullDish = collect([
+                    'dish' => $dish,
+                    'ingredients' => Ingredient::addSelect(['measure' => Measure::select('name')
+                            ->whereColumn('measure_id', 'measures.id')
+                        ])
+                        ->where('dish_id', $dish->id)
+                        ->get(),
+                    'dish_steps' => DishStep::where('dish_id', $dish->id)->get(),
+                    'author' => User::where('id', $dish->user_id)->first(),
+                    'category' => Category::where('id', $dish->category_id)->first()
+                ]);
+
+                $fullDishes[] = $fullDish;
+            }
+
+        } catch (\Exception $e) {
+            return $this->handleError('error', [], 404);
+        }
+
+        return $this->handleResponse($fullDishes);
     }
 }

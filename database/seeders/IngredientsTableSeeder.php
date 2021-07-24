@@ -41,12 +41,7 @@ class IngredientsTableSeeder extends Seeder
                 'упитанная курочка',
             ]),
             'quantity' => $this->faker->randomDigitNotNull(),
-            'measure' => $this->faker->randomElement([
-                'кг.',
-                'г.',
-                'ч.л',
-                'ст.л',
-            ]),
+            'measure_id' => $this->faker->numberBetween(1, 6),
             'dish_id' => $dish_id,
             'created_at' => $this->faker->date('Y-m-d') . ' ' . $this->faker->time('H:i:s'),
         ];
