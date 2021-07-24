@@ -3,9 +3,7 @@ import './styles.css';
 import { Card, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import { DishRating } from './dishrating';
 import { DishComplexity } from './dishcomplexity';
-
-const MAX_TITLE_LENGTH = 50;
-const MAX_CAT_NAME_LENGTH = 35;
+import { MAX_CAT_NAME_LENGTH, MAX_TITLE_LENGTH } from '../../dish/const';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -83,7 +81,7 @@ export const TEST_DISH = {
 };
 
 // преобразование данных из поля pubdate в строку вида "23.12.2020 17:53"
-const getDateString = (string) => {
+export const getDateString = (string) => {
     let date = new Date(Date.parse(string));
     return(`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
      ${date.getHours()}:${date.getMinutes()}`);
