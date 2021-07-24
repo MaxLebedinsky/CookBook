@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/pages/{currentPage}', 'FullDishController@index')
-    ->where('currentPage', '[0-9]+')
+Route::get('/', 'FullDishController@index')
+    ->where('id', '[0-9]+')
     ->name('full-dishes.index');
 
 Route::get('/{id}', 'FullDishController@show')

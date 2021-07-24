@@ -482,12 +482,12 @@ Response
 
 **_Полный рецепт:_**
 
-**Постраничный список**
+**Все рецепты**
 
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/full-dishes/pages/{page}```
+Request GET ```/api/v1/full-dishes```
 
 Response
 ```json
@@ -513,6 +513,7 @@ Response
           "id": 1,
           "ingredients_name": "сахар",
           "quantity": 8,
+          "measure_id": 1,
           "measure": "г.",
           "dish_id": 1
         },
@@ -520,6 +521,7 @@ Response
           "id": 2,
           "ingredients_name": "упитанная курочка",
           "quantity": 2,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         },
@@ -527,6 +529,7 @@ Response
           "id": 3,
           "ingredients_name": "лавровый лист",
           "quantity": 7,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         }
@@ -585,6 +588,111 @@ Response
 ```
 
 
+**Все рецепты категории**
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request GET ```/api/v1/categories/{id}/full-dishes```
+
+Response
+```json
+{
+  "success": true,
+  "data": {
+    "1": {
+      "dish": {
+        "id": 1,
+        "title": "Occaecati laborum tenetur asperiores error sit necessitatibus et consequatur aut.",
+        "big_img": "https://via.placeholder.com/360x360.png/00cc22?text=dishes+maiores",
+        "small_img": "https://via.placeholder.com/360x360.png/00eebb?text=dishes+sint",
+        "description": "Nihil ut accusantium quasi et labore expedita. Ut expedita cumque unde quas.",
+        "user_id": 24,
+        "category_id": 9,
+        "views": 435,
+        "rating": 4.019999999999999573674358543939888477325439453125,
+        "complexity": 3,
+        "created_at": "2015-07-28T20:35:18.000000Z"
+      },
+      "ingredients": [
+        {
+          "id": 1,
+          "ingredients_name": "сахар",
+          "quantity": 8,
+          "measure_id": 1,
+          "measure": "г.",
+          "dish_id": 1
+        },
+        {
+          "id": 2,
+          "ingredients_name": "упитанная курочка",
+          "quantity": 2,
+          "measure_id": 1,
+          "measure": "ст.л",
+          "dish_id": 1
+        },
+        {
+          "id": 3,
+          "ingredients_name": "лавровый лист",
+          "quantity": 7,
+          "measure_id": 1,
+          "measure": "ст.л",
+          "dish_id": 1
+        }
+      ],
+      "dishSteps": [
+        {
+          "id": 1,
+          "step_number": 1,
+          "img": "https://via.placeholder.com/360x360.png/00dd44?text=dishes+eius",
+          "text": "Temporibus ut vel officiis rerum ut.",
+          "dish_id": 1
+        },
+        {
+          "id": 2,
+          "step_number": 2,
+          "img": "https://via.placeholder.com/360x360.png/005599?text=dishes+culpa",
+          "text": "Corporis beatae ut saepe sint sequi. Rerum totam quo dicta omnis.",
+          "dish_id": 1
+        },
+        {
+          "id": 3,
+          "step_number": 3,
+          "img": "https://via.placeholder.com/360x360.png/002244?text=dishes+adipisci",
+          "text": "Et doloremque dolorum numquam. Tenetur et aspernatur ut.",
+          "dish_id": 1
+        },
+        {
+          "id": 4,
+          "step_number": 4,
+          "img": "https://via.placeholder.com/360x360.png/0044cc?text=dishes+assumenda",
+          "text": "Velit blanditiis totam rerum laborum ut dolorum.",
+          "dish_id": 1
+        }
+      ],
+      "author": {
+        "id": 24,
+        "name": "Dewayne Gerhold",
+        "email": "cicero78@example.com",
+        "phone": "+15626036003",
+        "about": "Nihil sunt quis consequuntur quia ipsam optio qui aut porro quo.",
+        "is_admin": false,
+        "email_verified_at": null,
+        "created_at": "2021-07-20T08:06:05.000000Z",
+        "updated_at": "2021-07-20T08:06:05.000000Z"
+      },
+      "category": {
+        "id": 9,
+        "name": "Iure velit soluta error."
+      }
+    },
+    "2": { 
+     }
+  },
+    "message": ""
+} 
+```
+
 **Один полный рецепт**
 
 Header:
@@ -616,6 +724,7 @@ Response
           "id": 1,
           "ingredients_name": "сахар",
           "quantity": 8,
+          "measure_id": 1,
           "measure": "г.",
           "dish_id": 1
         },
@@ -623,6 +732,7 @@ Response
           "id": 2,
           "ingredients_name": "упитанная курочка",
           "quantity": 2,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         },
@@ -630,6 +740,7 @@ Response
           "id": 3,
           "ingredients_name": "лавровый лист",
           "quantity": 7,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         }
@@ -717,6 +828,7 @@ Response
           "id": 1,
           "ingredients_name": "сахар",
           "quantity": 8,
+          "measure_id": 1,
           "measure": "г.",
           "dish_id": 1
         },
@@ -731,6 +843,7 @@ Response
           "id": 3,
           "ingredients_name": "лавровый лист",
           "quantity": 7,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         }
@@ -820,6 +933,7 @@ Response
           "id": 1,
           "ingredients_name": "сахар",
           "quantity": 8,
+          "measure_id": 1,
           "measure": "г.",
           "dish_id": 1
         },
@@ -827,6 +941,7 @@ Response
           "id": 2,
           "ingredients_name": "упитанная курочка",
           "quantity": 2,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         },
@@ -834,6 +949,7 @@ Response
           "id": 3,
           "ingredients_name": "лавровый лист",
           "quantity": 7,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         }
@@ -921,6 +1037,7 @@ Response
           "id": 1,
           "ingredients_name": "сахар",
           "quantity": 8,
+          "measure_id": 1,
           "measure": "г.",
           "dish_id": 1
         },
@@ -928,6 +1045,7 @@ Response
           "id": 2,
           "ingredients_name": "упитанная курочка",
           "quantity": 2,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         },
@@ -935,6 +1053,7 @@ Response
           "id": 3,
           "ingredients_name": "лавровый лист",
           "quantity": 7,
+          "measure_id": 1,
           "measure": "ст.л",
           "dish_id": 1
         }
