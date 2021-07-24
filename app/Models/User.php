@@ -45,6 +45,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Dish[] $dishes
+ * @property-read int|null $dishes_count
  */
 class User extends Authenticatable
 {
@@ -82,14 +84,6 @@ class User extends Authenticatable
     protected static function newFactory(): UserFactory
     {
         return UserFactory::new();
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function articles(): HasMany
-    {
-        return $this->hasMany(Article::class);
     }
 
     /**
