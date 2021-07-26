@@ -1,24 +1,32 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Layout from "./components/layout";
 import Header from "./components/header";
 import { DishCardList } from "./components/dishcardlist";
 import { Dish } from "./components/dish";
 
+const routes = [
+   {
+      path: "/",
+      component: DishCardList,
+   },
+   {
+      path: "/dish",
+      component: Dish,
+
+   }
+];
+
 export const Routes = () => {
    return (
       <Router>
-         <Layout>
+         <div>
             <Header />
             <Switch>
-               <Route path="/" exact>
-                  <DishCardList />
-               </Route>
-               <Route path="/dish">
-                  <Dish />
-               </Route>
+               { routes.map((route) => (
+                  <Route key={ route.path } path={ route.path } component={ route.component } exact />
+               )) }
             </Switch>
-         </Layout>
+         </div>
       </Router>
    )
 }

@@ -5,7 +5,7 @@ import { DishCard } from './dishcard';
 
 export const DishCardList = () => {
 
-   const [dishes, setDishes] = useState()
+   const [dishes, setDishes] = useState([])
 
    const getDishes = () =>
       window.axios.get('/dishes')
@@ -14,8 +14,6 @@ export const DishCardList = () => {
    useEffect(() => {
       getDishes()
    }, [])
-
-   console.log(dishes)
 
    return (
       <ul className="list">
