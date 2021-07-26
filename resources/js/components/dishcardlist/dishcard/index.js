@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 300,
         maxWidth: 370,
-        margin: '15px auto 0',
+        // margin: '15px auto 0',
         borderRadius: 10,
         padding: '10px',
         display: 'flex',
