@@ -99,10 +99,7 @@ const useStyles = makeStyles ((theme) => ({
         stepImage: {
             marginRight: '20px',
         },
-    }
-    // amount: {
-    //     color: 'red',
-    // }
+    },
 }));
 
 export const Dish = (props) => {
@@ -110,7 +107,7 @@ export const Dish = (props) => {
     const classes = useStyles();
 
     return (
-        <>
+    <>
         <Card className = {classes.root}>
             <CardMedia className={classes.image}
                     component="img"
@@ -170,6 +167,6 @@ export const Dish = (props) => {
                 </ListItem>
             )) }
         </List>
-        </>
+    </>
     )
 }
