@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import "./styles.css"
 import { DishCard } from './dishcard';
+import PropTypes from 'prop-types';
 
 
-export const DishCardList = () => {
+export const DishCardList = ({ dishes }) => {
 
-   const [dishes, setDishes] = useState([])
-
-   const getDishes = () =>
-      window.axios.get('/full-dishes')
-         .then(json => setDishes(json.data.data))
-
-
-   useEffect(() => {
-      getDishes()
-   }, [])   
-
-   console.log(dishes);
+   DishCardList.propTypes = {
+      dishes: PropTypes.array
+   }
 
    return (
       <ul className="list">
@@ -27,4 +19,6 @@ export const DishCardList = () => {
          )) }
       </ul>
    )
-}
+
+
+};
