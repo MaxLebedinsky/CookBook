@@ -1,15 +1,14 @@
 import React from 'react';
 import './styles.css'
 import Header from '../header'
-import { DishCardList } from '../dishcardlist';
 
 const Layout = () => {
     return (<>
-        <Header />
-        <main>
-            <DishCardList />
+        <Header/>
+        <main className='layout-content'>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, nisi?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque id minima molestiae nisi, quo quos.</p>
         </main>
-        {/* Нам нужно создать стили для основного контента(main), чтобы текст лорем ипсум был адаптивным. Можешь почитать информацию тут:https://material.io/design/layout/responsive-layout-grid.html#breakpoints  */ }
     </>)
 }
 
