@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.layout-content {
+    padding: 16px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 600px) {
+    .layout-content {
+        padding: 32px;
+    }
+}
+
+@media (min-width: 905px) {
+    .layout-content {
+        width: 840px;
+    }
+}
+
+@media (min-width: 1240px) {
+    .layout-content {
+        padding: 72px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .layout-content {
+        width:1040px;
+    }
+}
