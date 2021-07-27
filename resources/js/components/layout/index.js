@@ -3,13 +3,13 @@ import { useParams } from 'react-router';
 import './styles.css'
 import Header from '../header'
 import { DishCardList } from '../dishcardlist';
-// import { Dish } from '../dish';
+import { Dish } from '../dish';
 
 const Layout = () => {
 
     const [dishes, setDishes] = useState([]);
-    // const [dish, setDish] = useState([]);
-    const dishId = useParams();
+    const [dish, setDish] = useState([]);
+    const { dishId } = useParams();
 
     const getDishes = () =>
         window.axios.get('/full-dishes')
@@ -17,28 +17,23 @@ const Layout = () => {
 
     useEffect(() => {
         getDishes()
+        console.log("fetching")
     }, []);
 
-    console.log(dishId.length == 0)
+    useEffect(() => {
+        setDish(() => (dishes[dishId - 1]))
+        console.log(dish)
+    }, [dishes]);
 
-    // useEffect(() => {
-    //     setDish(() => (dishes.filter(() => dishes.dish.id == dishId)))
-    // }, [dishId]);
-
-
-    setTimeout(() => {
-        console.log(dishes);
-        // console.log(dish);
-    }, 3000)
-
-    console.log(dishId)
-
+    console.log(dishes)
+    console.log(dish)
+    // console.log(dishes[dishId - 1])
 
     return (
         <>
             <Header />
             <main className='layout-content'>
-                { Object.keys(dishId).length === 0 ? <DishCardList dishes={ dishes } /> : "<Dish dishes={ dish } />" }
+                { dishId == undefined ? <DishCardList dishes={ dishes } /> : <Dish dish={ dish } /> }
             </main>
         </>)
 }

@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 export const DishCardList = ({ dishes }) => {
 
-   console.log(dishes)
-
    DishCardList.propTypes = {
       dishes: PropTypes.array
    }
