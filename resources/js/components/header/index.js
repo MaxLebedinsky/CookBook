@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
 import Logo from './logo'
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,14 +22,19 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Header = () => {
+const Header = ({ handleSetCategory }) => {
+
+    Header.propTypes = {
+        handleSetCategory: PropTypes.func
+    }
+
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={ classes.root }>
             <AppBar position="static">
                 <Logo />
                 <Toolbar className={ classes.toolbar }>
-                    <SearchField />
+                    <SearchField handleSetCategory={ handleSetCategory } />
                 </Toolbar>
             </AppBar>
         </div>

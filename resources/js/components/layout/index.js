@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router';
 import './styles.css'
 import Header from '../header'
@@ -13,6 +13,7 @@ const Layout = () => {
     const [dish, setDish] = useState([]);
     const [loading, setLoading] = useState(false);
     const { dishId } = useParams();
+    const [category, setCategory] = useState('');
 
     const getDishes = async () => {
         try {
@@ -27,6 +28,10 @@ const Layout = () => {
         }
     }
 
+    const handleSetCategory = useCallback((newCategory) => {
+        setCategory(() => newCategory);
+    }, [])
+
     useEffect(() => {
         getDishes()
     }, []);
@@ -36,9 +41,9 @@ const Layout = () => {
         console.log(dish)
     });
 
-    console.log(dishes)
-    console.log(dishId)
-    console.log(dish)
+    // console.log(dishes)
+    // console.log(dishId)
+    // console.log(dish)
 
     if (loading) {
         return (
@@ -52,9 +57,11 @@ const Layout = () => {
 
     return (
         <>
-            <Header />
+            <Header handleSetCategory={ handleSetCategory } />
             <main className='layout-content'>
-                { dishId == undefined ? <DishCardList dishes={ dishes } /> : <Dish dish={ dish } /> }
+                { dishId == undefined ?
+                    <DishCardList dishes={ dishes } category={ category } /> :
+                    <Dish dish={ dish } /> }
             </main>
         </>)
 }

@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.css';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterIcon from "./filtericon";
-import {makeStyles, withStyles} from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(() => ({
     button: {
         backgroundColor: '#757de8',
-        padding:'4px',
-        minWidth:0,
-        marginRight:'8px'
+        padding: '4px',
+        minWidth: 0,
+        marginRight: '8px'
     }
 }));
 
@@ -24,17 +24,17 @@ const StyledMenu = withStyles({
     },
 })((props) => (
     <Menu
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
+        elevation={ 0 }
+        getContentAnchorEl={ null }
+        anchorOrigin={ {
             vertical: 'bottom',
             horizontal: 'center',
-        }}
-        transformOrigin={{
+        } }
+        transformOrigin={ {
             vertical: 'top',
             horizontal: 'center',
-        }}
-        {...props}
+        } }
+        { ...props }
     />
 ));
 
@@ -49,8 +49,13 @@ const StyledMenuItem = withStyles((theme) => ({
     },
 }))(MenuItem);
 
-const SearchField = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+const SearchField = ({ handleSetCategory }) => {
+
+    SearchField.propTypes = {
+        handleSetCategory: PropTypes.func
+    }
+
+    const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const [categories, setCategories] = useState([])
 
@@ -73,32 +78,32 @@ const SearchField = () => {
         <div className='search-box'>
             <div className="search">
                 <form className="search-form">
-                    <SearchIcon className="search-icon"/>
-                    <input className='filter-icon-input' type="text" placeholder="Search ..."/>
-                        <Button
-                            className={classes.button}
-                            aria-controls="customized-menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                        >
-                            <FilterIcon />
-                        </Button>
-                        <StyledMenu
-                            id="customized-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                        >
-                            {categories.map((category, index) => (
-                                    <StyledMenuItem key={index}>
-                                        <ListItemText
-                                            onClick={handleClose}
-                                            primary={category.name}/>
-                                    </StyledMenuItem>
-                                )
-                            )}
-                        </StyledMenu>
+                    <SearchIcon className="search-icon" />
+                    <input className='filter-icon-input' type="text" placeholder="Search ..." />
+                    <Button
+                        className={ classes.button }
+                        aria-controls="customized-menu"
+                        aria-haspopup="true"
+                        onClick={ handleClick }
+                    >
+                        <FilterIcon />
+                    </Button>
+                    <StyledMenu
+                        id="customized-menu"
+                        anchorEl={ anchorEl }
+                        keepMounted
+                        open={ Boolean(anchorEl) }
+                        onClose={ handleClose }
+                    >
+                        { categories.map((category, index) => (
+                            <StyledMenuItem key={ index }>
+                                <ListItemText
+                                    onClick={ handleClose, handleSetCategory(category.name) }
+                                    primary={ category.name } />
+                            </StyledMenuItem>
+                        )
+                        ) }
+                    </StyledMenu>
 
                 </form>
             </div>
