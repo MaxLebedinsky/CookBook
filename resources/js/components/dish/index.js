@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
 export const Dish = ({ dish }) => {
    //  const {dish} = {...props};
    console.log(dish)
-   // const classes = useStyles();
+   const classes = useStyles();
 
    Dish.propTypes = {
       dish: PropTypes.array,
@@ -118,7 +118,7 @@ export const Dish = ({ dish }) => {
          <Card className={ classes.root }>
             <CardMedia className={ classes.image }
                component="img"
-               alt={ dish.title }
+               alt={ dish.dish.title }
                image={ dish.dish.big_img }
             />
             <CardContent className={ classes.desc }>
