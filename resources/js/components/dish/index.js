@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, CardContent, CardMedia, List, ListItem, makeStyles, Typography } from '@material-ui/core';
 import { Card } from 'reactstrap';
 import { DishRating } from '../dishcardlist/dishcard/dishrating';
@@ -105,12 +105,20 @@ const useStyles = makeStyles((theme) => ({
 
 export const Dish = ({ dish }) => {
    //  const {dish} = {...props};
-   console.log(dish)
    const classes = useStyles();
 
    Dish.propTypes = {
-      dish: PropTypes.array,
-      dishId: PropTypes.object
+      dish: PropTypes.object,
+   }
+
+   useEffect(() => {
+      // console.log(dish)
+   }, [dish])
+
+   if (dish == undefined || dish.length == 0) {
+      return (
+         <h1>Loading card...</h1>
+      )
    }
 
    return (

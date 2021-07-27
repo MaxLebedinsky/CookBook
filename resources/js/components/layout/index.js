@@ -5,6 +5,8 @@ import Header from '../header'
 import { DishCardList } from '../dishcardlist';
 import { Dish } from '../dish';
 
+const API_URL = 'http://localhost:8000/api/v1/full-dishes'
+
 const Layout = () => {
 
     const [dishes, setDishes] = useState([]);
@@ -12,11 +14,17 @@ const Layout = () => {
     const [loading, setLoading] = useState(false);
     const { dishId } = useParams();
 
-    const getDishes = () => {
-        setLoading(true);
-        window.axios.get('/full-dishes')
-            .then(json => setDishes(json.data.data));
-        setLoading(false);
+    const getDishes = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            setDishes(data.data);
+        } catch (err) {
+            console.log(err.message);
+        } finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
@@ -26,9 +34,10 @@ const Layout = () => {
     useEffect(() => {
         setDish(() => (dishes[dishId - 1]))
         console.log(dish)
-    }, [dishes]);
+    });
 
     console.log(dishes)
+    console.log(dishId)
     console.log(dish)
 
     if (loading) {
@@ -36,7 +45,7 @@ const Layout = () => {
             <>
                 <Header />
                 <main className='layout-content'>
-                    <p>I AM FETCHING DONT RUSH ME</p>
+                    <p>Here suppose to be loader</p>
                 </main>
             </>)
     }
