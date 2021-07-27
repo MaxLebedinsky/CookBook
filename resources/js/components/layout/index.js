@@ -5,38 +5,39 @@ import Header from '../header'
 import { DishCardList } from '../dishcardlist';
 import { Dish } from '../dish';
 
+const API_URL = 'http://localhost:8000/api/v1/full-dishes'
+
 const Layout = () => {
 
     const [dishes, setDishes] = useState([]);
     const [dish, setDish] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const { dishId } = useParams();
 
-    const getDishes = () => {
-        // setLoading(true);
-        console.log(loading);
-        window.axios.get('/full-dishes')
-            .then(json => setDishes(json.data.data));
-        console.log("fetching dishes")
-        setLoading(false);
-        console.log(loading)
+    const getDishes = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            setDishes(data.data);
+        } catch (err) {
+            console.log(err.message);
+        } finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
         getDishes()
     }, []);
 
-    // const handleSetDish = useCallback((dishid) => {
-    //     setDish(() => (dishes[dishid - 1]))
-    // }, [dishId])
-
     useEffect(() => {
         setDish(() => (dishes[dishId - 1]))
         console.log(dish)
-    }, [dishId, dish]);
+    });
 
-    // console.log(dishId)
     console.log(dishes)
+    console.log(dishId)
     console.log(dish)
 
     if (loading) {

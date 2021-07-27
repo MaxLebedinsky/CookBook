@@ -105,17 +105,14 @@ const useStyles = makeStyles((theme) => ({
 
 export const Dish = ({ dish }) => {
    //  const {dish} = {...props};
-
    const classes = useStyles();
 
-
-
    Dish.propTypes = {
-      dish: PropTypes.array,
+      dish: PropTypes.object,
    }
 
    useEffect(() => {
-      console.log(dish)
+      // console.log(dish)
    }, [dish])
 
    if (dish == undefined || dish.length == 0) {
