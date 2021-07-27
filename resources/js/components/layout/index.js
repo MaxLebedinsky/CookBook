@@ -9,25 +9,33 @@ const Layout = () => {
 
     const [dishes, setDishes] = useState([]);
     const [dish, setDish] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { dishId } = useParams();
 
     const getDishes = () => {
-        setLoading(true);
+        // setLoading(true);
+        console.log(loading);
         window.axios.get('/full-dishes')
             .then(json => setDishes(json.data.data));
+        console.log("fetching dishes")
         setLoading(false);
+        console.log(loading)
     }
 
     useEffect(() => {
         getDishes()
     }, []);
 
+    // const handleSetDish = useCallback((dishid) => {
+    //     setDish(() => (dishes[dishid - 1]))
+    // }, [dishId])
+
     useEffect(() => {
         setDish(() => (dishes[dishId - 1]))
         console.log(dish)
-    }, [dishes]);
+    }, [dishId, dish]);
 
+    // console.log(dishId)
     console.log(dishes)
     console.log(dish)
 
@@ -36,7 +44,7 @@ const Layout = () => {
             <>
                 <Header />
                 <main className='layout-content'>
-                    <p>I AM FETCHING DONT RUSH ME</p>
+                    <p>Here suppose to be loader</p>
                 </main>
             </>)
     }
