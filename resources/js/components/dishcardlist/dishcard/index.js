@@ -3,15 +3,14 @@ import './styles.css';
 import { Card, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import { DishRating } from './dishrating';
 import { DishComplexity } from './dishcomplexity';
-
-const MAX_TITLE_LENGTH = 50;
-const MAX_CAT_NAME_LENGTH = 35;
+import { MAX_CAT_NAME_LENGTH, MAX_TITLE_LENGTH } from '../../dish/const';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 300,
         maxWidth: 370,
-        margin: '15px auto 0',
+        // margin: '15px auto 0',
         borderRadius: 10,
         padding: '10px',
         display: 'flex',
@@ -82,8 +81,8 @@ export const TEST_DISH = {
     created_at: "2021-07-10 23:12:59",
 };
 
-// преобразование данных из поля pubdate в строку вида "23.12.2020 17:53"
-const getDateString = (string) => {
+// преобразование данных из поля created_at в строку вида "23.12.2020 17:53"
+export const getDateString = (string) => {
     let date = new Date(Date.parse(string));
     return(`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
      ${date.getHours()}:${date.getMinutes()}`);
@@ -92,36 +91,39 @@ const getDateString = (string) => {
 export const DishCard = (props) => {
     const {dish} = {...props};
     const classes = useStyles();
-    const clickHandler = (event) => {
-        if (!event.target.classList.contains('MuiRating-label')&&
-            !event.target.classList.contains('MuiRating-visuallyhidden')) 
-        // здесь будет вызов компонента Dish c id = dish.id
-        console.log(`calling component Dish with id=${dish.dish.id}`);
-    };
+    // const clickHandler = (event) => {
+    //     if (!event.target.classList.contains('MuiRating-label')&&
+    //         !event.target.classList.contains('MuiRating-visuallyhidden')) 
+    //     // здесь будет вызов компонента Dish c id = dish.id
+    //     console.log(`calling component Dish with id=${dish.dish.id}`);
+    // };
     
     return (
-        <Card 
-            className={classes.root} 
-            onClick={(event) => clickHandler(event)}>    
-                <CardMedia className={classes.image}
-                    component="img"
-                    alt={dish.dish.title}
-                    image={dish.dish.small_img}
-                />
-                <CardContent className={classes.desc}>
-                    <Typography component="h3" className={classes.title}>
-                        {dish.dish.title.slice(0, MAX_TITLE_LENGTH - 1)}
-                    </Typography>
-                    <Typography 
-                        color="textSecondary" 
-                        className={classes.data}>
-                        Рейтинг:<DishRating rating={+dish.dish.rating.toFixed(1)}/><br/>
-                        Сложность:<DishComplexity complexity={dish.dish.complexity}/><br/>
-                        <b><u>{dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1)}</u></b><br/>
-                        Автор: <b><u>{dish.author.name}</u></b><br/>
-                        Опубликовано: {getDateString(dish.dish.created_at)}
-                    </Typography>
-                </CardContent>
-        </Card>
+        <Link to={`/dish/${dish.dish.id}`}>
+            <Card 
+                className={classes.root} 
+                // onClick={(event) => clickHandler(event)}
+                >    
+                    <CardMedia className={classes.image}
+                        component="img"
+                        alt={dish.dish.title}
+                        image={dish.dish.small_img}
+                    />
+                    <CardContent className={classes.desc}>
+                        <Typography component="h3" className={classes.title}>
+                            {dish.dish.title.slice(0, MAX_TITLE_LENGTH - 1)}
+                        </Typography>
+                        <Typography 
+                            color="textSecondary" 
+                            className={classes.data}>
+                            Рейтинг:<DishRating rating={+dish.dish.rating.toFixed(1)}/><br/>
+                            Сложность:<DishComplexity complexity={dish.dish.complexity}/><br/>
+                            <b><u>{dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1)}</u></b><br/>
+                            Автор: <b><u>{dish.author.name}</u></b><br/>
+                            Опубликовано: {getDateString(dish.dish.created_at)}
+                        </Typography>
+                    </CardContent>
+            </Card>
+        </Link>
     );
 }

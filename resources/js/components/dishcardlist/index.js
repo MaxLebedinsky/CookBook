@@ -14,9 +14,9 @@ export const DishCardList = () => {
 
    useEffect(() => {
       getDishes()
-   }, [])
+   }, [])   
 
-   console.log(dishes)
+   console.log(dishes);
 
    return (
       <ul className="list">
