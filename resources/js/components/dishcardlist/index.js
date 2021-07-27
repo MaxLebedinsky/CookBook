@@ -1,9 +1,16 @@
 import React from 'react';
 import "./styles.css"
 import { DishCard } from './dishcard';
+import PropTypes from 'prop-types';
 
 
-export const DishCardList = () => {
+export const DishCardList = ({ dishes }) => {
+
+   console.log(dishes)
+
+   DishCardList.propTypes = {
+      dishes: PropTypes.array
+   }
 
    return (
       <ul className="list">
@@ -14,4 +21,6 @@ export const DishCardList = () => {
          )) }
       </ul>
    )
-}
+
+
+};
