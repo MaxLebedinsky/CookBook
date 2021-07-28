@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, CardContent, CardMedia, List, ListItem, makeStyles, Typography } from '@material-ui/core';
 import { Card } from 'reactstrap';
 import { DishRating } from '../dishcardlist/dishcard/dishrating';
@@ -11,8 +11,6 @@ const useStyles = makeStyles((theme) => ({
    root: {
       minWidth: 300,
       maxWidth: 370,
-      // margin: '20px auto',
-      // textAlign: 'center',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -24,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
    title: {
       fontWeight: 700,
       marginBottom: 6,
-      // lineHeight: '1.3em',
       fontSize: '1.5em',
    },
    desc: {
@@ -60,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
       bottom: 4,
    },
    stepImage: {
-      // display: 'block',
       width: 150,
       marginBottom: 10,
    },
@@ -69,8 +65,6 @@ const useStyles = makeStyles((theme) => ({
    },
    [theme.breakpoints.down(374)]: {
       root: {
-         // flexDirection: 'column',
-         // alignItems: 'center',
          maxWidth: 300,
       },
       title: {
@@ -111,10 +105,6 @@ export const Dish = ({ dish }) => {
       dish: PropTypes.object,
    }
 
-   useEffect(() => {
-      // console.log(dish)
-   }, [dish])
-
    if (dish == undefined || dish.length == 0) {
       return (
          <h1>Loading card...</h1>
@@ -136,7 +126,7 @@ export const Dish = ({ dish }) => {
                <Typography
                   color="textSecondary"
                   className={ classes.data }>
-                  Рейтинг:<DishRating rating={ +dish.dish.rating.toFixed(1) } /><br />
+                  Рейтинг:<DishRating rating={ +dish.dish.rating.toFixed(1) } changeable={true} /><br />
                   Сложность:<DishComplexity complexity={ dish.dish.complexity } /><br />
                   <b><u>{ dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1) }</u></b><br />
                   Автор: <b><u>{ dish.author.name }</u></b><br />
