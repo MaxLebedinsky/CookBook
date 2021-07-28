@@ -1,10 +1,11 @@
 import React from "react"
-import "./styles.css"
+import {useStyles} from "./styled";
 import { Link } from 'react-router-dom';
 
 const Logo = () => {
+    const classes = useStyles();
     return (
-        <Link to="/" className="logo">
+        <Link to="/" className={classes.logo}>
             <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
