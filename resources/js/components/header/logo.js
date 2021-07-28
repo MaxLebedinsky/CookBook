@@ -1,10 +1,11 @@
 import React from "react"
-import "./styles.css"
+import {useStyles} from "./styled";
 
 const Logo = () => {
+    const classes = useStyles();
     return (
         <>
-            <svg className="logo" width="70" height="70" viewBox="0 0 70 70" fill="none"
+            <svg className={classes.logo} width="70" height="70" viewBox="0 0 70 70" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M33.0038 2.30764C32.9436 2.34045 32.878 2.39514 32.8561 2.42795C32.7741 2.54279 32.8124 2.78889 32.9272 2.90373C33.0311 3.00764 33.0749 3.01311 33.9225 2.98029C34.7319 2.94201 36.9413 3.01857 37.4991 3.09514C37.696 3.12248 37.7452 3.11154 37.871 2.98576C38.046 2.80529 38.035 2.59201 37.8436 2.45529C37.7342 2.37873 37.5264 2.34592 36.8702 2.2967C35.7217 2.22014 33.146 2.22561 33.0038 2.30764Z"
