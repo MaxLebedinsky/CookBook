@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const DishRating = (props) => {
-    const baseValue = {...props}.rating
+    const baseValue = {...props}.rating;
+    const changeable = {...props}.changeable;
     const [value, setValue] = React.useState(baseValue);
     const classes = useStyles();
 
@@ -29,6 +30,7 @@ export const DishRating = (props) => {
         <span className={classes.root}>
             <Rating className={classes.ratingStars}
                 name="rating-stars"
+                readOnly={!changeable}
                 value={value}
                 precision={0.5}
                 size="small"

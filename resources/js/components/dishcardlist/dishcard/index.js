@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 300,
         maxWidth: 370,
-        // margin: '15px auto 0',
         borderRadius: 10,
         padding: '10px',
         display: 'flex',
@@ -43,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.8em',
         lineHeight: '1.8em',
     },
+    noUnderline: {
+        textDecoration: 'none',
+    },
 
     // media queries:
     [theme.breakpoints.down(374)]: {
@@ -68,20 +70,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// тестовые данные; в "боевом" режиме будут передаваться из компонента DishCardList
-// export const TEST_DISH = {
-//     id: 1,
-//     name: "Мясо по-французски с сыром и картофелем",
-//     category: "Мясные блюда",
-//     author: "Иванов",
-//     complexity: 2,
-//     rating: 3.4,
-// photo: "https://via.placeholder.com/130x100",
-// photo: "https://eda.ru/img/eda/-x900i/s1.eda.ru/StaticContent/Photos/160406123417/160413162850/p_O.jpg",
-// photo: '../../../../images/dishes/1/main.jpg',
-// created_at: "2021-07-10 23:12:59",
-// };
-
 // преобразование данных из поля created_at в строку вида "23.12.2020 17:53"
 export const getDateString = (string) => {
     let date = new Date(Date.parse(string));
@@ -97,15 +85,15 @@ export const DishCard = ({ dish }) => {
         dish: PropTypes.object,
     }
 
+    // функция для предотвращения ухода на страницу Dish при клике на рейтинг
     // const clickHandler = (event) => {
     //     if (!event.target.classList.contains('MuiRating-label')&&
     //         !event.target.classList.contains('MuiRating-visuallyhidden')) 
-    //     // здесь будет вызов компонента Dish c id = dish.id
     //     console.log(`calling component Dish with id=${dish.dish.id}`);
     // };
 
     return (
-        <Link to={ `/dish/${dish.dish.id}` }>
+        <Link to={ `/dish/${dish.dish.id}` } className={ classes.noUnderline }>
             <Card
                 className={ classes.root }
             // onClick={(event) => clickHandler(event)}
@@ -122,7 +110,7 @@ export const DishCard = ({ dish }) => {
                     <Typography
                         color="textSecondary"
                         className={ classes.data }>
-                        Рейтинг:<DishRating rating={ +dish.dish.rating.toFixed(1) } /><br />
+                        Рейтинг:<DishRating rating={ +dish.dish.rating.toFixed(1) } changeable={false}/><br />
                         Сложность:<DishComplexity complexity={ dish.dish.complexity } /><br />
                         <b><u>{ dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1) }</u></b><br />
                         Автор: <b><u>{ dish.author.name }</u></b><br />
