@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './styles.css';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterIcon from "./filtericon";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -24,17 +24,17 @@ const StyledMenu = withStyles({
     },
 })((props) => (
     <Menu
-        elevation={ 0 }
-        getContentAnchorEl={ null }
-        anchorOrigin={ {
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'center',
-        } }
-        transformOrigin={ {
+        }}
+        transformOrigin={{
             vertical: 'top',
             horizontal: 'center',
-        } }
-        { ...props }
+        }}
+        {...props}
     />
 ));
 
@@ -49,7 +49,7 @@ const StyledMenuItem = withStyles((theme) => ({
     },
 }))(MenuItem);
 
-const SearchField = ({ handleSetCategory }) => {
+const SearchField = ({handleSetCategory}) => {
 
     SearchField.propTypes = {
         handleSetCategory: PropTypes.func
@@ -77,37 +77,38 @@ const SearchField = ({ handleSetCategory }) => {
 
     const handleCategory = (categoryName) => {
         handleSetCategory(categoryName)
+        handleClose()
     }
-    
+
     return (
         <div className='search-box'>
             <div className="search">
                 <form className="search-form">
-                    <SearchIcon className="search-icon" />
-                    <input className='filter-icon-input' type="text" placeholder="Search ..." />
+                    <SearchIcon className="search-icon"/>
+                    <input className='filter-icon-input' type="text" placeholder="Search ..."/>
                     <Button
-                        className={ classes.button }
+                        className={classes.button}
                         aria-controls="customized-menu"
                         aria-haspopup="true"
-                        onClick={ handleClick }
+                        onClick={handleClick}
                     >
-                        <FilterIcon />
+                        <FilterIcon/>
                     </Button>
                     <StyledMenu
                         id="customized-menu"
-                        anchorEl={ anchorEl }
+                        anchorEl={anchorEl}
                         keepMounted
-                        open={ Boolean(anchorEl) }
-                        onClose={ handleClose }
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
                     >
-                        { categories.map((category, index) => (
-                            <StyledMenuItem key={ index }>
-                                <ListItemText
-                                    onClick={ handleCategory(category.name), handleClose }
-                                    primary={ category.name } />
-                            </StyledMenuItem>
-                        )
-                        ) }
+                        {categories.map((category, index) => (
+                                <StyledMenuItem key={index}>
+                                    <ListItemText
+                                        onClick={() => handleCategory(category.name)}
+                                        primary={category.name}/>
+                                </StyledMenuItem>
+                            )
+                        )}
                     </StyledMenu>
 
                 </form>
