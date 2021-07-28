@@ -74,6 +74,11 @@ const SearchField = ({ handleSetCategory }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleCategory = (categoryName) => {
+        handleSetCategory(categoryName)
+    }
+    
     return (
         <div className='search-box'>
             <div className="search">
@@ -98,7 +103,7 @@ const SearchField = ({ handleSetCategory }) => {
                         { categories.map((category, index) => (
                             <StyledMenuItem key={ index }>
                                 <ListItemText
-                                    onClick={ handleClose, handleSetCategory(category.name) }
+                                    onClick={ handleCategory(category.name), handleClose }
                                     primary={ category.name } />
                             </StyledMenuItem>
                         )

@@ -41,9 +41,7 @@ const Layout = () => {
         console.log(dish)
     });
 
-    // console.log(dishes)
-    // console.log(dishId)
-    // console.log(dish)
+    console.log(dishes)
 
     if (loading) {
         return (

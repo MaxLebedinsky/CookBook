@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, CardContent, CardMedia, List, ListItem, makeStyles, Typography } from '@material-ui/core';
 import { Card } from 'reactstrap';
 import { DishRating } from '../dishcardlist/dishcard/dishrating';
@@ -104,16 +104,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Dish = ({ dish }) => {
-   //  const {dish} = {...props};
    const classes = useStyles();
 
    Dish.propTypes = {
       dish: PropTypes.object,
    }
-
-   useEffect(() => {
-      // console.log(dish)
-   }, [dish])
 
    if (dish == undefined || dish.length == 0) {
       return (
