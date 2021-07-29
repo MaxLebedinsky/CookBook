@@ -1,53 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './styles.css';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterIcon from "./filtericon";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { useStyles, StyledMenu, StyledMenuItem } from "./styled";
 import PropTypes from 'prop-types';
-
-const useStyles = makeStyles(() => ({
-    button: {
-        backgroundColor: '#757de8',
-        padding: '4px',
-        minWidth: 0,
-        marginRight: '8px'
-    }
-}));
-
-const StyledMenu = withStyles({
-    paper: {
-        border: '1px solid #d3d4d5',
-    },
-})((props) => (
-    <Menu
-        elevation={ 0 }
-        getContentAnchorEl={ null }
-        anchorOrigin={ {
-            vertical: 'bottom',
-            horizontal: 'center',
-        } }
-        transformOrigin={ {
-            vertical: 'top',
-            horizontal: 'center',
-        } }
-        { ...props }
-    />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-    root: {
-        '&:focus': {
-            backgroundColor: theme.palette.primary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
-        },
-    },
-}))(MenuItem);
 
 const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
@@ -93,12 +50,12 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
     };
 
     return (
-        <div className='search-box'>
-            <div className="search">
-                <form className="search-form" onSubmit={ handleSubmit }>
-                    <SearchIcon className="search-icon" />
+        <div className={ classes.searchBox }>
+            <div className={ classes.search }>
+                <form className={ classes.searchForm } onSubmit={ handleSubmit }>
+                    <SearchIcon className={ classes.searchIcon } />
                     <input
-                        className='filter-icon-input'
+                        className={ classes.filterIconInput }
                         value={ value }
                         onChange={ handleChange }
                         type="text"
@@ -122,7 +79,7 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
                         { categories.map((category, index) => (
                             <StyledMenuItem key={ index }>
                                 <ListItemText
-                                    onClick={ () => handleCategory(category.name) }
+                                    onClick={ () => handleCategory(category.name), handleClose }
                                     primary={ category.name } />
                             </StyledMenuItem>
                         )
