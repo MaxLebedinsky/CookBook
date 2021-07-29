@@ -38,10 +38,8 @@ const Layout = () => {
 
     useEffect(() => {
         setDish(() => (dishes[dishId - 1]))
-        console.log(dish)
     });
 
-    console.log(dishes)
 
     if (loading) {
         return (

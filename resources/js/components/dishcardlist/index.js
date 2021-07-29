@@ -12,6 +12,17 @@ export const DishCardList = ({ dishes, category }) => {
    }
 
    console.log(category)
+   if (category === '') {
+      return (
+         <ul className="list">
+            { dishes.map(dish => (
+               <li className="list-item" key={ dish.dish.id }>
+                  <DishCard dish={ dish } />
+               </li>
+            )) }
+         </ul>
+      )
+   }
 
    return (
       <ul className="list">
