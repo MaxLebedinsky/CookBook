@@ -79,7 +79,7 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
                         { categories.map((category, index) => (
                             <StyledMenuItem key={ index }>
                                 <ListItemText
-                                    onClick={ () => handleCategory(category.name), handleClose }
+                                    onClick={ () => handleCategory(category.name) }
                                     primary={ category.name } />
                             </StyledMenuItem>
                         )

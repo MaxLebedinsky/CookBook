@@ -3,7 +3,8 @@ import SearchField from "./searchfield";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Logo from './logo'
-import {useStyles} from "./styled";
+import { useStyles } from "./styled";
+import PropTypes from 'prop-types';
 
 const Header = ({ handleSetCategory, handleSetDishSearch }) => {
 
