@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import { useStyles } from './styled';
 
 export const Dish = ({ dish }) => {
-   //  const {dish} = {...props};
    const classes = useStyles();
 
    Dish.propTypes = {
