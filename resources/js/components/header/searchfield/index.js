@@ -49,33 +49,35 @@ const StyledMenuItem = withStyles((theme) => ({
     },
 }))(MenuItem);
 
-const SearchField = ({ handleSetCategory }) => {
+const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
     SearchField.propTypes = {
-        handleSetCategory: PropTypes.func
-    }
+        handleSetCategory: PropTypes.func,
+        handleSetDishSearch: PropTypes.func,
+    };
 
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
-    const [categories, setCategories] = useState([])
+    const [categories, setCategories] = useState([]);
     const [value, setValue] = useState('');
 
     const getCategories = () =>
         window.axios.get('/categories')
-            .then(json => setCategories(json.data.data))
+            .then(json => setCategories(json.data.data));
 
     useEffect(() => {
         getCategories()
-    }, [])
+    }, []);
 
     const handleChange = (e) => {
         setValue(e.target.value);
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setValue('');
-    }
+        handleSetDishSearch(value);
+        // setValue('');
+    };
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -88,7 +90,7 @@ const SearchField = ({ handleSetCategory }) => {
     const handleCategory = (categoryName) => {
         handleSetCategory(categoryName)
         handleClose()
-    }
+    };
 
     return (
         <div className='search-box'>

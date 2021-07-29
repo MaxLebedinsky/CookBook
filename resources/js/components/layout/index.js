@@ -5,8 +5,6 @@ import Header from '../header'
 import { DishCardList } from '../dishcardlist';
 import { Dish } from '../dish';
 
-const API_URL = 'http://localhost:8000/api/v1/full-dishes'
-
 const Layout = () => {
 
     const [dishes, setDishes] = useState([]);
@@ -14,13 +12,13 @@ const Layout = () => {
     const [loading, setLoading] = useState(false);
     const { dishId } = useParams();
     const [category, setCategory] = useState('');
+    const [dishSearch, setDishSearch] = useState('');
 
     const getDishes = async () => {
         try {
             setLoading(true);
-            const response = await fetch(API_URL);
-            const data = await response.json();
-            setDishes(data.data);
+            const response = await window.axios.get('/full-dishes');
+            setDishes(response.data.data);
         } catch (err) {
             console.log(err.message);
         } finally {
@@ -28,38 +26,48 @@ const Layout = () => {
         }
     }
 
-    const handleSetCategory = useCallback((newCategory) => {
-        setCategory(() => newCategory);
-    }, [])
-
     useEffect(() => {
         getDishes()
     }, []);
 
+    const handleSetCategory = useCallback((newCategory) => {
+        setCategory(() => newCategory);
+    }, [])
+
+    const handleSetDishSearch = useCallback((newDishSearch) => {
+        setDishSearch(() => newDishSearch);
+    }, [])
+
     useEffect(() => {
         setDish(() => (dishes[dishId - 1]))
     });
-
 
     if (loading) {
         return (
             <>
                 <Header />
                 <main className='layout-content'>
-                    <p>Here suppose to be loader</p>
+                    <p>Loading cards...</p>
                 </main>
             </>)
     }
 
     return (
         <>
-            <Header handleSetCategory={ handleSetCategory } />
+            <Header
+                handleSetCategory={ handleSetCategory }
+                handleSetDishSearch={ handleSetDishSearch }
+            />
             <main className='layout-content'>
                 { dishId == undefined ?
-                    <DishCardList dishes={ dishes } category={ category } /> :
+                    <DishCardList
+                        dishes={ dishes }
+                        category={ category }
+                        dishSearch={ dishSearch }
+                    /> :
                     <Dish dish={ dish } /> }
             </main>
         </>)
 }
 
-export default Layout
+export default Layout;

@@ -1,10 +1,21 @@
 import React from "react"
 import "./styles.css"
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Logo = () => {
+const Logo = ({ handleSetCategory, handleSetDishSearch }) => {
+
+    Logo.propTypes = {
+        handleSetCategory: PropTypes.func,
+        handleSetDishSearch: PropTypes.func
+    }
+
     return (
-        <Link to="/" className="logo">
+        <Link
+            to="/"
+            className="logo"
+            onClick={ () => handleSetCategory(''), () => handleSetDishSearch('') }
+        >
             <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
