@@ -62,7 +62,7 @@ class CategoryController extends Controller
         $data = $request->validated();
         $category->update($data);
 
-        return $this->handleResponse(new CategoryResource($category), 'Updated');
+        return $this->handleResponse(new CategoryResource($category));
     }
 
     /**
@@ -75,6 +75,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return $this->handleResponse([], 'Deleted');
+        return $this->handleResponse([]);
     }
 }

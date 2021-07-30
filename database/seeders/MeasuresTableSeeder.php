@@ -24,6 +24,7 @@ class MeasuresTableSeeder extends Seeder
             'мл.',
             'ч.л.',
             'ст.л.',
+            'шт.',
         ];
 
         $this->faker = $faker;

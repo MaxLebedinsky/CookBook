@@ -4,20 +4,17 @@ namespace App\Traits;
 
 trait ApiResponder
 {
-    public function handleResponse($result, $msg = '')
+    public function handleResponse($result, $code = 200)
     {
         $res = [
-            'success' => true,
             'data' => $result,
-            'message' => $msg,
         ];
-        return response()->json($res, 200);
+        return response()->json($res, $code);
     }
 
-    public function handleError($error, $errorMsg = [], $code = 404)
+    public function handleError($error, $errorMsg = [], $code = 400)
     {
         $res = [
-            'success' => false,
             'message' => $error,
         ];
         if (!empty($errorMsg)) {

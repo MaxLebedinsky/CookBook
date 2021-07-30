@@ -21,7 +21,7 @@ class AuthController extends Controller
             $data = [
                 'token' => $request->user()->createToken('LaravelSanctumAuth')->plainTextToken,
             ];
-            return $this->handleResponse($data, 'Login successful');
+            return $this->handleResponse($data);
         } else {
             return $this->handleError('Unauthorised.', ['error' => 'Unauthorised']);
         }
@@ -44,19 +44,18 @@ class AuthController extends Controller
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] = $user->createToken('LaravelSanctumAuth')->plainTextToken;
-        $success['name'] = $user->name;
 
-        return $this->handleResponse($success, 'User successfully registered!');
+        return $this->handleResponse($success);
     }
 
     public function logout(Request $request)
     {
         $user = Auth::user();
         if (is_null($user)) {
-            return $this->handleResponse([], 'User successfully logout!');
+            return $this->handleResponse([]);
         }
 //        $request->user()->currentAccessToken()->delete();
         $user->tokens()->delete();
-        return $this->handleResponse($user, 'User successfully logout!');
+        return $this->handleResponse($user);
     }
 }
