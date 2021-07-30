@@ -58,16 +58,18 @@ const Layout = () => {
                 handleSetCategory={ handleSetCategory }
                 handleSetDishSearch={ handleSetDishSearch }
             />
-            <main className='layout-content'>
+            <main className='layout-content'>                
                 { dishId == undefined ?
                     <DishCardList
                         dishes={ dishes }
                         category={ category }
                         dishSearch={ dishSearch }
-                    /> :
-                    <Dish dish={ dish } /> }
+                    /> 
+                : <Dish dish={ dish }/>
+                }
             </main>
-        </>)
+        </>
+        )
 }
 
 export default Layout;

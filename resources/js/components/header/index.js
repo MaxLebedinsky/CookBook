@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Logo from './logo'
 import { useStyles } from "./styled";
 import PropTypes from 'prop-types';
+import { Button } from '@material-ui/core';
 
 const Header = ({ handleSetCategory, handleSetDishSearch }) => {
 
@@ -26,6 +27,7 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
                         handleSetCategory={ handleSetCategory }
                         handleSetDishSearch={ handleSetDishSearch }
                     />
+                    <Button href="/add-dish" variant="contained">Add dish</Button>
                 </Toolbar>
             </AppBar>
         </div>
