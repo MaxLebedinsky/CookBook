@@ -14,7 +14,7 @@ class AlterFieldRating extends Migration
     public function up()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->double('rating')->default(0.0)->nullable();
+            $table->float('rating')->default(0.0)->change();
         });
     }
 
@@ -26,7 +26,7 @@ class AlterFieldRating extends Migration
     public function down()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->double('rating')->default(0.0)->nullable();
+            $table->float('rating')->default(0.0)->nullable();
         });
     }
 }
