@@ -11,7 +11,7 @@ Route::get('/{id}', 'FullDishController@show')
     ->name('full-dishes.show');
 
 Route::group([
-    'middleware' => 'auth:sanctum',
+//    'middleware' => 'auth:sanctum',
 ], function () {
 
     Route::post('/', 'FullDishController@store')->name('dishes.store');
