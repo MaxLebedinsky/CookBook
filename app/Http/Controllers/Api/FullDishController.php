@@ -37,15 +37,21 @@ class FullDishController extends Controller
 
     public function store(DishRequest $request)
     {
+        dd($request->input());
         try {
             DB::transaction(function () use ($request) {
-                $dish = Dish::create($request->input['data.dish.*']);
 
-                foreach ($$request->input['data.ingredients.*'] as $ingredient) {
+                $dish = Dish::create($request->input['dish']);
+
+                dd($dish);
+
+                foreach ($request->input['ingredients'] as $ingredient) {
+                    $ingredient['dish_id'] = $dish->id;
                     Ingredient::create($ingredient);
                 }
 
-                foreach ($$request->input['data.dish_steps.*'] as $dish_step) {
+                foreach ($request->input['dish_steps'] as $dish_step) {
+                    $dish_step['dish_id'] = $dish->id;
                     DishStep::create($dish_step);
                 }
             });
@@ -53,7 +59,7 @@ class FullDishController extends Controller
             return $this->handleError('error', [], 404);
         }
 
-        return $this->handleResponse($request->input['data'], 'Created');
+        return $this->handleResponse($request->input(), 201);
     }
 
     public function show(Request $request, int $id)
@@ -105,7 +111,7 @@ class FullDishController extends Controller
             return $this->handleError('error', [], 404);
         }
 
-        return $this->handleResponse($request->input['data'], 'Updated');
+        return $this->handleResponse($request->input['data']);
     }
 
     public function delete(int $id)
@@ -133,7 +139,7 @@ class FullDishController extends Controller
             return $this->handleError('error', [], 500);
         }
 
-        return $this->handleResponse($fullDish, 'Deleted');
+        return $this->handleResponse($fullDish);
     }
 
     private function getItemIds($collection): array

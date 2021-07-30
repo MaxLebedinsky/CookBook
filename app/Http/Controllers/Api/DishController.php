@@ -66,7 +66,7 @@ class DishController extends Controller
         $data = $request->validated();
         $dish->update($data);
 
-        return $this->handleResponse($dish, 'Updated');
+        return $this->handleResponse($dish);
     }
 
     /**
@@ -80,7 +80,7 @@ class DishController extends Controller
         $dish = Dish::findOrFail($id);
         $dish->delete();
 
-        return $this->handleResponse($dish, 'Deleted');
+        return $this->handleResponse($dish);
     }
 
 }
