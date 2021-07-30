@@ -37,26 +37,23 @@ class FullDishController extends Controller
 
     public function store(DishRequest $request)
     {
-        dd($request->input());
         try {
             DB::transaction(function () use ($request) {
 
-                $dish = Dish::create($request->input['dish']);
+                $dish = Dish::create($request->input('dish'));
 
-                dd($dish);
-
-                foreach ($request->input['ingredients'] as $ingredient) {
+                foreach ($request->input('ingredients') as $ingredient) {
                     $ingredient['dish_id'] = $dish->id;
                     Ingredient::create($ingredient);
                 }
 
-                foreach ($request->input['dish_steps'] as $dish_step) {
+                foreach ($request->input('dish_steps') as $dish_step) {
                     $dish_step['dish_id'] = $dish->id;
                     DishStep::create($dish_step);
                 }
             });
         } catch (\Exception $e) {
-            return $this->handleError('error', [], 404);
+            return $this->handleError($e->getMessage());
         }
 
         return $this->handleResponse($request->input(), 201);
@@ -84,7 +81,7 @@ class FullDishController extends Controller
                 'category' =>$category,
             ]);
         } catch (\Exception $e) {
-            return $this->handleError('error', [], 404);
+            return $this->handleError('error');
         }
 
         return $this->handleResponse($fullDish);
@@ -108,7 +105,7 @@ class FullDishController extends Controller
                 }
             });
         } catch (\Exception $e) {
-            return $this->handleError('error', [], 404);
+            return $this->handleError('error');
         }
 
         return $this->handleResponse($request->input['data']);
@@ -136,7 +133,7 @@ class FullDishController extends Controller
                 Dish::destroy($id);
             });
         } catch (\Exception $e) {
-            return $this->handleError('error', [], 500);
+            return $this->handleError('error');
         }
 
         return $this->handleResponse($fullDish);
@@ -176,7 +173,7 @@ class FullDishController extends Controller
             }
 
         } catch (\Exception $e) {
-            return $this->handleError('error', [], 404);
+            return $this->handleError('error');
         }
 
         return $this->handleResponse($fullDishes);
