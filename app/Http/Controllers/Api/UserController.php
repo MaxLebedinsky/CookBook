@@ -16,6 +16,6 @@ class UserController extends Controller
 
         $user->update($request->validated());
 
-        return $this->handleResponse($user, 201);
+        return $this->handleResponse($user);
     }
 }

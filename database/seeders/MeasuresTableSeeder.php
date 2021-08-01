@@ -18,12 +18,13 @@ class MeasuresTableSeeder extends Seeder
     public function run(Generator $faker)
     {
         $measures = [
-            'кг.',
-            'г.',
-            'л.',
-            'мл.',
+            'кг',
+            'г',
+            'л',
+            'мл',
             'ч.л.',
             'ст.л.',
+            'шт.',
         ];
 
         $this->faker = $faker;

@@ -33,7 +33,7 @@ class DishTableSeeder extends Seeder
             'small_img' => $this->faker->imageUrl(130, 100, 'dishes', true),
             'description' => $this->faker->paragraph(10),
             'user_id' => $this->faker->numberBetween(1,50),
-            'category_id' => $this->faker->numberBetween(1,10),
+            'category_id' => $this->faker->numberBetween(1,8),
             'views' => $this->faker->randomNumber(3, false),
             'rating' => $this->faker->randomFloat(2, 0, 5),
             'complexity' => $this->faker->numberBetween(1, 3),

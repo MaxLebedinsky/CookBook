@@ -67,7 +67,7 @@ class IngredientController extends Controller
         $data = $request->validated();
         $ingredient->update($data);
 
-        return $this->handleResponse($ingredient, 'Updated');
+        return $this->handleResponse($ingredient);
     }
 
     /**
@@ -81,6 +81,6 @@ class IngredientController extends Controller
         $ingredient = Ingredient::findOrFail($ingredient_id)->where('dish_id', $dish_id)->first();
         $ingredient->delete();
 
-        return $this->handleResponse($ingredient, 'Deleted');
+        return $this->handleResponse($ingredient);
     }
 }

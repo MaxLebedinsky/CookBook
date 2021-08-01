@@ -24,10 +24,11 @@ class DishRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:250',
-            'img' => 'required|file|mimes:jpg,png',
-            'description' => 'required|string|min:20|max:1000',
-            'category_id'=> 'required|integer',
+            'dish.title' => 'required|min:3|max:250',
+//            'dish.img' => 'required|file|mimes:jpg,png',
+            'dish.description' => 'required|string|min:20|max:1000',
+            'dish.category_id'=> 'required|integer',
+            'dish.user_id'=> 'required|integer',
         ];
     }
 }
