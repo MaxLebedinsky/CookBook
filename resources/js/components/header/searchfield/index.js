@@ -24,6 +24,7 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
     useEffect(() => {
         getCategories()
+        console.log(categories)
     }, []);
 
     const handleChange = (e) => {
