@@ -21,6 +21,7 @@ export const Dish = ({ dish }) => {
       )
    }
 
+   console.log(dish);
    return (
       <>
          <Card className={ classes.root }>
