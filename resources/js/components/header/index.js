@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Logo from './logo'
 import { useStyles } from "./styled";
 import PropTypes from 'prop-types';
+import Login from './login'
 
 const Header = ({ handleSetCategory, handleSetDishSearch }) => {
 
@@ -17,6 +18,7 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
     return (
         <div className={ classes.root }>
             <AppBar position="static">
+                <Login />
                 <Logo
                     handleSetCategory={ handleSetCategory }
                     handleSetDishSearch={ handleSetDishSearch }
