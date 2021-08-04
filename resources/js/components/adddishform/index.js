@@ -1,6 +1,4 @@
-import { Button, TextField, Typography, FormControlLabel, RadioGroup, Radio, FormControl, FormLabel } from '@material-ui/core';
-// import { FormControlLabel } from '@material-ui/core/FormControlLabel';
-// import { RadioGroup } from '@material-ui/core/RadioGroup';
+import { Button, TextField, FormControlLabel, RadioGroup, Radio, FormControl, FormLabel, Modal } from '@material-ui/core';
 import React, { useState } from 'react';
 import { TEST_DISH_FOR_POST } from '../dish/const';
 import { useStyles } from './styled';
@@ -10,6 +8,16 @@ export const AddDishForm = () => {
 
     const [idDelete, setIdDelete] = useState('');
     const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
+    const [modal, setModal] = useState(false);
+    const [modalText, setModalText] = useState('Default message');
+
+    const handleOpenModal = () => {
+        setModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setModal(false)
+    };
 
     const postDish = async (dish) => {
         console.log(JSON.stringify(dish));
@@ -21,8 +29,16 @@ export const AddDishForm = () => {
             body: JSON.stringify(dish)
           });
           
-          let result = await response.json();
-          console.log(result);
+        let result = await response.json();
+        console.log(result);
+
+        if (result.success === false) {
+            setModalText('Сбой связи с сервером');
+            handleOpenModal();
+        } else {
+            setModalText('Рецепт успешно добавлен');
+            handleOpenModal();
+        }
     };
 
     const deleteDish = async (id) => {
@@ -31,10 +47,18 @@ export const AddDishForm = () => {
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
             },
-          });
-          
-          let result = await response.json();
-          console.log(result);
+        });
+        
+        let result = await response.json();
+        console.log(result);
+
+        if (result.success === false) {
+            setModalText('Сбой связи с сервером');
+            handleOpenModal();
+        } else {
+            setModalText('Рецепт успешно удалён');
+            handleOpenModal();
+        }
     };
     
     const handleDelete = (event) => {
@@ -73,34 +97,42 @@ export const AddDishForm = () => {
 
     return (
     <>
-        <Button href="/" className= { classes.form_button } variant="contained">&lt; Вернуться на главную</Button>
+        <Modal
+            open={modal}
+            onClose={handleCloseModal}>
+                <div className={ classes.modal }>{ modalText }</div>
+        </Modal>
+        <Button href="/" className= { classes.form_button } variant="contained">
+            &lt; Вернуться на главную
+        </Button>
         <br/><hr/><br/>
-        <Typography component="h2" className={ classes.h2 }>Добавление рецепта:</Typography> 
-        <form onSubmit={handleAdd} className={ classes.root }>
-            <TextField 
-                type="text"
-                label="Название блюда"
-                variant="outlined"
-                id="title"
-                onChange={handleChange}
-            />
-            <FormControl component="fieldset" >
-                <FormLabel component="legend">Сложность: </FormLabel>
-                <RadioGroup row
-                    aria-label="complexity"
-                    value={dish.dish.complexity}
-                    onChange={handleChange}>
-                    <FormControlLabel value="1" control={<Radio id="complexity"/>} label="1" />
-                    <FormControlLabel value="2" control={<Radio id="complexity"/>} label="2" />
-                    <FormControlLabel value="3" control={<Radio id="complexity"/>} label="3" />
-                </RadioGroup>
+            <FormControl className={ classes.root } component="fieldset">
+                <FormLabel component="h2" className={ classes.h2 }>Добавление рецепта</FormLabel>
+                <TextField 
+                    type="text"
+                    label="Название блюда"
+                    variant="outlined"
+                    id="title"
+                    onChange={handleChange}
+                />
+                <FormControl component="fieldset" >
+                    <FormLabel component="legend">Сложность: </FormLabel>
+                    <RadioGroup row
+                        aria-label="complexity"
+                        value={dish.dish.complexity}
+                        onChange={handleChange}>
+                        <FormControlLabel value="1" control={<Radio id="complexity"/>} label="1" />
+                        <FormControlLabel value="2" control={<Radio id="complexity"/>} label="2" />
+                        <FormControlLabel value="3" control={<Radio id="complexity"/>} label="3" />
+                    </RadioGroup>
+                </FormControl>
+                <Button type="submit" onClick={handleAdd} className= { classes.form_button } variant="contained" >
+                    Добавить рецепт
+                </Button>
             </FormControl>
-        
-            <Button type="submit" className= { classes.form_button } variant="contained" >Добавить рецепт</Button>
-        </form>
         <br/><hr/><br/>
-        <Typography component="h2" className={ classes.h2 }>Удаление рецепта:</Typography>
-        <form onSubmit={handleDelete} className={ classes.root }>
+        <FormControl className={ classes.root } component="fieldset">
+        <FormLabel component="h2" className={ classes.h2 }>Удаление рецепта</FormLabel>
             <TextField
                 type="text" 
                 label="id удаляемого блюда" 
@@ -108,8 +140,8 @@ export const AddDishForm = () => {
                 value={idDelete}
                 id="id-delete"
                 onChange={handleChange}/>
-            <Button type="submit" className= { classes.form_button } variant="contained">Удалить</Button>
-        </form>
+            <Button type="submit" onClick={handleDelete} className= { classes.form_button } variant="contained">Удалить</Button>
+        </FormControl>
     </>
     )
 }

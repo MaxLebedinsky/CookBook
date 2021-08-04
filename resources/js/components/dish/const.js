@@ -99,34 +99,34 @@ export const TEST_DISH_FOR_POST = {
         "small_img":"https://via.placeholder.com/130x100.png/00aa44?text=dishes+officia",
         "description":"Itaque reiciendis assumenda sed. Qui non libero dolore quaerat magnam. Possimus pariatur eligendi modi. Molestiae sit eius facere officia illum in consequatur. Recusandae fugiat sint doloribus odit perspiciatis. Et asperiores id inventore eligendi. Dolores eum tenetur quisquam. Aut possimus id nisi aspernatur voluptatem facilis. Recusandae id expedita laboriosam officiis quo ratione voluptatum.",
         "user_id":3,
-        "category_id":4,
+        "category_id":1,
         "complexity":1,
     },
     "ingredients": [
         {
             "ingredients_name":"Мясо (свинина)",
             "quantity":0.6,
-            "measure":"кг",
+            "measure_id":1,
         },
         {
             "ingredients_name":"Картофель",
             "quantity":0.5,
-            "measure":"кг",
+            "measure_id":1,
         },
         {
             "ingredients_name":"Сыр",
             "quantity":250,
-            "measure":"г",
+            "measure_id":2,
         },
         {
             "ingredients_name":"Соль",
             "quantity":2,
-            "measure":"ч.л.",
+            "measure_id":5,
         },
         {
             "ingredients_name":"Лук репчатый",
             "quantity":2,
-            "measure":"шт.",
+            "measure_id":7,
         }
     ],
     "dish_steps": [

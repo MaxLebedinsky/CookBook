@@ -15,5 +15,14 @@ export  const useStyles = makeStyles((theme) => ({
     h2: {
         fontWeight: 700,
         margin: theme.spacing(2),
+    },
+    modal: {
+        margin: '20% auto',
+        width: 300,
+        backgroundColor: theme.palette.background.paper,
+        textAlign: 'center',
+        borderRadius: 10,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(6, 1, 6),
     }
 }));
