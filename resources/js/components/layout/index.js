@@ -39,7 +39,8 @@ const Layout = () => {
     }, [])
 
     useEffect(() => {
-        setDish(() => (dishes[dishId - 1]))
+        // setDish(() => (dishes[dishId - 1]))
+        setDish(dishes.find(item => item.dish.id === +dishId));
     });
 
     if (loading) {
@@ -58,16 +59,18 @@ const Layout = () => {
                 handleSetCategory={ handleSetCategory }
                 handleSetDishSearch={ handleSetDishSearch }
             />
-            <main className='layout-content'>
+            <main className='layout-content'>                
                 { dishId == undefined ?
                     <DishCardList
                         dishes={ dishes }
                         category={ category }
                         dishSearch={ dishSearch }
-                    /> :
-                    <Dish dish={ dish } /> }
+                    /> 
+                : <Dish dish={ dish }/>
+                }
             </main>
-        </>)
+        </>
+        )
 }
 
 export default Layout;
