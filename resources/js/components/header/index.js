@@ -27,8 +27,8 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
                         handleSetCategory={ handleSetCategory }
                         handleSetDishSearch={ handleSetDishSearch }
                     />
-                    <Button href="/add-dish" variant="contained">Add dish</Button>
                 </Toolbar>
+                <Button href="/add-dish"  className={ classes.add_button } variant="contained">Добавить рецепт</Button>
             </AppBar>
         </div>
     );

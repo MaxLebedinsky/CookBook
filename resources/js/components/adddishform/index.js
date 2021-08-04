@@ -1,8 +1,10 @@
 import { Button, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { TEST_DISH_FOR_POST } from '../dish/const';
+import { useStyles } from './styled';
 
 export const AddDishForm = () => {
+    const classes = useStyles();
 
     const [idDelete, setIdDelete] = useState('');
     const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
@@ -72,8 +74,10 @@ export const AddDishForm = () => {
 
     return (
     <>
-        <Typography>Добавление рецепта:</Typography> 
-        <form onSubmit={handleAdd}>
+        <Button href="/" className= { classes.form_button } variant="contained">&lt; Вернуться на главную</Button>
+        <br/><hr/><br/>
+        <Typography component="h2" className={ classes.h2 }>Добавление рецепта:</Typography> 
+        <form onSubmit={handleAdd} className={ classes.root }>
             <TextField 
                 type="text"
                 label="Название блюда"
@@ -89,11 +93,11 @@ export const AddDishForm = () => {
                 onChange={handleChange}
             />
         
-            <Button type="submit" variant="contained">Добавить рецепт</Button>
+            <Button type="submit" className= { classes.form_button } variant="contained" >Добавить рецепт</Button>
         </form>
-        <br/><br/><hr/><br/>
-        <Typography>Удаление рецепта:</Typography>
-        <form onSubmit={handleDelete}>
+        <br/><hr/><br/>
+        <Typography component="h2" className={ classes.h2 }>Удаление рецепта:</Typography>
+        <form onSubmit={handleDelete} className={ classes.root }>
             <TextField
                 type="text" 
                 label="id удаляемого блюда" 
@@ -101,7 +105,7 @@ export const AddDishForm = () => {
                 value={idDelete}
                 id="id-delete"
                 onChange={handleChange}/>
-            <Button type="submit" variant="contained">Удалить</Button>
+            <Button type="submit" className= { classes.form_button } variant="contained">Удалить</Button>
         </form>
     </>
     )

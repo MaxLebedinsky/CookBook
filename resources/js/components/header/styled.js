@@ -7,7 +7,7 @@ export  const useStyles = makeStyles((theme) => ({
     toolbar: {
         display: 'block',
         width: '70%',
-        minHeight: 128,
+        // minHeight: 128,
         margin: '0 auto',
         [theme.breakpoints.up('md')]: {
             width: '50%',
@@ -16,5 +16,9 @@ export  const useStyles = makeStyles((theme) => ({
     logo:{
         margin: 'auto',
         padding: '24px',
+    },
+    add_button: {
+        margin: '0 auto 16px',
+        textTransform: 'none',
     }
 }));
