@@ -38,6 +38,9 @@ Route::group(["prefix" => "{$api_version}"], function () {
     // register full-dishes by category routes
     Route::prefix('categories')
         ->group(base_path('routes/api/fullDishesByCategory.php'));
+    // register measures by category routes
+    Route::prefix('measures')
+        ->group(base_path('routes/api/measures.php'));
 });
 
 Route::any('/{any?}', function () {
