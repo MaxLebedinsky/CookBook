@@ -1,4 +1,6 @@
-import { Button, TextField, Typography } from '@material-ui/core';
+import { Button, TextField, Typography, FormControlLabel, RadioGroup, Radio, FormControl, FormLabel } from '@material-ui/core';
+// import { FormControlLabel } from '@material-ui/core/FormControlLabel';
+// import { RadioGroup } from '@material-ui/core/RadioGroup';
 import React, { useState } from 'react';
 import { TEST_DISH_FOR_POST } from '../dish/const';
 import { useStyles } from './styled';
@@ -50,7 +52,7 @@ export const AddDishForm = () => {
             console.log('adding dish: '+dish);
             postDish(dish);
         }
-        setDish({ ...TEST_DISH_FOR_POST });
+        // setDish({ ...TEST_DISH_FOR_POST });
     }
 
     const handleChange = (event) => {
@@ -61,15 +63,12 @@ export const AddDishForm = () => {
                 break;
             case 'title' :
                 setDish({...dish, dish:{...dish.dish, title: event.target.value}});
-                console.log(dish);
                 break;
             case 'complexity' :
                 setDish({...dish, dish:{...dish.dish, complexity: event.target.value}});
-                console.log(dish);
+                console.log('selected complexity: '+event.target.value);
                 break;
-        }
-
-        
+        }  
     };
 
     return (
@@ -85,13 +84,17 @@ export const AddDishForm = () => {
                 id="title"
                 onChange={handleChange}
             />
-            <TextField 
-                type="text"
-                label="Сложность (1, 2 или 3)"
-                variant="outlined"
-                id="complexity"
-                onChange={handleChange}
-            />
+            <FormControl component="fieldset" >
+                <FormLabel component="legend">Сложность: </FormLabel>
+                <RadioGroup row
+                    aria-label="complexity"
+                    value={dish.dish.complexity}
+                    onChange={handleChange}>
+                    <FormControlLabel value="1" control={<Radio id="complexity"/>} label="1" />
+                    <FormControlLabel value="2" control={<Radio id="complexity"/>} label="2" />
+                    <FormControlLabel value="3" control={<Radio id="complexity"/>} label="3" />
+                </RadioGroup>
+            </FormControl>
         
             <Button type="submit" className= { classes.form_button } variant="contained" >Добавить рецепт</Button>
         </form>
