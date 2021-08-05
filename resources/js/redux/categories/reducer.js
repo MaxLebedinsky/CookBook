@@ -1,8 +1,14 @@
 import { REQUEST_STATUS } from "../../utils/constants";
-import { CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE } from "./actions"
+import {
+   CATEGORIES_REQUEST,
+   CATEGORIES_SUCCESS,
+   CATEGORIES_FAILURE,
+   CATEGORIES_FILTER
+} from "./actions"
 
 const initialState = {
    categoryList: [],
+   categoryFilter: "",
    request: {
       status: REQUEST_STATUS.IDLE,
       error: '',
@@ -39,6 +45,12 @@ export const categoryListReducer = (state = initialState, action) => {
             }
          }
       };
+      case CATEGORIES_FILTER: {
+         return {
+            ...state,
+            categoryFilter: action.category,
+         }
+      }
       default:
          return state;
    }

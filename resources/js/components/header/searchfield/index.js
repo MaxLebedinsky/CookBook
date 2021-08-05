@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterIcon from "./filtericon";
 import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useStyles, StyledMenu, StyledMenuItem } from "./styled";
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { categoriesFilter } from '../../../redux/categories/actions'
+
 
 const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
@@ -15,17 +18,9 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
-    // const [categories, setCategories] = useState([]);
     const [value, setValue] = useState('');
-
-    // const getCategories = () =>
-    //     window.axios.get('/categories')
-    //         .then(json => setCategories(json.data.data));
-
-    // useEffect(() => {
-    //     getCategories()
-    //     console.log(categories)
-    // }, []);
+    const categories = useSelector(state => state.categories.categoryList)
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -34,7 +29,6 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleSetDishSearch(value);
-        // setValue('');
     };
 
     const handleClick = (event) => {
@@ -46,8 +40,8 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
     };
 
     const handleCategory = (categoryName) => {
-        handleSetCategory(categoryName)
-        handleClose()
+        dispatch(categoriesFilter(categoryName));
+        handleClose();
     };
 
     return (

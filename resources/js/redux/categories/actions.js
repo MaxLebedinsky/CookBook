@@ -1,6 +1,7 @@
 export const CATEGORIES_REQUEST = 'CATEGORIES::REQUEST';
 export const CATEGORIES_SUCCESS = 'CATEGORIES::SUCCESS';
 export const CATEGORIES_FAILURE = 'CATEGORIES::FAILURE';
+export const CATEGORIES_FILTER = 'CATEGORIES::FILTER';
 
 export const categoriesRequest = () => ({
 type: CATEGORIES_REQUEST,
@@ -15,6 +16,11 @@ export const categoriesFailure = (error) => ({
    type: CATEGORIES_FAILURE,
    error,
 });
+
+export const categoriesFilter = (category) => ({
+   type: CATEGORIES_FILTER,
+   category,
+})
 
 
 export const getDishes = () => async (dispatch) => {
