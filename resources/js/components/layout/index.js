@@ -7,28 +7,28 @@ import { Dish } from '../dish';
 
 const Layout = () => {
 
-    const [dishes, setDishes] = useState([]);
+    // const [dishes, setDishes] = useState([]);
     const [dish, setDish] = useState([]);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const { dishId } = useParams();
     const [category, setCategory] = useState('');
     const [dishSearch, setDishSearch] = useState('');
 
-    const getDishes = async () => {
-        try {
-            setLoading(true);
-            const response = await window.axios.get('/full-dishes');
-            setDishes(response.data.data);
-        } catch (err) {
-            console.log(err.message);
-        } finally {
-            setLoading(false);
-        }
-    }
+    // const getDishes = async () => {
+    //     try {
+    //         setLoading(true);
+    //         const response = await window.axios.get('/full-dishes');
+    //         setDishes(response.data.data);
+    //     } catch (err) {
+    //         console.log(err.message);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // }
 
-    useEffect(() => {
-        getDishes()
-    }, []);
+    // useEffect(() => {
+    //     getDishes()
+    // }, []);
 
     const handleSetCategory = useCallback((newCategory) => {
         setCategory(() => newCategory);

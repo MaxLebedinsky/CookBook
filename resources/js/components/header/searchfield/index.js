@@ -15,17 +15,17 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
-    const [categories, setCategories] = useState([]);
+    // const [categories, setCategories] = useState([]);
     const [value, setValue] = useState('');
 
-    const getCategories = () =>
-        window.axios.get('/categories')
-            .then(json => setCategories(json.data.data));
+    // const getCategories = () =>
+    //     window.axios.get('/categories')
+    //         .then(json => setCategories(json.data.data));
 
-    useEffect(() => {
-        getCategories()
-        console.log(categories)
-    }, []);
+    // useEffect(() => {
+    //     getCategories()
+    //     console.log(categories)
+    // }, []);
 
     const handleChange = (e) => {
         setValue(e.target.value);
