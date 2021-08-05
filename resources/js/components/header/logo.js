@@ -1,20 +1,18 @@
 import React from "react"
 import { useStyles } from "./styled";
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useDispatch } from "react-redux";
+import { categoriesFilter } from '../../redux/categories/actions';
+import { dishesSearchField } from '../../redux/dishes/actions';
 
-const Logo = ({ handleSetCategory, handleSetDishSearch }) => {
+const Logo = () => {
 
     const classes = useStyles();
-
-    Logo.propTypes = {
-        handleSetCategory: PropTypes.func,
-        handleSetDishSearch: PropTypes.func
-    }
+    const dispatch = useDispatch();
 
     const resetCategoryAndSearch = () => {
-        handleSetCategory('');
-        handleSetDishSearch('');
+        dispatch(categoriesFilter(''));
+        dispatch(dishesSearchField(''));
     }
 
     return (

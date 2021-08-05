@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterIcon from "./filtericon";
 import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useStyles, StyledMenu, StyledMenuItem } from "./styled";
 import { useDispatch, useSelector } from 'react-redux';
-import { categoriesFilter } from '../../../redux/categories/actions';
+import { categoriesFilter, getCategories } from '../../../redux/categories/actions';
 import { dishesSearchField } from '../../../redux/dishes/actions';
 
 
@@ -16,6 +16,10 @@ const SearchField = () => {
     const [value, setValue] = useState('');
     const categories = useSelector(state => state.categories.categoryList)
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCategories());
+    }, [])
 
     const handleChange = (e) => {
         setValue(e.target.value);

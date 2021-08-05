@@ -3,7 +3,9 @@ import {
    DISHES_REQUEST,
    DISHES_FAILURE,
    DISHES_SUCCESS,
-   DISHES_SEARCH_FIELD
+   DISHES_SEARCH_FIELD,
+   ADD_DISH,
+   DELETE_DISH,
 } from "./actions"
 
 const initialState = {
@@ -34,7 +36,7 @@ export const dishListReducer = (state = initialState, action) => {
                error: action.error,
             }
          }
-      };
+      }
       case DISHES_SUCCESS: {
          return {
             ...state,
@@ -44,13 +46,13 @@ export const dishListReducer = (state = initialState, action) => {
                error: "",
             }
          }
-      };
+      }
       case ADD_DISH: {
          return {
             ...state,
             dishList: [...state.dishList, action.payload]
          }
-      };
+      }
       case DELETE_DISH: {
          const dishIndex = [...state.dishList].findIndex(dish => dish.dish.id === action.payload);
 
@@ -61,7 +63,7 @@ export const dishListReducer = (state = initialState, action) => {
             ...state,
             dishList: newDishList,
          }
-      };
+      }
       case DISHES_SEARCH_FIELD: {
          return {
             ...state,

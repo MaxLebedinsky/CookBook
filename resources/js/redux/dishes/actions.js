@@ -41,9 +41,9 @@ export const getDishes = () => async (dispatch) => {
    try {
       const response = await window.axios.get('/full-dishes');
 
-      if (!response.ok) {
-         throw new Error("request failed with status " + response.status);
-      };
+      // if (!response.ok) {
+      //    throw new Error("request failed with status " + response.status);
+      // }
 
       dispatch(dishesSuccess(response.data.data));
    } catch (err) {

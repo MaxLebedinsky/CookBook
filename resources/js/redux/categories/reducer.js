@@ -34,7 +34,7 @@ export const categoryListReducer = (state = initialState, action) => {
                error: action.error,
             }
          }
-      };
+      }
       case CATEGORIES_SUCCESS: {
          return {
             ...state,
@@ -44,7 +44,7 @@ export const categoryListReducer = (state = initialState, action) => {
                error: "",
             }
          }
-      };
+      }
       case CATEGORIES_FILTER: {
          return {
             ...state,
