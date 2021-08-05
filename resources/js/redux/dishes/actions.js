@@ -3,6 +3,7 @@ export const DELETE_DISH = 'DISHES::DELETE_DISH';
 export const DISHES_REQUEST = 'DISHES::REQUEST';
 export const DISHES_SUCCESS = 'DISHES::SUCCESS';
 export const DISHES_FAILURE = 'DISHES::FAILURE';
+export const DISHES_SEARCH_FIELD = 'DISHES::SEARCH_FIELD';
 
 export const addDish = newDish => ({
    type: ADD_DISH,
@@ -27,6 +28,11 @@ export const dishesFailure = (error) => ({
    type: DISHES_FAILURE,
    error,
 });
+
+export const dishesSearchField = (search) => ({
+   type: DISHES_SEARCH_FIELD,
+   search,
+})
 
 
 export const getDishes = () => async (dispatch) => {

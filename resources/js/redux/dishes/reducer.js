@@ -1,8 +1,14 @@
 import { REQUEST_STATUS } from "../../utils/constants";
-import { DISHES_REQUEST, DISHES_FAILURE, DISHES_SUCCESS } from "./actions"
+import {
+   DISHES_REQUEST,
+   DISHES_FAILURE,
+   DISHES_SUCCESS,
+   DISHES_SEARCH_FIELD
+} from "./actions"
 
 const initialState = {
    dishList: [],
+   search: "",
    request: {
       status: REQUEST_STATUS.IDLE,
       error: '',
@@ -54,6 +60,12 @@ export const dishListReducer = (state = initialState, action) => {
          return {
             ...state,
             dishList: newDishList,
+         }
+      };
+      case DISHES_SEARCH_FIELD: {
+         return {
+            ...state,
+            search: action.search,
          }
       }
       default:

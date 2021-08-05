@@ -4,17 +4,12 @@ import FilterIcon from "./filtericon";
 import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useStyles, StyledMenu, StyledMenuItem } from "./styled";
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { categoriesFilter } from '../../../redux/categories/actions'
+import { categoriesFilter } from '../../../redux/categories/actions';
+import { dishesSearchField } from '../../../redux/dishes/actions';
 
 
-const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
-
-    SearchField.propTypes = {
-        handleSetCategory: PropTypes.func,
-        handleSetDishSearch: PropTypes.func,
-    };
+const SearchField = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
@@ -28,7 +23,7 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleSetDishSearch(value);
+        dispatch(dishesSearchField(value));
     };
 
     const handleClick = (event) => {
