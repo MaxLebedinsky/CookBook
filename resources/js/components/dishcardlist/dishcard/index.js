@@ -15,25 +15,16 @@ export const getDateString = (string) => {
 }
 
 export const DishCard = ({ dish }) => {
-    // const { dish } = { ...props };
     const classes = useStyles();
 
     DishCard.propTypes = {
         dish: PropTypes.object,
     }
 
-    // функция для предотвращения ухода на страницу Dish при клике на рейтинг
-    // const clickHandler = (event) => {
-    //     if (!event.target.classList.contains('MuiRating-label')&&
-    //         !event.target.classList.contains('MuiRating-visuallyhidden')) 
-    //     console.log(`calling component Dish with id=${dish.dish.id}`);
-    // };
-
     return (
         <Link to={ `/dish/${dish.dish.id}` } className={ classes.noUnderline }>
             <Card
                 className={ classes.root }
-            // onClick={(event) => clickHandler(event)}
             >
                 <CardMedia className={ classes.image }
                     component="img"
