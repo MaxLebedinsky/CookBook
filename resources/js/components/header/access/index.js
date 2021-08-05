@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import {useStyles} from "./styled";
 import Login from "./login"
+import Logout from "./logout";
 
 const Access = () => {
     const [open, setOpen] = React.useState(false);
@@ -16,9 +17,13 @@ const Access = () => {
     const [isLogged, setIsLogged] = useState(false)
 
     useEffect(() => {
+        if(sessionStorage.getItem('authToken')){
+            setToken(sessionStorage.getItem('authToken'))
+        }
         if (token !== "") {
             setIsLogged(true)
-        } else {
+        }
+        if (token === "") {
             setIsLogged(false)
         }
     }, [token]);
@@ -26,9 +31,10 @@ const Access = () => {
     return (
         <div>
             <Button className={classes.loginButton} variant="text" onClick={handleClickOpen}>
-                {isLogged ? 'Logout' : 'Login'}
+                {isLogged ? 'Выйти' : 'Войти'}
             </Button>
-            <Login setToken={setToken} isLogged={isLogged} open={open} onClose={handleClose} token={token}/>
+            {isLogged ? <Logout open={open} onClose={handleClose} setToken={setToken} token={token}/> :
+                <Login setToken={setToken} isLogged={isLogged} open={open} onClose={handleClose} token={token}/>}
         </div>
     );
 }

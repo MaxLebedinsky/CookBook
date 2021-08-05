@@ -30,6 +30,7 @@ const Login = (props) => {
             .then(function (response) {
                 sessionStorage.setItem('authToken', response.data.data.token);
                 props.setToken(response.data.data.token)
+                handleClose()
             })
             .catch(function (error) {
                 console.log(error);
@@ -40,8 +41,8 @@ const Login = (props) => {
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <DialogTitle id="simple-dialog-title">Войти</DialogTitle>
             <form className={classes.loginForm} onSubmit={handleLogin}>
-                <TextField id="email-input" label="Email" value={email} onChange={handleEmail}/>
-                <TextField id="password-input" label="Password" value={password} onChange={handlePassword}/>
+                <TextField type="email" id="email-input" label="Email" value={email} onChange={handleEmail}/>
+                <TextField type="password" id="password-input" label="Password" value={password} onChange={handlePassword}/>
                 <div className={classes.loginButtonsContainer}>
                     <Button variant='outlined' type="submit">Login</Button>
                 </div>
