@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { AddDishForm } from "./components/adddishform";
 import Layout from "./components/layout";
 
 const routes = [
@@ -10,8 +11,11 @@ const routes = [
    {
       path: "/dish/:dishId",
       component: Layout,
-
-   }
+   },
+   {
+      path: "/add-dish",
+      component: AddDishForm
+   },
 ];
 
 export const Routes = () => {

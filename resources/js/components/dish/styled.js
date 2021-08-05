@@ -55,6 +55,7 @@ export const useStyles = makeStyles((theme) => ({
     stepText: {
        padding: 0,
     },
+    
     [theme.breakpoints.down(374)]: {
        root: {
           maxWidth: 300,

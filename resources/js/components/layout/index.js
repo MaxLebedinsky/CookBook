@@ -20,7 +20,7 @@ const Layout = () => {
 
 
     useEffect(() => {
-        setDish(() => dishes.filter(dish => dish.dish.id === dishId))
+        setDish(() => dishes.find(item => item.dish.id === +dishId))
     }, []);
 
     return (
@@ -31,7 +31,8 @@ const Layout = () => {
                     <DishCardList /> :
                     <Dish dish={ dish } /> }
             </main>
-        </>)
+        </>
+    )
 }
 
 export default Layout;
