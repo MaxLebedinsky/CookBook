@@ -32,7 +32,6 @@ export const getCategories = () => async (dispatch) => {
       // if (!response.ok) {
       //    throw new Error("request failed with status " + response.status);
       // }
-      console.log(response.data.data)
 
       dispatch(categoriesSuccess(response.data.data));
    } catch (err) {
