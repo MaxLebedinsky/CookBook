@@ -69,7 +69,7 @@ export const Dish = ({ dish }) => {
 
          <List className={ classes.list }>
             { dish.dish_steps.map((item) => (
-               <ListItem className={ classes.listItem, classes.stepItem } key={ item.id }>
+               <ListItem className={ classes.stepItem } key={ item.id }>
                   <Card className={ classes.stepItem }>
                      <CardMedia className={ classes.stepImage }
                         component="img"
