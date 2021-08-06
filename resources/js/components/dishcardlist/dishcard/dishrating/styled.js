@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: '1rem',
         [theme.breakpoints.down(425)]: {
             margin: '0 2px',
-            fontSize: '0.85rem',
+            fontSize: '0.83rem',
         },
     }
   }));

@@ -1,22 +1,25 @@
 import React from "react"
 import { useStyles } from "./styled";
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useDispatch } from "react-redux";
+import { categoriesFilter } from '../../redux/categories/actions';
+import { dishesSearchField } from '../../redux/dishes/actions';
 
-const Logo = ({ handleSetCategory, handleSetDishSearch }) => {
+const Logo = () => {
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
-    Logo.propTypes = {
-        handleSetCategory: PropTypes.func,
-        handleSetDishSearch: PropTypes.func
+    const resetCategoryAndSearch = () => {
+        dispatch(categoriesFilter(''));
+        dispatch(dishesSearchField(''));
     }
-    
+
     return (
         <Link
             to="/"
             className={ classes.logo }
-            onClick={ () => handleSetCategory(''), () => handleSetDishSearch('') }
+            onClick={ resetCategoryAndSearch }
         >
             <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
                 xmlns="http://www.w3.org/2000/svg">

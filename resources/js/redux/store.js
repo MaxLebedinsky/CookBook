@@ -1,19 +1,22 @@
-import {applyMiddleware} from 'redux'
-import thunk from 'redux-thunk'
-import rootReducer from './reducers'
-import {configureStore} from '@reduxjs/toolkit';
+import { createStore, applyMiddleware, compose } from "redux";
+import { reducers } from "./reducers";
+import thunk from "redux-thunk";
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import "regenerator-runtime/runtime";
 
-const enhancers = [
-    applyMiddleware(thunk),
-]
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-if (process.env.NODE_ENV !== 'production') {
-    window.__REDUX_DEVTOOLS_EXTENSION__ && enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__())
+const persistConfig = {
+   key: 'CookBook',
+   storage,
 }
 
-export const store = configureStore({
-    enhancers: enhancers,
-    reducer: rootReducer,
-});
+const persistedReducer = persistReducer(persistConfig, reducers)
 
+export const store = createStore(
+   persistedReducer,
+   composeEnhancers(applyMiddleware(thunk))
+);
 
+export const persistor = persistStore(store)

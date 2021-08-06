@@ -1,16 +1,14 @@
 import React from 'react';
 import "./styles.css"
 import { DishCard } from './dishcard';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 
-export const DishCardList = ({ dishes, category, dishSearch }) => {
+export const DishCardList = () => {
 
-   DishCardList.propTypes = {
-      dishes: PropTypes.array,
-      category: PropTypes.string,
-      dishSearch: PropTypes.string
-   }
+   const dishes = useSelector(state => state.dishes.dishList);
+   const category = useSelector(state => state.categories.categoryFilter);
+   const dishSearch = useSelector(state => state.dishes.search);
 
    if (category === '' && dishSearch === '') {
       return (

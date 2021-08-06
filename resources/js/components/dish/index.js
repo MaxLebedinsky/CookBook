@@ -21,6 +21,7 @@ export const Dish = ({ dish }) => {
       )
    }
 
+   console.log(dish);
    return (
       <>
          <Card className={ classes.root }>
@@ -72,10 +73,10 @@ export const Dish = ({ dish }) => {
                   <Card className={ classes.stepItem }>
                      <CardMedia className={ classes.stepImage }
                         component="img"
-                        alt={ `шаг №${item.id}` }
+                        alt={ `шаг №${item.step_number}` }
                         image={ item.img } />
                      <CardContent className={ classes.stepText }>
-                        { item.id }{ `. ` }
+                        { item.step_number }{ `. ` }
                         { item.text }
                      </CardContent>
                   </Card>

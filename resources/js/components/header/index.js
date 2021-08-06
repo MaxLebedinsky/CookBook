@@ -6,6 +6,7 @@ import Logo from './logo'
 import { useStyles } from "./styled";
 import PropTypes from 'prop-types';
 import Access from './access'
+import { Button } from '@material-ui/core';
 
 const Header = ({ handleSetCategory, handleSetDishSearch }) => {
 
@@ -20,8 +21,6 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
         <div className={ classes.root }>
             <AppBar position="static">
                 <Access/>
-                 {/*TASK 2 pass the user name from Login*/}
-                {/*<div>{user}</div>*/}
                 <Logo
                     handleSetCategory={ handleSetCategory }
                     handleSetDishSearch={ handleSetDishSearch }
@@ -32,6 +31,7 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
                         handleSetDishSearch={ handleSetDishSearch }
                     />
                 </Toolbar>
+                <Button href="/add-dish" className={ classes.add_button } variant="contained">Добавить рецепт</Button>
             </AppBar>
         </div>
     );

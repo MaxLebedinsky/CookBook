@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterIcon from "./filtericon";
 import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useStyles, StyledMenu, StyledMenuItem } from "./styled";
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { categoriesFilter, getCategories } from '../../../redux/categories/actions';
+import { dishesSearchField } from '../../../redux/dishes/actions';
 
-const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
-    SearchField.propTypes = {
-        handleSetCategory: PropTypes.func,
-        handleSetDishSearch: PropTypes.func,
-    };
+const SearchField = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
-    const [categories, setCategories] = useState([]);
     const [value, setValue] = useState('');
-
-    const getCategories = () =>
-        window.axios.get('/categories')
-            .then(json => setCategories(json.data.data));
+    const categories = useSelector(state => state.categories.categoryList)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getCategories()
-    }, []);
+        dispatch(getCategories());
+    }, [])
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -32,8 +27,7 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleSetDishSearch(value);
-        // setValue('');
+        dispatch(dishesSearchField(value));
     };
 
     const handleClick = (event) => {
@@ -45,8 +39,8 @@ const SearchField = ({ handleSetCategory, handleSetDishSearch }) => {
     };
 
     const handleCategory = (categoryName) => {
-        handleSetCategory(categoryName)
-        handleClose()
+        dispatch(categoriesFilter(categoryName));
+        handleClose();
     };
 
     return (

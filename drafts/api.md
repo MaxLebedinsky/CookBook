@@ -1108,3 +1108,47 @@ Response
   "message": "Deleted"
 }
 ```
+**_Меры:_**
+
+**Весь список**
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request GET ```/api/v1/measures```
+
+Response
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "кг"
+    },
+    {
+      "id": 2,
+      "name": "г"
+    },
+    {
+      "id": 3,
+      "name": "л"
+    },
+    {
+      "id": 4,
+      "name": "мл"
+    },
+    {
+      "id": 5,
+      "name": "ч.л."
+    },
+    {
+      "id": 6,
+      "name": "ст.л."
+    },
+    {
+      "id": 7,
+      "name": "шт."
+    }
+  ]
+}
+```
