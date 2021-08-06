@@ -53,8 +53,7 @@ const SearchField = () => {
                         value={ value }
                         onChange={ handleChange }
                         type="text"
-                        placeholder="Search ..." /
-                    >
+                        placeholder="Search ..." />
                     <Button
                         className={ classes.button }
                         aria-controls="customized-menu"
