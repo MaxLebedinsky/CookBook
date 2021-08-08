@@ -14,3 +14,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::view( '/{any?}', 'index')->where('any', '.*');
+
+Route::get('/storage/{file}', function ($fileName) {
+    if (! \Storage::disk('public')->has($fileName)) {
+        abort(400);
+    }
+    return \Storage::disk('public')->response($fileName);
+})->where('file', '.*');
