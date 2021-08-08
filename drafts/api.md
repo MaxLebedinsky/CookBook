@@ -1013,3 +1013,21 @@ Response
   ]
 }
 ```
+
+***Сохранение картинки блюда***
+Сохранится и превьюшка(max 300*300) и сама картинка(max 1024*1024) и сконвертируются. 
+В случае ошибки сохранения-загрузки картинки удаляются автоматически. 
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request POST ```/api/dishes/{$id}/store_image```
+
+Fields: ```image```
+Encode: ```form-data```
+
+Response
+```json
+{}
+```
+
