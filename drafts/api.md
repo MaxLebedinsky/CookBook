@@ -3,7 +3,7 @@ API
 
 **Login**
 
-Request POST /api/v1/auth/login
+Request POST /api/auth/login
 x-www-form-urlencoded
 email, password
 
@@ -19,7 +19,7 @@ Response
 
 **Register**
 
-Request POST /api/v1/auth/register
+Request POST /api/auth/register
 
 x-www-form-urlencoded
 name, email, password, confirm_password
@@ -40,7 +40,7 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/auth/logout```
+Request POST ```/api/auth/logout```
 
 Response
 ```json
@@ -64,7 +64,7 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/auth/me```
+Request POST ```/api/auth/me```
 
 Response
 ```json
@@ -99,7 +99,7 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/categories```
+Request GET ```/api/categories```
 
 Response
 ```json
@@ -123,7 +123,7 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/categories/{id}```
+Request GET ```/api/categories/{id}```
 
 Response
 ```json
@@ -141,7 +141,7 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/categories/```
+Request POST ```/api/categories/```
 Fields: ```name```
 
 Response
@@ -159,7 +159,7 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request PUT|PATCH ```/api/v1/categories/{id}```
+Request PUT|PATCH ```/api/categories/{id}```
 Fields: ```name```
 
 Response
@@ -177,7 +177,7 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request DELETE ```/api/v1/categories/{id}```
+Request DELETE ```/api/categories/{id}```
 
 Response
 ```json
@@ -194,7 +194,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/dishes```
+Request GET ```/api/dishes```
 
 Response
 ```json
@@ -230,7 +230,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/dishes/{id}```
+Request GET ```/api/dishes/{id}```
 
 Response
 ```json
@@ -254,7 +254,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/dishes/```
+Request POST ```/api/dishes/```
 Fields: ```title, img, description, user_id, category_id```
 
 Response
@@ -278,7 +278,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request PUT|PATCH ```/api/v1/dishes/{id}```
+Request PUT|PATCH ```/api/dishes/{id}```
 Fields: ```title```
 
 Response
@@ -302,7 +302,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request DELETE ```/api/v1/dishes/{id}```
+Request DELETE ```/api/dishes/{id}```
 
 Response
 ```json
@@ -329,7 +329,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/dishes/{id}/ingredients```
+Request GET ```/api/dishes/{id}/ingredients```
 
 Response
 ```json
@@ -362,7 +362,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/dishes/{id}/ingredients/{id}
+Request GET ```/api/dishes/{id}/ingredients/{id}
 
 Response
 ```json
@@ -383,7 +383,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/dishes/{id}/ingredients```
+Request POST ```/api/dishes/{id}/ingredients```
 Fields: ```ingredients_name, quantity, measure```
 
 Response
@@ -404,7 +404,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request PUT|PATCH ```/api/v1/dishes/{id}/ingredients/{id}```
+Request PUT|PATCH ```/api/dishes/{id}/ingredients/{id}```
 Fields: ```ingredients_name```
 
 Response
@@ -425,7 +425,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request DELETE ```/api/v1/dishes/{id}/ingredients/{id}```
+Request DELETE ```/api/dishes/{id}/ingredients/{id}```
 
 Response
 ```json
@@ -448,7 +448,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/full-dishes```
+Request GET ```/api/full-dishes```
 
 Response
 ```json
@@ -552,7 +552,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/categories/{id}/full-dishes```
+Request GET ```/api/categories/{id}/full-dishes```
 
 Response
 ```json
@@ -655,7 +655,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/full-dishes/{id}```
+Request GET ```/api/full-dishes/{id}```
 
 Response
 ```json
@@ -757,7 +757,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/full-dishes/```
+Request POST ```/api/full-dishes/```
 
 Response
 ```json
@@ -858,7 +858,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request PUT|PATCH ```/api/v1/full-dishes/{id}```
+Request PUT|PATCH ```/api/full-dishes/{id}```
 
 Fields: ```dish.title```
 
@@ -962,7 +962,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request DELETE ```/api/v1/full-dishes/{id}```
+Request DELETE ```/api/full-dishes/{id}```
 
 Response
 ```json
@@ -976,7 +976,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/measures```
+Request GET ```/api/measures```
 
 Response
 ```json
