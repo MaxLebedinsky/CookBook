@@ -16,10 +16,14 @@ class ImageSave
     const IMAGE_DIR = 'images';
     const THUMB_DIR = 'thumbnails';
 
+    const SAVE_THUMB = 1;
+    const SAVE_IMAGE = 2;
+
     // contain all saved files. need for delete saved files if fails
     private $_fileList = [];
 
-    public function deleteImages() {
+    public function deleteImages()
+    {
         foreach ($this->_fileList as $file) {
             if (\File::exists($file)) {
                 \File::delete($file);
@@ -27,19 +31,22 @@ class ImageSave
         }
     }
 
-    private function _addtoFileList($file) {
+    private function _addtoFileList($file)
+    {
         $this->_fileList[] = $file;
     }
 
-    public function makeUrl($name, $is_thumb = false) {
+    public function makeUrl($name, $is_thumb = false)
+    {
         return '/storage/' . ($is_thumb ? self::THUMB_DIR : self::IMAGE_DIR) . '/' . $name;
     }
 
     /**
      * @param UploadedFile $image
+     * @param int $whatSave
      * @return string|bool
      */
-    public function saveImage($image)
+    public function saveImage($image, $whatSave = self::SAVE_THUMB & self::SAVE_IMAGE)
     {
         $filePath = null;
         $thumbPath = null;
@@ -51,25 +58,31 @@ class ImageSave
             $filePath = $basePath . self::IMAGE_DIR . DIRECTORY_SEPARATOR . $name;
             $thumbPath = $basePath . self::THUMB_DIR . DIRECTORY_SEPARATOR . $name;
 
-            // save fullimage
-            $img = Image::make($image->path());
-            $img->resize(1024, 1024, function ($const) {
-                $const->aspectRatio();
-            })->save($filePath);
-            $this->_addtoFileList($filePath);
-
-            // save thumbnail
-            $img = Image::make($image->path());
-            $img->resize(300, 300, function ($const) {
-                $const->aspectRatio();
-            })->save($thumbPath);
-            $this->_addtoFileList($filePath);
-
-            // check if images is exists
-            if (\File::exists($filePath) && \File::exists($thumbPath)) {
-                return $name;
+            if ($whatSave & self::SAVE_IMAGE) {
+                // save fullimage
+                $img = Image::make($image->path());
+                $img->resize(1024, 1024, function ($const) {
+                    $const->aspectRatio();
+                })->save($filePath);
+                if (!\File::exists($filePath)) {
+                    throw new \Exception('Image not saved');
+                }
+                $this->_addtoFileList($filePath);
             }
-            throw new \Exception('');
+
+            if ($whatSave & self::SAVE_THUMB) {
+                // save thumbnail
+                $img = Image::make($image->path());
+                $img->resize(300, 300, function ($const) {
+                    $const->aspectRatio();
+                })->save($thumbPath);
+                if (!\File::exists($thumbPath)) {
+                    throw new \Exception('Thumbnail not saved');
+                }
+                $this->_addtoFileList($thumbPath);
+            }
+
+            return $name;
         } catch (\Exception $e) {
             $this->deleteImages();
             return false;

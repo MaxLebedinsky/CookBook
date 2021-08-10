@@ -28,6 +28,9 @@ Route::prefix('dishes/{dish_id}/ingredients')
 // register dishes routes
 Route::prefix('dishes')
     ->group(base_path('routes/api/dishes.php'));
+// register dish_steps routes
+Route::prefix('dish_steps')
+    ->group(base_path('routes/api/dish_steps.php'));
 // register full-dish routes
 Route::prefix('full-dishes')
     ->group(base_path('routes/api/fullDishes.php'));
