@@ -6,11 +6,17 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {Link, Typography} from "@material-ui/core";
 import PropTypes from "prop-types";
+import Register from "../register";
 
 const Login = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const {onClose, open} = props;
+    const [isRegisterPressed, setIsRegisterPressed] = useState(false);
+    const handleShowRegisterForm = (e) => {
+        e.preventDefault()
+        setIsRegisterPressed(true)
+    }
     const handleEmail = (e) => {
         setEmail(e.target.value)
     }
@@ -28,6 +34,7 @@ const Login = (props) => {
             password: `${password}`
         })
             .then(function (response) {
+                console.log(response.status);
                 sessionStorage.setItem('authToken', response.data.data.token);
                 props.setToken(response.data.data.token)
                 handleClose()
@@ -39,19 +46,25 @@ const Login = (props) => {
     const classes = useStyles();
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle id="simple-dialog-title">Войти</DialogTitle>
-            <form className={classes.loginForm} onSubmit={handleLogin}>
-                <TextField type="email" id="email-input" label="Email" value={email} onChange={handleEmail}/>
-                <TextField type="password" id="password-input" label="Password" value={password} onChange={handlePassword}/>
-                <div className={classes.loginButtonsContainer}>
-                    <Button variant='outlined' type="submit">Login</Button>
-                </div>
-                <Typography>
-                    <Link href="#">
-                        Зарегистрироваться
-                    </Link>
-                </Typography>
-            </form>
+            {isRegisterPressed ?
+                <Register setIsRegisterPressed={setIsRegisterPressed}  handleLogin={handleLogin} onClose={handleClose} open={open} setToken={props.setToken} token={props.token}/>
+                :
+                <>
+                    <DialogTitle id="simple-dialog-title">Войти</DialogTitle>
+                    <form className={classes.loginForm} onSubmit={handleLogin}>
+                        <TextField type="email" id="email-input" label="Email" value={email} onChange={handleEmail}/>
+                        <TextField type="password" id="password-input" label="Password" value={password}
+                                   onChange={handlePassword}/>
+                        <div className={classes.loginButtonsContainer}>
+                            <Button variant='outlined' type="submit">Login</Button>
+                        </div>
+                        <Typography>
+                            <Link onClick={handleShowRegisterForm}>
+                                Зарегистрироваться
+                            </Link>
+                        </Typography>
+                    </form>
+                </>}
         </Dialog>
     );
 }
@@ -60,6 +73,6 @@ Login.propTypes = {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     setToken: PropTypes.func.isRequired,
-    token: PropTypes.string.isRequired
+    token: PropTypes.string.isRequired,
 };
 export default Login;

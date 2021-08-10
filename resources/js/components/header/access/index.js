@@ -34,7 +34,7 @@ const Access = () => {
                 {isLogged ? 'Выйти' : 'Войти'}
             </Button>
             {isLogged ? <Logout open={open} onClose={handleClose} setToken={setToken} token={token}/> :
-                <Login setToken={setToken} isLogged={isLogged} open={open} onClose={handleClose} token={token}/>}
+                <Login isLogged={isLogged} open={open} onClose={handleClose} setToken={setToken} token={token}/>}
         </div>
     );
 }
