@@ -41,7 +41,9 @@ class FullDishController extends Controller
                 $dish->ingredients()->createMany($request->input('ingredients'));
                 $dish->dishSteps()->createMany($request->input('dish_steps'));
             });
-            return $this->handleResponse($dish, 201);
+
+            $full_dish = Dish::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->findOrFail($dish->id);
+            return $this->handleResponse($full_dish, 201);
         } catch (\Exception $e) {
             return $this->handleError($e->getMessage());
         }
