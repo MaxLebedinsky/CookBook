@@ -69,7 +69,8 @@ const SearchField = () => {
                         open={ Boolean(anchorEl) }
                         onClose={ handleClose }
                     >
-                        { categories.map((category, index) => (
+                        {
+                            categories.map((category, index) => (
                             <StyledMenuItem key={ index }>
                                 <ListItemText
                                     onClick={ () => handleCategory(category.name) }
