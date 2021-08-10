@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ImageSave;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDishImageRequest;
 use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
 use App\Models\Dish;
@@ -83,4 +85,27 @@ class DishController extends Controller
         return $this->handleResponse($dish);
     }
 
+    public function storeImage(StoreDishImageRequest $request, Dish $dish, ImageSave $imageSave)
+    {
+        try {
+            $image = $request->file('image');
+            $name = $imageSave->saveImage($image);
+            if ($name === false) {
+                throw new \Exception('Upload error');
+            }
+
+            $dish->fill([
+                'big_img' => $imageSave->makeUrl($name),
+                'small_img' => $imageSave->makeUrl($name, true),
+            ]);
+
+            if(!$dish->save()) {
+                throw new \Exception('Image not saved');
+            };
+            $this->handleResponse([]);
+        } catch (\Exception $exception) {
+            $imageSave->deleteImages();
+            $this->handleError($exception->getMessage());
+        }
+    }
 }

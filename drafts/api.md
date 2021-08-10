@@ -3,25 +3,23 @@ API
 
 **Login**
 
-Request POST /api/v1/auth/login
+Request POST /api/auth/login
 x-www-form-urlencoded
 email, password
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "token": "8|JDMhJVJdFqOljlViwylboLozIUeesSWvi5z4v1XI"
-    },
-    "message": "User logged-in!"
+    }
 }
 ```
 
 
 **Register**
 
-Request POST /api/v1/auth/register
+Request POST /api/auth/register
 
 x-www-form-urlencoded
 name, email, password, confirm_password
@@ -29,12 +27,10 @@ name, email, password, confirm_password
 Response
 ```json
 {
-    "success": true,
     "data": {
         "token": "9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI",
         "name": "name_qwe"
-    },
-    "message": "User successfully registered!"
+    }
 }
 ```
 
@@ -44,12 +40,11 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/auth/logout```
+Request POST ```/api/auth/logout```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "id": 56,
         "name": "name_qwe",
@@ -60,8 +55,7 @@ Response
         "email_verified_at": null,
         "created_at": "2021-07-09T16:16:17.000000Z",
         "updated_at": "2021-07-09T16:16:17.000000Z"
-    },
-    "message": "User successfully logout!"
+    }
 }
 ```
 
@@ -70,12 +64,11 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/auth/me```
+Request POST ```/api/auth/me```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "id": 56,
         "name": "name_qwe",
@@ -86,8 +79,7 @@ Response
         "email_verified_at": null,
         "created_at": "2021-07-09T16:16:17.000000Z",
         "updated_at": "2021-07-09T16:16:17.000000Z"
-    },
-    "message": ""
+    }
 }
 ```
 
@@ -107,12 +99,11 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/categories```
+Request GET ```/api/categories```
 
 Response
 ```json
 {
-    "success": true,
     "data": [
         {
             "id": 1,
@@ -122,8 +113,7 @@ Response
             "id": 2,
             "name": "Labore repudiandae sed consequatur vitae officiis."
         }
-    ],
-    "message": ""
+    ]
 }
 ```
 
@@ -133,17 +123,15 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/categories/{id}```
+Request GET ```/api/categories/{id}```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
             "id": 2,
             "name": "Labore repudiandae sed consequatur vitae officiis."
-        },
-    "message": ""
+        }
 }
 ```
 
@@ -153,18 +141,16 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/categories/```
+Request POST ```/api/categories/```
 Fields: ```name```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "name": "Новая категория",
         "id": 13
-    },
-    "message": 201
+    }
 }
 ```
 
@@ -173,18 +159,16 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request PUT|PATCH ```/api/v1/categories/{id}```
+Request PUT|PATCH ```/api/categories/{id}```
 Fields: ```name```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "name": "Новая категория 2",
         "id": 13
-    },
-    "message": "Updated"
+    }
 }
 ```
 
@@ -193,17 +177,11 @@ Response
 Header: 
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request DELETE ```/api/v1/categories/{id}```
+Request DELETE ```/api/categories/{id}```
 
 Response
 ```json
 {
-    "success": true,
-    "data": {
-        "name": "Новая категория 2",
-        "id": 13
-    },
-    "message": "Deleted"
 }
 ```
 
@@ -216,12 +194,11 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/dishes```
+Request GET ```/api/dishes```
 
 Response
 ```json
 {
-    "success": true,
     "data": [
         {
             "id": 1,
@@ -243,8 +220,7 @@ Response
           "category_id": 5,
           "views": 213 
         }
-    ],
-    "message": ""
+    ]
 }
 ```
 
@@ -254,12 +230,11 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/dishes/{id}```
+Request GET ```/api/dishes/{id}```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "id": 2,
         "title": "Lorem ipsum dolor sit.",
@@ -269,8 +244,7 @@ Response
         "user_id": 3,
         "category_id": 5,
         "views": 213
-    },
-"message": ""
+    }
 }
 ```
 
@@ -280,13 +254,12 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/dishes/```
+Request POST ```/api/dishes/```
 Fields: ```title, img, description, user_id, category_id```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "id": 2,
         "title": "Lorem ipsum dolor sit.",
@@ -296,8 +269,7 @@ Response
         "user_id": 3,
         "category_id": 5,
         "views": 213
-    },
-  "message": 201
+    }
 }
 ```
 
@@ -306,13 +278,12 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request PUT|PATCH ```/api/v1/dishes/{id}```
+Request PUT|PATCH ```/api/dishes/{id}```
 Fields: ```title```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "id": 2,
         "title": "Куриное рагу.",
@@ -322,8 +293,7 @@ Response
         "user_id": 3,
         "category_id": 5,
         "views": 213
-    },
-  "message": "Updated"
+    }
 }
 ```
 
@@ -332,12 +302,11 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request DELETE ```/api/v1/dishes/{id}```
+Request DELETE ```/api/dishes/{id}```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "id": 2,
         "title": "Lorem ipsum dolor sit.",
@@ -347,8 +316,7 @@ Response
         "user_id": 3,
         "category_id": 5,
         "views": 213
-    },
-    "message": "Deleted"
+    }
 }
 ```
 
@@ -361,20 +329,21 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/dishes/{id}/ingredients```
+Request GET ```/api/dishes/{id}/ingredients```
 
 Response
 ```json
 {
-  "success": true,
-  "data": {
+  "data": [
+  {
     "3": {
       "id": 4,
       "ingredients_name": "упитанная курочка",
       "quantity": 5,
       "measure": "тушка",
       "dish_id": 98
-    },
+    }},
+    {
     "9": {
       "id": 10,
       "ingredients_name": "соль",
@@ -382,8 +351,8 @@ Response
       "measure": "чайная ложка",
       "dish_id": 98
     }
-  },
-  "message": ""
+    }
+  ]
 } 
 ```
 
@@ -393,20 +362,18 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/dishes/{id}/ingredients/{id}
+Request GET ```/api/dishes/{id}/ingredients/{id}
 
 Response
 ```json
 {
-  "success": true,
   "data": {
     "id": 4,
     "ingredients_name": "упитанная курочка",
     "quantity": 5,
     "measure": "тушка",
     "dish_id": 98
-  },
-  "message": ""
+  }
 }
 ```
 
@@ -416,21 +383,19 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/dishes/{id}/ingredients```
+Request POST ```/api/dishes/{id}/ingredients```
 Fields: ```ingredients_name, quantity, measure```
 
 Response
 ```json
 {
-  "success": true,
   "data": {
     "ingredients_name": "Тестовый ингредиент",
     "quantity": "34",
     "measure": "Тестовая мера измерения",
     "dish_id": 98,
     "id": 51
-  },
-  "message": 201
+  }
 } 
 ```
 
@@ -439,21 +404,19 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request PUT|PATCH ```/api/v1/dishes/{id}/ingredients/{id}```
+Request PUT|PATCH ```/api/dishes/{id}/ingredients/{id}```
 Fields: ```ingredients_name```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "id": 4,
         "ingredients_name": "Тестовый ингредиент (изменен)",
         "quantity": "34",
         "measure": "Тестовая мера измерения",
         "dish_id": 98
-    },
-    "message": "Updated"
+    }
 }
 ```
 
@@ -462,20 +425,18 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request DELETE ```/api/v1/dishes/{id}/ingredients/{id}```
+Request DELETE ```/api/dishes/{id}/ingredients/{id}```
 
 Response
 ```json
 {
-    "success": true,
     "data": {
         "id": 4,
         "ingredients_name": "Тестовый ингредиент (изменен)",
         "quantity": "34",
         "measure": "Тестовая мера измерения",
         "dish_id": 98
-    },
-  "message": "Deleted"
+    }
 }
 ```
 
@@ -487,12 +448,11 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/full-dishes```
+Request GET ```/api/full-dishes```
 
 Response
 ```json
 {
-  "success": true,
   "data": {
     "1": {
       "dish": {
@@ -564,7 +524,7 @@ Response
           "dish_id": 1
         }
       ],
-      "author": {
+      "user": {
         "id": 24,
         "name": "Dewayne Gerhold",
         "email": "cicero78@example.com",
@@ -582,8 +542,7 @@ Response
     },
     "2": { 
      }
-  },
-    "message": ""
+  }
 } 
 ```
 
@@ -593,12 +552,11 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/categories/{id}/full-dishes```
+Request GET ```/api/categories/{id}/full-dishes```
 
 Response
 ```json
 {
-  "success": true,
   "data": {
     "1": {
       "dish": {
@@ -670,7 +628,7 @@ Response
           "dish_id": 1
         }
       ],
-      "author": {
+      "user": {
         "id": 24,
         "name": "Dewayne Gerhold",
         "email": "cicero78@example.com",
@@ -688,8 +646,7 @@ Response
     },
     "2": { 
      }
-  },
-    "message": ""
+  }
 } 
 ```
 
@@ -698,12 +655,11 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/full-dishes/{id}```
+Request GET ```/api/full-dishes/{id}```
 
 Response
 ```json
 {
-  "success": true,
   "data": {
     "1": {
       "dish": {
@@ -775,7 +731,7 @@ Response
           "dish_id": 1
         }
       ],
-      "author": {
+      "user": {
         "id": 24,
         "name": "Dewayne Gerhold",
         "email": "cicero78@example.com",
@@ -791,8 +747,7 @@ Response
         "name": "Iure velit soluta error."
       }
     }
-  },
-  "message": ""
+  }
 } 
 ```
 
@@ -802,12 +757,11 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/v1/full-dishes/```
+Request POST ```/api/full-dishes/```
 
 Response
 ```json
 {
-  "success": true,
   "data": {
     "1": {
       "dish": {
@@ -878,7 +832,7 @@ Response
           "dish_id": 1
         }
       ],
-      "author": {
+      "user": {
         "id": 24,
         "name": "Dewayne Gerhold",
         "email": "cicero78@example.com",
@@ -894,8 +848,7 @@ Response
         "name": "Iure velit soluta error."
       }
     }
-  },
-  "message": "Created"
+  }
 }
 ```
 
@@ -905,14 +858,13 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request PUT|PATCH ```/api/v1/full-dishes/{id}```
+Request PUT|PATCH ```/api/full-dishes/{id}```
 
 Fields: ```dish.title```
 
 Response
 ```json
 {
-  "success": true,
   "data": {
     "1": {
       "dish": {
@@ -984,7 +936,7 @@ Response
           "dish_id": 1
         }
       ],
-      "author": {
+      "user": {
         "id": 24,
         "name": "Dewayne Gerhold",
         "email": "cicero78@example.com",
@@ -1000,8 +952,7 @@ Response
         "name": "Iure velit soluta error."
       }
     }
-  },
-  "message": "Updated"
+  }
 }
 ```
 
@@ -1011,101 +962,11 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request DELETE ```/api/v1/full-dishes/{id}```
+Request DELETE ```/api/full-dishes/{id}```
 
 Response
 ```json
 {
-  "success": true,
-  "data": {
-    "1": {
-      "dish": {
-        "id": 1,
-        "title": "Tru-la-la.",
-        "big_img": "https://via.placeholder.com/360x360.png/00cc22?text=dishes+maiores",
-        "small_img": "https://via.placeholder.com/360x360.png/00eebb?text=dishes+sint",
-        "description": "Nihil ut accusantium quasi et labore expedita. Ut expedita cumque unde quas.",
-        "user_id": 24,
-        "category_id": 9,
-        "views": 435,
-        "rating": 4.019999999999999573674358543939888477325439453125,
-        "complexity": 3,
-        "created_at": "2015-07-28T20:35:18.000000Z"
-      },
-      "ingredients": [
-        {
-          "id": 1,
-          "ingredients_name": "сахар",
-          "quantity": 8,
-          "measure_id": 1,
-          "measure": "г.",
-          "dish_id": 1
-        },
-        {
-          "id": 2,
-          "ingredients_name": "упитанная курочка",
-          "quantity": 2,
-          "measure_id": 1,
-          "measure": "ст.л",
-          "dish_id": 1
-        },
-        {
-          "id": 3,
-          "ingredients_name": "лавровый лист",
-          "quantity": 7,
-          "measure_id": 1,
-          "measure": "ст.л",
-          "dish_id": 1
-        }
-      ],
-      "dishSteps": [
-        {
-          "id": 1,
-          "step_number": 1,
-          "img": "https://via.placeholder.com/360x360.png/00dd44?text=dishes+eius",
-          "text": "Temporibus ut vel officiis rerum ut.",
-          "dish_id": 1
-        },
-        {
-          "id": 2,
-          "step_number": 2,
-          "img": "https://via.placeholder.com/360x360.png/005599?text=dishes+culpa",
-          "text": "Corporis beatae ut saepe sint sequi. Rerum totam quo dicta omnis.",
-          "dish_id": 1
-        },
-        {
-          "id": 3,
-          "step_number": 3,
-          "img": "https://via.placeholder.com/360x360.png/002244?text=dishes+adipisci",
-          "text": "Et doloremque dolorum numquam. Tenetur et aspernatur ut.",
-          "dish_id": 1
-        },
-        {
-          "id": 4,
-          "step_number": 4,
-          "img": "https://via.placeholder.com/360x360.png/0044cc?text=dishes+assumenda",
-          "text": "Velit blanditiis totam rerum laborum ut dolorum.",
-          "dish_id": 1
-        }
-      ],
-      "author": {
-        "id": 24,
-        "name": "Dewayne Gerhold",
-        "email": "cicero78@example.com",
-        "phone": "+15626036003",
-        "about": "Nihil sunt quis consequuntur quia ipsam optio qui aut porro quo.",
-        "is_admin": false,
-        "email_verified_at": null,
-        "created_at": "2021-07-20T08:06:05.000000Z",
-        "updated_at": "2021-07-20T08:06:05.000000Z"
-      },
-      "category": {
-        "id": 9,
-        "name": "Iure velit soluta error."
-      }
-    }
-  },
-  "message": "Deleted"
 }
 ```
 **_Меры:_**
@@ -1115,7 +976,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request GET ```/api/v1/measures```
+Request GET ```/api/measures```
 
 Response
 ```json
@@ -1152,3 +1013,21 @@ Response
   ]
 }
 ```
+
+***Сохранение картинки блюда***
+Сохранится и превьюшка(max 300*300) и сама картинка(max 1024*1024) и сконвертируются. 
+В случае ошибки сохранения-загрузки картинки удаляются автоматически. 
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request POST ```/api/dishes/{$id}/store_image```
+
+Fields: ```image```
+Encode: ```form-data```
+
+Response
+```json
+{}
+```
+

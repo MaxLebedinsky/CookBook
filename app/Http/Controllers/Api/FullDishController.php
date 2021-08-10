@@ -22,84 +22,56 @@ class FullDishController extends Controller
 
     public function index()
     {
-        $dishes = Dish::all();
-
-        return $this->getFullDishes($dishes);
-
+        $full_dishes = Dish::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
+        return $this->handleResponse($full_dishes);
     }
 
     public function getByCategoryId(int $categoryId)
     {
-        $dishes = Dish::where('category_id', $categoryId)->get();
-
-        return $this->getFullDishes($dishes);
+        $full_dishes = Dish::where('category_id', $categoryId)->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
+        return $this->handleResponse($full_dishes);
     }
 
     public function store(DishRequest $request)
     {
         try {
-            DB::transaction(function () use ($request) {
-
+            $dish = null;
+            DB::transaction(function () use ($request, &$dish) {
                 $dish = Dish::create($request->input('dish'));
-
-                foreach ($request->input('ingredients') as $ingredient) {
-                    $ingredient['dish_id'] = $dish->id;
-                    Ingredient::create($ingredient);
-                }
-
-                foreach ($request->input('dish_steps') as $dish_step) {
-                    $dish_step['dish_id'] = $dish->id;
-                    DishStep::create($dish_step);
-                }
+                $dish->ingredients()->createMany($request->input('ingredients'));
+                $dish->dishSteps()->createMany($request->input('dish_steps'));
             });
+            return $this->handleResponse($dish, 201);
         } catch (\Exception $e) {
             return $this->handleError($e->getMessage());
         }
-
-        return $this->handleResponse($request->input(), 201);
     }
 
-    public function show(Request $request, int $id)
+    public function show(int $id)
     {
         try {
-            $dish = Dish::findOrFail($id);
-
-            $ingredients = Ingredient::where('dish_id', $dish->id)->get();
-            $dish_steps = DishStep::where('dish_id', $dish->id)->get();
-            $author = User::where('id', $dish->user_id)->first();
-            $category = Category::where('id', $dish->category_id)->first();
-
-            $fullDish = collect([
-                'dish' => $dish,
-                'ingredients' => Ingredient::addSelect(['measure' => Measure::select('name')
-                        ->whereColumn('measure_id', 'measures.id')
-                    ])
-                    ->where('dish_id', $dish->id)
-                    ->get(),
-                'dish_steps' =>$dish_steps,
-                'author' =>$author,
-                'category' =>$category,
-            ]);
+            $dish = Dish::where('id', $id)->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
+            return $this->handleResponse($dish);
         } catch (\Exception $e) {
             return $this->handleError('error');
         }
-
-        return $this->handleResponse($fullDish);
     }
 
     public function update(Request $request, int $id)
     {
+        // TODO: Make method
+        $this->handleError('under construction');
         try {
             DB::transaction(function () use ($request, $id) {
                 $dish = Dish::update($request->input['data.dish.*'])
                     ->where('id', $id);
 
-                foreach ($$request->input['data.ingredients.*'] as $ingredient) {
+                foreach ($request->input('data.ingredients.*') as $ingredient) {
                     Ingredient::update($ingredient)
                         ->where('dish_id', $id);
                 }
 
-                foreach ($$request->input['data.dish_steps.*'] as $dish_step) {
+                foreach ($request->input('data.dish_steps.*') as $dish_step) {
                     DishStep::update($dish_step)
                         ->where('dish_id', $id);
                 }
@@ -113,69 +85,7 @@ class FullDishController extends Controller
 
     public function delete(int $id)
     {
-        $dish = Dish::findOrFail($id);
-
-        try {
-            $fullDish = collect([
-                'dish' => $dish,
-                'ingredients' => Ingredient::where('dish_id', $dish->id)->get(),
-                'dish_steps' => DishStep::where('dish_id', $dish->id)->get(),
-                'author' => User::where('id', $dish->user_id)->first(),
-                'category' => Category::where('id', $dish->category_id)->first(),
-            ]);
-
-            $ingredientsIds = $this->getItemIds($fullDish['ingredients']);
-            $dishStepIds = $this->getItemIds($fullDish['dish_steps']);
-
-            DB::transaction(function () use ($id, $ingredientsIds, $dishStepIds) {
-                Ingredient::destroy($ingredientsIds);
-                DishStep::destroy($dishStepIds);
-                Dish::destroy($id);
-            });
-        } catch (\Exception $e) {
-            return $this->handleError('error');
-        }
-
-        return $this->handleResponse($fullDish);
-    }
-
-    private function getItemIds($collection): array
-    {
-        $itemIds = [];
-
-        foreach ($collection as $item) {
-            $itemIds[] = $item->id;
-        }
-
-        return $itemIds;
-    }
-
-    private function getFullDishes($dishes)
-    {
-        $fullDishes =[];
-
-        try {
-            foreach ($dishes as $dish) {
-
-                $fullDish = collect([
-                    'dish' => $dish,
-                    'ingredients' => Ingredient::addSelect(['measure' => Measure::select('name')
-                            ->whereColumn('measure_id', 'measures.id')
-                        ])
-                        ->where('dish_id', $dish->id)
-                        ->get(),
-                    'dish_steps' => DishStep::where('dish_id', $dish->id)->get(),
-                    'author' => User::where('id', $dish->user_id)->first(),
-                    'category' => Category::where('id', $dish->category_id)->first()
-                ]);
-
-                $fullDishes[] = $fullDish;
-            }
-
-        } catch (\Exception $e) {
-            return $this->handleError('error');
-        }
-
-        return $this->handleResponse($fullDishes);
+        Dish::destroy($id);
+        return $this->handleResponse([]);
     }
 }
