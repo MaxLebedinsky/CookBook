@@ -14,7 +14,7 @@ export const DishCardList = () => {
       return (
          <ul className="list">
             { dishes.map(dish => (
-               <li className="list-item" key={ dish.dish.id }>
+               <li className="list-item" key={ dish.id }>
                   <DishCard dish={ dish } />
                </li>
             )) }
@@ -24,8 +24,8 @@ export const DishCardList = () => {
    else if (category === '' && dishSearch != '') {
       return (
          <ul className="list">
-            { dishes.filter(dish => dish.dish.title.match(dishSearch) != null).map((dish) => (
-               <li className="list-item" key={ dish.dish.id }>
+            { dishes.filter(dish => dish.title.match(dishSearch) != null).map((dish) => (
+               <li className="list-item" key={ dish.id }>
                   <DishCard dish={ dish } />
                </li>
             )) }
@@ -36,7 +36,7 @@ export const DishCardList = () => {
       return (
          <ul className="list">
             { dishes.filter(dish => dish.category.name === category).map((dish) => (
-               <li className="list-item" key={ dish.dish.id }>
+               <li className="list-item" key={ dish.id }>
                   <DishCard dish={ dish } />
                </li>
             )) }
@@ -46,8 +46,8 @@ export const DishCardList = () => {
 
    return (
       <ul className="list">
-         { dishes.filter(dish => dish.category.name === category).filter(dish => dish.dish.title.match(dishSearch) != null).map((dish) => (
-            <li className="list-item" key={ dish.dish.id }>
+         { dishes.filter(dish => dish.category.name === category).filter(dish => dish.title.match(dishSearch) != null).map((dish) => (
+            <li className="list-item" key={ dish.id }>
                <DishCard dish={ dish } />
             </li>
          )) }

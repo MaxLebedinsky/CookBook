@@ -20,7 +20,7 @@ const Layout = () => {
 
 
     useEffect(() => {
-        setDish(() => dishes.find(item => item.dish.id === +dishId))
+        setDish(() => dishes.find(item => item.id === +dishId))
     }, []);
 
     return (

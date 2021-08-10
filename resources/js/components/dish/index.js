@@ -21,27 +21,27 @@ export const Dish = ({ dish }) => {
       )
    }
 
-   console.log(dish);
+   // console.log(dish);
    return (
       <>
          <Card className={ classes.root }>
             <CardMedia className={ classes.image }
                component="img"
-               alt={ dish.dish.title }
-               image={ dish.dish.big_img }
+               alt={ dish.title }
+               image={ dish.big_img }
             />
             <CardContent className={ classes.desc }>
                <Typography component="h1" className={ classes.title }>
-                  { dish.dish.title.slice(0, MAX_TITLE_LENGTH - 1) }
+                  { dish.title.slice(0, MAX_TITLE_LENGTH - 1) }
                </Typography>
                <Typography
                   color="textSecondary"
                   className={ classes.data }>
-                  Рейтинг:<DishRating rating={ +dish.dish.rating.toFixed(1) } changeable={true} /><br />
-                  Сложность:<DishComplexity complexity={ dish.dish.complexity } /><br />
+                  Рейтинг:<DishRating rating={ +dish.rating.toFixed(1) } changeable={true} /><br />
+                  Сложность:<DishComplexity complexity={ dish.complexity } /><br />
                   <b><u>{ dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1) }</u></b><br />
-                  Автор: <b><u>{ dish.author.name }</u></b><br />
-                  Опубликовано: { getDateString(dish.dish.created_at) }
+                  Автор: <b><u>{ dish.user.name }</u></b><br />
+                  Опубликовано: { getDateString(dish.created_at) }
                </Typography>
             </CardContent>
          </Card>
@@ -57,9 +57,10 @@ export const Dish = ({ dish }) => {
                   <Box className={ classes.dots }></Box>
                   <Box className={ classes.amount }>
                      { item.quantity } { ` ` }
-                     { item.measure }
+                     { item.measure.name }
                   </Box>
                </ListItem>
+               // <div key={item.id}>{item.id} {item.ingredients_name} { item.quantity } { item.measure.name }</div>
             )) }
          </List>
 

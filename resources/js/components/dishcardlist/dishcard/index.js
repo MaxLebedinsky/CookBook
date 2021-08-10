@@ -22,27 +22,27 @@ export const DishCard = ({ dish }) => {
     }
 
     return (
-        <Link to={ `/dish/${dish.dish.id}` } className={ classes.noUnderline }>
+        <Link to={ `/dish/${dish.id}` } className={ classes.noUnderline }>
             <Card
                 className={ classes.root }
             >
                 <CardMedia className={ classes.image }
                     component="img"
-                    alt={ dish.dish.title }
-                    image={ dish.dish.small_img }
+                    alt={ dish.title }
+                    image={ dish.small_img }
                 />
                 <CardContent className={ classes.desc }>
                     <Typography component="h3" className={ classes.title }>
-                        { dish.dish.title.slice(0, MAX_TITLE_LENGTH - 1) }
+                        { dish.title.slice(0, MAX_TITLE_LENGTH - 1) }
                     </Typography>
                     <Typography
                         color="textSecondary"
                         className={ classes.data }>
-                        Рейтинг:<DishRating rating={ +dish.dish.rating.toFixed(1) } changeable={false}/><br />
-                        Сложность:<DishComplexity complexity={ dish.dish.complexity } /><br />
-                        <b><u>{ dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1) }</u></b><br />
-                        Автор: <b><u>{ dish.author.name }</u></b><br />
-                        Опубликовано: { getDateString(dish.dish.created_at) }
+                        Рейтинг:<DishRating rating={ +dish.rating.toFixed(1) } changeable={false}/><br />
+                        Сложность:<DishComplexity complexity={ dish.complexity } /><br />
+                        <b>{ dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1) }</b><br />
+                        Автор: { dish.user.name }<br />
+                        Опубликовано: { getDateString(dish.created_at) }
                     </Typography>
                 </CardContent>
             </Card>

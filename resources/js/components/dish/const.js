@@ -163,3 +163,40 @@ export const TEST_DISH_FOR_POST = {
 
 };
 
+export const TEST_DISH_FOR_POST_2 = {
+    "title":"Мясо по-французски с сыром и картофелем",
+    "big_img":"https://via.placeholder.com/640x480.png/0066aa?text=dishes+temporibus",
+    "small_img":"https://via.placeholder.com/130x100.png/00aa44?text=dishes+officia",
+    "description":"Текст описания блюда",
+    "user_id":3,
+    "category_id":1,
+    "complexity":1,
+    "ingredients": [
+        {
+            "ingredients_name":"Лук репчатый",
+            "quantity":20,
+            "measure":
+                {
+                    "id": 3
+                }
+        }
+    ],
+    "dish_steps": [
+        {
+            "step_number":1,
+            "img":"https://via.placeholder.com/300x225.png/00ee66?text=dishes+animi",
+            "text":"Текст шага №1",
+        },
+        {
+            "step_number":2,
+            "img":"https://via.placeholder.com/300x225.png/0088aa?text=dishes+tempore",
+            "text":"Текст шага №2",
+        },
+        {
+            "step_number":3,
+            "img":"https://via.placeholder.com/300x225.png/00aa22?text=dishes+nemo",
+            "text":"Текст шага №3",
+        }
+    ],
+
+};

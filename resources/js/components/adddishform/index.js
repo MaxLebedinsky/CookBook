@@ -1,14 +1,14 @@
 import { Button, TextField, FormControlLabel, RadioGroup, Radio, 
     FormControl, FormLabel, Modal, Select, MenuItem, InputLabel } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { TEST_DISH_FOR_POST } from '../dish/const';
+import { TEST_DISH_FOR_POST_2 } from '../dish/const';
 import { useStyles } from './styled';
 
 export const AddDishForm = () => {
     const classes = useStyles();
 
     const [idDelete, setIdDelete] = useState('');
-    const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
+    const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST_2 });
     const [modal, setModal] = useState(false);
     const [modalText, setModalText] = useState('');
     const [measuresArr, setMeasuresArr] = useState([]);
@@ -28,15 +28,15 @@ export const AddDishForm = () => {
     };
 
     const getMeasures = async () => {
-        let response = await fetch('/api/v1/measures');
+        let response = await fetch('/api/measures');
         let result = await response.json();
         setMeasuresArr([...result.data]);
-        console.log(measuresArr);
+        // console.log(measuresArr);
     };
 
     const postDish = async (dish) => {
-        console.log(JSON.stringify(dish));
-        let response = await fetch('/api/v1/full-dishes/', {
+        // console.log(JSON.stringify(dish));
+        let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
@@ -45,10 +45,10 @@ export const AddDishForm = () => {
           });
           
         let result = await response.json();
-        console.log(result);
+        // console.log(result);
 
         if (result.success === false) {
-            setModalText('Сбой связи с сервером');
+            setModalText('Что-то пошло не так :(');
             handleOpenModal();
         } else {
             setModalText('Рецепт успешно добавлен');
@@ -57,7 +57,7 @@ export const AddDishForm = () => {
     };
 
     const deleteDish = async (id) => {
-        let response = await fetch(`/api/v1/full-dishes/${id}`, {
+        let response = await fetch(`/api/full-dishes/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
@@ -65,7 +65,7 @@ export const AddDishForm = () => {
         });
         
         let result = await response.json();
-        console.log(result);
+        // console.log(result);
 
         if (result.success === false) {
             setModalText('Блюдо с таким id не найдено');
@@ -79,7 +79,7 @@ export const AddDishForm = () => {
     const handleDelete = (event) => {
         event.preventDefault();
         if (idDelete) {
-            console.log('deleting dish with id: '+idDelete);
+            // console.log('deleting dish with id: '+idDelete);
             deleteDish(idDelete);
         }
         setIdDelete('');
@@ -87,7 +87,7 @@ export const AddDishForm = () => {
 
     const handleAdd = (event) => {
         event.preventDefault();
-        if (dish.dish.title) {
+        if (dish.title) {
             console.log('adding dish: '+dish);
             postDish(dish);
         }
@@ -96,34 +96,35 @@ export const AddDishForm = () => {
 
     const handleAddIngredient = () => {
         dish.ingredients.push(ingredient);
-        console.log(dish.ingredients);
+        // console.log(dish.ingredients);
     };
 
     const handleChange = (event) => {
-        console.log(event.target.name);
         switch (event.target.name) {
             case 'id-delete' :
                 setIdDelete(event.target.value);
                 break;
             case 'title' :
-                setDish({...dish, dish:{...dish.dish, title: event.target.value}});
-                console.log(dish.dish.title);
+                // setDish({...dish, dish:{...dish.dish, title: event.target.value}});
+                setDish({...dish, title: event.target.value});
+                // console.log(dish.title);
                 break;
             case 'complexity' :
-                setDish({...dish, dish:{...dish.dish, complexity: event.target.value}});
-                console.log('selected complexity: '+event.target.value);
+                // setDish({...dish, dish:{...dish.dish, complexity: event.target.value}});
+                setDish({...dish, complexity: event.target.value});
+                // console.log('selected complexity: '+event.target.value);
                 break;
             case 'ingredient-name' :
                 setIngredient({ ...ingredient, ingredients_name: event.target.value });
-                console.log(ingredient);
+                // console.log(ingredient);
                 break;
             case 'measure-select' :
                 setIngredient({ ...ingredient, measure_id: +event.target.value });
-                console.log(ingredient);
+                // console.log(ingredient);
                 break;
             case 'ingredient-quantity' :
                 setIngredient({ ...ingredient, quantity: +event.target.value });
-                console.log(ingredient);
+                // console.log(ingredient);
                 break;
         }  
     };
@@ -146,14 +147,14 @@ export const AddDishForm = () => {
                     label="Название блюда"
                     variant="outlined"
                     name="title"
-                    value={dish.dish.title}
+                    value={dish.title}
                     onChange={handleChange}
                 />
                 <FormControl component="fieldset" >
                     <FormLabel component="legend">Сложность: </FormLabel>
                     <RadioGroup row
                         aria-label="complexity"
-                        value={dish.dish.complexity}
+                        value={dish.complexity}
                         onChange={handleChange}>
                         <FormControlLabel value="1" control={<Radio name="complexity"/>} label="1" />
                         <FormControlLabel value="2" control={<Radio name="complexity"/>} label="2" />
