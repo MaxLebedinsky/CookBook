@@ -7,7 +7,6 @@ import { Dish } from '../dish';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDishes } from '../../redux/dishes/actions';
 
-
 const Layout = () => {
     const dishes = useSelector(state => state.dishes.dishList)
     const [dish, setDish] = useState([]);
@@ -18,9 +17,8 @@ const Layout = () => {
         dispatch(getDishes());
     }, [])
 
-
     useEffect(() => {
-        setDish(() => dishes.find(item => item.id === +dishId))
+        setDish(() => dishes.find(dish => dish.id === +dishId))
     }, []);
 
     return (
@@ -29,7 +27,7 @@ const Layout = () => {
             <main className='layout-content'>
                 { dishId == undefined ?
                     <DishCardList /> :
-                    <Dish dish={ dish } /> }
+                    <Dish dish={dish} /> }
             </main>
         </>
     )

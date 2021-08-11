@@ -21,7 +21,6 @@ export const Dish = ({ dish }) => {
       )
    }
 
-   // console.log(dish);
    return (
       <>
          <Card className={ classes.root }>
@@ -55,7 +54,7 @@ export const Dish = ({ dish }) => {
             { dish.ingredients.map((item) => (
                <ListItem className={ classes.listItem } key={ item.id }>
                   { item.ingredients_name }
-                  <Box className={ classes.dots }></Box>
+                  <Box className={ classes.dots }/>
                   <Box className={ classes.amount }>
                      { item.quantity } { ` ` }
                      { item.measure.name }
