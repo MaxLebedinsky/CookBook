@@ -21,7 +21,7 @@ export const AddDishForm = () => {
 
     const postDish = async (dish) => {
         console.log(JSON.stringify(dish));
-        let response = await fetch('/api/v1/full-dishes/', {
+        let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
@@ -42,7 +42,7 @@ export const AddDishForm = () => {
     };
 
     const deleteDish = async (id) => {
-        let response = await fetch(`/api/v1/full-dishes/${id}`, {
+        let response = await fetch(`/api/full-dishes/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
