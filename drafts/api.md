@@ -757,7 +757,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/full-dishes/```
+Request POST ```/api/full-dishes```
 
 ```{
       "dish":{
