@@ -757,7 +757,7 @@ Response
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
-Request POST ```/api/full-dishes/```
+Request POST ```/api/full-dishes```
 
 ```{
       "dish":{
@@ -1112,7 +1112,7 @@ Response
 {}
 ```
 
-***Сохранение картинки шага (Одного шага!)***
+***Сохранение картинок нескольких шагов***
 Картинка сконвертируется в превьюшку(max 300*300) 
 В случае ошибки сохранения-загрузки картинка удалится автоматически. 
 
@@ -1121,11 +1121,13 @@ Header:
 
 Request POST ```/api/dish_steps/{$id}/store_image```
 
-Fields: ```image```
+Fields: ```image[]```
+Fields: ```id[]```
 Encode: ```form-data```
 
 Response
 ```json
-{}
+{
+    "data": []
+}
 ```
-
