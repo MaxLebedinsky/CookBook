@@ -1,14 +1,14 @@
 import { Button, TextField, FormControlLabel, RadioGroup, Radio, 
-    FormControl, FormLabel, Modal, Select, MenuItem, InputLabel } from '@material-ui/core';
+    FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { TEST_DISH_FOR_POST_2 } from '../dish/const';
+import { TEST_DISH_FOR_POST } from '../dish/const';
 import { useStyles } from './styled';
 
 export const AddDishForm = () => {
     const classes = useStyles();
 
     const [idDelete, setIdDelete] = useState('');
-    const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST_2 });
+    const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
     const [modal, setModal] = useState(false);
     const [modalText, setModalText] = useState('');
     const [measuresArr, setMeasuresArr] = useState([]);
@@ -35,7 +35,7 @@ export const AddDishForm = () => {
     };
 
     const postDish = async (dish) => {
-        // console.log(JSON.stringify(dish));
+        console.log(JSON.stringify(dish));
         let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
@@ -87,15 +87,20 @@ export const AddDishForm = () => {
 
     const handleAdd = (event) => {
         event.preventDefault();
-        if (dish.title) {
+        if (dish.dish.title) {
             console.log('adding dish: '+dish);
             postDish(dish);
         }
-        // setDish({ ...TEST_DISH_FOR_POST });
     };
 
     const handleAddIngredient = () => {
         dish.ingredients.push(ingredient);
+        document.getElementById("ingredients-preview").insertAdjacentHTML('beforeend', 
+        `<div class=${ classes.ingredients_item }>
+            ${ingredient.ingredients_name} 
+            ${ingredient.quantity} 
+            ${measuresArr.find(item => item.id == ingredient.measure_id).name}
+        </div>`);
         // console.log(dish.ingredients);
     };
 
@@ -105,13 +110,13 @@ export const AddDishForm = () => {
                 setIdDelete(event.target.value);
                 break;
             case 'title' :
-                // setDish({...dish, dish:{...dish.dish, title: event.target.value}});
-                setDish({...dish, title: event.target.value});
+                setDish({...dish, dish:{...dish.dish, title: event.target.value}});
+                // setDish({...dish, title: event.target.value});
                 // console.log(dish.title);
                 break;
             case 'complexity' :
-                // setDish({...dish, dish:{...dish.dish, complexity: event.target.value}});
-                setDish({...dish, complexity: event.target.value});
+                setDish({...dish, dish:{...dish.dish, complexity: event.target.value}});
+                // setDish({...dish, complexity: event.target.value});
                 // console.log('selected complexity: '+event.target.value);
                 break;
             case 'ingredient-name' :
@@ -147,14 +152,14 @@ export const AddDishForm = () => {
                     label="Название блюда"
                     variant="outlined"
                     name="title"
-                    value={dish.title}
+                    value={dish.dish.title}
                     onChange={handleChange}
                 />
                 <FormControl component="fieldset" >
                     <FormLabel component="legend">Сложность: </FormLabel>
                     <RadioGroup row
                         aria-label="complexity"
-                        value={dish.complexity}
+                        value={dish.dish.complexity}
                         onChange={handleChange}>
                         <FormControlLabel value="1" control={<Radio name="complexity"/>} label="1" />
                         <FormControlLabel value="2" control={<Radio name="complexity"/>} label="2" />
@@ -162,6 +167,8 @@ export const AddDishForm = () => {
                     </RadioGroup>
                 </FormControl>
 
+                <Typography component="h3">Ингредиенты:</Typography>
+                <div id="ingredients-preview"></div>
                 <TextField 
                     type="text"
                     label="Название ингредиента"

@@ -30,5 +30,8 @@ export  const useStyles = makeStyles((theme) => ({
     select_measure: {
         margin: theme.spacing(2),
         minWidth: 100,
+    },
+    ingredients_item: {
+        color: 'gray',
     }
 }));
