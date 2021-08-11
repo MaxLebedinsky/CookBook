@@ -36,10 +36,11 @@ export const Dish = ({ dish }) => {
                <Typography
                   color="textSecondary"
                   className={ classes.data }>
+                  { dish.description }<br/><br/>
                   Рейтинг:<DishRating rating={ +dish.rating.toFixed(1) } changeable={true} /><br />
                   Сложность:<DishComplexity complexity={ dish.complexity } /><br />
-                  <b><u>{ dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1) }</u></b><br />
-                  Автор: <b><u>{ dish.user.name }</u></b><br />
+                  <b>{ dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1) }</b><br />
+                  Автор: { dish.user.name }<br />
                   Опубликовано: { getDateString(dish.created_at) }
                </Typography>
             </CardContent>
@@ -59,6 +60,7 @@ export const Dish = ({ dish }) => {
                      { item.measure.name }
                   </Box>
                </ListItem>
+               // <div key={item.id}>{item.id} {item.ingredients_name} { item.quantity } { item.measure.name }</div>
             )) }
          </List>
 
@@ -68,7 +70,7 @@ export const Dish = ({ dish }) => {
 
          <List className={ classes.list }>
             { dish.dish_steps.map((item) => (
-               <ListItem className={ classes.listItem, classes.stepItem } key={ item.id }>
+               <ListItem className={ classes.stepItem } key={ item.id }>
                   <Card className={ classes.stepItem }>
                      <CardMedia className={ classes.stepImage }
                         component="img"

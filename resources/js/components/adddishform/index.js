@@ -1,5 +1,6 @@
-import { Button, TextField, FormControlLabel, RadioGroup, Radio, FormControl, FormLabel, Modal } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Button, TextField, FormControlLabel, RadioGroup, Radio, 
+    FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { TEST_DISH_FOR_POST } from '../dish/const';
 import { useStyles } from './styled';
 
@@ -9,7 +10,14 @@ export const AddDishForm = () => {
     const [idDelete, setIdDelete] = useState('');
     const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
     const [modal, setModal] = useState(false);
-    const [modalText, setModalText] = useState('Default message');
+    const [modalText, setModalText] = useState('');
+    const [measuresArr, setMeasuresArr] = useState([]);
+
+    const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:null, measure_id:'' });
+
+    useEffect(()=> {
+        getMeasures();
+    }, []);
 
     const handleOpenModal = () => {
         setModal(true);
@@ -17,6 +25,13 @@ export const AddDishForm = () => {
 
     const handleCloseModal = () => {
         setModal(false)
+    };
+
+    const getMeasures = async () => {
+        let response = await fetch('/api/measures');
+        let result = await response.json();
+        setMeasuresArr([...result.data]);
+        // console.log(measuresArr);
     };
 
     const postDish = async (dish) => {
@@ -30,10 +45,10 @@ export const AddDishForm = () => {
           });
           
         let result = await response.json();
-        console.log(result);
+        // console.log(result);
 
         if (result.success === false) {
-            setModalText('Сбой связи с сервером');
+            setModalText('Что-то пошло не так :(');
             handleOpenModal();
         } else {
             setModalText('Рецепт успешно добавлен');
@@ -50,10 +65,10 @@ export const AddDishForm = () => {
         });
         
         let result = await response.json();
-        console.log(result);
+        // console.log(result);
 
         if (result.success === false) {
-            setModalText('Сбой связи с сервером');
+            setModalText('Блюдо с таким id не найдено');
             handleOpenModal();
         } else {
             setModalText('Рецепт успешно удалён');
@@ -64,7 +79,7 @@ export const AddDishForm = () => {
     const handleDelete = (event) => {
         event.preventDefault();
         if (idDelete) {
-            console.log('deleting dish with id: '+idDelete);
+            // console.log('deleting dish with id: '+idDelete);
             deleteDish(idDelete);
         }
         setIdDelete('');
@@ -76,21 +91,45 @@ export const AddDishForm = () => {
             console.log('adding dish: '+dish);
             postDish(dish);
         }
-        // setDish({ ...TEST_DISH_FOR_POST });
-    }
+    };
+
+    const handleAddIngredient = () => {
+        dish.ingredients.push(ingredient);
+        document.getElementById("ingredients-preview").insertAdjacentHTML('beforeend', 
+        `<div class=${ classes.ingredients_item }>
+            ${ingredient.ingredients_name} 
+            ${ingredient.quantity} 
+            ${measuresArr.find(item => item.id == ingredient.measure_id).name}
+        </div>`);
+        // console.log(dish.ingredients);
+    };
 
     const handleChange = (event) => {
-        console.log(event.target.id);
-        switch (event.target.id) {
+        switch (event.target.name) {
             case 'id-delete' :
                 setIdDelete(event.target.value);
                 break;
             case 'title' :
                 setDish({...dish, dish:{...dish.dish, title: event.target.value}});
+                // setDish({...dish, title: event.target.value});
+                // console.log(dish.title);
                 break;
             case 'complexity' :
                 setDish({...dish, dish:{...dish.dish, complexity: event.target.value}});
-                console.log('selected complexity: '+event.target.value);
+                // setDish({...dish, complexity: event.target.value});
+                // console.log('selected complexity: '+event.target.value);
+                break;
+            case 'ingredient-name' :
+                setIngredient({ ...ingredient, ingredients_name: event.target.value });
+                // console.log(ingredient);
+                break;
+            case 'measure-select' :
+                setIngredient({ ...ingredient, measure_id: +event.target.value });
+                // console.log(ingredient);
+                break;
+            case 'ingredient-quantity' :
+                setIngredient({ ...ingredient, quantity: +event.target.value });
+                // console.log(ingredient);
                 break;
         }  
     };
@@ -112,7 +151,8 @@ export const AddDishForm = () => {
                     type="text"
                     label="Название блюда"
                     variant="outlined"
-                    id="title"
+                    name="title"
+                    value={dish.dish.title}
                     onChange={handleChange}
                 />
                 <FormControl component="fieldset" >
@@ -121,11 +161,44 @@ export const AddDishForm = () => {
                         aria-label="complexity"
                         value={dish.dish.complexity}
                         onChange={handleChange}>
-                        <FormControlLabel value="1" control={<Radio id="complexity"/>} label="1" />
-                        <FormControlLabel value="2" control={<Radio id="complexity"/>} label="2" />
-                        <FormControlLabel value="3" control={<Radio id="complexity"/>} label="3" />
+                        <FormControlLabel value="1" control={<Radio name="complexity"/>} label="1" />
+                        <FormControlLabel value="2" control={<Radio name="complexity"/>} label="2" />
+                        <FormControlLabel value="3" control={<Radio name="complexity"/>} label="3" />
                     </RadioGroup>
                 </FormControl>
+
+                <Typography component="h3">Ингредиенты:</Typography>
+                <div id="ingredients-preview"></div>
+                <TextField 
+                    type="text"
+                    label="Название ингредиента"
+                    variant="outlined"
+                    name="ingredient-name"
+                    value={ingredient.ingredients_name}
+                    onChange={handleChange}
+                />
+                <TextField 
+                    type="text"
+                    label="Кол-во"
+                    variant="outlined"
+                    name="ingredient-quantity"
+                    onChange={handleChange}
+                />
+                <FormControl className={ classes.select_measure }>
+                    <InputLabel>Ед. изм.</InputLabel>
+                    <Select
+                        name="measure-select"
+                        onChange={handleChange}
+                        value={ ingredient.measure_id }
+                    >
+                        {measuresArr.map((item) => (
+                            <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <Button onClick={handleAddIngredient} className= { classes.form_button } variant="outlined">
+                    Добавить ингредиент
+                </Button>
                 <Button type="submit" onClick={handleAdd} className= { classes.form_button } variant="contained" >
                     Добавить рецепт
                 </Button>
@@ -138,7 +211,7 @@ export const AddDishForm = () => {
                 label="id удаляемого блюда" 
                 variant="outlined" 
                 value={idDelete}
-                id="id-delete"
+                name="id-delete"
                 onChange={handleChange}/>
             <Button type="submit" onClick={handleDelete} className= { classes.form_button } variant="contained">Удалить</Button>
         </FormControl>
