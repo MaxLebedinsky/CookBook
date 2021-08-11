@@ -22,28 +22,18 @@ class FullDishController extends Controller
 
     public function index()
     {
-        $full_dishes = Dish::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
-        return $this->handleResponse($full_dishes);
+        return $this->handleResponse((new Dish())->getAll());
     }
 
-    public function getByCategoryId(int $categoryId)
+    public function showByCategoryId(int $categoryId)
     {
-        $full_dishes = Dish::where('category_id', $categoryId)->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
-        return $this->handleResponse($full_dishes);
+        return $this->handleResponse((new Dish())->getByCategoryId($categoryId));
     }
 
     public function store(DishRequest $request)
     {
         try {
-            $dish = null;
-            DB::transaction(function () use ($request, &$dish) {
-                $dish = Dish::create($request->input('dish'));
-                $dish->ingredients()->createMany($request->input('ingredients'));
-                $dish->dishSteps()->createMany($request->input('dish_steps'));
-            });
-
-            $full_dish = Dish::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->findOrFail($dish->id);
-            return $this->handleResponse($full_dish, 201);
+            return $this->handleResponse((new Dish())->createNew($request), 201);
         } catch (\Exception $e) {
             return $this->handleError($e->getMessage());
         }
@@ -52,8 +42,7 @@ class FullDishController extends Controller
     public function show(int $id)
     {
         try {
-            $dish = Dish::where('id', $id)->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
-            return $this->handleResponse($dish);
+            return $this->handleResponse((new Dish())->getById($id));
         } catch (\Exception $e) {
             return $this->handleError('error');
         }
@@ -61,28 +50,13 @@ class FullDishController extends Controller
 
     public function update(Request $request, int $id)
     {
-        // TODO: Make method
-        $this->handleError('under construction');
         try {
-            DB::transaction(function () use ($request, $id) {
-                $dish = Dish::update($request->input['data.dish.*'])
-                    ->where('id', $id);
-
-                foreach ($request->input('data.ingredients.*') as $ingredient) {
-                    Ingredient::update($ingredient)
-                        ->where('dish_id', $id);
-                }
-
-                foreach ($request->input('data.dish_steps.*') as $dish_step) {
-                    DishStep::update($dish_step)
-                        ->where('dish_id', $id);
-                }
-            });
+            $dish = (new Dish())->updateDish($request, $id);
         } catch (\Exception $e) {
             return $this->handleError('error');
         }
 
-        return $this->handleResponse($request->input['data']);
+        return $this->handleResponse($dish);
     }
 
     public function delete(int $id)
