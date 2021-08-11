@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\Dish
@@ -67,6 +68,56 @@ class Dish extends Model
     protected $hidden = [
         'updated_at',
     ];
+
+    public function getByCategoryId(int $categoryId)
+    {
+        return self::where('category_id', $categoryId)
+            ->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])
+            ->get();
+    }
+
+    public function getAll()
+    {
+        return self::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
+    }
+
+    public function getById(int $id)
+    {
+        return self::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->findOrFail($id);
+    }
+
+    public function createNew($request)
+    {
+        $dish = null;
+
+        DB::transaction(function () use ($request, &$dish) {
+            $dish = self::create($request->input('dish'));
+            $dish->ingredients()->createMany($request->input('ingredients'));
+            $dish->dishSteps()->createMany($request->input('dish_steps'));
+        });
+
+        return $this->getById($dish->id);
+    }
+
+    public function updateDish($request, int $id)
+    {
+        DB::transaction(function () use ($request, $id) {
+            self::where('id', $id)
+                ->update($request->input('data.dish.*'));
+
+            foreach ($request->input('data.ingredients.*') as $ingredient) {
+                Ingredient::where('dish_id', $id)
+                    ->update($ingredient);
+            }
+
+            foreach ($request->input('data.dish_steps.*') as $dish_step) {
+                DishStep::where('dish_id', $id)
+                    ->update($dish_step);
+            }
+        });
+
+        return $this->getById($id);
+    }
 
     /**
      * Relationship between dishes and user
