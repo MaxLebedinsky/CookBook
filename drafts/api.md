@@ -759,101 +759,179 @@ Header:
 
 Request POST ```/api/full-dishes/```
 
+```{
+      "dish":{
+         "title":"Мясо по-французски с сыром и картофелем",
+         "big_img":"https://via.placeholder.com/640x480.png/0066aa?text=dishes+temporibus",
+         "small_img":"https://via.placeholder.com/130x100.png/00aa44?text=dishes+officia",
+         "description":"Itaque reiciendis assumenda sed. Qui non libero dolore quaerat magnam. Possimus pariatur eligendi modi. Molestiae sit eius facere officia illum in consequatur. Recusandae fugiat sint doloribus odit perspiciatis. Et asperiores id inventore eligendi. Dolores eum tenetur quisquam. Aut possimus id nisi aspernatur voluptatem facilis. Recusandae id expedita laboriosam officiis quo ratione voluptatum.",
+         "user_id":"3",
+         "category_id":"4",
+         "complexity":"1",
+         "rating":"0"
+      },
+      "ingredients":[
+         {
+            "ingredients_name":"Мясо (свинина)",
+            "quantity":"0.6",
+            "measure_id":"1"
+         },
+         {
+            "ingredients_name":"Картофель",
+            "quantity":"0.5",
+            "measure_id":"1"
+         },
+         {
+            "ingredients_name":"Сыр",
+            "quantity":"250",
+            "measure_id":"2"
+         },
+         {
+            "ingredients_name":"Соль",
+            "quantity":"2",
+            "measure_id":"5"
+         },
+         {
+            "ingredients_name":"Лук репчатый",
+            "quantity":"2",
+            "measure_id":"7"
+         }
+      ],
+      "dish_steps":[
+         {
+            "step_number":"1",
+            "text":"Voluptatibus earum voluptatum amet. Sed ut officiis praesentium tempora. Blanditiis velit et et voluptates reiciendis sint. Vel est sed architecto rem exercitationem dolorem. In ut natus autem dolore quis nemo corporis cum. Laboriosam consequatur adipisci praesentium et repudiandae. Neque culpa fuga distinctio ea harum officiis officiis. Animi est odio aut delectus ut nesciunt. Quia omnis temporibus porro autem. Consectetur rem nisi asperiores porro numquam saepe. Eum consequatur et necessitatibus ab quas doloremque odit."
+         },
+         {
+            "step_number":"2",
+            "text":"Voluptatibus modi expedita dignissimos ratione earum culpa dolor laboriosam. Dolor numquam incidunt autem ut. Natus et qui eos veniam. Qui accusamus consequatur mollitia qui sed et aut. Odit a quisquam rerum suscipit voluptatibus dolorem quis. Corporis ullam similique ea consequuntur omnis est ut. Ea et alias ex voluptas. Aliquam dolores adipisci cumque voluptate tempore sint. Dignissimos officiis eum ut veritatis. Atque rerum quia odio eos. Quidem reiciendis dolor tempora."
+         },
+         {
+            "step_number":"3",
+            "text":"Et enim omnis et numquam quo quia. Voluptatum temporibus maiores non corrupti. Harum vel odit quia dolore esse distinctio. Accusantium odio et voluptatem eius quam cumque. Sint accusamus molestiae earum. Quia asperiores quos est voluptate aspernatur odit. Consequatur molestiae aut aliquid expedita ut. Minus qui consectetur quos sunt ab ipsa asperiores. Quia quam ea repellendus et et beatae eum."
+         }
+      ]
+   }
+```
+
 Response
 ```json
 {
-  "data": {
-    "1": {
-      "dish": {
-        "id": 1,
-        "title": "Occaecati laborum tenetur asperiores error sit necessitatibus et consequatur aut.",
-        "big_img": "https://via.placeholder.com/360x360.png/00cc22?text=dishes+maiores",
-        "small_img": "https://via.placeholder.com/360x360.png/00eebb?text=dishes+sint",
-        "description": "Nihil ut accusantium quasi et labore expedita. Ut expedita cumque unde quas.",
-        "user_id": 24,
-        "category_id": 9,
-        "views": 435,
-        "rating": 4.019999999999999573674358543939888477325439453125,
-        "complexity": 3,
-        "created_at": "2015-07-28T20:35:18.000000Z"
-      },
-      "ingredients": [
-        {
-          "id": 1,
-          "ingredients_name": "сахар",
-          "quantity": 8,
-          "measure_id": 1,
-          "measure": "г.",
-          "dish_id": 1
+    "data": {
+        "id": 111,
+        "title": "Мясо по-французски с сыром и картофелем",
+        "big_img": "https://via.placeholder.com/640x480.png/0066aa?text=dishes+temporibus",
+        "small_img": "https://via.placeholder.com/130x100.png/00aa44?text=dishes+officia",
+        "description": "Itaque reiciendis assumenda sed. Qui non libero dolore quaerat magnam. Possimus pariatur eligendi modi. Molestiae sit eius facere officia illum in consequatur. Recusandae fugiat sint doloribus odit perspiciatis. Et asperiores id inventore eligendi. Dolores eum tenetur quisquam. Aut possimus id nisi aspernatur voluptatem facilis. Recusandae id expedita laboriosam officiis quo ratione voluptatum.",
+        "user_id": 3,
+        "category_id": 4,
+        "views": null,
+        "rating": 0,
+        "complexity": 1,
+        "created_at": "2021-08-10T21:40:11.000000Z",
+        "dish_steps": [
+            {
+                "id": 417,
+                "step_number": 1,
+                "img": null,
+                "text": "Voluptatibus earum voluptatum amet. Sed ut officiis praesentium tempora. Blanditiis velit et et voluptates reiciendis sint. Vel est sed architecto rem exercitationem dolorem. In ut natus autem dolore quis nemo corporis cum. Laboriosam consequatur adipisci praesentium et repudiandae. Neque culpa fuga distinctio ea harum officiis officiis. Animi est odio aut delectus ut nesciunt. Quia omnis temporibus porro autem. Consectetur rem nisi asperiores porro numquam saepe. Eum consequatur et necessitatibus ab quas doloremque odit.",
+                "dish_id": 111
+            },
+            {
+                "id": 418,
+                "step_number": 2,
+                "img": null,
+                "text": "Voluptatibus modi expedita dignissimos ratione earum culpa dolor laboriosam. Dolor numquam incidunt autem ut. Natus et qui eos veniam. Qui accusamus consequatur mollitia qui sed et aut. Odit a quisquam rerum suscipit voluptatibus dolorem quis. Corporis ullam similique ea consequuntur omnis est ut. Ea et alias ex voluptas. Aliquam dolores adipisci cumque voluptate tempore sint. Dignissimos officiis eum ut veritatis. Atque rerum quia odio eos. Quidem reiciendis dolor tempora.",
+                "dish_id": 111
+            },
+            {
+                "id": 419,
+                "step_number": 3,
+                "img": null,
+                "text": "Et enim omnis et numquam quo quia. Voluptatum temporibus maiores non corrupti. Harum vel odit quia dolore esse distinctio. Accusantium odio et voluptatem eius quam cumque. Sint accusamus molestiae earum. Quia asperiores quos est voluptate aspernatur odit. Consequatur molestiae aut aliquid expedita ut. Minus qui consectetur quos sunt ab ipsa asperiores. Quia quam ea repellendus et et beatae eum.",
+                "dish_id": 111
+            }
+        ],
+        "ingredients": [
+            {
+                "id": 438,
+                "ingredients_name": "Мясо (свинина)",
+                "quantity": "0.6",
+                "measure_id": 1,
+                "dish_id": 111,
+                "measure": {
+                    "id": 1,
+                    "name": "кг"
+                }
+            },
+            {
+                "id": 439,
+                "ingredients_name": "Картофель",
+                "quantity": "0.5",
+                "measure_id": 1,
+                "dish_id": 111,
+                "measure": {
+                    "id": 1,
+                    "name": "кг"
+                }
+            },
+            {
+                "id": 440,
+                "ingredients_name": "Сыр",
+                "quantity": "250",
+                "measure_id": 2,
+                "dish_id": 111,
+                "measure": {
+                    "id": 2,
+                    "name": "г"
+                }
+            },
+            {
+                "id": 441,
+                "ingredients_name": "Соль",
+                "quantity": "2",
+                "measure_id": 5,
+                "dish_id": 111,
+                "measure": {
+                    "id": 5,
+                    "name": "ч.л."
+                }
+            },
+            {
+                "id": 442,
+                "ingredients_name": "Лук репчатый",
+                "quantity": "2",
+                "measure_id": 7,
+                "dish_id": 111,
+                "measure": {
+                    "id": 7,
+                    "name": "шт."
+                }
+            }
+        ],
+        "category": {
+            "id": 4,
+            "name": "Супы"
         },
-        {
-          "id": 2,
-          "ingredients_name": "упитанная курочка",
-          "quantity": 2,
-          "measure": "ст.л",
-          "dish_id": 1
-        },
-        {
-          "id": 3,
-          "ingredients_name": "лавровый лист",
-          "quantity": 7,
-          "measure_id": 1,
-          "measure": "ст.л",
-          "dish_id": 1
+        "user": {
+            "id": 3,
+            "name": "kelvin06",
+            "email": "abshire.isom@roob.biz",
+            "phone": "864-823-9114",
+            "about": "I did: there's no name signed at the corners: next the ten courtiers; these were ornamented all over their shoulders, that all the things between whiles.' 'Then you should say what you.",
+            "is_admin": true,
+            "email_verified_at": null,
+            "created_at": "2013-01-27T16:58:01.000000Z",
+            "updated_at": null
         }
-      ],
-      "dishSteps": [
-        {
-          "id": 1,
-          "step_number": 1,
-          "img": "https://via.placeholder.com/360x360.png/00dd44?text=dishes+eius",
-          "text": "Temporibus ut vel officiis rerum ut.",
-          "dish_id": 1
-        },
-        {
-          "id": 2,
-          "step_number": 2,
-          "img": "https://via.placeholder.com/360x360.png/005599?text=dishes+culpa",
-          "text": "Corporis beatae ut saepe sint sequi. Rerum totam quo dicta omnis.",
-          "dish_id": 1
-        },
-        {
-          "id": 3,
-          "step_number": 3,
-          "img": "https://via.placeholder.com/360x360.png/002244?text=dishes+adipisci",
-          "text": "Et doloremque dolorum numquam. Tenetur et aspernatur ut.",
-          "dish_id": 1
-        },
-        {
-          "id": 4,
-          "step_number": 4,
-          "img": "https://via.placeholder.com/360x360.png/0044cc?text=dishes+assumenda",
-          "text": "Velit blanditiis totam rerum laborum ut dolorum.",
-          "dish_id": 1
-        }
-      ],
-      "user": {
-        "id": 24,
-        "name": "Dewayne Gerhold",
-        "email": "cicero78@example.com",
-        "phone": "+15626036003",
-        "about": "Nihil sunt quis consequuntur quia ipsam optio qui aut porro quo.",
-        "is_admin": false,
-        "email_verified_at": null,
-        "created_at": "2021-07-20T08:06:05.000000Z",
-        "updated_at": "2021-07-20T08:06:05.000000Z"
-      },
-      "category": {
-        "id": 9,
-        "name": "Iure velit soluta error."
-      }
     }
-  }
 }
 ```
 
 
 **Обновление полей полного рецепта**
+
+*Под редактированием
 
 Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
@@ -967,8 +1045,11 @@ Request DELETE ```/api/full-dishes/{id}```
 Response
 ```json
 {
+    "data": []
 }
 ```
+
+
 **_Меры:_**
 
 **Весь список**
@@ -1022,6 +1103,23 @@ Header:
 ```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
 
 Request POST ```/api/dishes/{$id}/store_image```
+
+Fields: ```image```
+Encode: ```form-data```
+
+Response
+```json
+{}
+```
+
+***Сохранение картинки шага (Одного шага!)***
+Картинка сконвертируется в превьюшку(max 300*300) 
+В случае ошибки сохранения-загрузки картинка удалится автоматически. 
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request POST ```/api/dish_steps/{$id}/store_image```
 
 Fields: ```image```
 Encode: ```form-data```
