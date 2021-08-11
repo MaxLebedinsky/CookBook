@@ -24,7 +24,10 @@ class StoreDishStepImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|image|mimes:jpg,jpeg,png,svg,gif|max:8192',
+            'image' => 'required',
+            'image.*' => 'image|mimes:jpg,jpeg,png,svg,gif|max:8192',
+            'id' => 'required',
+            'id.*' => 'numeric',
         ];
     }
 }

@@ -18,8 +18,8 @@ class ChangeColumnTypeToNullableInDishesTable extends Migration
             $table->string('big_img')->nullable()->change();
             $table->string('small_img')->nullable()->change();
             $table->text('description')->nullable()->change();
-            $table->bigInteger('views')->nullable()->change();
-            $table->float('rating')->nullable()->change();
+            $table->bigInteger('views')->default(0)->change();
+            $table->float('rating')->default(0)->change();
             $table->integer('complexity')->nullable()->change();
             $table->unsignedBigInteger('user_id')->nullable()->change();
             $table->unsignedBigInteger('category_id')->nullable()->change();
@@ -38,8 +38,8 @@ class ChangeColumnTypeToNullableInDishesTable extends Migration
             $table->string('big_img')->nullable($value = false)->change();
             $table->string('small_img')->nullable($value = false)->change();
             $table->text('description')->nullable($value = false)->change();
-            $table->bigInteger('views')->nullable($value = false)->change();
-            $table->float('rating')->nullable($value = false)->change();
+            $table->bigInteger('views')->default(null)->change();
+            $table->float('rating')->default(null)->change();
             $table->integer('complexity')->nullable($value = false)->change();
             $table->unsignedBigInteger('user_id')->nullable($value = false)->change();
             $table->unsignedBigInteger('category_id')->nullable($value = false)->change();

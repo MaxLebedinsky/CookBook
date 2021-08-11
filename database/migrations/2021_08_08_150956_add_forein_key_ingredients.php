@@ -38,8 +38,9 @@ class AddForeinKeyIngredients extends Migration
         Schema::table('ingredients', function (Blueprint $table) {
             $table->dropForeign('fk_ingredients_dishes');
             $table->dropForeign('fk_ingredients_measures');
+        });
+        Schema::table('ingredients', function (Blueprint $table) {
             $table->unsignedInteger('measure_id')->change();
-
         });
     }
 }
