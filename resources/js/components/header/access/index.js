@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import {useStyles} from "./styled";
 import Login from "./login"
 import Logout from "./logout";
+import {useDispatch, useSelector} from "react-redux";
+import {isLogin, isLogout} from "../../../redux/access/actions";
 
 const Access = () => {
     const [open, setOpen] = React.useState(false);
@@ -14,27 +16,28 @@ const Access = () => {
         setOpen(false);
     };
     const [token, setToken] = useState("")
-    const [isLogged, setIsLogged] = useState(false)
+    const loginStatus = useSelector(state => state.access.loginStatus)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if(sessionStorage.getItem('authToken')){
+        if (sessionStorage.getItem('authToken')) {
             setToken(sessionStorage.getItem('authToken'))
         }
         if (token !== "") {
-            setIsLogged(true)
+            dispatch(isLogin(true))
         }
         if (token === "") {
-            setIsLogged(false)
+            dispatch(isLogout(false))
         }
     }, [token]);
 
     return (
         <div>
             <Button className={classes.loginButton} variant="text" onClick={handleClickOpen}>
-                {isLogged ? 'Выйти' : 'Войти'}
+                {loginStatus ? 'Выйти' : 'Войти'}
             </Button>
-            {isLogged ? <Logout open={open} onClose={handleClose} setToken={setToken} token={token}/> :
-                <Login isLogged={isLogged} open={open} onClose={handleClose} setToken={setToken} token={token}/>}
+            {loginStatus ? <Logout open={open} onClose={handleClose} setToken={setToken} token={token}/> :
+                <Login open={open} onClose={handleClose} setToken={setToken} token={token}/>}
         </div>
     );
 }
