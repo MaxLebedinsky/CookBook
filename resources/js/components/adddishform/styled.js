@@ -4,13 +4,51 @@ export  const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 600,
         display: 'flex',
-        margin: theme.spacing(0, 1),
+        margin: theme.spacing(0, 'auto'),
+        padding: theme.spacing(0, 1),
     },
     formControl: {
         margin: theme.spacing(1, 0),
+        width: '100%',
+    },
+    uploadDialog: {
+        // display: 'flex',
+        // flexDirection: 'row',
+        // flexWrap: 'wrap',
+        alignItems: 'center',
+        margin: theme.spacing(1, 'auto'),
+    },
+    hidden: {
+        display: 'none',
+    },
+    imagePreviewContainer: {
+        width: 200,
+        height: 150,
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        border: '1px solid gray',
+        background: 'lightgray',
+        margin: theme.spacing(1),
+        overflow: 'hidden',
+    },
+    imagePreview: {
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+    },
+    fileName: {
+        color: theme.palette.text.secondary,
+        fontSize: '0.8em',
+    },
+    iconCamera: {
+        color: theme.palette.text.secondary,
+        fontSize: '2em',
     },
     form_button: {
         textTransform: 'none',
+        display: 'flex',
         margin: theme.spacing(2, 4),
     },
     back_button: {
@@ -42,5 +80,9 @@ export  const useStyles = makeStyles((theme) => ({
     ingredientsItem: {
         color: 'gray',
         margin: theme.spacing(1, 0),
-    }
+    },
+    // inlineBlock: {
+    //     display: 'inline-block',
+    //     // width: '30%'
+    // }
 }));

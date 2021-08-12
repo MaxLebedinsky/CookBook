@@ -1,5 +1,6 @@
 import { Button, TextField, FormControlLabel, RadioGroup, Radio, 
-    FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography } from '@material-ui/core';
+    FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography, Box } from '@material-ui/core';
+import { PhotoCamera } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TEST_DISH_FOR_POST } from '../dish/const';
@@ -14,7 +15,7 @@ export const AddDishForm = () => {
     const [measuresArr, setMeasuresArr] = useState([]);
     const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:null, measure_id:'' });
     const categories = useSelector(state => state.categories.categoryList);
-    // const [category, setCategory] = useState({ id:null, name:'' });
+    const [mainImage, setMainImage] = useState({ file: '', imagePreviewUrl: '' });
 
     useEffect(()=> {
         getMeasures();
@@ -46,12 +47,13 @@ export const AddDishForm = () => {
           });
           
         let result = await response.json();
-        // console.log(result);
+        console.log(result);
 
         if (result.success === false) {
             setModalText('Что-то пошло не так :(');
             handleOpenModal();
         } else {
+            console.log(mainImage.file.name, ', id нового блюда: ', result.data.id);
             setModalText('Рецепт успешно добавлен');
             handleOpenModal();
         }
@@ -104,6 +106,22 @@ export const AddDishForm = () => {
         </div>`);
     };
 
+    const handleImageChange = (event) => {
+        event.preventDefault();
+        console.log('changing image...');
+        let reader = new FileReader();
+        let file = event.target.files[0];
+        reader.onloadend = () => {
+            setMainImage({...setMainImage, file: file, imagePreviewUrl: reader.result });
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // const handleSubmitUpload = (event) => {
+    //     event.preventDefault();
+    //     console.log(mainImage.file);
+    // };
+
     const handleChange = (event) => {
         switch (event.target.name) {
             case 'id-delete' :
@@ -150,7 +168,7 @@ export const AddDishForm = () => {
             &lt; Вернуться на главную
         </Button>
         <br/><hr/>
-            <FormControl className={ classes.root } component="fieldset">
+            <FormControl className={ classes.root }>
                 <Typography component="h1" className={ classes.h1 }>Добавление рецепта</Typography>
                 <TextField 
                     className={ classes.formControl }
@@ -160,7 +178,40 @@ export const AddDishForm = () => {
                     name="title"
                     value={ dish.dish.title }
                     onChange={ handleChange }
+                    multiline
                 />
+                <Typography component="h2" className={ classes.h2 }>Главное изображение:</Typography>
+                <FormControl className={ classes.uploadDialog }>
+                    <div className={ classes.imagePreviewContainer }>
+                        { mainImage.imagePreviewUrl ? 
+                        <img src={ mainImage.imagePreviewUrl } className={ classes.imagePreview } alt="Main image"/> 
+                        : <PhotoCamera className={ classes.iconCamera }/>}
+                    </div>
+                    <Box className={ classes.fileName }>{ mainImage.imagePreviewUrl ? mainImage.file.name : "Изображение не выбрано" }</Box>
+                    <input
+                        accept="image/*"
+                        className={ classes.hidden }
+                        id="upload-input"
+                        type="file"
+                        onChange={ handleImageChange }
+                    />
+                    <label htmlFor="upload-input">
+                        <Button variant="contained" component="span" className={ classes.form_button }>
+                            Выберите файл
+                        </Button>
+                    </label>
+                    {/* <Button
+                        className={ classes.inlineBlock }
+                        variant="contained"  
+                        component="span"
+                        onClick={ handleSubmitUpload }
+                    >
+                        Загрузить
+                    </Button> */}
+                </FormControl>
+
+                    
+
                 <FormControl variant="outlined" className={ classes.formControl }>
                     <InputLabel>Категория</InputLabel>
                     <Select
@@ -181,9 +232,9 @@ export const AddDishForm = () => {
                         aria-label="complexity"
                         value={ dish.dish.complexity }
                         onChange={ handleChange }>
-                        <FormControlLabel value="1" control={ <Radio name="complexity"/> } label="1" />
-                        <FormControlLabel value="2" control={ <Radio name="complexity"/> } label="2" />
-                        <FormControlLabel value="3" control={ <Radio name="complexity"/> } label="3" />
+                        <FormControlLabel value="1" control={ <Radio name="complexity" color="primary"/> } label="1" />
+                        <FormControlLabel value="2" control={ <Radio name="complexity" color="primary"/> } label="2" />
+                        <FormControlLabel value="3" control={ <Radio name="complexity" color="primary"/> } label="3" />
                     </RadioGroup>
                 </FormControl>
 
@@ -221,11 +272,11 @@ export const AddDishForm = () => {
                         ))}
                     </Select>
                 </FormControl>
-                <Button onClick={ handleAddIngredient } className= { classes.form_button } variant="outlined" fullWidth={ false }>
+                <Button onClick={ handleAddIngredient } className= { classes.form_button } variant="outlined">
                     Добавить ингредиент
                 </Button>
-                <Button type="submit" onClick={ handleAdd } className= { classes.form_button } variant="contained" >
-                    Добавить рецепт
+                <Button type="submit" onClick={ handleAdd } className= { classes.form_button } variant="contained" size="large">
+                    Сохранить рецепт
                 </Button>
             </FormControl>
         <br/><hr/><br/>
