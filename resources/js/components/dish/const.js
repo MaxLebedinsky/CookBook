@@ -99,7 +99,7 @@ export const EMPTY_DISH = {
         "small_img":"https://via.placeholder.com/130x100.png/00aa44?text=dishes+officia",
         "description":"",
         "user_id":3,
-        "category_id":1,
+        "category_id":3,
         "complexity":1,
     },
     "ingredients": [],
@@ -113,7 +113,7 @@ export const TEST_DISH_FOR_POST = {
         "small_img":"https://via.placeholder.com/130x100.png/00aa44?text=dishes+officia",
         "description":"Itaque reiciendis assumenda sed. Qui non libero dolore quaerat magnam. Possimus pariatur eligendi modi. Molestiae sit eius facere officia illum in consequatur. Recusandae fugiat sint doloribus odit perspiciatis. Et asperiores id inventore eligendi. Dolores eum tenetur quisquam. Aut possimus id nisi aspernatur voluptatem facilis. Recusandae id expedita laboriosam officiis quo ratione voluptatum.",
         "user_id":3,
-        "category_id":1,
+        "category_id":"",
         "complexity":1,
     },
     "ingredients": [

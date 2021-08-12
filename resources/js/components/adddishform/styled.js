@@ -2,21 +2,27 @@ import {makeStyles} from "@material-ui/core/styles";
 
 export  const useStyles = makeStyles((theme) => ({
     root: {
-        // margin: theme.spacing(2),
-        '& .MuiTextField-root, .MuiFormControl-root': {
-            margin: theme.spacing(1),
-        },
         maxWidth: 600,
         display: 'flex',
-        margin: '0 auto',
+        margin: theme.spacing(0, 1),
+    },
+    formControl: {
+        margin: theme.spacing(1, 0),
     },
     form_button: {
         textTransform: 'none',
-        margin: theme.spacing(2),
+        margin: theme.spacing(2, 4),
+    },
+    back_button: {
+        margin: theme.spacing(1, 'auto'),
+    },
+    h1: {
+        fontWeight: 700,
+        fontSize: '1.2em',
+        margin: theme.spacing(3, 'auto'),
     },
     h2: {
-        fontWeight: 700,
-        margin: theme.spacing(2),
+        margin: theme.spacing(1, 'auto'),
     },
     modal: {
         margin: '20% auto',
@@ -27,11 +33,14 @@ export  const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(6, 1, 6),
     },
-    select_measure: {
-        margin: theme.spacing(2),
+    select: {
         minWidth: 100,
     },
-    ingredients_item: {
+    ingredientsList: {
+        margin: theme.spacing(0, 0, 2),
+    },
+    ingredientsItem: {
         color: 'gray',
+        margin: theme.spacing(1, 0),
     }
 }));

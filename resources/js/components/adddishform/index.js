@@ -1,19 +1,20 @@
 import { Button, TextField, FormControlLabel, RadioGroup, Radio, 
     FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { TEST_DISH_FOR_POST } from '../dish/const';
 import { useStyles } from './styled';
 
 export const AddDishForm = () => {
     const classes = useStyles();
-
     const [idDelete, setIdDelete] = useState('');
     const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
     const [modal, setModal] = useState(false);
     const [modalText, setModalText] = useState('');
     const [measuresArr, setMeasuresArr] = useState([]);
-
     const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:null, measure_id:'' });
+    const categories = useSelector(state => state.categories.categoryList);
+    // const [category, setCategory] = useState({ id:null, name:'' });
 
     useEffect(()=> {
         getMeasures();
@@ -95,13 +96,12 @@ export const AddDishForm = () => {
 
     const handleAddIngredient = () => {
         dish.ingredients.push(ingredient);
-        document.getElementById("ingredients-preview").insertAdjacentHTML('beforeend', 
-        `<div class=${ classes.ingredients_item }>
-            ${ingredient.ingredients_name} 
-            ${ingredient.quantity} 
-            ${measuresArr.find(item => item.id == ingredient.measure_id).name}
+        document.getElementById("ingredients-list").insertAdjacentHTML('beforeend', 
+        `<div class=${ classes.ingredientsItem }>
+            ${ ingredient.ingredients_name } 
+            ${ ingredient.quantity } 
+            ${ measuresArr.find(item => item.id == ingredient.measure_id).name }
         </div>`);
-        // console.log(dish.ingredients);
     };
 
     const handleChange = (event) => {
@@ -110,12 +110,12 @@ export const AddDishForm = () => {
                 setIdDelete(event.target.value);
                 break;
             case 'title' :
-                setDish({...dish, dish:{...dish.dish, title: event.target.value}});
+                setDish({ ...dish, dish:{ ...dish.dish, title: event.target.value }});
                 // setDish({...dish, title: event.target.value});
                 // console.log(dish.title);
                 break;
             case 'complexity' :
-                setDish({...dish, dish:{...dish.dish, complexity: event.target.value}});
+                setDish({ ...dish, dish:{ ...dish.dish, complexity: event.target.value }});
                 // setDish({...dish, complexity: event.target.value});
                 // console.log('selected complexity: '+event.target.value);
                 break;
@@ -131,89 +131,115 @@ export const AddDishForm = () => {
                 setIngredient({ ...ingredient, quantity: +event.target.value });
                 // console.log(ingredient);
                 break;
+            case 'category-select' :
+                // setCategory({...category, id: event.target.value, name: categories.find(item => item.id == event.target.value).name });
+                setDish({ ...dish, dish:{ ...dish.dish, category_id: event.target.value }});
+                // console.log(category);
+                break;
         }  
     };
 
     return (
     <>
         <Modal
-            open={modal}
-            onClose={handleCloseModal}>
+            open={ modal }
+            onClose={ handleCloseModal }>
                 <div className={ classes.modal }>{ modalText }</div>
         </Modal>
-        <Button href="/" className= { classes.form_button } variant="contained">
+        <Button href="/" className= { classes.back_button } variant="contained">
             &lt; Вернуться на главную
         </Button>
-        <br/><hr/><br/>
+        <br/><hr/>
             <FormControl className={ classes.root } component="fieldset">
-                <FormLabel component="h2" className={ classes.h2 }>Добавление рецепта</FormLabel>
+                <Typography component="h1" className={ classes.h1 }>Добавление рецепта</Typography>
                 <TextField 
+                    className={ classes.formControl }
                     type="text"
                     label="Название блюда"
                     variant="outlined"
                     name="title"
-                    value={dish.dish.title}
-                    onChange={handleChange}
+                    value={ dish.dish.title }
+                    onChange={ handleChange }
                 />
-                <FormControl component="fieldset" >
+                <FormControl variant="outlined" className={ classes.formControl }>
+                    <InputLabel>Категория</InputLabel>
+                    <Select
+                        className={ classes.select }
+                        name="category-select"
+                        onChange={ handleChange }
+                        value={ dish.dish.category_id }
+                        label="Категория"
+                    >
+                        {categories.map((item) => (
+                                <MenuItem value={ item.id } key={ item.id }>{ item.name }</MenuItem>
+                            ))}
+                    </Select>
+                </FormControl>
+                <FormControl component="fieldset" className={ classes.formControl }>
                     <FormLabel component="legend">Сложность: </FormLabel>
                     <RadioGroup row
                         aria-label="complexity"
-                        value={dish.dish.complexity}
-                        onChange={handleChange}>
-                        <FormControlLabel value="1" control={<Radio name="complexity"/>} label="1" />
-                        <FormControlLabel value="2" control={<Radio name="complexity"/>} label="2" />
-                        <FormControlLabel value="3" control={<Radio name="complexity"/>} label="3" />
+                        value={ dish.dish.complexity }
+                        onChange={ handleChange }>
+                        <FormControlLabel value="1" control={ <Radio name="complexity"/> } label="1" />
+                        <FormControlLabel value="2" control={ <Radio name="complexity"/> } label="2" />
+                        <FormControlLabel value="3" control={ <Radio name="complexity"/> } label="3" />
                     </RadioGroup>
                 </FormControl>
 
-                <Typography component="h3">Ингредиенты:</Typography>
-                <div id="ingredients-preview"></div>
+                <Typography component="h2" className={ classes.h2 }>Ингредиенты:</Typography>
+                <div id="ingredients-list" className={ classes.ingredientsList }></div>
                 <TextField 
+                    className={ classes.formControl }
                     type="text"
                     label="Название ингредиента"
                     variant="outlined"
                     name="ingredient-name"
-                    value={ingredient.ingredients_name}
-                    onChange={handleChange}
+                    value={ ingredient.ingredients_name }
+                    onChange={ handleChange }
                 />
                 <TextField 
+                    className={ classes.formControl }
                     type="text"
                     label="Кол-во"
                     variant="outlined"
                     name="ingredient-quantity"
-                    onChange={handleChange}
+                    onChange={ handleChange }
                 />
-                <FormControl className={ classes.select_measure }>
-                    <InputLabel>Ед. изм.</InputLabel>
+                <FormControl variant="outlined" className={ classes.formControl }>
+                    <InputLabel className={ classes.input_label }>Единицы измерения</InputLabel>
                     <Select
+                        className={ classes.select }
                         name="measure-select"
-                        onChange={handleChange}
+                        onChange={ handleChange }
                         value={ ingredient.measure_id }
+                        variant="outlined"
+                        label="Единицы измерения"
                     >
                         {measuresArr.map((item) => (
-                            <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>
+                            <MenuItem value={ item.id } key={ item.id }>{ item.name }</MenuItem>
                         ))}
                     </Select>
                 </FormControl>
-                <Button onClick={handleAddIngredient} className= { classes.form_button } variant="outlined">
+                <Button onClick={ handleAddIngredient } className= { classes.form_button } variant="outlined" fullWidth={ false }>
                     Добавить ингредиент
                 </Button>
-                <Button type="submit" onClick={handleAdd} className= { classes.form_button } variant="contained" >
+                <Button type="submit" onClick={ handleAdd } className= { classes.form_button } variant="contained" >
                     Добавить рецепт
                 </Button>
             </FormControl>
         <br/><hr/><br/>
-        <FormControl className={ classes.root } component="fieldset">
-        <FormLabel component="h2" className={ classes.h2 }>Удаление рецепта</FormLabel>
+        <FormControl className={ classes.root }>
+            <Typography component="h2" className={ classes.h2 }>Удаление рецепта:</Typography>
             <TextField
+                className={ classes.formControl }
                 type="text" 
                 label="id удаляемого блюда" 
                 variant="outlined" 
-                value={idDelete}
+                value={ idDelete }
                 name="id-delete"
-                onChange={handleChange}/>
-            <Button type="submit" onClick={handleDelete} className= { classes.form_button } variant="contained">Удалить</Button>
+                onChange={ handleChange }/>
+            <Button type="submit" onClick={ handleDelete } className= { classes.form_button } variant="contained">Удалить</Button>
         </FormControl>
     </>
     )
