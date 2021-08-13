@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Dish extends JsonResource
+class FullDishResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,15 +15,20 @@ class Dish extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'title' => $this->title,
-            'img' => $this->img,
+            'big_img' => $this->big_img,
+            'small_img' => $this->small_img,
             'description' => $this->description,
-            'pubdate' => $this->pubdate,
             'user_id' => $this->user_id,
             'category_id' => $this->category_id,
             'views' => $this->views,
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
+            'rating' => $this->rating,
+            'complexity' => $this->complexity,
+            'created_at' => $this->created_at,
+            'dish_steps' => DishStepResource::collection($this->dishSteps),
+            'ingredients' => IngredientResource::collection($this->ingredients),
+            'user' => UserResource::make($this->user),
         ];
     }
 }
