@@ -85,9 +85,10 @@ class DishController extends Controller
         return $this->handleResponse($dish);
     }
 
-    public function storeImage(StoreDishImageRequest $request, Dish $dish, ImageSave $imageSave)
+    public function storeImage(StoreDishImageRequest $request, Dish $dish)
     {
         try {
+            $imageSave = new ImageSave();
             $image = $request->file('image');
             $name = $imageSave->saveImage($image);
             if ($name === false) {
