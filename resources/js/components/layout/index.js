@@ -25,7 +25,7 @@ const Layout = () => {
         <>
             <Header />
             <main className='layout-content'>
-                { dishId == undefined ?
+                { dishId === undefined ?
                     <DishCardList /> :
                     <Dish dish={dish} /> }
             </main>
