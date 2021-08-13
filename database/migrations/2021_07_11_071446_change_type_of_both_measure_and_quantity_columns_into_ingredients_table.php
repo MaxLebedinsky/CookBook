@@ -26,6 +26,7 @@ class ChangeTypeOfBothMeasureAndQuantityColumnsIntoIngredientsTable extends Migr
      */
     public function down()
     {
+        DB::table('ingredients')->update(['quantity' => 1]);
         Schema::table('ingredients', function (Blueprint $table) {
             $table->integer('quantity')->change();
             $table->string('measure', 250)->change();
