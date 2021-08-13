@@ -37,7 +37,7 @@ export const AddDishForm = () => {
     };
 
     const postDish = async (dish) => {
-        console.log(JSON.stringify(dish));
+        // console.log(JSON.stringify(dish));
         let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
@@ -54,6 +54,24 @@ export const AddDishForm = () => {
             handleOpenModal();
         } else {
             console.log(mainImage.file.name, ', id нового блюда: ', result.data.id);
+        // begin POST main image
+            let formData = new FormData();
+            formData.append("image", mainImage.file, mainImage.file.name);
+            let responseImage = await fetch(`/api/dishes/${result.data.id}/store_image`, {
+                method: 'POST',
+                // headers: {
+                //     'Content-Type': 'multipart/form-data',
+                // },
+                body: formData
+                // headers: {
+                //     'Content-Type': 'application/json;charset=utf-8',
+                //   },
+                //   body: JSON.stringify(dish)
+            });
+            let resultImage = await responseImage.json();
+            console.log(resultImage);
+        // end POST main image
+
             setModalText('Рецепт успешно добавлен');
             handleOpenModal();
         }
@@ -108,13 +126,14 @@ export const AddDishForm = () => {
 
     const handleImageChange = (event) => {
         event.preventDefault();
-        console.log('changing image...');
         let reader = new FileReader();
         let file = event.target.files[0];
+        console.log('file: ', file);
         reader.onloadend = () => {
             setMainImage({...setMainImage, file: file, imagePreviewUrl: reader.result });
         };
         reader.readAsDataURL(file);
+        console.log('mainImage: ', mainImage);
     };
 
     // const handleSubmitUpload = (event) => {
