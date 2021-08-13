@@ -16,7 +16,7 @@ class DishStepController extends Controller
 {
     use ApiResponder;
 
-    public function storeImage(StoreDishStepImageRequest $request, ImageSave $imageSave)
+    public function storeImage(StoreDishStepImageRequest $request)
     {
         $data = $request->validated();
         if (count($data['id']) !== count($data['image'])) {
@@ -24,6 +24,8 @@ class DishStepController extends Controller
         }
 
         try {
+            $imageSave = new ImageSave();
+
             $images = $request->file('image');
             $ids = $request->input('id');
             $id = current($ids);
