@@ -28,6 +28,7 @@ class FullDishResource extends JsonResource
             'created_at' => $this->created_at,
             'dish_steps' => DishStepResource::collection($this->dishSteps),
             'ingredients' => IngredientResource::collection($this->ingredients),
+            'category' => CategoryResource::make($this->category),
             'user' => UserResource::make($this->user),
         ];
     }
