@@ -130,12 +130,12 @@ export const AddDishForm = () => {
             case 'title' :
                 setDish({ ...dish, dish:{ ...dish.dish, title: event.target.value }});
                 // setDish({...dish, title: event.target.value});
-                // console.log(dish.title);
+                break;
+            case 'description' :
+                setDish({ ...dish, dish:{ ...dish.dish, description: event.target.value }});
                 break;
             case 'complexity' :
                 setDish({ ...dish, dish:{ ...dish.dish, complexity: event.target.value }});
-                // setDish({...dish, complexity: event.target.value});
-                // console.log('selected complexity: '+event.target.value);
                 break;
             case 'ingredient-name' :
                 setIngredient({ ...ingredient, ingredients_name: event.target.value });
@@ -198,18 +198,17 @@ export const AddDishForm = () => {
                             Выберите файл
                         </Button>
                     </label>
-                    {/* <Button
-                        className={ classes.inlineBlock }
-                        variant="contained"  
-                        component="span"
-                        onClick={ handleSubmitUpload }
-                    >
-                        Загрузить
-                    </Button> */}
                 </FormControl>
-
-                    
-
+                <TextField 
+                    className={ classes.formControl }
+                    type="text"
+                    label="Описание"
+                    variant="outlined"
+                    name="description"
+                    value={ dish.dish.description }
+                    onChange={ handleChange }
+                    multiline
+                />
                 <FormControl variant="outlined" className={ classes.formControl }>
                     <InputLabel>Категория</InputLabel>
                     <Select
