@@ -33,7 +33,6 @@ export const AddDishForm = () => {
         let response = await fetch('/api/measures');
         let result = await response.json();
         setMeasuresArr([...result.data]);
-        // console.log(measuresArr);
     };
 
     const postDish = async (dish) => {
@@ -45,35 +44,29 @@ export const AddDishForm = () => {
             },
             body: JSON.stringify(dish)
           });
-          
-        let result = await response.json();
-        console.log(result);
 
-        if (result.success === false) {
+        if (!response.ok) {
             setModalText('Что-то пошло не так :(');
             handleOpenModal();
         } else {
-            console.log(mainImage.file.name, ', id нового блюда: ', result.data.id);
         // begin POST main image
+            let result = await response.json();
             let formData = new FormData();
-            formData.append("image", mainImage.file, mainImage.file.name);
+            formData.append("image", mainImage.file);
             let responseImage = await fetch(`/api/dishes/${result.data.id}/store_image`, {
                 method: 'POST',
-                // headers: {
-                //     'Content-Type': 'multipart/form-data',
-                // },
                 body: formData
-                // headers: {
-                //     'Content-Type': 'application/json;charset=utf-8',
-                //   },
-                //   body: JSON.stringify(dish)
             });
-            let resultImage = await responseImage.json();
-            console.log(resultImage);
+            if (responseImage.ok) {
+                setModalText('Рецепт успешно добавлен');
+                handleOpenModal();
+            } else {
+                setModalText('Ошибка загрузки изображения');
+                handleOpenModal();
+            }
         // end POST main image
 
-            setModalText('Рецепт успешно добавлен');
-            handleOpenModal();
+
         }
     };
 
@@ -84,15 +77,11 @@ export const AddDishForm = () => {
               'Content-Type': 'application/json;charset=utf-8',
             },
         });
-        
-        let result = await response.json();
-        // console.log(result);
-
-        if (result.success === false) {
-            setModalText('Блюдо с таким id не найдено');
+        if (response.ok) {
+            setModalText('Рецепт успешно удалён');
             handleOpenModal();
         } else {
-            setModalText('Рецепт успешно удалён');
+            setModalText('Блюдо с таким id не найдено');
             handleOpenModal();
         }
     };
@@ -109,7 +98,6 @@ export const AddDishForm = () => {
     const handleAdd = (event) => {
         event.preventDefault();
         if (dish.dish.title) {
-            console.log('adding dish: '+dish);
             postDish(dish);
         }
     };
@@ -126,20 +114,13 @@ export const AddDishForm = () => {
 
     const handleImageChange = (event) => {
         event.preventDefault();
-        let reader = new FileReader();
-        let file = event.target.files[0];
-        console.log('file: ', file);
+        const reader = new FileReader();
+        const file = event.target.files[0];
         reader.onloadend = () => {
             setMainImage({...setMainImage, file: file, imagePreviewUrl: reader.result });
         };
         reader.readAsDataURL(file);
-        console.log('mainImage: ', mainImage);
     };
-
-    // const handleSubmitUpload = (event) => {
-    //     event.preventDefault();
-    //     console.log(mainImage.file);
-    // };
 
     const handleChange = (event) => {
         switch (event.target.name) {
@@ -158,20 +139,16 @@ export const AddDishForm = () => {
                 break;
             case 'ingredient-name' :
                 setIngredient({ ...ingredient, ingredients_name: event.target.value });
-                // console.log(ingredient);
                 break;
             case 'measure-select' :
                 setIngredient({ ...ingredient, measure_id: +event.target.value });
-                // console.log(ingredient);
                 break;
             case 'ingredient-quantity' :
                 setIngredient({ ...ingredient, quantity: +event.target.value });
-                // console.log(ingredient);
                 break;
             case 'category-select' :
                 // setCategory({...category, id: event.target.value, name: categories.find(item => item.id == event.target.value).name });
                 setDish({ ...dish, dish:{ ...dish.dish, category_id: event.target.value }});
-                // console.log(category);
                 break;
         }  
     };
@@ -206,7 +183,9 @@ export const AddDishForm = () => {
                         <img src={ mainImage.imagePreviewUrl } className={ classes.imagePreview } alt="Main image"/> 
                         : <PhotoCamera className={ classes.iconCamera }/>}
                     </div>
-                    <Box className={ classes.fileName }>{ mainImage.imagePreviewUrl ? mainImage.file.name : "Изображение не выбрано" }</Box>
+                    <Box className={ classes.fileName }>
+                        { mainImage.imagePreviewUrl ? mainImage.file.name : "Изображение не выбрано" }
+                    </Box>
                     <input
                         accept="image/*"
                         className={ classes.hidden }
