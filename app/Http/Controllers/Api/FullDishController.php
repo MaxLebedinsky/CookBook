@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\DishRequest;
+use App\Http\Resources\FullDishResource;
 use App\Models\{
     Dish,
     Ingredient,
     DishStep,
-    User,
-    Category,
-    Measure
 };
 use Illuminate\Support\Facades\DB;
 use App\Traits\ApiResponder;
@@ -22,14 +20,14 @@ class FullDishController extends Controller
 
     public function index()
     {
-        $full_dishes = Dish::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
-        return $this->handleResponse($full_dishes);
+        $full_dishes = Dish::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->paginate(10);
+        return FullDishResource::collection($full_dishes);
     }
 
     public function getByCategoryId(int $categoryId)
     {
-        $full_dishes = Dish::where('category_id', $categoryId)->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
-        return $this->handleResponse($full_dishes);
+        $full_dishes = Dish::where('category_id', $categoryId)->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->paginate(10);
+        return FullDishResource::collection($full_dishes);
     }
 
     public function store(DishRequest $request)
@@ -43,7 +41,7 @@ class FullDishController extends Controller
             });
 
             $full_dish = Dish::with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->findOrFail($dish->id);
-            return $this->handleResponse($full_dish, 201);
+            return FullDishResource::make($full_dish);
         } catch (\Exception $e) {
             return $this->handleError($e->getMessage());
         }
@@ -52,8 +50,8 @@ class FullDishController extends Controller
     public function show(int $id)
     {
         try {
-            $dish = Dish::where('id', $id)->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->get();
-            return $this->handleResponse($dish);
+            $dish = Dish::query()->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->findOrFail($id);
+            return FullDishResource::make($dish);
         } catch (\Exception $e) {
             return $this->handleError('error');
         }
@@ -88,6 +86,6 @@ class FullDishController extends Controller
     public function delete(int $id)
     {
         Dish::destroy($id);
-        return $this->handleResponse([]);
+        return response()->json();
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Dish extends JsonResource
+class DishResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
