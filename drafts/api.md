@@ -625,7 +625,7 @@ Response
                 "dish_id": 1
             }
         ],
-        "dish-_steps": [
+        "dish_steps": [
             {
               "id": 1,
               "step_number": 1,
