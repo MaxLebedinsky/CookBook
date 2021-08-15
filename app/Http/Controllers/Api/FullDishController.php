@@ -59,28 +59,29 @@ class FullDishController extends Controller
 
     public function update(Request $request, int $id)
     {
-        // TODO: Make method
-        $this->handleError('under construction');
         try {
             DB::transaction(function () use ($request, $id) {
-                $dish = Dish::update($request->input['data.dish.*'])
-                    ->where('id', $id);
+                Dish::where('id', $id)
+                    ->update($request->input('dish'));
 
-                foreach ($request->input('data.ingredients.*') as $ingredient) {
-                    Ingredient::update($ingredient)
-                        ->where('dish_id', $id);
+                foreach ($request->input('ingredients') as $ingredient) {
+                    Ingredient::where('dish_id', $id)
+                        ->update($ingredient);
                 }
 
-                foreach ($request->input('data.dish_steps.*') as $dish_step) {
-                    DishStep::update($dish_step)
-                        ->where('dish_id', $id);
+                foreach ($request->input('dish_steps') as $dish_step) {
+                    DishStep::where('dish_id', $id)
+                        ->update($dish_step);
                 }
             });
         } catch (\Exception $e) {
             return $this->handleError('error');
+            //return $this->handleError($e->getMessage());
         }
 
-        return $this->handleResponse($request->input['data']);
+        $dish = Dish::query()->with(['dishSteps', 'ingredients', 'ingredients.measure', 'category', 'user'])->findOrFail($id);
+
+        return $this->handleResponse($dish);
     }
 
     public function delete(int $id)
