@@ -455,67 +455,63 @@ Response
 {
   "data": [
     {
-        "id": 1,
-        "title": "Occaecati laborum tenetur asperiores error sit necessitatibus et consequatur aut.",
-        "big_img": "https://via.placeholder.com/360x360.png/00cc22?text=dishes+maiores",
-        "small_img": "https://via.placeholder.com/360x360.png/00eebb?text=dishes+sint",
-        "description": "Nihil ut accusantium quasi et labore expedita. Ut expedita cumque unde quas.",
-        "user_id": 24,
-        "category_id": 9,
-        "views": 435,
-        "rating": 4.019999999999999573674358543939888477325439453125,
-        "complexity": 3,
-        "created_at": "2015-07-28T20:35:18.000000Z",
+      "id": 1,
+      "title": "Occaecati laborum tenetur asperiores error sit necessitatibus et consequatur aut.",
+      "big_img": "https://via.placeholder.com/360x360.png/00cc22?text=dishes+maiores",
+      "small_img": "https://via.placeholder.com/360x360.png/00eebb?text=dishes+sint",
+      "description": "Nihil ut accusantium quasi et labore expedita. Ut expedita cumque unde quas.",
+      "user_id": 24,
+      "category_id": 9,
+      "views": 435,
+      "rating": 4.019999999999999573674358543939888477325439453125,
+      "complexity": 3,
+      "created_at": "2015-07-28T20:35:18.000000Z",
       "ingredients": [
         {
+          "id": 1,
+          "ingredients_name": "мука",
+          "quantity": "3",
+          "measure": {
             "id": 1,
-            "ingredients_name": "мука",
-            "quantity": "3",
-            "measure": {
-                "id": 1,
-                "name": "кг"
-            },
-            "dish_id": 1
+            "name": "кг"
+          },
+          "dish_id": 1
         },
         {
-            "id": 2,
-            "ingredients_name": "соль",
-            "quantity": "4",
-            "measure": {
-                "id": 5,
-                "name": "ч.л."
-            },
-            "dish_id": 1
+          "id": 2,
+          "ingredients_name": "соль",
+          "quantity": "4",
+          "measure": {
+            "id": 5,
+            "name": "ч.л."
+          },
+          "dish_id": 1
         }
       ],
-      "dishSteps": [
+      "dish_steps": [
         {
           "id": 1,
           "step_number": 1,
           "img": "https://via.placeholder.com/360x360.png/00dd44?text=dishes+eius",
-          "text": "Temporibus ut vel officiis rerum ut.",
-          "dish_id": 1
+          "text": "Temporibus ut vel officiis rerum ut."
         },
         {
           "id": 2,
           "step_number": 2,
           "img": "https://via.placeholder.com/360x360.png/005599?text=dishes+culpa",
-          "text": "Corporis beatae ut saepe sint sequi. Rerum totam quo dicta omnis.",
-          "dish_id": 1
+          "text": "Corporis beatae ut saepe sint sequi. Rerum totam quo dicta omnis."
         },
         {
           "id": 3,
           "step_number": 3,
           "img": "https://via.placeholder.com/360x360.png/002244?text=dishes+adipisci",
-          "text": "Et doloremque dolorum numquam. Tenetur et aspernatur ut.",
-          "dish_id": 1
+          "text": "Et doloremque dolorum numquam. Tenetur et aspernatur ut."
         },
         {
           "id": 4,
           "step_number": 4,
           "img": "https://via.placeholder.com/360x360.png/0044cc?text=dishes+assumenda",
-          "text": "Velit blanditiis totam rerum laborum ut dolorum.",
-          "dish_id": 1
+          "text": "Velit blanditiis totam rerum laborum ut dolorum."
         }
       ],
       "user": {
@@ -524,66 +520,65 @@ Response
         "email": "cicero78@example.com",
         "phone": "+15626036003",
         "about": "Nihil sunt quis consequuntur quia ipsam optio qui aut porro quo.",
-        "is_admin": false,
+        "is_admin": false
       }
     }
   ],
-    "links": {
-        "first": "http://cookbook.local/api/full-dishes?page=1",
-        "last": "http://cookbook.local/api/full-dishes?page=11",
-        "prev": null,
-        "next": "http://cookbook.local/api/full-dishes?page=2"
-    },
-    "meta": {
-        "current_page": 1,
-        "from": 1,
-        "last_page": 11,
-        "links": [
-            {
-                "url": null,
-                "label": "pagination.previous",
-                "active": false
-            },
-            {
-                "url": "http://cookbook.local/api/full-dishes?page=1",
-                "label": "1",
-                "active": true
-            },
-            {
-                "url": "http://cookbook.local/api/full-dishes?page=2",
-                "label": "2",
-                "active": false
-            },
-            ...
-            {
-                "url": "http://cookbook.local/api/full-dishes?page=9",
-                "label": "9",
-                "active": false
-            },
-            {
-                "url": "http://cookbook.local/api/full-dishes?page=10",
-                "label": "10",
-                "active": false
-            },
-            {
-                "url": "http://cookbook.local/api/full-dishes?page=11",
-                "label": "11",
-                "active": false
-            },
-            {
-                "url": "http://cookbook.local/api/full-dishes?page=2",
-                "label": "pagination.next",
-                "active": false
-            }
-        ],
-        "path": "http://cookbook.local/api/full-dishes",
-        "per_page": 10,
-        "to": 10,
-        "total": 103
-    }
+  "links": {
+    "first": "http://cookbook.local/api/full-dishes?page=1",
+    "last": "http://cookbook.local/api/full-dishes?page=11",
+    "prev": null,
+    "next": "http://cookbook.local/api/full-dishes?page=2"
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 11,
+    "links": [
+      {
+        "url": null,
+        "label": "pagination.previous",
+        "active": false
+      },
+      {
+        "url": "http://cookbook.local/api/full-dishes?page=1",
+        "label": "1",
+        "active": true
+      },
+      {
+        "url": "http://cookbook.local/api/full-dishes?page=2",
+        "label": "2",
+        "active": false
+      },
+      ...
+      {
+        "url": "http://cookbook.local/api/full-dishes?page=9",
+        "label": "9",
+        "active": false
+      },
+      {
+        "url": "http://cookbook.local/api/full-dishes?page=10",
+        "label": "10",
+        "active": false
+      },
+      {
+        "url": "http://cookbook.local/api/full-dishes?page=11",
+        "label": "11",
+        "active": false
+      },
+      {
+        "url": "http://cookbook.local/api/full-dishes?page=2",
+        "label": "pagination.next",
+        "active": false
+      }
+    ],
+    "path": "http://cookbook.local/api/full-dishes",
+    "per_page": 10,
+    "to": 10,
+    "total": 103
+  }
 } 
 ```
-
 
 **Все рецепты категории**
 
@@ -608,66 +603,62 @@ Response
         "rating": 4.019999999999999573674358543939888477325439453125,
         "complexity": 3,
         "created_at": "2015-07-28T20:35:18.000000Z",
-      "ingredients": [
-        {
-            "id": 1,
-            "ingredients_name": "мука",
-            "quantity": "3",
-            "measure": {
+        "ingredients": [
+            {
                 "id": 1,
-                "name": "кг"
+                "ingredients_name": "мука",
+                "quantity": "3",
+                "measure": {
+                    "id": 1,
+                    "name": "кг"
+                },
+                "dish_id": 1
             },
-            "dish_id": 1
-        },
-        {
-            "id": 2,
-            "ingredients_name": "соль",
-            "quantity": "4",
-            "measure": {
-                "id": 5,
-                "name": "ч.л."
+            {
+                "id": 2,
+                "ingredients_name": "соль",
+                "quantity": "4",
+                "measure": {
+                    "id": 5,
+                    "name": "ч.л."
+                },
+                "dish_id": 1
+            }
+        ],
+        "dish-_steps": [
+            {
+              "id": 1,
+              "step_number": 1,
+              "img": "https://via.placeholder.com/360x360.png/00dd44?text=dishes+eius",
+              "text": "Temporibus ut vel officiis rerum ut."
             },
-            "dish_id": 1
+            {
+              "id": 2,
+              "step_number": 2,
+              "img": "https://via.placeholder.com/360x360.png/005599?text=dishes+culpa",
+              "text": "Corporis beatae ut saepe sint sequi. Rerum totam quo dicta omnis."
+            },
+            {
+              "id": 3,
+              "step_number": 3,
+              "img": "https://via.placeholder.com/360x360.png/002244?text=dishes+adipisci",
+              "text": "Et doloremque dolorum numquam. Tenetur et aspernatur ut."
+            },
+            {
+              "id": 4,
+              "step_number": 4,
+              "img": "https://via.placeholder.com/360x360.png/0044cc?text=dishes+assumenda",
+              "text": "Velit blanditiis totam rerum laborum ut dolorum."
+            }
+        ],
+        "user": {
+            "id": 24,
+            "name": "Dewayne Gerhold",
+            "email": "cicero78@example.com",
+            "phone": "+15626036003",
+            "about": "Nihil sunt quis consequuntur quia ipsam optio qui aut porro quo.",
+            "is_admin": false
         }
-      ],
-      "dishSteps": [
-        {
-          "id": 1,
-          "step_number": 1,
-          "img": "https://via.placeholder.com/360x360.png/00dd44?text=dishes+eius",
-          "text": "Temporibus ut vel officiis rerum ut.",
-          "dish_id": 1
-        },
-        {
-          "id": 2,
-          "step_number": 2,
-          "img": "https://via.placeholder.com/360x360.png/005599?text=dishes+culpa",
-          "text": "Corporis beatae ut saepe sint sequi. Rerum totam quo dicta omnis.",
-          "dish_id": 1
-        },
-        {
-          "id": 3,
-          "step_number": 3,
-          "img": "https://via.placeholder.com/360x360.png/002244?text=dishes+adipisci",
-          "text": "Et doloremque dolorum numquam. Tenetur et aspernatur ut.",
-          "dish_id": 1
-        },
-        {
-          "id": 4,
-          "step_number": 4,
-          "img": "https://via.placeholder.com/360x360.png/0044cc?text=dishes+assumenda",
-          "text": "Velit blanditiis totam rerum laborum ut dolorum.",
-          "dish_id": 1
-        }
-      ],
-      "user": {
-        "id": 24,
-        "name": "Dewayne Gerhold",
-        "email": "cicero78@example.com",
-        "phone": "+15626036003",
-        "about": "Nihil sunt quis consequuntur quia ipsam optio qui aut porro quo.",
-        "is_admin": false,
-      }
     }
   ],
     "links": {
