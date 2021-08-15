@@ -39,7 +39,7 @@ export const getDishes = () => async (dispatch) => {
    dispatch(dishesRequest());
 
    try {
-      const response = await window.axios.get('/full-dishes');
+      const response = await window.axios.get('/full-dishes?page=11');
 
       // if (!response.ok) {
       //    throw new Error("request failed with status " + response.status);

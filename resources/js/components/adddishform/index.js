@@ -16,6 +16,7 @@ export const AddDishForm = () => {
     const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:null, measure_id:'' });
     const categories = useSelector(state => state.categories.categoryList);
     const [mainImage, setMainImage] = useState({ file: '', imagePreviewUrl: '' });
+    const [step, setStep] = useState({ step_number: dish.dish_steps.length + 1, text: ''});
 
     useEffect(()=> {
         getMeasures();
@@ -112,6 +113,12 @@ export const AddDishForm = () => {
         </div>`);
     };
 
+    const handleAddStep = () => {
+        setStep({ ...step, step_number: step.step_number + 1 });
+        dish.dish_steps.push(step);
+        console.log(dish.dish_steps);
+    }
+
     const handleImageChange = (event) => {
         event.preventDefault();
         const reader = new FileReader();
@@ -149,6 +156,9 @@ export const AddDishForm = () => {
             case 'category-select' :
                 // setCategory({...category, id: event.target.value, name: categories.find(item => item.id == event.target.value).name });
                 setDish({ ...dish, dish:{ ...dish.dish, category_id: event.target.value }});
+                break;
+            case 'step-desc' :
+                setStep({ ...step, text: event.target.value });
                 break;
         }  
     };
@@ -272,6 +282,21 @@ export const AddDishForm = () => {
                 <Button onClick={ handleAddIngredient } className= { classes.form_button } variant="outlined">
                     Добавить ингредиент
                 </Button>
+                <Typography component="h2" className={ classes.h2 }>Пошаговый рецепт:</Typography>
+                <TextField 
+                    className={ classes.formControl }
+                    type="text"
+                    label="Описание шага рецепта"
+                    variant="outlined"
+                    name="step-desc"
+                    value={ step.text }
+                    onChange={ handleChange }
+                />
+                <Button onClick={ handleAddStep } className= { classes.form_button } variant="outlined">
+                    Добавить шаг
+                </Button>
+
+
                 <Button type="submit" onClick={ handleAdd } className= { classes.form_button } variant="contained" size="large">
                     Сохранить рецепт
                 </Button>
