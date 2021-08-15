@@ -13,7 +13,7 @@ export const AddDishForm = () => {
     const [modal, setModal] = useState(false);
     const [modalText, setModalText] = useState('');
     const [measuresArr, setMeasuresArr] = useState([]);
-    const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:null, measure_id:'' });
+    const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:'', measure_id:'' });
     const categories = useSelector(state => state.categories.categoryList);
     const [mainImage, setMainImage] = useState({ file: '', imagePreviewUrl: '' });
     const [stepImage, setStepImage] = useState({ file: '', imagePreviewUrl: '' });
@@ -121,11 +121,15 @@ export const AddDishForm = () => {
     const handleAddIngredient = () => {
         dish.ingredients.push(ingredient);
         document.getElementById("ingredients-list").insertAdjacentHTML('beforeend', 
-        `<div class=${ classes.ingredientsItem }>
-            ${ ingredient.ingredients_name } 
-            ${ ingredient.quantity } 
-            ${ measuresArr.find(item => item.id == ingredient.measure_id).name }
+        `<div class=${ classes.listItem }>
+            <div>${ ingredient.ingredients_name }</div> 
+            <div class=${ classes.dots }></div>
+            <div class=${ classes.amount }>
+                ${ ingredient.quantity } 
+                ${ measuresArr.find(item => item.id == ingredient.measure_id).name }
+            </div>
         </div>`);
+        setIngredient({ ingredients_name:'', quantity:'', measure_id:'' })
     };
 
     const handleAddStep = () => {
@@ -287,6 +291,7 @@ export const AddDishForm = () => {
                     label="Кол-во"
                     variant="outlined"
                     name="ingredient-quantity"
+                    value={ ingredient.quantity }
                     onChange={ handleChange }
                 />
                 <FormControl variant="outlined" className={ classes.formControl }>

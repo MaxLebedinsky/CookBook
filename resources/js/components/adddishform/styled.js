@@ -60,7 +60,7 @@ export  const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 'auto'),
     },
     h2: {
-        margin: theme.spacing(1, 'auto'),
+        margin: theme.spacing(3, 'auto'),
     },
     modal: {
         margin: '20% auto',
@@ -75,14 +75,24 @@ export  const useStyles = makeStyles((theme) => ({
         minWidth: 100,
     },
     ingredientsList: {
-        margin: theme.spacing(0, 0, 2),
+        margin: theme.spacing(0, 0, 3),
     },
     ingredientsItem: {
         color: 'gray',
         margin: theme.spacing(1, 0),
     },
-    // inlineBlock: {
-    //     display: 'inline-block',
-    //     // width: '30%'
-    // }
+    listItem: {
+        paddingBottom: 0,
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: theme.spacing(1),
+     },
+     dots: {
+        flexGrow: 0.9,
+        borderBottom: '2px dotted lightgray',
+        alignSelf: 'flex-end',
+        lineHeight: '1.3em',
+        position: 'relative',
+        bottom: 4,
+     },
 }));
