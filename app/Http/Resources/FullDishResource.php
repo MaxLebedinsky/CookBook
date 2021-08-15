@@ -22,6 +22,7 @@ class FullDishResource extends JsonResource
             'description' => $this->description,
             'user_id' => $this->user_id,
             'category_id' => $this->category_id,
+            'category' => CategoryResource::make($this->category),
             'views' => $this->views,
             'rating' => $this->rating,
             'complexity' => $this->complexity,
