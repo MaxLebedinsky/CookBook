@@ -16,6 +16,8 @@ export const AddDishForm = () => {
     const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:null, measure_id:'' });
     const categories = useSelector(state => state.categories.categoryList);
     const [mainImage, setMainImage] = useState({ file: '', imagePreviewUrl: '' });
+    const [stepImage, setStepImage] = useState({ file: '', imagePreviewUrl: '' });
+    const [stepImagesArr, setStepImagesArr] = useState([]);
     const [step, setStep] = useState({ step_number: dish.dish_steps.length + 1, text: ''});
 
     useEffect(()=> {
@@ -47,7 +49,7 @@ export const AddDishForm = () => {
           });
 
         if (!response.ok) {
-            setModalText('Что-то пошло не так :(');
+            setModalText('Ошибка загрузки данных рецепта');
             handleOpenModal();
         } else {
         // begin POST main image
@@ -58,16 +60,29 @@ export const AddDishForm = () => {
                 method: 'POST',
                 body: formData
             });
+        // end POST main image
             if (responseImage.ok) {
+            // begin POST step images
+                let formDataImages = new FormData();
+                formDataImages.append("images", stepImagesArr);
+                let responseStepImages = await fetch(`/api/dishes/${result.data.id}/store_image`, {
+                    method: 'POST',
+                    body: formDataImages
+                })
+                console.log('stepImagesArr: ', stepImagesArr);
+            // end POST step images
+                if (responseStepImages.ok) {
                 setModalText('Рецепт успешно добавлен');
                 handleOpenModal();
-            } else {
-                setModalText('Ошибка загрузки изображения');
+                } else {
+                    setModalText('Ошибка загрузки изображений шагов');
                 handleOpenModal();
+                }
+            } else {
+                setModalText('Ошибка загрузки главного изображения');
+                handleOpenModal();
+                return;
             }
-        // end POST main image
-
-
         }
     };
 
@@ -115,8 +130,8 @@ export const AddDishForm = () => {
 
     const handleAddStep = () => {
         setStep({ ...step, step_number: step.step_number + 1 });
-        dish.dish_steps.push(step);
-        console.log(dish.dish_steps);
+        dish.dish_steps.push(step);       
+        setStepImagesArr(stepImagesArr.concat({ id: step.step_number, file: stepImage.file }));
     }
 
     const handleImageChange = (event) => {
@@ -124,10 +139,20 @@ export const AddDishForm = () => {
         const reader = new FileReader();
         const file = event.target.files[0];
         reader.onloadend = () => {
-            setMainImage({...setMainImage, file: file, imagePreviewUrl: reader.result });
+            setMainImage({...mainImage, file: file, imagePreviewUrl: reader.result });
         };
         reader.readAsDataURL(file);
     };
+
+    const handleStepImageChange = (event) => {
+        event.preventDefault();
+        const reader = new FileReader();
+        const file = event.target.files[0];
+        reader.onloadend = () => {
+            setStepImage({...stepImage, file: file, imagePreviewUrl: reader.result });
+        };
+        reader.readAsDataURL(file);
+    }
 
     const handleChange = (event) => {
         switch (event.target.name) {
@@ -292,6 +317,28 @@ export const AddDishForm = () => {
                     value={ step.text }
                     onChange={ handleChange }
                 />
+                <FormControl className={ classes.uploadDialog }>
+                    <div className={ classes.imagePreviewContainer }>
+                        { stepImage.imagePreviewUrl ? 
+                        <img src={ stepImage.imagePreviewUrl } className={ classes.imagePreview } alt="Step image"/> 
+                        : <PhotoCamera className={ classes.iconCamera }/>}
+                    </div>
+                    <Box className={ classes.fileName }>
+                        { stepImage.imagePreviewUrl ? stepImage.file.name : "Изображение не выбрано" }
+                    </Box>
+                    <input
+                        accept="image/*"
+                        className={ classes.hidden }
+                        id="upload-step-input"
+                        type="file"
+                        onChange={ handleStepImageChange }
+                    />
+                    <label htmlFor="upload-step-input">
+                        <Button variant="contained" component="span" className={ classes.form_button }>
+                            Выберите файл
+                        </Button>
+                    </label>
+                </FormControl>
                 <Button onClick={ handleAddStep } className= { classes.form_button } variant="outlined">
                     Добавить шаг
                 </Button>

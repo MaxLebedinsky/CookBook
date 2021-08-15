@@ -30,6 +30,7 @@ export const useStyles = makeStyles((theme) => ({
         '&:last-child': {
             paddingBottom: 10,
         },
+        flexGrow: 1,
     },
     data: {
         fontSize: '0.8em',
