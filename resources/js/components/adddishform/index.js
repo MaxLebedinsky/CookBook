@@ -63,17 +63,13 @@ export const AddDishForm = () => {
             if (responseImage.ok) {
             // begin POST step images
                 let formDataImages = new FormData();
-                console.log('stepImagesArr: ', stepImagesArr);
-                console.log('result.data.dish_steps: ', result.data.dish_steps);
                 stepImagesArr.forEach(item => {
-                    console.log(item.file, item.file.name);
                     formDataImages.append("image[]", item.file, item.file.name);
                 });
                 result.data.dish_steps.forEach(item => {
-                    console.log(item.id);
                     formDataImages.append("id[]", item.id);
                 });
-                let responseStepImages = await fetch(`/api/dishes/${result.data.id}/store_image`, {
+                let responseStepImages = await fetch(`/api/dish_steps/store_image`, {
                     method: 'POST',
                     body: formDataImages
                 })
@@ -140,14 +136,17 @@ export const AddDishForm = () => {
     };
 
     const handleAddStep = () => {
-        setStep({ ...step, step_number: step.step_number + 1 });
+        setStep({ ...step, step_number: step.step_number + 1, text: '' });
         document.getElementById("steps-list").insertAdjacentHTML('beforeend', 
         `<div class=${ classes.stepsListItem}>
-            <span>${ step.step_number }. </span> 
+            <span>${ step.step_number }. </span>
+            <img src=${ stepImage.imagePreviewUrl } class=${ classes.stepImagePreview } alt="Step image"/>
             <span>${ step.text }</span>
         </div>`);
         dish.dish_steps.push(step);       
         setStepImagesArr(stepImagesArr.concat({ id: step.step_number, file: stepImage.file }));
+        // setStep({ ...step, text: ''});
+        setStepImage({ ...stepImage, file: '', imagePreviewUrl: '' });
     }
 
     const handleImageChange = (event) => {
@@ -334,6 +333,7 @@ export const AddDishForm = () => {
                     name="step-desc"
                     value={ step.text }
                     onChange={ handleChange }
+                    multiline
                 />
                 <FormControl className={ classes.uploadDialog }>
                     <div className={ classes.imagePreviewContainer }>
@@ -368,7 +368,11 @@ export const AddDishForm = () => {
             </FormControl>
         <br/><hr/><br/>
         <FormControl className={ classes.root }>
-            <Typography component="h2" className={ classes.h2 }>Удаление рецепта:</Typography>
+            <Typography component="h2" className={ classes.h2 }>Удаление рецепта:
+            <Box className={ classes.fileName }>
+                        (Будет доступно для пользователя с role = admin)
+            </Box>
+            </Typography>
             <TextField
                 className={ classes.formControl }
                 type="text" 

@@ -56,10 +56,15 @@ export const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up(425)]: {
         root: {
-            maxWidth: 400
+            maxWidth: 400,
         },
         desc: {
             marginLeft: 20,
         },
+    },
+    [theme.breakpoints.up(768)]: {
+        desc: {
+            minWidth: 230,
+        }
     },
 }));

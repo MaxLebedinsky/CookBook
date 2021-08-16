@@ -82,17 +82,22 @@ export  const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         marginBottom: theme.spacing(1),
-     },
-     stepsListItem: {
-         display: 'flex',
-         marginBottom: theme.spacing(1),
-     },
-     dots: {
+    },
+    stepsListItem: {
+        display: 'flex',
+        marginBottom: theme.spacing(1),
+        alignItems: 'flex-start',
+    },
+    stepImagePreview: {
+        width: '100px',
+        margin: theme.spacing(0, 1),
+    },
+    dots: {
         flexGrow: 0.9,
         borderBottom: '2px dotted lightgray',
         alignSelf: 'flex-end',
         lineHeight: '1.3em',
         position: 'relative',
         bottom: 4,
-     },
+    },
 }));
