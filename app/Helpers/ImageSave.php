@@ -9,6 +9,9 @@
 namespace App\Helpers;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class ImageSave
@@ -22,11 +25,34 @@ class ImageSave
     // contain all saved files. need for delete saved files if fails
     private $_fileList = [];
 
+    private $_baseDirectory = '';
+    private $_baseUrl = '';
+
+    /**
+     * ImageSave constructor.
+     * @param string $storageDiskName
+     * @param string $storageBaseUrl
+     */
+    public function __construct($storageDiskName = 'public', $storageBaseUrl = '/storage/')
+    {
+        $this->_baseDirectory = Storage::disk($storageDiskName)->path('');
+        $this->_baseUrl = $storageBaseUrl;
+
+        $filePath = $this->_baseDirectory . self::IMAGE_DIR;
+        $thumbPath = $this->_baseDirectory . self::THUMB_DIR;
+
+        foreach ([$filePath, $thumbPath] as $path) {
+            if (!File::isDirectory($path)) {
+                File::makeDirectory($path);
+            }
+        }
+    }
+
     public function deleteImages()
     {
         foreach ($this->_fileList as $file) {
-            if (\File::exists($file)) {
-                \File::delete($file);
+            if (File::exists($file)) {
+                File::delete($file);
             }
         }
     }
@@ -46,7 +72,7 @@ class ImageSave
      * @param int $whatSave
      * @return string|bool
      */
-    public function saveImage($image, $whatSave = self::SAVE_THUMB & self::SAVE_IMAGE)
+    public function saveImage($image, $whatSave = self::SAVE_THUMB | self::SAVE_IMAGE)
     {
         $filePath = null;
         $thumbPath = null;
@@ -54,9 +80,8 @@ class ImageSave
             $name = $image->hashName();
             $name = $this->_getUniqueFileName($name);
 
-            $basePath = \Storage::disk('public')->path('');
-            $filePath = $basePath . self::IMAGE_DIR . DIRECTORY_SEPARATOR . $name;
-            $thumbPath = $basePath . self::THUMB_DIR . DIRECTORY_SEPARATOR . $name;
+            $filePath = $this->_baseDirectory . self::IMAGE_DIR . DIRECTORY_SEPARATOR . $name;
+            $thumbPath = $this->_baseDirectory . self::THUMB_DIR . DIRECTORY_SEPARATOR . $name;
 
             if ($whatSave & self::SAVE_IMAGE) {
                 // save fullimage
@@ -64,7 +89,7 @@ class ImageSave
                 $img->resize(1024, 1024, function ($const) {
                     $const->aspectRatio();
                 })->save($filePath);
-                if (!\File::exists($filePath)) {
+                if (!File::exists($filePath)) {
                     throw new \Exception('Image not saved');
                 }
                 $this->_addtoFileList($filePath);
@@ -76,7 +101,7 @@ class ImageSave
                 $img->resize(300, 300, function ($const) {
                     $const->aspectRatio();
                 })->save($thumbPath);
-                if (!\File::exists($thumbPath)) {
+                if (!File::exists($thumbPath)) {
                     throw new \Exception('Thumbnail not saved');
                 }
                 $this->_addtoFileList($thumbPath);
@@ -91,7 +116,7 @@ class ImageSave
 
     private function _getUniqueFileName($name)
     {
-        $folder = \Storage::disk('public')->path(self::IMAGE_DIR);
+        $folder = $this->_baseDirectory . DIRECTORY_SEPARATOR . self::THUMB_DIR;
         $name = $this->_getNewName($name);
         while (is_file($folder . DIRECTORY_SEPARATOR . $name)) {
             $name = $this->_getNewName($name);
@@ -102,7 +127,7 @@ class ImageSave
     private function _getNewName($name)
     {
         $ext = pathinfo($name, PATHINFO_EXTENSION);
-        $name = \Str::random(16) . ($ext ? "." . $ext : "");
-        return \Str::lower($name);
+        $name = Str::random(16) . ($ext ? "." . $ext : "");
+        return Str::lower($name);
     }
 }

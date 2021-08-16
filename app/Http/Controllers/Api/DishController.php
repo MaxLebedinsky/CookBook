@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ImageSave;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDishImageRequest;
+use App\Http\Resources\DishResource;
+use App\Http\Resources\FullDishResource;
 use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
 use App\Models\Dish;
@@ -60,15 +62,14 @@ class DishController extends Controller
      *
      * @param DishRequest $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return DishResource
      */
     public function update(DishRequest $request, int $id)
     {
-        $dish = Dish::findOrFail($id);
         $data = $request->validated();
-        $dish->update($data);
+        $dish = Dish::findOrFail($id)->update($data);
 
-        return $this->handleResponse($dish);
+        return DishResource::make($dish);
     }
 
     /**
@@ -79,15 +80,14 @@ class DishController extends Controller
      */
     public function delete(int $id)
     {
-        $dish = Dish::findOrFail($id);
-        $dish->delete();
-
-        return $this->handleResponse($dish);
+        Dish::destroy($id);
+        return response()->json([]);
     }
 
-    public function storeImage(StoreDishImageRequest $request, Dish $dish, ImageSave $imageSave)
+    public function storeImage(StoreDishImageRequest $request, Dish $dish)
     {
         try {
+            $imageSave = new ImageSave();
             $image = $request->file('image');
             $name = $imageSave->saveImage($image);
             if ($name === false) {
