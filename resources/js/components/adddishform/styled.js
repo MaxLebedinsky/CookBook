@@ -77,15 +77,15 @@ export  const useStyles = makeStyles((theme) => ({
     ingredientsList: {
         margin: theme.spacing(0, 0, 3),
     },
-    ingredientsItem: {
-        color: 'gray',
-        margin: theme.spacing(1, 0),
-    },
     listItem: {
         paddingBottom: 0,
         display: 'flex',
         justifyContent: 'space-between',
         marginBottom: theme.spacing(1),
+     },
+     stepsListItem: {
+         display: 'flex',
+         marginBottom: theme.spacing(1),
      },
      dots: {
         flexGrow: 0.9,

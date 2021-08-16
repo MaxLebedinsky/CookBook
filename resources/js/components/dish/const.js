@@ -116,33 +116,7 @@ export const TEST_DISH_FOR_POST = {
         "category_id":"",
         "complexity":1,
     },
-    "ingredients": [
-        {
-            "ingredients_name":"Мясо (свинина)",
-            "quantity":0.6,
-            "measure_id":1,
-        },
-        {
-            "ingredients_name":"Картофель",
-            "quantity":0.5,
-            "measure_id":1,
-        },
-        {
-            "ingredients_name":"Сыр",
-            "quantity":250,
-            "measure_id":2,
-        },
-        {
-            "ingredients_name":"Соль",
-            "quantity":2,
-            "measure_id":5,
-        },
-        {
-            "ingredients_name":"Лук репчатый",
-            "quantity":2,
-            "measure_id":7,
-        }
-    ],
+    "ingredients": [],
     "dish_steps": [],
 
 };

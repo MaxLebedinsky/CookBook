@@ -39,7 +39,6 @@ export const AddDishForm = () => {
     };
 
     const postDish = async (dish) => {
-        // console.log(JSON.stringify(dish));
         let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
@@ -64,12 +63,20 @@ export const AddDishForm = () => {
             if (responseImage.ok) {
             // begin POST step images
                 let formDataImages = new FormData();
-                formDataImages.append("images", stepImagesArr);
+                console.log('stepImagesArr: ', stepImagesArr);
+                console.log('result.data.dish_steps: ', result.data.dish_steps);
+                stepImagesArr.forEach(item => {
+                    console.log(item.file, item.file.name);
+                    formDataImages.append("image[]", item.file, item.file.name);
+                });
+                result.data.dish_steps.forEach(item => {
+                    console.log(item.id);
+                    formDataImages.append("id[]", item.id);
+                });
                 let responseStepImages = await fetch(`/api/dishes/${result.data.id}/store_image`, {
                     method: 'POST',
                     body: formDataImages
                 })
-                console.log('stepImagesArr: ', stepImagesArr);
             // end POST step images
                 if (responseStepImages.ok) {
                 setModalText('Рецепт успешно добавлен');
@@ -134,6 +141,11 @@ export const AddDishForm = () => {
 
     const handleAddStep = () => {
         setStep({ ...step, step_number: step.step_number + 1 });
+        document.getElementById("steps-list").insertAdjacentHTML('beforeend', 
+        `<div class=${ classes.stepsListItem}>
+            <span>${ step.step_number }. </span> 
+            <span>${ step.text }</span>
+        </div>`);
         dish.dish_steps.push(step);       
         setStepImagesArr(stepImagesArr.concat({ id: step.step_number, file: stepImage.file }));
     }
@@ -313,6 +325,7 @@ export const AddDishForm = () => {
                     Добавить ингредиент
                 </Button>
                 <Typography component="h2" className={ classes.h2 }>Пошаговый рецепт:</Typography>
+                <div id="steps-list" className={ classes.ingredientsList }></div>
                 <TextField 
                     className={ classes.formControl }
                     type="text"
