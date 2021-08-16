@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterIcon from "./filtericon";
 import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
-import { useStyles, StyledMenu, StyledMenuItem } from "./styled";
-import { useDispatch, useSelector } from 'react-redux';
-import { categoriesFilter, getCategories } from '../../../redux/categories/actions';
-import { dishesSearchField } from '../../../redux/dishes/actions';
-
+import {StyledMenu, StyledMenuItem, useStyles} from "./styled";
+import {useDispatch, useSelector} from 'react-redux';
+import {categoriesFilter} from '../../../redux/categories/actions';
+import {dishesSearchField} from '../../../redux/dishes/actions';
 
 const SearchField = () => {
 
@@ -16,10 +15,6 @@ const SearchField = () => {
     const [value, setValue] = useState('');
     const categories = useSelector(state => state.categories.categoryList)
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getCategories());
-    }, [])
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -44,40 +39,40 @@ const SearchField = () => {
     };
 
     return (
-        <div className={ classes.searchBox }>
-            <div className={ classes.search }>
-                <form className={ classes.searchForm } onSubmit={ handleSubmit }>
-                    <SearchIcon className={ classes.searchIcon } />
+        <div className={classes.searchBox}>
+            <div className={classes.search}>
+                <form className={classes.searchForm} onSubmit={handleSubmit}>
+                    <SearchIcon className={classes.searchIcon}/>
                     <input
-                        className={ classes.filterIconInput }
-                        value={ value }
-                        onChange={ handleChange }
+                        className={classes.filterIconInput}
+                        value={value}
+                        onChange={handleChange}
                         type="text"
-                        placeholder="Search ..." />
+                        placeholder="Search ..."/>
                     <Button
-                        className={ classes.button }
+                        className={classes.button}
                         aria-controls="customized-menu"
                         aria-haspopup="true"
-                        onClick={ handleClick }
+                        onClick={handleClick}
                     >
-                        <FilterIcon />
+                        <FilterIcon/>
                     </Button>
                     <StyledMenu
                         id="customized-menu"
-                        anchorEl={ anchorEl }
+                        anchorEl={anchorEl}
                         keepMounted
-                        open={ Boolean(anchorEl) }
-                        onClose={ handleClose }
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
                     >
                         {
                             categories.map((category, index) => (
-                            <StyledMenuItem key={ index }>
-                                <ListItemText
-                                    onClick={ () => handleCategory(category.name) }
-                                    primary={ category.name } />
-                            </StyledMenuItem>
-                        )
-                        ) }
+                                <StyledMenuItem key={index}>
+                                    <ListItemText
+                                        onClick={() => handleCategory(category.name)}
+                                        primary={category.name}/>
+                                </StyledMenuItem>
+                            ))
+                        }
                     </StyledMenu>
                 </form>
             </div>

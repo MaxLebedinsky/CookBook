@@ -34,7 +34,6 @@ const Login = (props) => {
             password: `${password}`
         })
             .then(function (response) {
-                console.log(response.status);
                 sessionStorage.setItem('authToken', response.data.data.token);
                 props.setToken(response.data.data.token)
                 handleClose()
