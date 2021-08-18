@@ -1203,3 +1203,23 @@ Response
     "data": []
 }
 ```
+
+***Поиск блюд по заданным параметрам***
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request GET ```/api/full-dishes/search```
+
+Fields: ```category_id``` поиск по коду категории
+Fields: ```sort``` (пример: -rating,views сортировка по убыванию рейтинга и возрастанию просмотров)
+Fields: ```user_id``` поиск по коду юзера
+Fields: ```title``` поиск по подстроке наименования
+Fields: ```includes[]``` поиск по массиву подстрок ингредиентов, которые должны быть
+Fields: ```includes[]``` 
+Fields: ```excludes[]``` поиск по массиву подстрок ингредиентов, которых не должно быть в блюде
+Fields: ```excludes[]```
+
+Response
+Ответ аналогичен полному блюду с пагинацией
+
