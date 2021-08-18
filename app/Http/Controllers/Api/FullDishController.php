@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\DishRequest;
+use App\Http\Requests\SearchRequest;
 use App\Http\Resources\FullDishResource;
 use App\Models\{
     Dish,
@@ -88,5 +89,12 @@ class FullDishController extends Controller
     {
         Dish::destroy($id);
         return response()->json();
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $dish = new Dish();
+        $full_dishes = $dish->searchByParams($request->validated());
+        return FullDishResource::collection($full_dishes);
     }
 }
