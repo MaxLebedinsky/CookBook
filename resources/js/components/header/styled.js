@@ -15,7 +15,7 @@ export  const useStyles = makeStyles((theme) => ({
     },
     logo:{
         margin: 'auto',
-        padding: '24px',
+        padding: '0 24px 24px',
     },
     add_button: {
         margin: '0 auto 16px',
