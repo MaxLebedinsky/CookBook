@@ -4,6 +4,7 @@ export const DISHES_REQUEST = 'DISHES::REQUEST';
 export const DISHES_SUCCESS = 'DISHES::SUCCESS';
 export const DISHES_FAILURE = 'DISHES::FAILURE';
 export const DISHES_SEARCH_FIELD = 'DISHES::SEARCH_FIELD';
+export const CHOOSE_DISH = 'CHOSEN_DISH::CHOOSE_DISH';
 
 export const addDish = newDish => ({
    type: ADD_DISH,
@@ -34,6 +35,10 @@ export const dishesSearchField = (search) => ({
    search,
 })
 
+export const chooseDish = (chosenDish) =>({
+   type: CHOOSE_DISH,
+    chosenDish,
+})
 
 export const getDishes = () => async (dispatch) => {
    dispatch(dishesRequest());

@@ -1,33 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
+import React, {useEffect} from 'react';
+
 import './styles.css'
 import Header from '../header'
-import { DishCardList } from '../dishcardlist';
-import { Dish } from '../dish';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDishes } from '../../redux/dishes/actions';
+import {getCategories} from "../../redux/categories/actions";
+import {useDispatch} from "react-redux";
+import {getDishes} from "../../redux/dishes/actions";
 
-const Layout = () => {
-    const dishes = useSelector(state => state.dishes.dishList)
-    const [dish, setDish] = useState([]);
-    const { dishId } = useParams();
+// eslint-disable-next-line react/prop-types
+const Layout = ({children}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(getCategories());
         dispatch(getDishes());
     }, [])
 
-    useEffect(() => {
-        setDish(() => dishes.find(dish => dish.id === +dishId))
-    }, []);
-
     return (
         <>
-            <Header />
+            <Header/>
             <main className='layout-content'>
-                { dishId === undefined ?
-                    <DishCardList /> :
-                    <Dish dish={dish} /> }
+                {children}
             </main>
         </>
     )
