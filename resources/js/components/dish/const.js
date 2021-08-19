@@ -108,13 +108,13 @@ export const EMPTY_DISH = {
 
 export const TEST_DISH_FOR_POST = {
     "dish": {
-        "title":"Мясо по-французски с сыром и картофелем",
+        "title":"",
         "big_img":"https://via.placeholder.com/640x480.png/0066aa?text=dishes+temporibus",
         "small_img":"https://via.placeholder.com/130x100.png/00aa44?text=dishes+officia",
-        "description":"Itaque reiciendis assumenda sed. Qui non libero dolore quaerat magnam. Possimus pariatur eligendi modi.",
+        "description":"",
         "user_id":3,
         "category_id":"",
-        "complexity":1,
+        "complexity":"",
     },
     "ingredients": [],
     "dish_steps": [],

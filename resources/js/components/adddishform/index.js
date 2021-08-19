@@ -24,7 +24,8 @@ export const AddDishForm = () => {
         getMeasures();
     }, []);
 
-    const handleOpenModal = () => {
+    const handleOpenModal = (text) => {
+        setModalText(text);
         setModal(true);
     };
 
@@ -39,6 +40,7 @@ export const AddDishForm = () => {
     };
 
     const postDish = async (dish) => {
+        console.log(dish);
         let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
@@ -48,8 +50,7 @@ export const AddDishForm = () => {
           });
 
         if (!response.ok) {
-            setModalText('Ошибка загрузки данных рецепта');
-            handleOpenModal();
+            handleOpenModal('Ошибка загрузки данных рецепта');
         } else {
         // begin POST main image
             let result = await response.json();
@@ -75,15 +76,12 @@ export const AddDishForm = () => {
                 })
             // end POST step images
                 if (responseStepImages.ok) {
-                setModalText('Рецепт успешно добавлен');
-                handleOpenModal();
+                handleOpenModal('Рецепт успешно добавлен');
                 } else {
-                    setModalText('Ошибка загрузки изображений шагов');
-                handleOpenModal();
+                handleOpenModal('Ошибка загрузки изображений шагов');
                 }
             } else {
-                setModalText('Ошибка загрузки главного изображения');
-                handleOpenModal();
+                handleOpenModal('Ошибка загрузки главного изображения');
                 return;
             }
         }
@@ -97,11 +95,9 @@ export const AddDishForm = () => {
             },
         });
         if (response.ok) {
-            setModalText('Рецепт успешно удалён');
-            handleOpenModal();
+            handleOpenModal('Рецепт успешно удалён');
         } else {
-            setModalText('Блюдо с таким id не найдено');
-            handleOpenModal();
+            handleOpenModal('Блюдо с таким id не найдено');
         }
     };
     
@@ -114,14 +110,58 @@ export const AddDishForm = () => {
         setIdDelete('');
     };
 
+    const formDataIsValid = (dish) => {
+        if (!dish.dish.title) {
+            handleOpenModal('Название блюда не введено');
+            return false;
+        }
+        if (!mainImage.file) {
+            handleOpenModal('Главное изображение не выбрано');
+            return false;
+        }
+        if (!dish.dish.description) {
+            handleOpenModal('Описание блюда не введено');
+            return false;
+        }
+        if (!dish.dish.category_id) {
+            handleOpenModal('Категория блюда не выбрана');
+            return false;
+        }
+        if (!dish.dish.complexity) {
+            handleOpenModal('Уровень сложности блюда не выбран');
+            return false;
+        }
+        if (dish.ingredients.length === 0) {
+            handleOpenModal('Добавьте хотя бы один ингредиент');
+            return false;
+        }
+        if (dish.dish_steps.length === 0) {
+            handleOpenModal('Добавьте в рецепт хотя бы один шаг');
+            return false;
+        }
+        return true;
+    }
+
     const handleAdd = (event) => {
         event.preventDefault();
-        if (dish.dish.title) {
+        if(formDataIsValid(dish)) {
             postDish(dish);
         }
     };
 
     const handleAddIngredient = () => {
+        if (!ingredient.ingredients_name) {
+            handleOpenModal('Название ингредиента не введено');
+            return;
+        }
+        if (!ingredient.quantity) {
+            handleOpenModal('Количество не введено');
+            return;
+        }
+        if (!ingredient.measure_id) {
+            handleOpenModal('Единица измерения не выбрана');
+            return;
+        }
         dish.ingredients.push(ingredient);
         document.getElementById("ingredients-list").insertAdjacentHTML('beforeend', 
         `<div class=${ classes.listItem }>
@@ -136,6 +176,14 @@ export const AddDishForm = () => {
     };
 
     const handleAddStep = () => {
+        if (!step.text) {
+            handleOpenModal('Описание шага рецепта не введено');
+            return;
+        }
+        if (!stepImage.file) {
+            handleOpenModal('Изображение для шага рецепта не выбрано');
+            return;
+        }
         setStep({ ...step, step_number: step.step_number + 1, text: '' });
         document.getElementById("steps-list").insertAdjacentHTML('beforeend', 
         `<div class=${ classes.stepsListItem}>
@@ -225,6 +273,7 @@ export const AddDishForm = () => {
                     value={ dish.dish.title }
                     onChange={ handleChange }
                     multiline
+                    required
                 />
                 <Typography component="h2" className={ classes.h2 }>Главное изображение:</Typography>
                 <FormControl className={ classes.uploadDialog }>
@@ -258,8 +307,9 @@ export const AddDishForm = () => {
                     value={ dish.dish.description }
                     onChange={ handleChange }
                     multiline
+                    required
                 />
-                <FormControl variant="outlined" className={ classes.formControl }>
+                <FormControl variant="outlined" className={ classes.formControl } required>
                     <InputLabel>Категория</InputLabel>
                     <Select
                         className={ classes.select }
@@ -267,14 +317,15 @@ export const AddDishForm = () => {
                         onChange={ handleChange }
                         value={ dish.dish.category_id }
                         label="Категория"
+                        required
                     >
                         {categories.map((item) => (
                                 <MenuItem value={ item.id } key={ item.id }>{ item.name }</MenuItem>
                             ))}
                     </Select>
                 </FormControl>
-                <FormControl component="fieldset" className={ classes.formControl }>
-                    <FormLabel component="legend">Сложность: </FormLabel>
+                <FormControl component="fieldset" className={ classes.formControl } required>
+                    <FormLabel component="legend">Уровень сложности: </FormLabel>
                     <RadioGroup row
                         aria-label="complexity"
                         value={ dish.dish.complexity }
@@ -295,6 +346,7 @@ export const AddDishForm = () => {
                     name="ingredient-name"
                     value={ ingredient.ingredients_name }
                     onChange={ handleChange }
+                    required
                 />
                 <TextField 
                     className={ classes.formControl }
@@ -304,8 +356,9 @@ export const AddDishForm = () => {
                     name="ingredient-quantity"
                     value={ ingredient.quantity }
                     onChange={ handleChange }
+                    required
                 />
-                <FormControl variant="outlined" className={ classes.formControl }>
+                <FormControl variant="outlined" className={ classes.formControl } required>
                     <InputLabel className={ classes.input_label }>Единицы измерения</InputLabel>
                     <Select
                         className={ classes.select }
@@ -334,6 +387,7 @@ export const AddDishForm = () => {
                     value={ step.text }
                     onChange={ handleChange }
                     multiline
+                    required
                 />
                 <FormControl className={ classes.uploadDialog }>
                     <div className={ classes.imagePreviewContainer }>
