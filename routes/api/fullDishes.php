@@ -10,6 +10,9 @@ Route::get('/{id}', 'FullDishController@show')
     ->where('id', '[0-9]+')
     ->name('full-dishes.show');
 
+Route::get('/search', 'FullDishController@search')
+    ->name('full-dishes.search');
+
 Route::group([
 //    'middleware' => 'auth:sanctum',
 ], function () {
