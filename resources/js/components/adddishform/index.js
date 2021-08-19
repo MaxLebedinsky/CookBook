@@ -40,7 +40,6 @@ export const AddDishForm = () => {
     };
 
     const postDish = async (dish) => {
-        console.log(dish);
         let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
@@ -104,23 +103,22 @@ export const AddDishForm = () => {
     const handleDelete = (event) => {
         event.preventDefault();
         if (idDelete) {
-            // console.log('deleting dish with id: '+idDelete);
             deleteDish(idDelete);
         }
         setIdDelete('');
     };
 
     const formDataIsValid = (dish) => {
-        if (!dish.dish.title) {
-            handleOpenModal('Название блюда не введено');
+        if (!dish.dish.title || dish.dish.title.length < 3) {
+            handleOpenModal('Название блюда не введено или слишком короткое (минимум 3 символа)');
             return false;
         }
         if (!mainImage.file) {
             handleOpenModal('Главное изображение не выбрано');
             return false;
         }
-        if (!dish.dish.description) {
-            handleOpenModal('Описание блюда не введено');
+        if (!dish.dish.description || dish.dish.description.length < 20) {
+            handleOpenModal('Описание блюда не введено или слишком короткое (минимум 20 символов)');
             return false;
         }
         if (!dish.dish.category_id) {
@@ -236,10 +234,12 @@ export const AddDishForm = () => {
                 setIngredient({ ...ingredient, ingredients_name: event.target.value });
                 break;
             case 'measure-select' :
-                setIngredient({ ...ingredient, measure_id: +event.target.value });
+                    setIngredient({ ...ingredient, measure_id: +event.target.value });
                 break;
             case 'ingredient-quantity' :
-                setIngredient({ ...ingredient, quantity: +event.target.value });
+                if (+event.target.value && event.target.value.length <= 8) {
+                    setIngredient({ ...ingredient, quantity: +event.target.value });
+                }
                 break;
             case 'category-select' :
                 // setCategory({...category, id: event.target.value, name: categories.find(item => item.id == event.target.value).name });
