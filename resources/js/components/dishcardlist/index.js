@@ -15,20 +15,20 @@ export const DishCardList = () => {
     const dishSearch = useSelector(state => state.dishes.search);
     const [filteredDishes, setFilteredDishes] = useState([])
     const [loadedDishes, setLoadedDishes] = useState([]);
-    const [isLastPage, setisLastPage] = useState(false);
+    const [isLastPage, setIsLastPage] = useState(false);
 
     const handleShowMore = () => {
         if (links.next === null) {
-            setisLastPage(true)
+            setIsLastPage(true)
         } else {
             dispatch(getDishes(links.next))
-            setLoadedDishes(previousDishes => dishes.concat(previousDishes))
+            setLoadedDishes(previousDishes => previousDishes.concat(dishes))
         }
     }
 
     useEffect(() => {
-        setisLastPage(false)
-        setLoadedDishes(previousDishes => dishes.concat(previousDishes))
+        setIsLastPage(false)
+        setLoadedDishes(dishes)
     }, [])
 
     useEffect(() => {
@@ -63,7 +63,6 @@ export const DishCardList = () => {
             {isLastPage ? <></> :
                 <Button className={classes.showMoreButton} onClick={handleShowMore} variant="contained">Больше
                     рецептов</Button>
-
             }
         </Layout>
     )
