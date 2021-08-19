@@ -7,51 +7,50 @@ export const DISHES_SEARCH_FIELD = 'DISHES::SEARCH_FIELD';
 export const CHOOSE_DISH = 'CHOSEN_DISH::CHOOSE_DISH';
 
 export const addDish = newDish => ({
-   type: ADD_DISH,
-   payload: newDish,
+    type: ADD_DISH,
+    payload: newDish,
 });
 
 export const deleteDish = deletingDishId => ({
-   type: DELETE_DISH,
-   payload: deletingDishId,
+    type: DELETE_DISH,
+    payload: deletingDishId,
 });
 
 export const dishesRequest = () => ({
-   type: DISHES_REQUEST,
+    type: DISHES_REQUEST,
 });
 
 export const dishesSuccess = (dishes) => ({
-   type: DISHES_SUCCESS,
-   dishes,
+    type: DISHES_SUCCESS,
+    dishes,
 });
 
 export const dishesFailure = (error) => ({
-   type: DISHES_FAILURE,
-   error,
+    type: DISHES_FAILURE,
+    error,
 });
 
 export const dishesSearchField = (search) => ({
-   type: DISHES_SEARCH_FIELD,
-   search,
+    type: DISHES_SEARCH_FIELD,
+    search,
 })
 
-export const chooseDish = (chosenDish) =>({
-   type: CHOOSE_DISH,
+export const chooseDish = (chosenDish) => ({
+    type: CHOOSE_DISH,
     chosenDish,
 })
 
-export const getDishes = () => async (dispatch) => {
-   dispatch(dishesRequest());
+export const getDishes = (url='/full-dishes') => async (dispatch) => {
+    dispatch(dishesRequest());
+    try {
+        const response = await window.axios.get(url);
 
-   try {
-      const response = await window.axios.get('/full-dishes');
+        // if (!response.ok) {
+        //    throw new Error("request failed with status " + response.status);
+        // }
 
-      // if (!response.ok) {
-      //    throw new Error("request failed with status " + response.status);
-      // }
-
-      dispatch(dishesSuccess(response.data.data));
-   } catch (err) {
-      dispatch(dishesFailure(err.message));
-   }
+        dispatch(dishesSuccess(response.data));
+    } catch (err) {
+        dispatch(dishesFailure(err.message));
+    }
 }

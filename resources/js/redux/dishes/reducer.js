@@ -16,7 +16,7 @@ const initialState = {
         status: REQUEST_STATUS.IDLE,
         error: '',
     },
-    chosenDish: {}
+    chosenDish: {},
 }
 
 export const dishListReducer = (state = initialState, action) => {
