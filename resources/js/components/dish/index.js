@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 
 export const Dish = () => {
     const classes = useStyles();
-    const dish = useSelector(state => state.dishes.chosenDish);
+    const dish = useSelector(state => state.dish.chosenDish);
 
     return (
         <Layout>

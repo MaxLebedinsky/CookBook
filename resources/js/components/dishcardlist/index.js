@@ -9,27 +9,39 @@ import {getDishes} from "../../redux/dishes/actions";
 export const DishCardList = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
-    const dishes = useSelector(state => state.dishes.dishList.data);
-    const links = useSelector(state => state.dishes.dishList.links);
+    const dishes = useSelector(state => state.dishes.dishes);
+    const links = useSelector(state => state.dishes.links);
     const category = useSelector(state => state.categories.categoryFilter);
     const dishSearch = useSelector(state => state.dishes.search);
     const [filteredDishes, setFilteredDishes] = useState([])
     const [loadedDishes, setLoadedDishes] = useState([]);
     const [isLastPage, setIsLastPage] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const handleShowMore = () => {
         if (links.next === null) {
             setIsLastPage(true)
         } else {
             dispatch(getDishes(links.next))
-            setLoadedDishes(previousDishes => previousDishes.concat(dishes))
         }
     }
 
     useEffect(() => {
+        if (filteredDishes !== undefined) {
+            if (filteredDishes.length > 0) {
+                setIsLoaded(true)
+            }
+        }
+    }, [filteredDishes])
+
+    useEffect(() => {
         setIsLastPage(false)
-        setLoadedDishes(dishes)
+        setFilteredDishes(dishes)
     }, [])
+
+    useEffect(() => {
+        setLoadedDishes(previousDishes => previousDishes.concat(dishes))
+    }, [dishes])
 
     useEffect(() => {
             switch (true) {
@@ -46,23 +58,28 @@ export const DishCardList = () => {
                     setFilteredDishes(loadedDishes);
                     break
             }
-        }, [category, dishSearch, dishes]
+        }, [category, dishSearch, loadedDishes]
     );
 
     return (
         <Layout>
-            <ul className={classes.list}>
-                {
-                    filteredDishes.map((dish, index) => (
-                        <li className={classes.listItem} key={index}>
-                            <DishCard dish={dish}/>
-                        </li>
-                    ))
-                }
-            </ul>
-            {isLastPage ? <></> :
-                <Button className={classes.showMoreButton} onClick={handleShowMore} variant="contained">Больше
-                    рецептов</Button>
+            {isLoaded ?
+                <>
+                    <ul className={classes.list}>
+                        {
+                            filteredDishes.map((dish, index) => (
+                                <li className={classes.listItem} key={index}>
+                                    <DishCard dish={dish}/>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                    {isLastPage ? <></> :
+                        <Button className={classes.showMoreButton} onClick={handleShowMore} variant="contained">Больше
+                            рецептов</Button>
+                    }</>
+                :
+                <></>
             }
         </Layout>
     )
