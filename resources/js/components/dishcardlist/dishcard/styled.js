@@ -57,6 +57,7 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up(425)]: {
         root: {
             maxWidth: 400,
+            height: 180
         },
         desc: {
             marginLeft: 20,

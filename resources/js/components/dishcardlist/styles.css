@@ -1,17 +1,30 @@
 .list {
-   padding: 5px;
+   /* padding: 5px; */
    list-style: none;
+   margin: 0 auto;
 }
 
 .list-item {
-   margin-bottom: 10px;
-   flex-grow: 1;
+   margin: 0 auto 10px;
+}
+
+@media screen and (max-width: 375px) {
+   .list-item {
+      max-width: 300px;
+   }
+}
+
+@media screen and (min-width: 425px) {
+   .list-item {
+      max-width: 400px;
+   }
 }
 
 @media screen and (min-width: 768px) {
    .list {
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: space-between;
    }
 }
