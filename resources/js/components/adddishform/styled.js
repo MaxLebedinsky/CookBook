@@ -67,9 +67,11 @@ export  const useStyles = makeStyles((theme) => ({
         width: 300,
         backgroundColor: theme.palette.background.paper,
         textAlign: 'center',
+        lineHeight: '1.5em',
         borderRadius: 10,
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(6, 1, 6),
+        padding: theme.spacing(6, 2, 6),
+        boxSizing: 'border-box'
     },
     select: {
         minWidth: 100,

@@ -1,5 +1,6 @@
 export const MAX_TITLE_LENGTH = 50;
 export const MAX_CAT_NAME_LENGTH = 35;
+export const MAX_FILE_SIZE = 5000000;
 
 export const TEST_FULL_DISH = {
     "dish": {

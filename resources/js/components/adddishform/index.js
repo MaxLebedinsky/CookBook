@@ -3,7 +3,7 @@ import { Button, TextField, FormControlLabel, RadioGroup, Radio,
 import { PhotoCamera } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TEST_DISH_FOR_POST } from '../dish/const';
+import { MAX_FILE_SIZE, TEST_DISH_FOR_POST } from '../dish/const';
 import { useStyles } from './styled';
 
 export const AddDishForm = () => {
@@ -197,22 +197,34 @@ export const AddDishForm = () => {
 
     const handleImageChange = (event) => {
         event.preventDefault();
-        const reader = new FileReader();
         const file = event.target.files[0];
-        reader.onloadend = () => {
-            setMainImage({...mainImage, file: file, imagePreviewUrl: reader.result });
-        };
-        reader.readAsDataURL(file);
+        if (file && file.size > MAX_FILE_SIZE ) {
+            handleOpenModal('Максимальный размер файла – 5 Мб');
+            return;
+        }
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setMainImage({...mainImage, file: file, imagePreviewUrl: reader.result });
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleStepImageChange = (event) => {
         event.preventDefault();
-        const reader = new FileReader();
         const file = event.target.files[0];
-        reader.onloadend = () => {
-            setStepImage({...stepImage, file: file, imagePreviewUrl: reader.result });
-        };
-        reader.readAsDataURL(file);
+        if (file && file.size > MAX_FILE_SIZE ) {
+            handleOpenModal('Максимальный размер файла – 5 Мб');
+            return;
+        }
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setStepImage({...stepImage, file: file, imagePreviewUrl: reader.result });
+            };
+            reader.readAsDataURL(file);
+        }
     }
 
     const handleChange = (event) => {
