@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {useStyles} from './styled';
 import {useDispatch} from "react-redux";
-import {chooseDish} from "../../../redux/dishes/actions";
+import {chooseDish} from "../../../redux/dish/actions";
 
 // преобразование данных из поля created_at в строку вида "23.12.2020 17:53"
 export const getDateString = (string) => {

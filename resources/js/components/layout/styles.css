@@ -7,10 +7,9 @@
 }
 
 .layout-content {
-    padding: 16px 0;
-    margin-right: auto;
-    margin-left: auto;
-    box-sizing: border-box;
+    padding: 16px;
+    margin: auto;
+    text-align: center;
 }
 
 @media (min-width: 960px) {
