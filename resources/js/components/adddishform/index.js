@@ -1,4 +1,4 @@
-import { Button, TextField, FormControlLabel, RadioGroup, Radio, 
+import { Button, TextField, FormControlLabel, RadioGroup, Radio, Dialog, CircularProgress,
     FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography, Box } from '@material-ui/core';
 import { PhotoCamera } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
@@ -12,6 +12,8 @@ export const AddDishForm = () => {
     const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
     const [modal, setModal] = useState(false);
     const [modalText, setModalText] = useState('');
+    const [dialog, setDialog] = useState(false);
+    const [ uploadFinished, setUploadFinished ] = useState(true);
     const [measuresArr, setMeasuresArr] = useState([]);
     const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:'', measure_id:'' });
     const categories = useSelector(state => state.categories.categoryList);
@@ -33,6 +35,10 @@ export const AddDishForm = () => {
         setModal(false)
     };
 
+    const handleOpenDialog = () => {
+        setDialog(true);
+    }
+
     const getMeasures = async () => {
         let response = await fetch('/api/measures');
         let result = await response.json();
@@ -40,6 +46,7 @@ export const AddDishForm = () => {
     };
 
     const postDish = async (dish) => {
+        setUploadFinished(false);
         let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
@@ -74,8 +81,9 @@ export const AddDishForm = () => {
                     body: formDataImages
                 })
             // end POST step images
+                setUploadFinished(true);
                 if (responseStepImages.ok) {
-                handleOpenModal('Рецепт успешно добавлен');
+                handleOpenDialog();
                 } else {
                 handleOpenModal('Ошибка загрузки изображений шагов');
                 }
@@ -140,7 +148,7 @@ export const AddDishForm = () => {
         return true;
     }
 
-    const handleAdd = (event) => {
+    const handleAddRecipe = (event) => {
         event.preventDefault();
         if(formDataIsValid(dish)) {
             postDish(dish);
@@ -268,7 +276,22 @@ export const AddDishForm = () => {
         <Modal
             open={ modal }
             onClose={ handleCloseModal }>
-                <div className={ classes.modal }>{ modalText }</div>
+                <div className={ classes.modal }> { modalText } </div>
+        </Modal>
+        <Dialog open={ dialog }>
+            <div className={ classes.dialogText }>Рецепт успешно добавлен</div>
+            <Button href="/" className= { classes.form_button } variant="contained">
+                Вернуться на главную
+            </Button>
+            <Button href="/add-dish" className= { classes.form_button } variant="contained">
+                Добавить ещё один рецепт
+            </Button>
+        </Dialog>
+        <Modal open={ !uploadFinished }>
+            <div className={ classes.modal }>
+                <CircularProgress className= { classes.loader } disableShrink />
+                Сохранение рецепта...
+            </div>
         </Modal>
         <Button href="/" className= { classes.back_button } variant="contained">
             &lt; Вернуться на главную
@@ -428,7 +451,7 @@ export const AddDishForm = () => {
                 </Button>
 
 
-                <Button type="submit" onClick={ handleAdd } className= { classes.form_button } variant="contained" size="large">
+                <Button type="submit" onClick={ handleAddRecipe } className= { classes.form_button } variant="contained" size="large">
                     Сохранить рецепт
                 </Button>
             </FormControl>

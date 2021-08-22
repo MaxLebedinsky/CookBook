@@ -32,7 +32,6 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
 
     const addClickHandler = (event) => {
         if (!loginStatus) {
-            console.log('user is not logged in');
             handleOpenModal('Для добавления рецептов необходимо войти или зарегистрироваться');
             event.preventDefault();
         }

@@ -48,11 +48,10 @@ export  const useStyles = makeStyles((theme) => ({
     },
     form_button: {
         textTransform: 'none',
-        display: 'flex',
         margin: theme.spacing(2, 4),
     },
     back_button: {
-        margin: theme.spacing(1, 'auto'),
+        margin: theme.spacing(2),
     },
     h1: {
         fontWeight: 700,
@@ -72,6 +71,14 @@ export  const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(6, 2, 6),
         boxSizing: 'border-box'
+    },
+    dialogText: {
+        margin: theme.spacing(4, 'auto'),
+        textAlign: 'center',
+    },
+    loader: {
+        display: 'block',
+        margin: theme.spacing(0, 'auto', 2),
     },
     select: {
         minWidth: 100,
