@@ -87,10 +87,15 @@ export  const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(0, 0, 3),
     },
     listItem: {
-        paddingBottom: 0,
         display: 'flex',
         justifyContent: 'space-between',
-        marginBottom: theme.spacing(1),
+        marginBottom: theme.spacing(2),
+        alignItems: 'flex-end',
+    },
+    deleteButton: {
+        padding: 0,
+        marginBottom: '-2px',
+        color: 'tomato',
     },
     stepsListItem: {
         display: 'flex',

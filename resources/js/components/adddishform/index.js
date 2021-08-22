@@ -1,6 +1,6 @@
 import { Button, TextField, FormControlLabel, RadioGroup, Radio, Dialog, CircularProgress,
-    FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography, Box } from '@material-ui/core';
-import { PhotoCamera } from '@material-ui/icons';
+    FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography, Box, IconButton} from '@material-ui/core';
+import { HighlightOff, PhotoCamera } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MAX_FILE_SIZE, TEST_DISH_FOR_POST } from '../dish/const';
@@ -16,6 +16,7 @@ export const AddDishForm = () => {
     const [ uploadFinished, setUploadFinished ] = useState(true);
     const [measuresArr, setMeasuresArr] = useState([]);
     const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:'', measure_id:'' });
+    const [ingredientsArr, setIngredientsArr] = useState([]);
     const categories = useSelector(state => state.categories.categoryList);
     const [mainImage, setMainImage] = useState({ file: '', imagePreviewUrl: '' });
     const [stepImage, setStepImage] = useState({ file: '', imagePreviewUrl: '' });
@@ -137,10 +138,10 @@ export const AddDishForm = () => {
             handleOpenModal('Уровень сложности блюда не выбран');
             return false;
         }
-        if (dish.ingredients.length === 0) {
+        if (ingredientsArr.length === 0) {
             handleOpenModal('Добавьте хотя бы один ингредиент');
             return false;
-        }
+        } else { dish.ingredients = [...ingredientsArr]; }
         if (dish.dish_steps.length === 0) {
             handleOpenModal('Добавьте в рецепт хотя бы один шаг');
             return false;
@@ -168,18 +169,14 @@ export const AddDishForm = () => {
             handleOpenModal('Единица измерения не выбрана');
             return;
         }
-        dish.ingredients.push(ingredient);
-        document.getElementById("ingredients-list").insertAdjacentHTML('beforeend', 
-        `<div class=${ classes.listItem }>
-            <div>${ ingredient.ingredients_name }</div> 
-            <div class=${ classes.dots }></div>
-            <div class=${ classes.amount }>
-                ${ ingredient.quantity } 
-                ${ measuresArr.find(item => item.id == ingredient.measure_id).name }
-            </div>
-        </div>`);
+        setIngredientsArr(ingredientsArr.concat(ingredient));
         setIngredient({ ingredients_name:'', quantity:'', measure_id:'' })
     };
+
+    const handleDelIngredientClick = (event) => {
+        console.log(event.currentTarget.id);
+        setIngredientsArr(ingredientsArr.filter((item, index) => index !== +event.currentTarget.id))
+    }
 
     const handleAddStep = () => {
         if (!step.text) {
@@ -372,7 +369,27 @@ export const AddDishForm = () => {
                 </FormControl>
 
                 <Typography component="h2" className={ classes.h2 }>Ингредиенты:</Typography>
-                <div id="ingredients-list" className={ classes.ingredientsList }></div>
+                <div id="ingredients-list" className={ classes.ingredientsList }>
+                    {ingredientsArr.length === 0 ? <></> :
+                        ingredientsArr.map((item, index) => (
+                            <div className={ classes.listItem } key={ index }>
+                                <div>{ item.ingredients_name }</div> 
+                                <div className={ classes.dots }></div>
+                                <div className={ classes.amount }>
+                                    { item.quantity }
+                                    { ' ' + measuresArr.find(measure => measure.id == item.measure_id).name }
+                                </div>
+                                <IconButton 
+                                    onClick={ handleDelIngredientClick } 
+                                    id={ index } 
+                                    className={ classes.deleteButton }                                     
+                                >
+                                    <HighlightOff/>
+                                </IconButton>
+                            </div>
+                        ))
+                    }
+                </div>
                 <TextField 
                     className={ classes.formControl }
                     type="text"
