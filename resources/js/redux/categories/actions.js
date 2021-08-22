@@ -29,10 +29,6 @@ export const getCategories = () => async (dispatch) => {
    try {
       const response = await window.axios.get('/categories');
 
-      // if (!response.ok) {
-      //    throw new Error("request failed with status " + response.status);
-      // }
-
       dispatch(categoriesSuccess(response.data.data));
    } catch (err) {
       dispatch(categoriesFailure(err.message));

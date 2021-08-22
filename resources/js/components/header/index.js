@@ -2,35 +2,32 @@ import React from 'react';
 import SearchField from "./searchfield";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Logo from './logo'
+import Logo from './logo';
 import { useStyles } from "./styled";
-import PropTypes from 'prop-types';
-import Access from './access'
 import { Button } from '@material-ui/core';
+import FiltersBar from './filtersBar';
+import Access from './access'
+import { useSelector } from 'react-redux';
 
-const Header = ({ handleSetCategory, handleSetDishSearch }) => {
+const filters = [{ name: "По рейтингу" }, { name: "По новизне" }]
 
-    Header.propTypes = {
-        handleSetCategory: PropTypes.func,
-        handleSetDishSearch: PropTypes.func
-    }
+const Header = () => {
+
+    const categories = useSelector(state => state.categories.categoryList)
+
 
     const classes = useStyles();
 
     return (
         <div className={ classes.root }>
             <AppBar position="static">
-                <Access/>
-                <Logo
-                    handleSetCategory={ handleSetCategory }
-                    handleSetDishSearch={ handleSetDishSearch }
-                />
+                <Access />
+                <Logo />
                 <Toolbar className={ classes.toolbar }>
-                    <SearchField
-                        handleSetCategory={ handleSetCategory }
-                        handleSetDishSearch={ handleSetDishSearch }
-                    />
+                    <SearchField />
                 </Toolbar>
+                <FiltersBar optionsList={ filters } />
+                <FiltersBar optionsList={ categories } />
                 <Button href="/add-dish" className={ classes.add_button } variant="contained">Добавить рецепт</Button>
             </AppBar>
         </div>
