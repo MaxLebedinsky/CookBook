@@ -1,22 +1,23 @@
 import {REQUEST_STATUS} from "../../utils/constants";
 import {
     ADD_DISH,
-    CHOOSE_DISH,
     DELETE_DISH,
     DISHES_FAILURE,
+    DISHES_LINKS_SUCCESS,
     DISHES_REQUEST,
     DISHES_SEARCH_FIELD,
     DISHES_SUCCESS,
 } from "./actions"
 
 const initialState = {
-    dishList: [],
+    dishes: [],
+    links: [],
     search: "",
     request: {
         status: REQUEST_STATUS.IDLE,
         error: '',
     },
-    chosenDish: {}
+    chosenDish: {},
 }
 
 export const dishListReducer = (state = initialState, action) => {
@@ -42,7 +43,17 @@ export const dishListReducer = (state = initialState, action) => {
         case DISHES_SUCCESS: {
             return {
                 ...state,
-                dishList: action.dishes,
+                dishes: action.dishes,
+                request: {
+                    status: REQUEST_STATUS.SUCCESS,
+                    error: "",
+                }
+            }
+        }
+        case DISHES_LINKS_SUCCESS: {
+            return {
+                ...state,
+                links: action.links,
                 request: {
                     status: REQUEST_STATUS.SUCCESS,
                     error: "",
@@ -70,12 +81,6 @@ export const dishListReducer = (state = initialState, action) => {
             return {
                 ...state,
                 search: action.search,
-            }
-        }
-        case CHOOSE_DISH: {
-            return {
-                ...state,
-                chosenDish: action.chosenDish,
             }
         }
         default:

@@ -10,6 +10,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistConfig = {
    key: 'CookBook',
    storage,
+   blacklist:["dishes"]
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
