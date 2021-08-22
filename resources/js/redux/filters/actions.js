@@ -7,30 +7,30 @@ export const USER_ID = 'FILTERS::USER_ID';
 
 export const searchTitle = search => ({
    type: SEARCH_TITLE,
-   search,
+   payload: search,
 });
 
 export const filterOrder = order => ({
    type: FILTER_ORDER,
-   order,
+   payload: order,
 });
 
 export const filterCategory = category => ({
    type: FILTER_CATEGORY,
-   category,
+   payload: category,
 });
 
 export const includeIngredients = ingredients => ({
    type: INCLUDE_INGREDIENTS,
-   ingredients,
+   payload: ingredients,
 });
 
 export const excludeIngredients = ingredients => ({
    type: EXCLUDE_INGREDIENTS,
-   ingredients,
+   payload: ingredients,
 });
 
 export const userId = id => ({
    type: USER_ID,
-   id,
+   payload: id,
 });
