@@ -1,19 +1,13 @@
 import React, {useState} from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import FilterIcon from "./filtericon";
-import Button from '@material-ui/core/Button';
-import ListItemText from '@material-ui/core/ListItemText';
-import {StyledMenu, StyledMenuItem, useStyles} from "./styled";
-import {useDispatch, useSelector} from 'react-redux';
-import {categoriesFilter} from '../../../redux/categories/actions';
+import { useStyles} from "./styled";
+import {useDispatch} from 'react-redux';
 import {dishesSearchField} from '../../../redux/dishes/actions';
 
 const SearchField = () => {
 
-    const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const [value, setValue] = useState('');
-    const categories = useSelector(state => state.categories.categoryList)
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -23,19 +17,6 @@ const SearchField = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(dishesSearchField(value));
-    };
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const handleCategory = (categoryName) => {
-        dispatch(categoriesFilter(categoryName));
-        handleClose();
     };
 
     return (
@@ -49,31 +30,6 @@ const SearchField = () => {
                         onChange={handleChange}
                         type="text"
                         placeholder="Search ..."/>
-                    <Button
-                        className={classes.button}
-                        aria-controls="customized-menu"
-                        aria-haspopup="true"
-                        onClick={handleClick}
-                    >
-                        <FilterIcon/>
-                    </Button>
-                    <StyledMenu
-                        id="customized-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        {
-                            categories.map((category, index) => (
-                                <StyledMenuItem key={index}>
-                                    <ListItemText
-                                        onClick={() => handleCategory(category.name)}
-                                        primary={category.name}/>
-                                </StyledMenuItem>
-                            ))
-                        }
-                    </StyledMenu>
                 </form>
             </div>
         </div>
