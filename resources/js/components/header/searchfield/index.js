@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import { useStyles} from "./styled";
 import {useDispatch} from 'react-redux';
-import {dishesSearchField} from '../../../redux/dishes/actions';
+import {searchTitle} from '../../../redux/filters/actions';
 
 const SearchField = () => {
 
@@ -16,7 +16,7 @@ const SearchField = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(dishesSearchField(value));
+        dispatch(searchTitle(value));
     };
 
     return (

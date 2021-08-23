@@ -77,12 +77,6 @@ export const dishListReducer = (state = initialState, action) => {
                 dishList: newDishList,
             }
         }
-        case DISHES_SEARCH_FIELD: {
-            return {
-                ...state,
-                search: action.search,
-            }
-        }
         default:
             return state;
     }

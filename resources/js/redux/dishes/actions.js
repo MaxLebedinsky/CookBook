@@ -35,11 +35,6 @@ export const dishesFailure = (error) => ({
     error,
 });
 
-export const dishesSearchField = (search) => ({
-    type: DISHES_SEARCH_FIELD,
-    search,
-})
-
 export const getDishes = (filterEndpoint) => async (dispatch) => {
     dispatch(dishesRequest());
     try {
