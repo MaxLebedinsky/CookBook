@@ -5,16 +5,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Logo from './logo';
 import { useStyles } from "./styled";
 import { Button } from '@material-ui/core';
-import FiltersBar from './filtersBar';
-import Access from './access'
-import { useSelector } from 'react-redux';
-
-const filters = [{ name: "По рейтингу" }, { name: "По новизне" }]
+import Access from './access';
+import { Filters } from './filters';
 
 const Header = () => {
-
-    const categories = useSelector(state => state.categories.categoryList)
-
 
     const classes = useStyles();
 
@@ -26,8 +20,7 @@ const Header = () => {
                 <Toolbar className={ classes.toolbar }>
                     <SearchField />
                 </Toolbar>
-                <FiltersBar optionsList={ filters } />
-                <FiltersBar optionsList={ categories } />
+                <Filters />
                 <Button href="/add-dish" className={ classes.add_button } variant="contained">Добавить рецепт</Button>
             </AppBar>
         </div>
