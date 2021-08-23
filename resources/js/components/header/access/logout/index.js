@@ -4,9 +4,12 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
+import {loggedUserData} from "../../../../redux/access/actions";
 
 const Logout = (props) => {
     const {onClose, open} = props;
+    const dispatch = useDispatch();
 
     const handleClose = () => {
         onClose();
@@ -21,6 +24,7 @@ const Logout = (props) => {
                 if (response.status === 200) {
                     sessionStorage.removeItem('authToken')
                     props.setToken("")
+                    dispatch(loggedUserData({}))
                 }
                 handleClose()
             })

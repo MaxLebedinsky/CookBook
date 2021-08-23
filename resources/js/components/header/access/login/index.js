@@ -7,12 +7,15 @@ import Button from "@material-ui/core/Button";
 import {Link, Typography} from "@material-ui/core";
 import PropTypes from "prop-types";
 import Register from "../register";
+import {useDispatch} from "react-redux";
+import {loggedUserData} from "../../../../redux/access/actions";
 
 const Login = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const {onClose, open} = props;
     const [isRegisterPressed, setIsRegisterPressed] = useState(false);
+    const dispatch = useDispatch();
     const handleShowRegisterForm = (e) => {
         e.preventDefault()
         setIsRegisterPressed(true)
@@ -27,26 +30,46 @@ const Login = (props) => {
         onClose();
     };
 
+    const handleUserData = () => {
+        window.axios.get('/auth/me', {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
+                }
+            }
+        )
+            .then((response) => {
+                console.log(response.data.data)
+                dispatch(loggedUserData(response.data.data))
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     const handleLogin = (e) => {
         e.preventDefault()
         window.axios.post('/auth/login', {
-            email: `${email}`,
-            password: `${password}`
-        })
-            .then(function (response) {
+                email: `${email}`,
+                password: `${password}`
+            }
+        )
+            .then((response) => {
                 sessionStorage.setItem('authToken', response.data.data.token);
                 props.setToken(response.data.data.token)
+                handleUserData()
                 handleClose()
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
+
     const classes = useStyles();
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             {isRegisterPressed ?
-                <Register setIsRegisterPressed={setIsRegisterPressed}  handleLogin={handleLogin} onClose={handleClose} open={open} setToken={props.setToken} token={props.token}/>
+                <Register setIsRegisterPressed={setIsRegisterPressed} handleLogin={handleLogin} onClose={handleClose}
+                          open={open} setToken={props.setToken} token={props.token}/>
                 :
                 <>
                     <DialogTitle id="simple-dialog-title">Войти</DialogTitle>

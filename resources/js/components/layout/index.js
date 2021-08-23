@@ -12,7 +12,7 @@ const Layout = ({children}) => {
     useEffect(() => {
         if (dishes.length === 0) {
             dispatch(getDishes());
-        }else{
+        } else {
             dispatch(dishesSuccess([]))
         }
         dispatch(getCategories());
