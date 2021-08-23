@@ -11,26 +11,15 @@
     margin: auto;
     text-align: center;
 }
-@media (min-width: 600px) {
+
+@media (min-width: 960px) {
     .layout-content {
-        padding: 32px;
+        max-width: 860px;
     }
 }
 
-@media (min-width: 905px) {
+@media (min-width: 1280px) {
     .layout-content {
-        width: 840px;
-    }
-}
-
-@media (min-width: 1240px) {
-    .layout-content {
-        padding: 72px;
-    }
-}
-
-@media (min-width: 1440px) {
-    .layout-content {
-        width:1040px;
+        max-width: 1240px;
     }
 }
