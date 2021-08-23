@@ -9,12 +9,12 @@ import {
 
 const initialState = {
    searchTitle: "",
-   filterOrder: "raiting",
+   filterOrder: "rating",
    filterCategory: "",
    includeIngredients: [],
    excludeIngredietns: [],
    userId: "",
-    
+
 }
 
 export const filtersReducer = (state = initialState, action) => {
@@ -52,7 +52,7 @@ export const filtersReducer = (state = initialState, action) => {
       case USER_ID: {
          return {
             ...state,
-            excludeIngredietns: action.payload,
+            userId: action.payload,
          };
       }
       default:

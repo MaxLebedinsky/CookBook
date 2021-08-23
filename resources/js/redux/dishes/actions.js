@@ -44,7 +44,7 @@ export const getDishes = (filterEndpoint) => async (dispatch) => {
     dispatch(dishesRequest());
     try {
         const response = await window.axios.get(filterEndpoint);
-        
+
         dispatch(dishesSuccess(response.data.data));
         dispatch(dishesLinksSuccess(response.data.links));
     } catch (err) {
