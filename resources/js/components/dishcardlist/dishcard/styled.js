@@ -30,6 +30,7 @@ export const useStyles = makeStyles((theme) => ({
         '&:last-child': {
             paddingBottom: 10,
         },
+        flexGrow: 1,
     },
     data: {
         fontSize: '0.8em',
@@ -55,10 +56,16 @@ export const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up(425)]: {
         root: {
-            maxWidth: 400
+            maxWidth: 400,
+            height: 180
         },
         desc: {
             marginLeft: 20,
         },
+    },
+    [theme.breakpoints.up(768)]: {
+        desc: {
+            minWidth: 230,
+        }
     },
 }));

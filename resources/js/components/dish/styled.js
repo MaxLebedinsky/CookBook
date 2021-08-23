@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
     root: {
        maxWidth: 370,
+       margin: '0 auto',
        display: 'flex',
        flexDirection: 'column',
        alignItems: 'center',
@@ -20,9 +21,9 @@ export const useStyles = makeStyles((theme) => ({
        padding: 16,
        boxSizing: 'borderBox',
        margin: "0 auto",
-       '&:last-child': {
-          paddingBottom: 10,
-       },
+      //  '&:last-child': {
+      //     paddingBottom: 10,
+      //  },
     },
     data: {
        fontSize: '0.8em',
@@ -69,7 +70,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up(425)]: {
        root: {
-          maxWidth: 1200,
+          maxWidth: 800,
        },
        image: {
           width: 640,
