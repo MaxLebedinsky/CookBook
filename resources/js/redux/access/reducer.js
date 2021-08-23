@@ -1,7 +1,8 @@
-import {IS_LOGIN, IS_LOGOUT} from "./actions"
+import {IS_LOGIN, IS_LOGOUT, LOGGED_USER_DATA} from "./actions"
 
 const initialState = {
     loginStatus: false,
+    userData: {},
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -16,6 +17,12 @@ export const loginReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loginStatus: action.isLoginStatus
+            }
+        }
+        case LOGGED_USER_DATA: {
+            return {
+                ...state,
+                userData: action.userData,
             }
         }
         default:
