@@ -27,7 +27,13 @@ const FiltersBar = ({ optionsList }) => {
 
   const classes = useStyles();
   // const dispatch = useDispatch();
-q<div>
+
+  // const handleOption = (optionId) => {
+  //   dispatch(optionFilter(optionId));
+  // }
+
+  return (
+    <div>
       <FormControl variant="outlined" className={ classes.formControl }>
         <Select
           native

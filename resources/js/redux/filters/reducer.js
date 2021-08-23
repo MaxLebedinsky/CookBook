@@ -4,7 +4,7 @@ import {
    FILTER_CATEGORY,
    INCLUDE_INGREDIENTS,
    EXCLUDE_INGREDIENTS,
-   USER_ID
+   USER_ID,
 } from "./actions";
 
 const initialState = {
@@ -14,6 +14,7 @@ const initialState = {
    includeIngredients: [],
    excludeIngredietns: [],
    userId: "",
+    
 }
 
 export const filtersReducer = (state = initialState, action) => {
