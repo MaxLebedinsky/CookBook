@@ -11,7 +11,6 @@ export const DishCardList = () => {
     const classes = useStyles();
     const dishes = useSelector(state => state.dishes.dishes);
     const links = useSelector(state => state.dishes.links);
-    const [filteredDishes, setFilteredDishes] = useState([])
     const [loadedDishes, setLoadedDishes] = useState([]);
     const [isLastPage, setIsLastPage] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -38,16 +37,16 @@ export const DishCardList = () => {
     }
 
     useEffect(() => {
-        if (filteredDishes !== undefined) {
-            if (filteredDishes.length > 0) {
+        if (loadedDishes !== undefined) {
+            if (loadedDishes.length > 0) {
                 setIsLoaded(true)
             }
         }
-    }, [filteredDishes])
+    }, [loadedDishes])
 
     useEffect(() => {
         setIsLastPage(false)
-        setFilteredDishes(dishes)
+        setLoadedDishes(dishes)
     }, [])
 
     useEffect(() => {
