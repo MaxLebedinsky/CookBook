@@ -1,6 +1,6 @@
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-export  const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
@@ -13,12 +13,14 @@ export  const useStyles = makeStyles((theme) => ({
             width: '50%',
         },
     },
-    logo:{
+    logo: {
         margin: 'auto',
         padding: '24px',
     },
     add_button: {
-        margin: '0 auto 16px',
+        position: 'absolute',
+        right: '10px',
+        top: '10px',
         textTransform: 'none',
     }
 }));
