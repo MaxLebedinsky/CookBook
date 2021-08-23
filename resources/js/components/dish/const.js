@@ -93,27 +93,13 @@ export const TEST_FULL_DISH = {
     }
 };
 
-export const EMPTY_DISH = {
-    "dish": {
-        "title":"",
-        "big_img":"https://via.placeholder.com/640x480.png/0066aa?text=dishes+temporibus",
-        "small_img":"https://via.placeholder.com/130x100.png/00aa44?text=dishes+officia",
-        "description":"",
-        "user_id":3,
-        "category_id":3,
-        "complexity":1,
-    },
-    "ingredients": [],
-    "dish_steps": [],
-};
-
 export const TEST_DISH_FOR_POST = {
     "dish": {
         "title":"",
         "big_img":"",
         "small_img":"",
         "description":"",
-        "user_id":1,
+        "user_id":"",
         "category_id":"",
         "complexity":"",
     },

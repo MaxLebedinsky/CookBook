@@ -18,6 +18,7 @@ export const AddDishForm = () => {
     const [ingredient, setIngredient] = useState({ ingredients_name:'', quantity:'', measure_id:'' });
     const [ingredientsArr, setIngredientsArr] = useState([]);
     const categories = useSelector(state => state.categories.categoryList);
+    const userData = useSelector(state => state.access.userData);
     const [mainImage, setMainImage] = useState({ file: '', imagePreviewUrl: '' });
     const [step, setStep] = useState({ file: '', imagePreviewUrl: '', text: ''});
     const [stepsArr, setStepsArr] = useState([]);
@@ -47,6 +48,7 @@ export const AddDishForm = () => {
 
     const postDish = async (dish) => {
         setUploadFinished(false);
+        dish.dish.user_id = userData.id;
         let response = await fetch('/api/full-dishes/', {
             method: 'POST',
             headers: {
