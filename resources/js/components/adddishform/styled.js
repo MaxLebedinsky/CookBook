@@ -12,9 +12,6 @@ export  const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
     uploadDialog: {
-        // display: 'flex',
-        // flexDirection: 'row',
-        // flexWrap: 'wrap',
         alignItems: 'center',
         margin: theme.spacing(1, 'auto'),
     },
@@ -50,16 +47,24 @@ export  const useStyles = makeStyles((theme) => ({
         textTransform: 'none',
         margin: theme.spacing(2, 4),
     },
+    save_button: {
+        margin: theme.spacing(2, 4),
+        height: '64px',
+    },
     back_button: {
         margin: theme.spacing(2),
     },
     h1: {
         fontWeight: 700,
-        fontSize: '1.2em',
+        fontSize: '1.4em',
         margin: theme.spacing(3, 'auto'),
     },
     h2: {
         margin: theme.spacing(3, 'auto'),
+        fontSize: '1.2em',
+    },
+    radio: {
+        marginLeft: '16px',
     },
     modal: {
         margin: '20% auto',
@@ -99,8 +104,12 @@ export  const useStyles = makeStyles((theme) => ({
     },
     stepsListItem: {
         display: 'flex',
-        marginBottom: theme.spacing(1),
+        justifyContent: 'space-between',
+        marginBottom: theme.spacing(2),
         alignItems: 'flex-start',
+    },
+    fullWidth: {
+        width: '100%',
     },
     stepImagePreview: {
         width: '100px',

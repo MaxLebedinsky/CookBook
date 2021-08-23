@@ -6,7 +6,7 @@ import Logo from './logo'
 import { useStyles } from "./styled";
 import PropTypes from 'prop-types';
 import Access from './access'
-import { Button, Modal } from '@material-ui/core';
+import { Box, Button, Modal } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
 const Header = ({ handleSetCategory, handleSetDishSearch }) => {
@@ -43,7 +43,12 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
                 <div className={ classes.modal }>{ modalText }</div>
             </Modal>
             <AppBar position="static">
-                <Access/>
+                <Box className={ classes.topNav }>
+                    <Access/>
+                    <Button href="/add-dish" onClick={ addClickHandler } className={ classes.addButton } variant="text">
+                        Добавить рецепт
+                    </Button>
+                </Box>
                 <Logo
                     handleSetCategory={ handleSetCategory }
                     handleSetDishSearch={ handleSetDishSearch }
@@ -54,7 +59,6 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
                         handleSetDishSearch={ handleSetDishSearch }
                     />
                 </Toolbar>
-                <Button href="/add-dish" onClick={ addClickHandler } className={ classes.add_button } variant="contained">Добавить рецепт</Button>
             </AppBar>
         </div>
     );

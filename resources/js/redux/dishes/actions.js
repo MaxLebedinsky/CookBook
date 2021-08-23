@@ -40,7 +40,7 @@ export const dishesSearchField = (search) => ({
     search,
 })
 
-export const getDishes = (url='/full-dishes?page=13') => async (dispatch) => {
+export const getDishes = (url='/full-dishes') => async (dispatch) => {
     dispatch(dishesRequest());
     try {
         const response = await window.axios.get(url);

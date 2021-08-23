@@ -17,9 +17,17 @@ export  const useStyles = makeStyles((theme) => ({
         margin: 'auto',
         padding: '0 24px 24px',
     },
-    add_button: {
-        margin: '0 auto 16px',
-        textTransform: 'none',
+    addButton: {
+        color: 'white',
+        backgroundColor: 'transparent',
+        margin: '16px',
+    },
+    topNav: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        maxWidth: 1200,
+        margin: '0 auto',
     },
     modal: {
         margin: '20% auto',
