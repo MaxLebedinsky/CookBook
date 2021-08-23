@@ -19,9 +19,11 @@ export const AddDishForm = () => {
     const [ingredientsArr, setIngredientsArr] = useState([]);
     const categories = useSelector(state => state.categories.categoryList);
     const [mainImage, setMainImage] = useState({ file: '', imagePreviewUrl: '' });
-    const [stepImage, setStepImage] = useState({ file: '', imagePreviewUrl: '' });
-    const [stepImagesArr, setStepImagesArr] = useState([]);
-    const [step, setStep] = useState({ step_number: dish.dish_steps.length + 1, text: ''});
+    // const [stepImage, setStepImage] = useState({ file: '', imagePreviewUrl: '' });
+    // const [stepImagesArr, setStepImagesArr] = useState([]);
+    // const [step, setStep] = useState({ step_number: dish.dish_steps.length + 1, text: ''});
+    const [step, setStep] = useState({ file: '', imagePreviewUrl: '', text: ''});
+    const [stepsArr, setStepsArr] = useState([]);
 
     useEffect(()=> {
         getMeasures();
@@ -71,7 +73,7 @@ export const AddDishForm = () => {
             if (responseImage.ok) {
             // begin POST step images
                 let formDataImages = new FormData();
-                stepImagesArr.forEach(item => {
+                stepsArr.forEach(item => {
                     formDataImages.append("image[]", item.file, item.file.name);
                 });
                 result.data.dish_steps.forEach(item => {
@@ -142,10 +144,10 @@ export const AddDishForm = () => {
             handleOpenModal('Добавьте хотя бы один ингредиент');
             return false;
         } else { dish.ingredients = [...ingredientsArr]; }
-        if (dish.dish_steps.length === 0) {
+        if (stepsArr.length === 0) {
             handleOpenModal('Добавьте в рецепт хотя бы один шаг');
             return false;
-        }
+        } else { stepsArr.forEach((item, index) => dish.dish_steps[index] = { step_number: index + 1, text: item.text}); }
         return true;
     }
 
@@ -174,7 +176,7 @@ export const AddDishForm = () => {
     };
 
     const handleDelIngredientClick = (event) => {
-        console.log(event.currentTarget.id);
+        // console.log(event.currentTarget.id);
         setIngredientsArr(ingredientsArr.filter((item, index) => index !== +event.currentTarget.id))
     }
 
@@ -183,21 +185,12 @@ export const AddDishForm = () => {
             handleOpenModal('Описание шага рецепта не введено');
             return;
         }
-        if (!stepImage.file) {
+        if (!step.file) {
             handleOpenModal('Изображение для шага рецепта не выбрано');
             return;
         }
-        setStep({ ...step, step_number: step.step_number + 1, text: '' });
-        document.getElementById("steps-list").insertAdjacentHTML('beforeend', 
-        `<div class=${ classes.stepsListItem}>
-            <span>${ step.step_number }. </span>
-            <img src=${ stepImage.imagePreviewUrl } class=${ classes.stepImagePreview } alt="Step image"/>
-            <span>${ step.text }</span>
-        </div>`);
-        dish.dish_steps.push(step);       
-        setStepImagesArr(stepImagesArr.concat({ id: step.step_number, file: stepImage.file }));
-        // setStep({ ...step, text: ''});
-        setStepImage({ ...stepImage, file: '', imagePreviewUrl: '' });
+        setStepsArr(stepsArr.concat(step));
+        setStep({ ...step, file: '', imagePreviewUrl: '', text: '' });
     }
 
     const handleImageChange = (event) => {
@@ -226,7 +219,7 @@ export const AddDishForm = () => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setStepImage({...stepImage, file: file, imagePreviewUrl: reader.result });
+                setStep({...step, file: file, imagePreviewUrl: reader.result });
             };
             reader.readAsDataURL(file);
         }
@@ -429,7 +422,17 @@ export const AddDishForm = () => {
                     Добавить ингредиент
                 </Button>
                 <Typography component="h2" className={ classes.h2 }>Пошаговый рецепт:</Typography>
-                <div id="steps-list" className={ classes.ingredientsList }></div>
+                <div id="steps-list" className={ classes.ingredientsList }>
+                    { stepsArr.length === 0 ? <></> :
+                        stepsArr.map((item, index) => (
+                            <div className={ classes.stepsListItem } key={ index }>
+                                <span>{ index + 1 }. </span>
+                                <img src={ item.imagePreviewUrl } className={ classes.stepImagePreview } alt="Step image"/>
+                                <span>{ item.text }</span>
+                            </div>
+                        ))
+                    }
+                </div>
                 <TextField 
                     className={ classes.formControl }
                     type="text"
@@ -443,12 +446,12 @@ export const AddDishForm = () => {
                 />
                 <FormControl className={ classes.uploadDialog }>
                     <div className={ classes.imagePreviewContainer }>
-                        { stepImage.imagePreviewUrl ? 
-                        <img src={ stepImage.imagePreviewUrl } className={ classes.imagePreview } alt="Step image"/> 
+                        { step.imagePreviewUrl ? 
+                        <img src={ step.imagePreviewUrl } className={ classes.imagePreview } alt="Step image"/> 
                         : <PhotoCamera className={ classes.iconCamera }/>}
                     </div>
                     <Box className={ classes.fileName }>
-                        { stepImage.imagePreviewUrl ? stepImage.file.name : "Изображение не выбрано" }
+                        { step.imagePreviewUrl ? step.file.name : "Изображение не выбрано" }
                     </Box>
                     <input
                         accept="image/*"
