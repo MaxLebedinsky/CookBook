@@ -19,11 +19,6 @@ export const FilterOrder = () => {
    const classes = useStyles();
    const dispatch = useDispatch();
    const [order, setOrder] = useState('rating');
-   // const ordersList = useState([
-   //    { name: "Рейтинг", value: "rating" },
-   //    { name: "Новизна", value: "date" },
-   //    { name: "Просмотры", value: "views " },
-   // ]);
 
    useEffect(() => {
       dispatch(filterOrder(order))
