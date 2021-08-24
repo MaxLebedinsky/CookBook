@@ -24,12 +24,16 @@ export const FilterIngredients = () => {
       setMinusIngredients(e.target.value)
    }
 
-   const handleClickPlusIng = () => {
-      dispatch(includeIngredients(plusIngredients.split(' ')));
+   const handleKeyPressPlusIng = (e) => {
+      if (e.key === 'Enter') {
+         dispatch(includeIngredients(plusIngredients.split(' ')));
+      }
    };
 
-   const handleClickMinusIng = () => {
-      dispatch(excludeIngredients(minusIngredients.split(' ')));
+   const handleKeyPressMinusIng = (e) => {
+      if (e.key === 'Enter') {
+         dispatch(excludeIngredients(minusIngredients.split(' ')));
+      }
    }
 
    const handleOpen = () => {
@@ -72,7 +76,7 @@ export const FilterIngredients = () => {
                         label="+ Ингредиенты"
                         variant="outlined"
                         onChange={ handleChangePlusIng }
-                        onClick={ handleClickPlusIng }
+                        onKeyPress={ handleKeyPressPlusIng }
                      />
                   </div>
                   <div>
@@ -88,7 +92,7 @@ export const FilterIngredients = () => {
                         label="- Ингредиенты"
                         variant="outlined"
                         onChange={ handleChangeMinusIng }
-                        onClick={ handleClickMinusIng }
+                        onKeyPress={ handleKeyPressMinusIng }
                      />
                   </div>
                </div>

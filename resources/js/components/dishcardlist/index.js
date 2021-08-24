@@ -22,10 +22,25 @@ export const DishCardList = () => {
     const excludeIngredients = useSelector(state => state.filters.excludeIngredietns);
     const userId = useSelector(state => state.filters.userId);
 
+    const ingredientsArrToString = (arr) => {
+        const string = `[${arr.map(ingredient => {
+            if (arr[0] === ingredient) {
+                return `"${ingredient}"`
+            }
+            else if (arr[arr.length - 1] === ingredient) {
+                return ` "${ingredient}"`
+            } else {
+                return ` "${ingredient}"`
+            }
+        })}]`
+        console.log(string)
+        return string
+    }
 
     useEffect(() => {
-        const filterEndpoint = `/full-dishes/search?sort=-${filterOrder}${filterCategory === "" ? "" : `&category_id=${filterCategory}`}${searchTitle === "" ? "" : `&title=${searchTitle}`}${includeIngredients.length === 0 ? "" : `&includes=${includeIngredients}`}${excludeIngredients.length === 0 ? "" : `&excludes=${excludeIngredients}`}`;
+        const filterEndpoint = `/full-dishes/search?sort=-${filterOrder}${filterCategory === "" ? "" : `&category_id=${filterCategory}`}${searchTitle === "" ? "" : `&title=${searchTitle}`}${includeIngredients.length === 0 ? "" : `&includes=${ingredientsArrToString(includeIngredients)}`}${excludeIngredients.length === 0 ? "" : `&excludes=${ingredientsArrToString(excludeIngredients)}`}`;
         dispatch(getDishes(filterEndpoint))
+        console.log(filterEndpoint)
     }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
 
     const handleShowMore = () => {
