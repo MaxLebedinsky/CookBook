@@ -21,6 +21,7 @@ const Logo = () => {
         dispatch(filterCategory(''));
         dispatch(includeIngredients([]));
         dispatch(excludeIngredients([]));
+        window.location.reload();
     };
 
     return (
