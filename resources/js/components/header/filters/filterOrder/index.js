@@ -1,47 +1,52 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import { useStyles } from '../styled';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { filterOrder } from '../../../../redux/filters/actions';
 
-const useStyles = makeStyles((theme) => ({
-   formControl: {
-      margin: theme.spacing(1),
-      minWidth: 150,
-   },
-   selectEmpty: {
-      marginTop: theme.spacing(2),
-      backgroundColor: "#fff",
-      paddingLeft: 5,
-   },
-}));
+
 
 export const FilterOrder = () => {
 
    const classes = useStyles();
-   const [category, setCategory] = useState('');
-   const categories = useSelector(state => state.categories.categoryList)
+   const dispatch = useDispatch();
+   const [order, setOrder] = useState('rating');
+   const ordersList = useState([
+      { name: "Рейтинг", value: "rating" },
+      { name: "Новизна", value: "date" },
+      { name: "Просмотры", value: "views " }
+   ]);
+
+   useEffect(() => {
+      dispatch(filterOrder(order))
+   }, [order])
 
    const handleChange = (event) => {
-      setCategory(event.target.value);
+      setOrder(event.target.value);
    };
 
    return (
       <FormControl className={ classes.formControl }>
          <Select
-            value={ category }
+            value={ order }
             onChange={ handleChange }
             displayEmpty
             className={ classes.selectEmpty }
             inputProps={ { 'aria-label': 'Without label' } }
          >
-            <MenuItem value="" disabled>
-               Категория
+            <MenuItem value="rating" disabled>
+               Сортировка
             </MenuItem>
             {
-               categories.map(category => (
-                  <MenuItem value={ category.name } key={ category.id }>{ category.name }</MenuItem>
+               ordersList.map(order => (
+                  <MenuItem
+                     value={ order.value }
+                     key={ order.value }
+                  >
+                     { order.name }
+                  </MenuItem>
                ))
             }
          </Select>

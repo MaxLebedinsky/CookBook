@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Logo from './logo';
 import { useStyles } from "./styled";
-import { Button } from '@material-ui/core';
 import Access from './access';
 import { Filters } from './filters';
 import { Box, Button, Modal } from '@material-ui/core';

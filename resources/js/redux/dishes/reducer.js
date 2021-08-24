@@ -1,11 +1,10 @@
-import {REQUEST_STATUS} from "../../utils/constants";
+import { REQUEST_STATUS } from "../../utils/constants";
 import {
     ADD_DISH,
     DELETE_DISH,
     DISHES_FAILURE,
     DISHES_LINKS_SUCCESS,
     DISHES_REQUEST,
-    DISHES_SEARCH_FIELD,
     DISHES_SUCCESS,
 } from "./actions"
 
