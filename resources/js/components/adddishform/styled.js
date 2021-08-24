@@ -73,6 +73,11 @@ export  const useStyles = makeStyles((theme) => ({
     },
     form_button: {
         // textTransform: 'none',
+        color: myTheme.palette.primary.light,
+        backgroundColor: myTheme.palette.text.secondary,
+        '&:hover': {
+            backgroundColor: myTheme.palette.secondary.main,
+        },
         margin: theme.spacing(2, 4),
     },
     save_button: {

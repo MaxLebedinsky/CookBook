@@ -21,7 +21,7 @@ const Logo = () => {
             className={ classes.logo }
             onClick={ resetCategoryAndSearch }
         >
-        <svg xmlns="http://www.w3.org/2000/svg" width="120" viewBox="0 0 119.41 113.04" fill="white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="120" viewBox="0 0 119.41 113.04" fill="#442617">
             <polygon points="100.65 83.63 117.68 83.63 111.91 74.92 111.74 74.66 111.91 74.41 117.68 65.6 106.16 65.6 106.16 64.66 118.54 
             64.66 119.41 64.66 118.93 65.38 112.86 74.66 118.93 83.84 119.41 84.57 118.54 84.57 100.65 84.57 100.65 83.63"/>
             <polygon points="106.62 79.29 100.97 84.44 100.33 83.77 105.98 78.62 106.62 79.29"/>

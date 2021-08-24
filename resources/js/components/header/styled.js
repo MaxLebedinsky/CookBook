@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+import { myTheme } from "../adddishform/styled";
 
 export  const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,8 +21,11 @@ export  const useStyles = makeStyles((theme) => ({
     },
     addButton: {
         color: 'white',
-        backgroundColor: 'transparent',
+        backgroundColor: myTheme.palette.text.secondary,
         margin: '16px',
+        '&:hover': {
+            backgroundColor: myTheme.palette.secondary.main,
+        },
     },
     topNav: {
         display: 'flex',

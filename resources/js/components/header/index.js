@@ -6,8 +6,9 @@ import Logo from './logo'
 import { useStyles } from "./styled";
 import PropTypes from 'prop-types';
 import Access from './access'
-import { Box, Button, Modal } from '@material-ui/core';
+import { Box, Button, Modal, ThemeProvider } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import { myTheme } from '../adddishform/styled';
 
 const Header = ({ handleSetCategory, handleSetDishSearch }) => {
 
@@ -38,29 +39,31 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
     }
 
     return (
-        <div className={ classes.root }>
-            <Modal open={ modal } onClose={ handleCloseModal }>
-                <div className={ classes.modal }>{ modalText }</div>
-            </Modal>
-            <AppBar position="static">
-                <Box className={ classes.topNav }>
-                    <Access/>
-                    <Button href="/add-dish" onClick={ addClickHandler } className={ classes.addButton } variant="text">
-                        Добавить рецепт
-                    </Button>
-                </Box>
-                <Logo
-                    handleSetCategory={ handleSetCategory }
-                    handleSetDishSearch={ handleSetDishSearch }
-                />
-                <Toolbar className={ classes.toolbar }>
-                    <SearchField
+        <ThemeProvider theme={ myTheme }>
+            <div className={ classes.root }>
+                <Modal open={ modal } onClose={ handleCloseModal }>
+                    <div className={ classes.modal }>{ modalText }</div>
+                </Modal>
+                <AppBar position="static">                    
+                    <Box className={ classes.topNav }>
+                        <Access/>
+                        <Button href="/add-dish" onClick={ addClickHandler } className={ classes.addButton } variant="contained">
+                            Добавить рецепт
+                        </Button>
+                    </Box>
+                    <Logo
                         handleSetCategory={ handleSetCategory }
                         handleSetDishSearch={ handleSetDishSearch }
                     />
-                </Toolbar>
-            </AppBar>
-        </div>
+                    <Toolbar className={ classes.toolbar }>
+                        <SearchField
+                            handleSetCategory={ handleSetCategory }
+                            handleSetDishSearch={ handleSetDishSearch }
+                        />
+                    </Toolbar>
+                </AppBar>
+            </div>
+        </ThemeProvider>
     );
 }
 

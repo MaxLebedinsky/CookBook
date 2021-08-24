@@ -262,13 +262,13 @@ export const AddDishForm = () => {
         </Dialog>
         <Modal open={ !uploadFinished }>
             <div className={ classes.modal }>
-                <CircularProgress className= { classes.loader } disableShrink color="secondary" thickness="5"/>
+                <CircularProgress className= { classes.loader } disableShrink color="secondary" thickness={5}/>
                 Сохранение рецепта...
             </div>
         </Modal>
         <Box className={ classes.formHeader }>
-            <Button href="/" className= { classes.back_button } variant="outlined" startIcon={ <ArrowBackIos/> } >
-                <Typography color="textPrimary">На главную</Typography>
+            <Button href="/" className= { classes.form_button } variant="contained" startIcon={ <ArrowBackIos/> } >
+                На главную
             </Button>
         </Box>
             <FormControl className={ classes.root }>
@@ -292,7 +292,7 @@ export const AddDishForm = () => {
                         <img src={ mainImage.imagePreviewUrl } className={ classes.imagePreview } alt="Main image"/> 
                         : <PhotoCamera className={ classes.iconCamera }/>}
                     </div>
-                    <Typography component="p" className={ classes.fileName } color="textSecondary">
+                    <Typography className={ classes.fileName } color="textSecondary">
                         { mainImage.imagePreviewUrl ? mainImage.file.name : "Изображение не выбрано" }
                     </Typography>
                     <input
@@ -352,13 +352,13 @@ export const AddDishForm = () => {
                 <div id="ingredients-list" className={ classes.ingredientsList }>
                     {ingredientsArr.length === 0 ? <></> :
                         ingredientsArr.map((item, index) => (
-                            <Typography className={ classes.listItem } key={ index } color="textPrimary">
-                                <div>{ item.ingredients_name }</div> 
-                                <div className={ classes.dots }></div>
-                                <div className={ classes.amount }>
+                            <Typography component="div" className={ classes.listItem } key={ index } color="textPrimary">
+                                <p>{ item.ingredients_name }</p> 
+                                <p className={ classes.dots }></p>
+                                <p className={ classes.amount }>
                                     { item.quantity }
                                     { ' ' + measuresArr.find(measure => measure.id == item.measure_id).name }
-                                </div>
+                                </p>
                                 <IconButton 
                                     onClick={ handleDelIngredientClick } 
                                     id={ index } 

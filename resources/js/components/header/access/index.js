@@ -33,7 +33,7 @@ const Access = () => {
 
     return (
         <div>
-            <Button className={classes.loginButton} variant="text" onClick={handleClickOpen}>
+            <Button className={classes.loginButton} variant="contained" onClick={handleClickOpen}>
                 {loginStatus ? 'Выйти' : 'Войти'}
             </Button>
             {loginStatus ? <Logout open={open} onClose={handleClose} setToken={setToken} token={token}/> :

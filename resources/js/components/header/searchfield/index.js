@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import FilterIcon from "./filtericon";
-import Button from '@material-ui/core/Button';
-import ListItemText from '@material-ui/core/ListItemText';
-import {StyledMenu, StyledMenuItem, useStyles} from "./styled";
-import {useDispatch, useSelector} from 'react-redux';
-import {categoriesFilter} from '../../../redux/categories/actions';
+// import FilterIcon from "./filtericon";
+// import Button from '@material-ui/core/Button';
+// import ListItemText from '@material-ui/core/ListItemText';
+import {useStyles} from "./styled";
+import {useDispatch} from 'react-redux';
+// import {categoriesFilter} from '../../../redux/categories/actions';
 import {dishesSearchField} from '../../../redux/dishes/actions';
 
 const SearchField = () => {
 
-    const [anchorEl, setAnchorEl] = useState(null);
+    // const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const [value, setValue] = useState('');
-    const categories = useSelector(state => state.categories.categoryList)
+    // const categories = useSelector(state => state.categories.categoryList)
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -25,18 +25,18 @@ const SearchField = () => {
         dispatch(dishesSearchField(value));
     };
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+    // const handleClick = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // };
 
-    const handleCategory = (categoryName) => {
-        dispatch(categoriesFilter(categoryName));
-        handleClose();
-    };
+    // const handleCategory = (categoryName) => {
+    //     dispatch(categoriesFilter(categoryName));
+    //     handleClose();
+    // };
 
     return (
         <div className={classes.searchBox}>
@@ -48,8 +48,8 @@ const SearchField = () => {
                         value={value}
                         onChange={handleChange}
                         type="text"
-                        placeholder="Search ..."/>
-                    <Button
+                        placeholder="Поиск ..."/>
+                    {/* <Button
                         className={classes.button}
                         aria-controls="customized-menu"
                         aria-haspopup="true"
@@ -73,7 +73,7 @@ const SearchField = () => {
                                 </StyledMenuItem>
                             ))
                         }
-                    </StyledMenu>
+                    </StyledMenu> */}
                 </form>
             </div>
         </div>
