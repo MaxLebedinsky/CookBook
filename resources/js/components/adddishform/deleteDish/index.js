@@ -45,26 +45,28 @@ export const DeleteDish = () => {
 
     return (
     <>
+        <br/><hr/><br/>
         <Modal
             open={ modal }
             onClose={ handleCloseModal }>
                 <div className={ classes.modal }> { modalText } </div>
         </Modal>
         <FormControl className={ classes.root }>
-            <Typography component="h2" className={ classes.h2 }>Удаление рецепта:</Typography>
+            <Typography component="h2" className={ classes.h2 } color="textPrimary">Удаление рецепта:</Typography>
             <Box className={ classes.fileName }>
                         (доступно для пользователя admin)
             </Box>
 
             <TextField
                 className={ classes.formControl }
+                color="secondary"
                 type="text" 
                 label="id удаляемого блюда" 
                 variant="outlined" 
                 value={ idDelete }
                 name="id-delete"
                 onChange={ handleChange }/>
-            <Button type="submit" onClick={ handleDelete } className= { classes.form_button } variant="contained">Удалить</Button>
+            <Button type="submit" onClick={ handleDelete } className= { classes.form_button } variant="contained" color="secondary">Удалить</Button>
         </FormControl>
     </>
     )

@@ -1,15 +1,15 @@
 import { Button, TextField, FormControlLabel, RadioGroup, Radio, Dialog, CircularProgress,
-    FormControl, FormLabel, Modal, Select, MenuItem, InputLabel, Typography, Box, IconButton} from '@material-ui/core';
-import { ArrowBackIos, Check, FolderOpen, HighlightOff, PhotoCamera } from '@material-ui/icons';
+    FormControl, Modal, Select, MenuItem, InputLabel, Typography, Box, IconButton} from '@material-ui/core';
+import { ArrowBackIos, Check, FolderOpen, HighlightOff, PhotoCamera} from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { MAX_FILE_SIZE, TEST_DISH_FOR_POST } from '../dish/const';
+import { ADMIN_USER_ID, MAX_FILE_SIZE, TEST_DISH_FOR_POST } from '../dish/const';
 import { DeleteDish } from './deleteDish';
-import { useStyles } from './styled';
+import { myTheme, useStyles } from './styled';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 export const AddDishForm = () => {
     const classes = useStyles();
-    // const [idDelete, setIdDelete] = useState('');
     const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
     const [modal, setModal] = useState(false);
     const [modalText, setModalText] = useState('');
@@ -97,28 +97,6 @@ export const AddDishForm = () => {
             }
         }
     };
-
-    // const deleteDish = async (id) => {
-    //     let response = await fetch(`/api/full-dishes/${id}`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //           'Content-Type': 'application/json;charset=utf-8',
-    //         },
-    //     });
-    //     if (response.ok) {
-    //         handleOpenModal('Рецепт успешно удалён');
-    //     } else {
-    //         handleOpenModal('Блюдо с таким id не найдено');
-    //     }
-    // };
-    
-    // const handleDelete = (event) => {
-    //     event.preventDefault();
-    //     if (idDelete) {
-    //         deleteDish(idDelete);
-    //     }
-    //     setIdDelete('');
-    // };
 
     const formDataIsValid = (dish) => {
         if (!dish.dish.title || dish.dish.title.length < 3) {
@@ -267,35 +245,37 @@ export const AddDishForm = () => {
     };
 
     return (
-    <>
+    <ThemeProvider theme={ myTheme }>
         <Modal
             open={ modal }
             onClose={ handleCloseModal }>
-                <div className={ classes.modal }> { modalText } </div>
+                <Typography className={ classes.modal } color="textPrimary"> { modalText } </Typography>
         </Modal>
         <Dialog open={ dialog }>
-            <div className={ classes.dialogText }>Рецепт успешно добавлен</div>
-            <Button href="/" className= { classes.form_button } variant="contained">
+            <Typography className={ classes.dialogText } color="textPrimary">Рецепт успешно добавлен</Typography>
+            <Button href="/" className= { classes.form_button } variant="contained" color="secondary">
                 Вернуться на главную
             </Button>
-            <Button href="/add-dish" className= { classes.form_button } variant="contained">
+            <Button href="/add-dish" className= { classes.form_button } variant="contained" color="secondary">
                 Добавить ещё один рецепт
             </Button>
         </Dialog>
         <Modal open={ !uploadFinished }>
             <div className={ classes.modal }>
-                <CircularProgress className= { classes.loader } disableShrink />
+                <CircularProgress className= { classes.loader } disableShrink color="secondary" thickness="5"/>
                 Сохранение рецепта...
             </div>
         </Modal>
-        <Button href="/" className= { classes.back_button } variant="contained" startIcon={ <ArrowBackIos/> }>
-            Вернуться на главную
-        </Button>
-        <br/><hr/>
+        <Box className={ classes.formHeader }>
+            <Button href="/" className= { classes.back_button } variant="outlined" startIcon={ <ArrowBackIos/> } >
+                <Typography color="textPrimary">На главную</Typography>
+            </Button>
+        </Box>
             <FormControl className={ classes.root }>
-                <Typography component="h1" className={ classes.h1 }>Добавление рецепта</Typography>
+                <Typography component="h1" className={ classes.h1 } color="textPrimary">Добавление рецепта</Typography>
                 <TextField 
                     className={ classes.formControl }
+                    color="secondary"
                     type="text"
                     label="Название блюда"
                     variant="outlined"
@@ -305,16 +285,16 @@ export const AddDishForm = () => {
                     multiline
                     required
                 />
-                <Typography component="h2" className={ classes.h2 }>Главное изображение:</Typography>
+                <Typography component="h2" className={ classes.h2 } color="textPrimary">Главное изображение:</Typography>
                 <FormControl className={ classes.uploadDialog }>
                     <div className={ classes.imagePreviewContainer }>
                         { mainImage.imagePreviewUrl ? 
                         <img src={ mainImage.imagePreviewUrl } className={ classes.imagePreview } alt="Main image"/> 
                         : <PhotoCamera className={ classes.iconCamera }/>}
                     </div>
-                    <Box className={ classes.fileName }>
+                    <Typography component="p" className={ classes.fileName } color="textSecondary">
                         { mainImage.imagePreviewUrl ? mainImage.file.name : "Изображение не выбрано" }
-                    </Box>
+                    </Typography>
                     <input
                         accept="image/*"
                         className={ classes.hidden }
@@ -323,13 +303,14 @@ export const AddDishForm = () => {
                         onChange={ handleImageChange }
                     />
                     <label htmlFor="upload-input">
-                        <Button variant="contained" component="span" className={ classes.form_button } startIcon={ <FolderOpen/> }>
+                        <Button variant="contained" component="span" className={ classes.form_button } startIcon={ <FolderOpen/> } color="primary">
                             Выберите файл
                         </Button>
                     </label>
                 </FormControl>
                 <TextField 
                     className={ classes.formControl }
+                    color="secondary"
                     type="text"
                     label="Описание"
                     variant="outlined"
@@ -343,6 +324,7 @@ export const AddDishForm = () => {
                     <InputLabel>Категория</InputLabel>
                     <Select
                         className={ classes.select }
+                        color="secondary"
                         name="category-select"
                         onChange={ handleChange }
                         value={ dish.dish.category_id }
@@ -350,27 +332,27 @@ export const AddDishForm = () => {
                         required
                     >
                         {categories.map((item) => (
-                                <MenuItem value={ item.id } key={ item.id }>{ item.name }</MenuItem>
+                                <MenuItem color="secondary" value={ item.id } key={ item.id }>{ item.name }</MenuItem>
                             ))}
                     </Select>
                 </FormControl>
                 <FormControl component="fieldset" className={ classes.formControl } required>
-                    <FormLabel component="legend">Уровень сложности: </FormLabel>
+                    <Typography component="legend" color="textPrimary">Уровень сложности: </Typography>
                     <RadioGroup row
                         aria-label="complexity"
                         value={ dish.dish.complexity }
                         onChange={ handleChange }>
-                        <FormControlLabel value="1" control={ <Radio name="complexity" color="primary" className={ classes.radio }/> } label="1" />
-                        <FormControlLabel value="2" control={ <Radio name="complexity" color="primary" className={ classes.radio }/> } label="2" />
-                        <FormControlLabel value="3" control={ <Radio name="complexity" color="primary" className={ classes.radio }/> } label="3" />
+                        <FormControlLabel value="1" control={ <Radio name="complexity" color="secondary" className={ classes.radio }/> } label="1" />
+                        <FormControlLabel value="2" control={ <Radio name="complexity" color="secondary" className={ classes.radio }/> } label="2" />
+                        <FormControlLabel value="3" control={ <Radio name="complexity" color="secondary" className={ classes.radio }/> } label="3" />
                     </RadioGroup>
                 </FormControl>
 
-                <Typography component="h2" className={ classes.h2 }>Ингредиенты:</Typography>
+                <Typography component="h2" className={ classes.h2 } color="textPrimary">Ингредиенты:</Typography>
                 <div id="ingredients-list" className={ classes.ingredientsList }>
                     {ingredientsArr.length === 0 ? <></> :
                         ingredientsArr.map((item, index) => (
-                            <div className={ classes.listItem } key={ index }>
+                            <Typography className={ classes.listItem } key={ index } color="textPrimary">
                                 <div>{ item.ingredients_name }</div> 
                                 <div className={ classes.dots }></div>
                                 <div className={ classes.amount }>
@@ -384,12 +366,13 @@ export const AddDishForm = () => {
                                 >
                                     <HighlightOff/>
                                 </IconButton>
-                            </div>
+                            </Typography>
                         ))
                     }
                 </div>
                 <TextField 
                     className={ classes.formControl }
+                    color="secondary"
                     type="text"
                     label="Название ингредиента"
                     variant="outlined"
@@ -400,6 +383,7 @@ export const AddDishForm = () => {
                 />
                 <TextField 
                     className={ classes.formControl }
+                    color="secondary"
                     type="text"
                     label="Кол-во"
                     variant="outlined"
@@ -423,14 +407,14 @@ export const AddDishForm = () => {
                         ))}
                     </Select>
                 </FormControl>
-                <Button onClick={ handleAddIngredient } className= { classes.form_button } variant="contained">
+                <Button onClick={ handleAddIngredient } className= { classes.form_button } variant="contained" color="primary">
                     Добавить ингредиент
                 </Button>
-                <Typography component="h2" className={ classes.h2 }>Пошаговый рецепт:</Typography>
+                <Typography component="h2" className={ classes.h2 } color="textPrimary">Пошаговый рецепт:</Typography>
                 <div id="steps-list" className={ classes.ingredientsList }>
                     { stepsArr.length === 0 ? <></> :
                         stepsArr.map((item, index) => (
-                            <div className={ classes.stepsListItem } key={ index }>
+                            <Typography className={ classes.stepsListItem } key={ index } color="textPrimary">
                                 <span>{ index + 1 }. </span>
                                 <img src={ item.imagePreviewUrl } className={ classes.stepImagePreview } alt="Step image"/>
                                 <span className={ classes.fullWidth }>{ item.text }</span>
@@ -441,12 +425,13 @@ export const AddDishForm = () => {
                                 >
                                     <HighlightOff/>
                                 </IconButton>
-                            </div>
+                            </Typography>
                         ))
                     }
                 </div>
                 <TextField 
                     className={ classes.formControl }
+                    color="secondary"
                     type="text"
                     label="Описание шага рецепта"
                     variant="outlined"
@@ -473,37 +458,20 @@ export const AddDishForm = () => {
                         onChange={ handleStepImageChange }
                     />
                     <label htmlFor="upload-step-input">
-                        <Button variant="contained" component="span" className={ classes.form_button } startIcon={ <FolderOpen/> }>
+                        <Button variant="contained" component="span" className={ classes.form_button } startIcon={ <FolderOpen/> } color="primary">
                             Выберите файл
                         </Button>
                     </label>
                 </FormControl>
-                <Button onClick={ handleAddStep } className= { classes.form_button } variant="contained">
+                <Button onClick={ handleAddStep } className= { classes.form_button } variant="contained" color="primary">
                     Добавить шаг
                 </Button>
                 <Button type="submit" onClick={ handleAddRecipe } className= { classes.save_button } 
-                variant="contained" size="large" startIcon={ <Check/> }>
+                variant="contained" size="large" startIcon={ <Check/> } color="secondary">
                     Сохранить рецепт
                 </Button>
             </FormControl>
-        <br/><hr/><br/>
-        <DeleteDish/>
-        {/* <FormControl className={ classes.root }>
-            <Typography component="h2" className={ classes.h2 }>Удаление рецепта:
-            <Box className={ classes.fileName }>
-                        (Будет доступно для пользователя с role = admin)
-            </Box>
-            </Typography>
-            <TextField
-                className={ classes.formControl }
-                type="text" 
-                label="id удаляемого блюда" 
-                variant="outlined" 
-                value={ idDelete }
-                name="id-delete"
-                onChange={ handleChange }/>
-            <Button type="submit" onClick={ handleDelete } className= { classes.form_button } variant="contained">Удалить</Button>
-        </FormControl> */}
-    </>
+        { (userData.id === ADMIN_USER_ID) && <DeleteDish/> }
+    </ThemeProvider>
     )
 }
