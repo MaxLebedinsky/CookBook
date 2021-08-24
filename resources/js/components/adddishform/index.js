@@ -4,11 +4,12 @@ import { ArrowBackIos, Check, FolderOpen, HighlightOff, PhotoCamera } from '@mat
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MAX_FILE_SIZE, TEST_DISH_FOR_POST } from '../dish/const';
+import { DeleteDish } from './deleteDish';
 import { useStyles } from './styled';
 
 export const AddDishForm = () => {
     const classes = useStyles();
-    const [idDelete, setIdDelete] = useState('');
+    // const [idDelete, setIdDelete] = useState('');
     const [dish, setDish] = useState({ ...TEST_DISH_FOR_POST });
     const [modal, setModal] = useState(false);
     const [modalText, setModalText] = useState('');
@@ -48,6 +49,7 @@ export const AddDishForm = () => {
 
     const postDish = async (dish) => {
         setUploadFinished(false);
+        console.log('id before post: ', userData);
         dish.dish.user_id = userData.id;
         let response = await fetch('/api/full-dishes/', {
             method: 'POST',
@@ -96,27 +98,27 @@ export const AddDishForm = () => {
         }
     };
 
-    const deleteDish = async (id) => {
-        let response = await fetch(`/api/full-dishes/${id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-            },
-        });
-        if (response.ok) {
-            handleOpenModal('Рецепт успешно удалён');
-        } else {
-            handleOpenModal('Блюдо с таким id не найдено');
-        }
-    };
+    // const deleteDish = async (id) => {
+    //     let response = await fetch(`/api/full-dishes/${id}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //           'Content-Type': 'application/json;charset=utf-8',
+    //         },
+    //     });
+    //     if (response.ok) {
+    //         handleOpenModal('Рецепт успешно удалён');
+    //     } else {
+    //         handleOpenModal('Блюдо с таким id не найдено');
+    //     }
+    // };
     
-    const handleDelete = (event) => {
-        event.preventDefault();
-        if (idDelete) {
-            deleteDish(idDelete);
-        }
-        setIdDelete('');
-    };
+    // const handleDelete = (event) => {
+    //     event.preventDefault();
+    //     if (idDelete) {
+    //         deleteDish(idDelete);
+    //     }
+    //     setIdDelete('');
+    // };
 
     const formDataIsValid = (dish) => {
         if (!dish.dish.title || dish.dish.title.length < 3) {
@@ -230,9 +232,9 @@ export const AddDishForm = () => {
 
     const handleChange = (event) => {
         switch (event.target.name) {
-            case 'id-delete' :
-                setIdDelete(event.target.value);
-                break;
+            // case 'id-delete' :
+            //     setIdDelete(event.target.value);
+            //     break;
             case 'title' :
                 setDish({ ...dish, dish:{ ...dish.dish, title: event.target.value }});
                 // setDish({...dish, title: event.target.value});
@@ -485,7 +487,8 @@ export const AddDishForm = () => {
                 </Button>
             </FormControl>
         <br/><hr/><br/>
-        <FormControl className={ classes.root }>
+        <DeleteDish/>
+        {/* <FormControl className={ classes.root }>
             <Typography component="h2" className={ classes.h2 }>Удаление рецепта:
             <Box className={ classes.fileName }>
                         (Будет доступно для пользователя с role = admin)
@@ -500,7 +503,7 @@ export const AddDishForm = () => {
                 name="id-delete"
                 onChange={ handleChange }/>
             <Button type="submit" onClick={ handleDelete } className= { classes.form_button } variant="contained">Удалить</Button>
-        </FormControl>
+        </FormControl> */}
     </>
     )
 }
