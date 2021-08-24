@@ -43,11 +43,11 @@ export const useStyles = makeStyles((theme) => ({
             color:' #fff',
         }
     },
-    searchBox:{
-        [theme.breakpoints.up(600)]:{
-            padding:'24px',
-        }
-    }
+    // searchBox:{
+    //     [theme.breakpoints.up(600)]:{
+    //         padding:'24px',
+    //     }
+    // }
 }));
 
 export const StyledMenu = withStyles({

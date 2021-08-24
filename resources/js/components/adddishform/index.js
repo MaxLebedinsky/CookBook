@@ -225,6 +225,7 @@ export const AddDishForm = () => {
             };
             reader.readAsDataURL(file);
         }
+        event.target.value = "";
     }
 
     const handleChange = (event) => {

@@ -19,11 +19,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     desc: {
        padding: 16,
-       boxSizing: 'borderBox',
        margin: "0 auto",
-      //  '&:last-child': {
-      //     paddingBottom: 10,
-      //  },
+       textAlign: 'left',
     },
     data: {
        fontSize: '0.8em',

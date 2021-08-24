@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor:'#3F51B5',
       color:'white'
    },
-   [theme.breakpoints.down(374)]: {
+   [theme.breakpoints.down(400)]: {
       listItem:{
          maxWidth: 300,
       }

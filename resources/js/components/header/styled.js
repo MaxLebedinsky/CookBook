@@ -9,6 +9,7 @@ export  const useStyles = makeStyles((theme) => ({
         width: '70%',
         // minHeight: 128,
         margin: '0 auto',
+        minHeight: '56px',
         [theme.breakpoints.up('md')]: {
             width: '50%',
         },
