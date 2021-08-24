@@ -59,23 +59,41 @@ export const FilterIngredients = () => {
          >
             <Fade in={ open }>
                <div className={ classes.paper }>
-                  <TextField
-                     value={ plusIngredients }
-                     label="+ Ингредиенты"
-                     variant="outlined"
-                     onChange={ handleChangePlusIng }
-                     onClick={ handleClickPlusIng }
-                  />
-                  <TextField
-                     value={ minusIngredients }
-                     label="- Ингредиенты"
-                     variant="outlined"
-                     onChange={ handleChangeMinusIng }
-                     onClick={ handleClickMinusIng }
-                  />
+                  <div>
+                     <label
+                        className={ classes.ingredientsLabel }
+                        htmlFor="include"
+                     >
+                        включить ингредиенты
+                     </label>
+                     <TextField
+                        id="include"
+                        value={ plusIngredients }
+                        label="+ Ингредиенты"
+                        variant="outlined"
+                        onChange={ handleChangePlusIng }
+                        onClick={ handleClickPlusIng }
+                     />
+                  </div>
+                  <div>
+                     <label
+                        className={ classes.ingredientsLabel }
+                        htmlFor="exclude"
+                     >
+                        исключить ингредиенты
+                     </label>
+                     <TextField
+                        id="exclude"
+                        value={ minusIngredients }
+                        label="- Ингредиенты"
+                        variant="outlined"
+                        onChange={ handleChangeMinusIng }
+                        onClick={ handleClickMinusIng }
+                     />
+                  </div>
                </div>
             </Fade>
          </Modal>
-      </div>
+      </div >
    );
 }

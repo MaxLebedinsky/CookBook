@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
    wrap: {
       display: 'flex',
+      margin: '0 auto',
    },
    root: {
       '& > *': {
@@ -37,4 +38,11 @@ export const useStyles = makeStyles((theme) => ({
       minWidth: 150,
       minHeight: 32,
    },
+   ingredientsLabel: {
+      display: 'block',
+      marginBottom: 15,
+      letterSpacing: 1,
+      textTransform: 'uppercase',
+      font: '700 10px/13px PT Serif,Georgia,serif',
+   }
 }));
