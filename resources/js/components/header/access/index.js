@@ -4,7 +4,7 @@ import {useStyles} from "./styled";
 import Login from "./login"
 import Logout from "./logout";
 import {useDispatch, useSelector} from "react-redux";
-import {isLogin, isLogout} from "../../../redux/access/actions";
+import {isLogin, isLogout, loggedUserData} from "../../../redux/access/actions";
 
 const Access = () => {
     const [open, setOpen] = React.useState(false);
@@ -22,6 +22,19 @@ const Access = () => {
     useEffect(() => {
         if (sessionStorage.getItem('authToken')) {
             setToken(sessionStorage.getItem('authToken'))
+            window.axios.get('/auth/me', {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
+                    }
+                }
+            )
+                .then((response) => {
+                    console.log(response.data.data)
+                    dispatch(loggedUserData(response.data.data))
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
         if (token !== "") {
             dispatch(isLogin(true))
