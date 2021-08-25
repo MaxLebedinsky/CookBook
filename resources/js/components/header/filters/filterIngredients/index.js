@@ -29,17 +29,18 @@ export const FilterIngredients = () => {
       dispatch(excludeIngredientsValue(e.target.value))
    }
 
-   const handleKeyPressPlusIng = (e) => {
-      if (e.key === 'Enter') {
-         dispatch(includeIngredients(plusIngredients.length > 0 ? plusIngredients.split(' ') : ""));
-      }
+   const handleReset = () => {
+      dispatch(includeIngredientsValue(''));
+      dispatch(excludeIngredientsValue(''));
+      dispatch(includeIngredients([]));
+      dispatch(excludeIngredients([]));
    };
 
-   const handleKeyPressMinusIng = (e) => {
-      if (e.key === 'Enter') {
-         dispatch(excludeIngredients(minusIngredients.length > 0 ? minusIngredients.split(' ') : ""));
-      }
-   }
+   const handleSetIngredients = () => {
+      dispatch(includeIngredients(plusIngredients.length > 0 ? plusIngredients.split(' ') : ""));
+      dispatch(excludeIngredients(minusIngredients.length > 0 ? minusIngredients.split(' ') : ""));
+   };
+
 
    const handleOpen = () => {
       setOpen(true);
@@ -85,7 +86,6 @@ export const FilterIngredients = () => {
                            label="+ Ингредиенты"
                            variant="outlined"
                            onChange={ handleChangePlusIng }
-                           onKeyPress={ handleKeyPressPlusIng }
                            color="secondary"
                         />
                      </div>
@@ -102,10 +102,26 @@ export const FilterIngredients = () => {
                            label="– Ингредиенты"
                            variant="outlined"
                            onChange={ handleChangeMinusIng }
-                           onKeyPress={ handleKeyPressMinusIng }
                            color="secondary"
                         />
                      </div>
+                  </div>
+                  <div className={ classes.ingredientsButtonsWrap }>
+                     <Button
+                        variant="contained"
+                        className={ classes.ingredientsButton }
+                        onClick={ handleReset }
+                     >
+                        Cброс
+                     </Button>
+                     <Button
+                        variant="contained"
+                        className={ classes.ingredientsButton }
+                        onClick={ handleSetIngredients }
+                     >
+                        Поиск
+                     </Button>
+
                   </div>
                </div>
             </Fade>

@@ -58,7 +58,7 @@ export const useStyles = makeStyles((theme) => ({
    },
    modalTitle: {
       textAlign: 'center',
-      margin: theme.spacing(1, 0 , 3),
+      margin: theme.spacing(1, 0, 3),
       textTransform: 'uppercase',
       fontSize: '1.2em',
       fontWeight: 'bold',
@@ -86,5 +86,19 @@ export const useStyles = makeStyles((theme) => ({
       color: myTheme.palette.text.primary,
       // font: '700 10px/13px PT Serif,Georgia,serif',
    },
+   ingredientsButtonsWrap: {
+      display: 'flex',
+      marginTop: 15,
+      justifyContent: 'space-around',
+      width: '100%',
+   },
+   ingredientsButton: {
+      display: 'block',
+      color: myTheme.palette.primary.light,
+      backgroundColor: myTheme.palette.text.secondary,
+      '&:hover': {
+         backgroundColor: myTheme.palette.secondary.main,
+      },
+   }
    // [theme.breakpoints,up]
 }));
