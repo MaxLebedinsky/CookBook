@@ -23,7 +23,13 @@ export const useStyles = makeStyles((theme) => ({
     },
     logo: {
         margin: 'auto',
-        padding: '0 24px 24px',
+        padding: '0 24px 8px',
+    },
+    title: {
+        fontSize: '0.7em',
+        textAlign: 'center',
+        marginBottom: '16px',
+        textTransform: 'uppercase',
     },
     addButton: {
         color: myTheme.palette.primary.light,

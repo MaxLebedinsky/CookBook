@@ -6,7 +6,7 @@ import Logo from './logo';
 import { useStyles } from "./styled";
 import Access from './access';
 import { Filters } from './filters';
-import { Box, Button, Modal, ThemeProvider } from '@material-ui/core';
+import { Box, Button, Modal, ThemeProvider, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { myTheme } from '../adddishform/styled';
 
@@ -47,6 +47,7 @@ const Header = () => {
                         </Button>
                     </Box>
                     <Logo/>
+                    <Typography color="textPrimary" className={ classes.title }>Книга кулинарных рецептов</Typography>
                     <Toolbar className={ classes.toolbar }>
                         <SearchField />
                     </Toolbar>
