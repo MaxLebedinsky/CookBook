@@ -29,7 +29,7 @@ const SearchField = () => {
                         value={value}
                         onChange={handleChange}
                         type="text"
-                        placeholder="Search ..."/>
+                        placeholder="Поиск ..."/>
                 </form>
             </div>
         </div>

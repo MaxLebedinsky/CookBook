@@ -4,7 +4,7 @@ import {Card} from 'reactstrap';
 import {DishRating} from '../dishcardlist/dishcard/dishrating';
 import {DishComplexity} from '../dishcardlist/dishcard/dishcomplexity';
 import {getDateString} from '../dishcardlist/dishcard';
-import {MAX_CAT_NAME_LENGTH, MAX_TITLE_LENGTH} from './const';
+import {MAX_CAT_NAME_LENGTH} from './const';
 import {useStyles} from './styled';
 import Layout from "../layout";
 import {useSelector} from "react-redux";
@@ -22,40 +22,40 @@ export const Dish = () => {
                            image={dish.big_img}
                 />
                 <CardContent className={classes.desc}>
-                    <Typography component="h1" className={classes.title}>
-                        {dish.title.slice(0, MAX_TITLE_LENGTH - 1)}
+                    <Typography component="h1" className={classes.title} color="textPrimary">
+                        {dish.title}
                     </Typography>
-                    <Typography
-                        color="textSecondary"
-                        className={classes.data}>
+                    <Typography color="textSecondary" className={classes.data}>
                         {dish.description}<br/><br/>
+                    </Typography>
+                    <Typography color="textPrimary" className={classes.data}>
                         Рейтинг:<DishRating rating={+dish.rating.toFixed(1)} changeable={true}/><br/>
                         Сложность:<DishComplexity complexity={dish.complexity}/><br/>
-                        <b>{dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1)}</b><br/>
-                        Автор: {dish.user.name}<br/>
+                        Категория: <b>{dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1)}</b><br/>
+                        Автор: <b>{dish.user.name}</b><br/>
                         Опубликовано: {getDateString(dish.created_at)}
                     </Typography>
                 </CardContent>
             </Card>
 
-            <Typography component="h2" className={classes.listTitle}>
+            <Typography component="h2" className={classes.listTitle} color="textPrimary">
                 Ингредиенты:
             </Typography>
 
             <List className={classes.list}>
                 {dish.ingredients.map((item) => (
                     <ListItem className={classes.listItem} key={item.id}>
-                        {item.ingredients_name}
+                        <Typography color="textPrimary">{item.ingredients_name}</Typography>
                         <Box className={classes.dots}/>
-                        <Box className={classes.amount}>
+                        <Typography className={classes.amount} color="textPrimary">
                             {item.quantity} {` `}
                             {item.measure.name}
-                        </Box>
+                        </Typography>
                     </ListItem>
                 ))}
             </List>
 
-            <Typography component="h2" className={classes.listTitle}>
+            <Typography component="h2" className={classes.listTitle} color="textPrimary">
                 Рецепт:
             </Typography>
 
@@ -68,8 +68,10 @@ export const Dish = () => {
                                        alt={`шаг №${item.step_number}`}
                                        image={item.img}/>
                             <CardContent className={classes.stepText}>
-                                {item.step_number}{`. `}
-                                {item.text}
+                                <Typography color="textPrimary">
+                                    {item.step_number}{`. `}
+                                    {item.text}
+                                </Typography>
                             </CardContent>
                         </Card>
                     </ListItem>

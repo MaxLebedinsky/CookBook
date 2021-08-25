@@ -53,16 +53,17 @@ const Login = (props) => {
                           open={open} setToken={props.setToken} token={props.token}/>
                 :
                 <>
-                    <DialogTitle id="simple-dialog-title">Войти</DialogTitle>
+                    <DialogTitle id="simple-dialog-title">Вход</DialogTitle>
                     <form className={classes.loginForm} onSubmit={handleLogin}>
-                        <TextField type="email" id="email-input" label="Email" value={email} onChange={handleEmail}/>
+                        <TextField type="email" id="email-input" label="Email" value={email} 
+                                onChange={handleEmail} color="secondary" className={ classes.modalInput }/> <br/>
                         <TextField type="password" id="password-input" label="Password" value={password}
-                                   onChange={handlePassword}/>
+                                onChange={handlePassword} color="secondary" className={ classes.modalInput }/> <br/>
                         <div className={classes.loginButtonsContainer}>
-                            <Button variant='outlined' type="submit">Login</Button>
+                            <Button variant='contained' type="submit" color="secondary">Войти</Button>
                         </div>
                         <Typography>
-                            <Link onClick={handleShowRegisterForm}>
+                            <Link onClick={handleShowRegisterForm} color="textPrimary" className={ classes.modalLink }>
                                 Зарегистрироваться
                             </Link>
                         </Typography>

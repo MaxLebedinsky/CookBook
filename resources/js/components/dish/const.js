@@ -108,6 +108,8 @@ export const TEST_DISH_FOR_POST = {
 
 };
 
+export const ADMIN_USER_ID = 53;
+
 export const TEST_DISH_FOR_POST_2 = {
     "title":"Мясо по-французски с сыром и картофелем",
     "big_img":"https://via.placeholder.com/640x480.png/0066aa?text=dishes+temporibus",

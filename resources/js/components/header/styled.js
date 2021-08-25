@@ -1,4 +1,5 @@
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
+import { myTheme } from "../adddishform/styled";
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,18 +16,28 @@ export const useStyles = makeStyles((theme) => ({
         width: '70%',
         // minHeight: 128,
         margin: '0 auto',
+        minHeight: '56px',
         [theme.breakpoints.up('md')]: {
             width: '50%',
         },
     },
     logo: {
         margin: 'auto',
-        padding: '0 24px 24px',
+        padding: '0 24px 8px',
+    },
+    title: {
+        fontSize: '0.7em',
+        textAlign: 'center',
+        marginBottom: '16px',
+        textTransform: 'uppercase',
     },
     addButton: {
-        color: 'white',
-        backgroundColor: 'transparent',
+        color: myTheme.palette.primary.light,
+        backgroundColor: myTheme.palette.text.secondary,
         margin: '16px',
+        '&:hover': {
+            backgroundColor: myTheme.palette.secondary.main,
+        },
     },
     topNav: {
         display: 'flex',

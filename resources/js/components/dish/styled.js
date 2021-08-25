@@ -10,23 +10,20 @@ export const useStyles = makeStyles((theme) => ({
     },
     image: {
        width: 365,
- 
+       margin: theme.spacing(2, 0),
     },
     title: {
        fontWeight: 700,
-       marginBottom: 6,
+       margin: theme.spacing(2, 0, 4),
        fontSize: '1.5em',
+       textTransform: 'uppercase',
     },
     desc: {
        padding: 16,
-       boxSizing: 'borderBox',
        margin: "0 auto",
-      //  '&:last-child': {
-      //     paddingBottom: 10,
-      //  },
+       textAlign: 'left',
     },
     data: {
-       fontSize: '0.8em',
        lineHeight: '1.8em',
     },
     list: {
@@ -35,6 +32,8 @@ export const useStyles = makeStyles((theme) => ({
     listTitle: {
        textAlign: 'center',
        fontWeight: 700,
+       margin: theme.spacing(2, 0),
+       textTransform: 'uppercase',
     },
     listItem: {
        paddingBottom: 0,

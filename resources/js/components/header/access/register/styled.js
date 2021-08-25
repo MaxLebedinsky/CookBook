@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+import { myTheme } from "../../../adddishform/styled";
 
 export const useStyles = makeStyles(() => ({
     registerForm: {
@@ -10,5 +11,12 @@ export const useStyles = makeStyles(() => ({
     },
     registerButton:{
         margin:'16px'
-    }
+    },
+    modalLink: {
+        '&:hover': {
+            color: myTheme.palette.secondary.main,
+            textDecoration: 'none',
+            cursor: 'pointer',
+        }
+    },
 }));

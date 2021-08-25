@@ -1,4 +1,27 @@
-import {makeStyles} from "@material-ui/core/styles";
+import {createTheme, makeStyles} from "@material-ui/core/styles";
+
+export const myTheme = createTheme({
+    palette: {
+      primary: {
+        light: '#fffff3',
+        main: '#f4dac0',
+        dark: '#c1a890',
+        contrastText: '#4f2c1b',
+      },
+      secondary: {
+        light: '#ffa844',
+        main: '#dc780b',
+        dark: '#a44b00',
+        contrastText: '#fff',
+      },
+      text: {
+          primary: '#442617',
+          secondary: '#a6907b',
+        // primary: '#cc2617',
+        // secondary: '#dd907b',
+      },
+    },
+  });
 
 export  const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,6 +40,11 @@ export  const useStyles = makeStyles((theme) => ({
     },
     hidden: {
         display: 'none',
+    },
+    formHeader: {
+        width: '100%',
+        backgroundColor: myTheme.palette.primary.main,
+        padding: theme.spacing(1, 2),
     },
     imagePreviewContainer: {
         width: 200,
@@ -44,11 +72,16 @@ export  const useStyles = makeStyles((theme) => ({
         fontSize: '2em',
     },
     form_button: {
-        textTransform: 'none',
+        // textTransform: 'none',
+        color: myTheme.palette.primary.light,
+        backgroundColor: myTheme.palette.text.secondary,
+        '&:hover': {
+            backgroundColor: myTheme.palette.secondary.main,
+        },
         margin: theme.spacing(2, 4),
     },
     save_button: {
-        margin: theme.spacing(2, 4),
+        margin: theme.spacing(2, 4, 6),
         height: '64px',
     },
     back_button: {
@@ -56,12 +89,14 @@ export  const useStyles = makeStyles((theme) => ({
     },
     h1: {
         fontWeight: 700,
-        fontSize: '1.4em',
+        fontSize: '1.6em',
         margin: theme.spacing(3, 'auto'),
+        textTransform: 'uppercase',
     },
     h2: {
         margin: theme.spacing(3, 'auto'),
-        fontSize: '1.2em',
+        fontSize: '1.4em',
+        textTransform: 'uppercase',
     },
     radio: {
         marginLeft: '16px',

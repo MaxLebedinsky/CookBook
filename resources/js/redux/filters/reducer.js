@@ -21,7 +21,7 @@ const initialState = {
    filterCategoryValue: '',
    filterOrderValue: "created_at",
    includeIngredientsValue: '',
-   excludeIngredietnsValue: '',
+   excludeIngredientsValue: '',
 }
 
 export const filtersReducer = (state = initialState, action) => {

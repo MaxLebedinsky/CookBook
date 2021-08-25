@@ -11,6 +11,7 @@ import {
    excludeIngredientsValue,
 } from '../../../../redux/filters/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, Typography } from '@material-ui/core';
 
 
 export const FilterIngredients = () => {
@@ -18,7 +19,7 @@ export const FilterIngredients = () => {
    const dispatch = useDispatch();
    const [open, setOpen] = useState(false);
    const plusIngredients = useSelector(state => state.filters.includeIngredientsValue);
-   const minusIngredients = useSelector(state => state.filters.excludeIngredietnsValue);
+   const minusIngredients = useSelector(state => state.filters.excludeIngredientsValue);
 
    const handleChangePlusIng = (e) => {
       dispatch(includeIngredientsValue(e.target.value))
@@ -50,9 +51,9 @@ export const FilterIngredients = () => {
 
    return (
       <div>
-         <button type="button" className={ classes.button } onClick={ handleOpen }>
+         <Button type="button" className={ classes.button } onClick={ handleOpen }>
             Ингредиенты
-         </button>
+         </Button>
          <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -67,37 +68,44 @@ export const FilterIngredients = () => {
          >
             <Fade in={ open }>
                <div className={ classes.paper }>
-                  <div className={ classes.ingredientsWrap }>
-                     <label
-                        className={ classes.ingredientsLabel }
-                        htmlFor="include"
-                     >
-                        включить ингредиенты
-                     </label>
-                     <TextField
-                        id="include"
-                        value={ plusIngredients }
-                        label="+ Ингредиенты"
-                        variant="outlined"
-                        onChange={ handleChangePlusIng }
-                        onKeyPress={ handleKeyPressPlusIng }
-                     />
-                  </div>
-                  <div>
-                     <label
-                        className={ classes.ingredientsLabel }
-                        htmlFor="exclude"
-                     >
-                        исключить ингредиенты
-                     </label>
-                     <TextField
-                        id="exclude"
-                        value={ minusIngredients }
-                        label="- Ингредиенты"
-                        variant="outlined"
-                        onChange={ handleChangeMinusIng }
-                        onKeyPress={ handleKeyPressMinusIng }
-                     />
+                  <Typography className={ classes.modalTitle } color="textPrimary">
+                     Показать рецепты
+                  </Typography>
+                  <div className={ classes.filtersContainer }>
+                     <div className={ classes.ingredientsWrap }>
+                        <label
+                           className={ classes.ingredientsLabel }
+                           htmlFor="include"
+                        >
+                           содержащие
+                        </label>
+                        <TextField
+                           id="include"
+                           value={ plusIngredients }
+                           label="+ Ингредиенты"
+                           variant="outlined"
+                           onChange={ handleChangePlusIng }
+                           onKeyPress={ handleKeyPressPlusIng }
+                           color="secondary"
+                        />
+                     </div>
+                     <div className={ classes.ingredientsWrap }>
+                        <label
+                           className={ classes.ingredientsLabel }
+                           htmlFor="exclude"
+                        >
+                           не содержащие
+                        </label>
+                        <TextField
+                           id="exclude"
+                           value={ minusIngredients }
+                           label="– Ингредиенты"
+                           variant="outlined"
+                           onChange={ handleChangeMinusIng }
+                           onKeyPress={ handleKeyPressMinusIng }
+                           color="secondary"
+                        />
+                     </div>
                   </div>
                </div>
             </Fade>
