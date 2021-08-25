@@ -6,7 +6,11 @@ import {
     filterOrder,
     filterCategory,
     includeIngredients,
-    excludeIngredients
+    excludeIngredients,
+    filterCategoryValue,
+    filterOrderValue,
+    includeIngredientsValue,
+    excludeIngredientsValue,
 } from '../../redux/filters/actions';
 import { useDispatch } from "react-redux";
 
@@ -17,18 +21,21 @@ const Logo = () => {
 
     const handleResetFilters = () => {
         dispatch(searchTitle(''));
-        dispatch(filterOrder('rating'));
+        dispatch(filterOrder('created_at'));
         dispatch(filterCategory(''));
         dispatch(includeIngredients([]));
         dispatch(excludeIngredients([]));
-        window.location.reload();
+        dispatch(filterCategoryValue(''));
+        dispatch(filterOrderValue('created_at'));
+        dispatch(includeIngredientsValue(''));
+        dispatch(excludeIngredientsValue(''));
     };
 
     return (
         <Link
             to="/"
             className={ classes.logo }
-            onClick={ () => handleResetFilters }
+            onClick={ handleResetFilters }
         >
         <svg xmlns="http://www.w3.org/2000/svg" width="120" viewBox="0 0 119.41 113.04" fill="#442617">
             <polygon points="100.65 83.63 117.68 83.63 111.91 74.92 111.74 74.66 111.91 74.41 117.68 65.6 106.16 65.6 106.16 64.66 118.54 

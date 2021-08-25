@@ -4,9 +4,13 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
-import { includeIngredients } from '../../../../redux/filters/actions';
-import { excludeIngredients } from '../../../../redux/filters/actions';
-import { useDispatch } from 'react-redux';
+import {
+   includeIngredients,
+   excludeIngredients,
+   includeIngredientsValue,
+   excludeIngredientsValue,
+} from '../../../../redux/filters/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Typography } from '@material-ui/core';
 
 
@@ -14,26 +18,26 @@ export const FilterIngredients = () => {
    const classes = useStyles();
    const dispatch = useDispatch();
    const [open, setOpen] = useState(false);
-   const [plusIngredients, setPlusIngredients] = useState('');
-   const [minusIngredients, setMinusIngredients] = useState('');
+   const plusIngredients = useSelector(state => state.filters.includeIngredientsValue);
+   const minusIngredients = useSelector(state => state.filters.excludeIngredientsValue);
 
    const handleChangePlusIng = (e) => {
-      setPlusIngredients(e.target.value)
+      dispatch(includeIngredientsValue(e.target.value))
    }
 
    const handleChangeMinusIng = (e) => {
-      setMinusIngredients(e.target.value)
+      dispatch(excludeIngredientsValue(e.target.value))
    }
 
    const handleKeyPressPlusIng = (e) => {
       if (e.key === 'Enter') {
-         dispatch(includeIngredients(plusIngredients.split(' ')));
+         dispatch(includeIngredients(plusIngredients.length > 0 ? plusIngredients.split(' ') : ""));
       }
    };
 
    const handleKeyPressMinusIng = (e) => {
       if (e.key === 'Enter') {
-         dispatch(excludeIngredients(minusIngredients.split(' ')));
+         dispatch(excludeIngredients(minusIngredients.length > 0 ? minusIngredients.split(' ') : ""));
       }
    }
 
@@ -65,10 +69,10 @@ export const FilterIngredients = () => {
             <Fade in={ open }>
                <div className={ classes.paper }>
                   <Typography className={ classes.modalTitle } color="textPrimary">
-                        Показать рецепты
+                     Показать рецепты
                   </Typography>
-                  <div className={ classes.filtersContainer}>
-                     <div className={classes.ingredientsWrap}>
+                  <div className={ classes.filtersContainer }>
+                     <div className={ classes.ingredientsWrap }>
                         <label
                            className={ classes.ingredientsLabel }
                            htmlFor="include"
@@ -85,7 +89,7 @@ export const FilterIngredients = () => {
                            color="secondary"
                         />
                      </div>
-                     <div className={classes.ingredientsWrap}>
+                     <div className={ classes.ingredientsWrap }>
                         <label
                            className={ classes.ingredientsLabel }
                            htmlFor="exclude"
