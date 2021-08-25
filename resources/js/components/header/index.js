@@ -7,7 +7,6 @@ import { useStyles } from "./styled";
 import Access from './access';
 import { Filters } from './filters';
 import { Box, Button, Modal, ThemeProvider } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { myTheme } from '../adddishform/styled';
 
@@ -47,13 +46,14 @@ const Header = () => {
                             Добавить рецепт
                         </Button>
                     </Box>
-                <Logo/>
-                <Toolbar className={ classes.toolbar }>
-                    <SearchField />
-                </Toolbar>
-                <Filters />
-            </AppBar>
-        </div>
+                    <Logo/>
+                    <Toolbar className={ classes.toolbar }>
+                        <SearchField />
+                    </Toolbar>
+                    <Filters />
+                </AppBar>
+            </div>
+        </ThemeProvider>
     );
 }
 
