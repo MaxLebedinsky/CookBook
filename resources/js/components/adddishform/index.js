@@ -49,9 +49,9 @@ export const AddDishForm = () => {
 
     const postDish = async (dish) => {
         setUploadFinished(false);
-        console.log('id before post: ', userData);
+        // console.log('id before post: ', userData);
         dish.dish.user_id = userData.id;
-        let response = await fetch('/api/full-dishes/', {
+        let response = await fetch('/api/full-dishes', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
