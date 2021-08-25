@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {useStyles} from './styled';
-import {DishCard} from './dishcard';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useStyles } from './styled';
+import { DishCard } from './dishcard';
+import { useDispatch, useSelector } from 'react-redux';
 import Layout from "../layout";
-import {Button} from '@material-ui/core';
-import {getDishes} from "../../redux/dishes/actions";
+import { Button } from '@material-ui/core';
+import { getDishes } from "../../redux/dishes/actions";
 
 export const DishCardList = () => {
     const dispatch = useDispatch();
@@ -34,16 +34,14 @@ export const DishCardList = () => {
                 return ` "${ingredient}"`
             }
         })}]`
-        console.log(string)
         return string
     }
 
-    
-    
+    const filterEndpoint = `/full-dishes/search?sort=-${filterOrder}${filterCategory === "" ? "" : `&category_id=${filterCategory}`}${searchTitle === "" ? "" : `&title=${searchTitle}`}${includeIngredients.length === 0 ? "" : `&includes=${ingredientsArrToString(includeIngredients)}`}${excludeIngredients.length === 0 ? "" : `&excludes=${ingredientsArrToString(excludeIngredients)}`}`;
+
 
     useEffect(() => {
         setIsFilter(true);
-        const filterEndpoint = `/full-dishes/search?sort=-${filterOrder}${filterCategory === "" ? "" : `&category_id=${filterCategory}`}${searchTitle === "" ? "" : `&title=${searchTitle}`}${includeIngredients.length === 0 ? "" : `&includes=${ingredientsArrToString(includeIngredients)}`}${excludeIngredients.length === 0 ? "" : `&excludes=${ingredientsArrToString(excludeIngredients)}`}`;
         dispatch(getDishes(filterEndpoint));
         console.log(filterEndpoint)
     }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
@@ -54,7 +52,7 @@ export const DishCardList = () => {
             setIsLastPage(true)
         } else {
             setIsLastPage(false)
-            dispatch(getDishes(links.next))
+            dispatch(getDishes(`${filterEndpoint}&page=${links.next.slice(-1)}`))
         }
     }
 
@@ -86,19 +84,19 @@ export const DishCardList = () => {
 
     return (
         <Layout>
-            {isLoaded ?
+            { isLoaded ?
                 <>
-                    <ul className={classes.list}>
+                    <ul className={ classes.list }>
                         {
                             loadedDishes.map((dish, index) => (
-                                <li className={classes.listItem} key={index}>
-                                    <DishCard dish={dish}/>
+                                <li className={ classes.listItem } key={ index }>
+                                    <DishCard dish={ dish } />
                                 </li>
                             ))
                         }
                     </ul>
-                    {isLastPage ? <></> :
-                        <Button className={classes.showMoreButton} onClick={handleShowMore} variant="contained">Больше
+                    { isLastPage ? <></> :
+                        <Button className={ classes.showMoreButton } onClick={ handleShowMore } variant="contained">Больше
                             рецептов</Button>
                     }</>
                 :
