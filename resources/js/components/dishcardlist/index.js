@@ -26,13 +26,13 @@ export const DishCardList = () => {
     const ingredientsArrToString = (arr) => (
         arr.map(ingredient => {
             if (arr === includeIngredients) {
-                return `&includes[]="${ingredient}"`
+                return `&includes[]=${ingredient}`
             } else {
-                return `&excludes[]="${ingredient}"`
+                return `&excludes[]=${ingredient}`
             }
         }).join('')
     )
-    
+
     const filterEndpoint = `/full-dishes/search?sort=-${filterOrder}${filterCategory === "" ? "" : `&category_id=${filterCategory}`}${searchTitle === "" ? "" : `&title=${searchTitle}`}${includeIngredients.length === 0 ? "" : ingredientsArrToString(includeIngredients)}${excludeIngredients.length === 0 ? "" : ingredientsArrToString(excludeIngredients)}`;
 
 
