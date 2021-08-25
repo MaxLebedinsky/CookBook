@@ -52,7 +52,6 @@ export const Dish = () => {
                             {item.measure.name}
                         </Box>
                     </ListItem>
-                    // <div key={item.id}>{item.id} {item.ingredients_name} { item.quantity } { item.measure.name }</div>
                 ))}
             </List>
 
