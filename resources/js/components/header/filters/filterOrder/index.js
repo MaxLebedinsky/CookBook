@@ -9,7 +9,7 @@ import { filterOrder } from '../../../../redux/filters/actions';
 
 const ordersList = [
    { name: "Рейтинг", value: "rating" },
-   { name: "Новизна", value: "date" },
+   { name: "Новизна", value: "created_at" },
 ]
 
 
