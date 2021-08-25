@@ -21,5 +21,15 @@ export const useStyles = makeStyles(() => ({
         margin: '16px',
         display: "flex",
         justifyContent: "space-between"
+    },
+    modalLink: {
+        '&:hover': {
+            color: myTheme.palette.secondary.main,
+            textDecoration: 'none',
+            cursor: 'pointer',
+        }
+    },
+    modalInput: {
+        margin: '0, 0, 24px',
     }
 }));

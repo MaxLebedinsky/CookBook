@@ -58,13 +58,17 @@ const Register = (props) => {
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <DialogTitle id="simple-dialog-title">Регистрация</DialogTitle>
             <form className={classes.registerForm} onSubmit={handleRegister}>
-                <TextField type="text" id="name-input" label="Name" value={name} onChange={handleName}/>
-                <TextField type="email" id="email-input" label="Email" value={email} onChange={handleEmail} />
-                <TextField type="password" id="password-input" label="Password" value={password} onChange={handlePassword}/>
-                <TextField type="password" id="password-repeat-input" label="Repeat password" value={confirm_password} onChange={handleRepeatPassword} />
-                <Button className={classes.registerButton} variant='outlined' type="submit">Регистрация</Button>
+                <TextField type="text" id="name-input" label="Name" value={name} 
+                        onChange={handleName} color="secondary"/><br/>
+                <TextField type="email" id="email-input" label="Email" value={email} 
+                        onChange={handleEmail} color="secondary"/><br/>
+                <TextField type="password" id="password-input" label="Password" value={password} 
+                        onChange={handlePassword} color="secondary"/>
+                <TextField type="password" id="password-repeat-input" label="Repeat password" value={confirm_password} 
+                        onChange={handleRepeatPassword} color="secondary"/>
+                <Button className={classes.registerButton} variant='contained' color="secondary" type="submit">Регистрация</Button>
                 <Typography>
-                    <Link onClick={handleShowLoginForm}>
+                    <Link onClick={handleShowLoginForm} color="textPrimary" className={ classes.modalLink }>
                         Войти
                     </Link>
                 </Typography>
