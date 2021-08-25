@@ -97,7 +97,7 @@ export const DishCardList = () => {
                         </Button>
                     }</>
                 :
-                <></>
+                <>Загрузка рецептов...</>
             }
         </Layout>
     )
