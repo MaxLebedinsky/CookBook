@@ -7,6 +7,8 @@ import {
    USER_ID,
    FILTER_CATEGORY_VALUE,
    FILTER_ORDER_VALUE,
+   INCLUDE_INGREDIENTS_VALUE,
+   EXCLUDE_INGREDIENTS_VALUE
 } from "./actions";
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
    userId: "",
    filterCategoryValue: '',
    filterOrderValue: "created_at",
+   includeIngredientsValue: '',
+   excludeIngredietnsValue: '',
 }
 
 export const filtersReducer = (state = initialState, action) => {
@@ -68,6 +72,18 @@ export const filtersReducer = (state = initialState, action) => {
          return {
             ...state,
             filterOrderValue: action.payload,
+         }
+      }
+      case INCLUDE_INGREDIENTS_VALUE: {
+         return {
+            ...state,
+            includeIngredientsValue: action.payload,
+         }
+      }
+      case EXCLUDE_INGREDIENTS_VALUE: {
+         return {
+            ...state,
+            excludeIngredientsValue: action.payload,
          }
       }
       default:

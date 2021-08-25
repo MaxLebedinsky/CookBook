@@ -4,24 +4,28 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
-import { includeIngredients } from '../../../../redux/filters/actions';
-import { excludeIngredients } from '../../../../redux/filters/actions';
-import { useDispatch } from 'react-redux';
+import {
+   includeIngredients,
+   excludeIngredients,
+   includeIngredientsValue,
+   excludeIngredientsValue,
+} from '../../../../redux/filters/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export const FilterIngredients = () => {
    const classes = useStyles();
    const dispatch = useDispatch();
    const [open, setOpen] = useState(false);
-   const [plusIngredients, setPlusIngredients] = useState('');
-   const [minusIngredients, setMinusIngredients] = useState('');
+   const plusIngredients = useSelector(state => state.filters.includeIngredientsValue);
+   const minusIngredients = useSelector(state => state.filters.excludeIngredietnsValue);
 
    const handleChangePlusIng = (e) => {
-      setPlusIngredients(e.target.value)
+      dispatch(includeIngredientsValue(e.target.value))
    }
 
    const handleChangeMinusIng = (e) => {
-      setMinusIngredients(e.target.value)
+      dispatch(excludeIngredientsValue(e.target.value))
    }
 
    const handleKeyPressPlusIng = (e) => {
