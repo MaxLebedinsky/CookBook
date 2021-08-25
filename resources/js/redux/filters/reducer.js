@@ -5,16 +5,23 @@ import {
    INCLUDE_INGREDIENTS,
    EXCLUDE_INGREDIENTS,
    USER_ID,
+   FILTER_CATEGORY_VALUE,
+   FILTER_ORDER_VALUE,
+   INCLUDE_INGREDIENTS_VALUE,
+   EXCLUDE_INGREDIENTS_VALUE
 } from "./actions";
 
 const initialState = {
    searchTitle: "",
-   filterOrder: "rating",
+   filterOrder: "created_at",
    filterCategory: "",
    includeIngredients: [],
    excludeIngredietns: [],
    userId: "",
-
+   filterCategoryValue: '',
+   filterOrderValue: "created_at",
+   includeIngredientsValue: '',
+   excludeIngredientsValue: '',
 }
 
 export const filtersReducer = (state = initialState, action) => {
@@ -54,6 +61,30 @@ export const filtersReducer = (state = initialState, action) => {
             ...state,
             userId: action.payload,
          };
+      }
+      case FILTER_CATEGORY_VALUE: {
+         return {
+            ...state,
+            filterCategoryValue: action.payload,
+         }
+      }
+      case FILTER_ORDER_VALUE: {
+         return {
+            ...state,
+            filterOrderValue: action.payload,
+         }
+      }
+      case INCLUDE_INGREDIENTS_VALUE: {
+         return {
+            ...state,
+            includeIngredientsValue: action.payload,
+         }
+      }
+      case EXCLUDE_INGREDIENTS_VALUE: {
+         return {
+            ...state,
+            excludeIngredientsValue: action.payload,
+         }
       }
       default:
          return state;
