@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
         padding: '0 24px 24px',
     },
     addButton: {
-        color: 'white',
+        color: myTheme.palette.primary.light,
         backgroundColor: myTheme.palette.text.secondary,
         margin: '16px',
         '&:hover': {

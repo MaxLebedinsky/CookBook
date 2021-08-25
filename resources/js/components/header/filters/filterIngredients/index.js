@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import { includeIngredients } from '../../../../redux/filters/actions';
 import { excludeIngredients } from '../../../../redux/filters/actions';
 import { useDispatch } from 'react-redux';
+import { Button, Typography } from '@material-ui/core';
 
 
 export const FilterIngredients = () => {
@@ -46,9 +47,9 @@ export const FilterIngredients = () => {
 
    return (
       <div>
-         <button type="button" className={ classes.button } onClick={ handleOpen }>
+         <Button type="button" className={ classes.button } onClick={ handleOpen }>
             Ингредиенты
-         </button>
+         </Button>
          <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -63,37 +64,44 @@ export const FilterIngredients = () => {
          >
             <Fade in={ open }>
                <div className={ classes.paper }>
-                  <div className={classes.ingredientsWrap}>
-                     <label
-                        className={ classes.ingredientsLabel }
-                        htmlFor="include"
-                     >
-                        включить ингредиенты
-                     </label>
-                     <TextField
-                        id="include"
-                        value={ plusIngredients }
-                        label="+ Ингредиенты"
-                        variant="outlined"
-                        onChange={ handleChangePlusIng }
-                        onKeyPress={ handleKeyPressPlusIng }
-                     />
-                  </div>
-                  <div className={classes.ingredientsWrap}>
-                     <label
-                        className={ classes.ingredientsLabel }
-                        htmlFor="exclude"
-                     >
-                        исключить ингредиенты
-                     </label>
-                     <TextField
-                        id="exclude"
-                        value={ minusIngredients }
-                        label="- Ингредиенты"
-                        variant="outlined"
-                        onChange={ handleChangeMinusIng }
-                        onKeyPress={ handleKeyPressMinusIng }
-                     />
+                  <Typography className={ classes.modalTitle } color="textPrimary">
+                        Показать рецепты
+                  </Typography>
+                  <div className={ classes.filtersContainer}>
+                     <div className={classes.ingredientsWrap}>
+                        <label
+                           className={ classes.ingredientsLabel }
+                           htmlFor="include"
+                        >
+                           содержащие
+                        </label>
+                        <TextField
+                           id="include"
+                           value={ plusIngredients }
+                           label="+ Ингредиенты"
+                           variant="outlined"
+                           onChange={ handleChangePlusIng }
+                           onKeyPress={ handleKeyPressPlusIng }
+                           color="secondary"
+                        />
+                     </div>
+                     <div className={classes.ingredientsWrap}>
+                        <label
+                           className={ classes.ingredientsLabel }
+                           htmlFor="exclude"
+                        >
+                           не содержащие
+                        </label>
+                        <TextField
+                           id="exclude"
+                           value={ minusIngredients }
+                           label="– Ингредиенты"
+                           variant="outlined"
+                           onChange={ handleChangeMinusIng }
+                           onKeyPress={ handleKeyPressMinusIng }
+                           color="secondary"
+                        />
+                     </div>
                   </div>
                </div>
             </Fade>
