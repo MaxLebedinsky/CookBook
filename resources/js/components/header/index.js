@@ -2,20 +2,15 @@ import React, { useState } from 'react';
 import SearchField from "./searchfield";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Logo from './logo'
+import Logo from './logo';
 import { useStyles } from "./styled";
-import PropTypes from 'prop-types';
-import Access from './access'
-import { Box, Button, Modal, ThemeProvider } from '@material-ui/core';
+import Access from './access';
+import { Filters } from './filters';
+import { Box, Button, Modal, ThemeProvider, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { myTheme } from '../adddishform/styled';
 
-const Header = ({ handleSetCategory, handleSetDishSearch }) => {
-
-    Header.propTypes = {
-        handleSetCategory: PropTypes.func,
-        handleSetDishSearch: PropTypes.func
-    }
+const Header = () => {
 
     const classes = useStyles();
     const loginStatus = useSelector(state => state.access.loginStatus)
@@ -51,16 +46,12 @@ const Header = ({ handleSetCategory, handleSetDishSearch }) => {
                             Добавить рецепт
                         </Button>
                     </Box>
-                    <Logo
-                        handleSetCategory={ handleSetCategory }
-                        handleSetDishSearch={ handleSetDishSearch }
-                    />
+                    <Logo/>
+                    <Typography color="textPrimary" className={ classes.title }>Книга кулинарных рецептов</Typography>
                     <Toolbar className={ classes.toolbar }>
-                        <SearchField
-                            handleSetCategory={ handleSetCategory }
-                            handleSetDishSearch={ handleSetDishSearch }
-                        />
+                        <SearchField />
                     </Toolbar>
+                    <Filters />
                 </AppBar>
             </div>
         </ThemeProvider>

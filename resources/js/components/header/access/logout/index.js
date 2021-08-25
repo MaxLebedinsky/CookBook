@@ -37,9 +37,9 @@ const Logout = (props) => {
     const classes = useStyles();
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle id="simple-dialog-title">Выйти</DialogTitle>
+            <DialogTitle id="simple-dialog-title">Выход</DialogTitle>
             <form className={classes.loginForm} onSubmit={handleLogout}>
-                <Button variant='outlined' type="submit">Выйти</Button>
+                <Button variant='contained' color="secondary" type="submit">Выйти</Button>
             </form>
         </Dialog>
     );

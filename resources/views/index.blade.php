@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{'Laravel 8 with React 17 Boilerplate'}}</title>
+    <title>{{'CookBook - книга кулинарных рецептов'}}</title>
 
 </head>
 <body>
