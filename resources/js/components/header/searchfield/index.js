@@ -1,19 +1,13 @@
 import React, {useState} from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-// import FilterIcon from "./filtericon";
-// import Button from '@material-ui/core/Button';
-// import ListItemText from '@material-ui/core/ListItemText';
-import {useStyles} from "./styled";
+import { useStyles} from "./styled";
 import {useDispatch} from 'react-redux';
-// import {categoriesFilter} from '../../../redux/categories/actions';
-import {dishesSearchField} from '../../../redux/dishes/actions';
+import {searchTitle} from '../../../redux/filters/actions';
 
 const SearchField = () => {
 
-    // const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const [value, setValue] = useState('');
-    // const categories = useSelector(state => state.categories.categoryList)
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -22,21 +16,8 @@ const SearchField = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(dishesSearchField(value));
+        dispatch(searchTitle(value));
     };
-
-    // const handleClick = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    // };
-
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    // };
-
-    // const handleCategory = (categoryName) => {
-    //     dispatch(categoriesFilter(categoryName));
-    //     handleClose();
-    // };
 
     return (
         <div className={classes.searchBox}>
@@ -49,31 +30,6 @@ const SearchField = () => {
                         onChange={handleChange}
                         type="text"
                         placeholder="Поиск ..."/>
-                    {/* <Button
-                        className={classes.button}
-                        aria-controls="customized-menu"
-                        aria-haspopup="true"
-                        onClick={handleClick}
-                    >
-                        <FilterIcon/>
-                    </Button>
-                    <StyledMenu
-                        id="customized-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        {
-                            categories.map((category, index) => (
-                                <StyledMenuItem key={index}>
-                                    <ListItemText
-                                        onClick={() => handleCategory(category.name)}
-                                        primary={category.name}/>
-                                </StyledMenuItem>
-                            ))
-                        }
-                    </StyledMenu> */}
                 </form>
             </div>
         </div>

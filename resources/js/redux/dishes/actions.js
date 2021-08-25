@@ -35,19 +35,10 @@ export const dishesFailure = (error) => ({
     error,
 });
 
-export const dishesSearchField = (search) => ({
-    type: DISHES_SEARCH_FIELD,
-    search,
-})
-
-export const getDishes = (url='/full-dishes') => async (dispatch) => {
+export const getDishes = (filterEndpoint) => async (dispatch) => {
     dispatch(dishesRequest());
     try {
-        const response = await window.axios.get(url);
-
-        // if (!response.ok) {
-        //    throw new Error("request failed with status " + response.status);
-        // }
+        const response = await window.axios.get(filterEndpoint);
 
         dispatch(dishesSuccess(response.data.data));
         dispatch(dishesLinksSuccess(response.data.links));

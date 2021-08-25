@@ -11,55 +11,78 @@ export const DishCardList = () => {
     const classes = useStyles();
     const dishes = useSelector(state => state.dishes.dishes);
     const links = useSelector(state => state.dishes.links);
-    const category = useSelector(state => state.categories.categoryFilter);
-    const dishSearch = useSelector(state => state.dishes.search);
-    const [filteredDishes, setFilteredDishes] = useState([])
     const [loadedDishes, setLoadedDishes] = useState([]);
     const [isLastPage, setIsLastPage] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isFilter, setIsFilter] = useState(false);
+
+    const filterCategory = useSelector(state => state.filters.filterCategory);
+    const filterOrder = useSelector(state => state.filters.filterOrder);
+    const searchTitle = useSelector(state => state.filters.searchTitle);
+    const includeIngredients = useSelector(state => state.filters.includeIngredients);
+    const excludeIngredients = useSelector(state => state.filters.excludeIngredietns);
+    const userId = useSelector(state => state.filters.userId);
+
+    const ingredientsArrToString = (arr) => {
+        const string = `[${arr.map(ingredient => {
+            if (arr[0] === ingredient) {
+                return `"${ingredient}"`
+            }
+            else if (arr[arr.length - 1] === ingredient) {
+                return ` "${ingredient}"`
+            } else {
+                return ` "${ingredient}"`
+            }
+        })}]`
+        console.log(string)
+        return string
+    }
+
+    
+    
+
+    useEffect(() => {
+        setIsFilter(true);
+        const filterEndpoint = `/full-dishes/search?sort=-${filterOrder}${filterCategory === "" ? "" : `&category_id=${filterCategory}`}${searchTitle === "" ? "" : `&title=${searchTitle}`}${includeIngredients.length === 0 ? "" : `&includes=${ingredientsArrToString(includeIngredients)}`}${excludeIngredients.length === 0 ? "" : `&excludes=${ingredientsArrToString(excludeIngredients)}`}`;
+        dispatch(getDishes(filterEndpoint));
+        console.log(filterEndpoint)
+    }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
 
     const handleShowMore = () => {
+        setIsFilter(false)
         if (links.next === null) {
             setIsLastPage(true)
         } else {
+            setIsLastPage(false)
             dispatch(getDishes(links.next))
         }
     }
 
     useEffect(() => {
-        if (filteredDishes !== undefined) {
-            if (filteredDishes.length > 0) {
+        if (links.next === null) {
+            setIsLastPage(true)
+        } else {
+            setIsLastPage(false)
+        }
+        if (loadedDishes !== undefined) {
+            if (loadedDishes.length > 0) {
                 setIsLoaded(true)
             }
         }
-    }, [filteredDishes])
+    }, [loadedDishes])
 
     useEffect(() => {
         setIsLastPage(false)
-        setFilteredDishes(dishes)
+        setLoadedDishes(dishes)
     }, [])
 
     useEffect(() => {
-        setLoadedDishes(previousDishes => previousDishes.concat(dishes))
+        if (isFilter) {
+            setLoadedDishes(dishes)
+        } else {
+            setLoadedDishes(previousDishes => previousDishes.concat(dishes))
+        }
     }, [dishes])
-
-    useEffect(() => {
-            switch (true) {
-                case category === '' && dishSearch !== '':
-                    setFilteredDishes(loadedDishes.filter(dish => dish.title.match(dishSearch) != null));
-                    break
-                case category !== '' && dishSearch === '':
-                    setFilteredDishes(loadedDishes.filter(dish => dish.category.name === category))
-                    break
-                case category !== '' && dishSearch !== '':
-                    setFilteredDishes(loadedDishes.filter(dish => dish.category.name === category).filter(dish => dish.title.match(dishSearch) !== null))
-                    break;
-                default:
-                    setFilteredDishes(loadedDishes);
-                    break
-            }
-        }, [category, dishSearch, loadedDishes]
-    );
 
     return (
         <Layout>
@@ -67,7 +90,7 @@ export const DishCardList = () => {
                 <>
                     <ul className={classes.list}>
                         {
-                            filteredDishes.map((dish, index) => (
+                            loadedDishes.map((dish, index) => (
                                 <li className={classes.listItem} key={index}>
                                     <DishCard dish={dish}/>
                                 </li>

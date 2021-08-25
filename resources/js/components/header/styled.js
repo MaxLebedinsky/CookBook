@@ -1,9 +1,15 @@
 import {makeStyles} from "@material-ui/core/styles";
 import { myTheme } from "../adddishform/styled";
 
-export  const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+    },
+    appbar: {
+        paddingBottom: 12,
+        [theme.breakpoints.up('768')]: {
+            paddingBottom: 25,
+        },
     },
     toolbar: {
         display: 'block',
@@ -15,7 +21,7 @@ export  const useStyles = makeStyles((theme) => ({
             width: '50%',
         },
     },
-    logo:{
+    logo: {
         margin: 'auto',
         padding: '0 24px 24px',
     },
