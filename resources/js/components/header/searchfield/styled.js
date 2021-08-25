@@ -2,6 +2,7 @@ import {makeStyles, withStyles} from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import React from "react";
+import { myTheme } from "../../adddishform/styled";
 
 export const useStyles = makeStyles((theme) => ({
     button: {
@@ -11,7 +12,8 @@ export const useStyles = makeStyles((theme) => ({
         marginRight:'8px'
     },
     search:{
-        border: '2px solid #002984',
+        // border: '2px solid #002984',
+        border: `1px solid ${myTheme.palette.text.primary}`,
         overflow: 'auto',
         width: '100%',
         borderRadius: '5px',
@@ -20,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     searchForm:{
-        backgroundColor: '#757de8',
+        backgroundColor: myTheme.palette.primary.light,
         display: 'flex',
         alignItems: 'center',
     },
@@ -29,23 +31,26 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: 'transparent',
     },
     filterIconInput:{
-        backgroundColor: '#757de8',
+        backgroundColor: myTheme.palette.primary.light,
         border: 0,
         width: '100%',
         height: '100%',
-        padding: '10px 10px',
-        color:'#fff',
+        padding: '8px 10px',
+        fontSize: '1.2em',
+        color: myTheme.palette.text.primary,
         '&:focus': {
-            color: '#fff',
+            color: myTheme.palette.text.primary,
             outline: 0,
         },
         '&::placeholder':{
-            color:' #fff',
+            color: myTheme.palette.text.primary,
         }
     },
     searchBox:{
+        margin: '0 auto',
+        maxWidth: 800,
         [theme.breakpoints.up(600)]:{
-            padding:'24px',
+            padding:'0 24px',
         }
     }
 }));

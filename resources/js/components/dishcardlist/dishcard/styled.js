@@ -30,6 +30,7 @@ export const useStyles = makeStyles((theme) => ({
         '&:last-child': {
             paddingBottom: 10,
         },
+        textAlign: 'left',
         flexGrow: 1,
     },
     data: {
@@ -41,7 +42,7 @@ export const useStyles = makeStyles((theme) => ({
     },
 
     // media queries:
-    [theme.breakpoints.down(374)]: {
+    [theme.breakpoints.down(400)]: {
         root: {
             flexDirection: 'column',
             alignItems: 'center',

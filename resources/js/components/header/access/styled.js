@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+import { myTheme } from "../../adddishform/styled";
 
 export const useStyles = makeStyles(() => ({
     loginForm: {
@@ -10,8 +11,11 @@ export const useStyles = makeStyles(() => ({
     },
     loginButton: {
         color: 'white',
-        backgroundColor: 'transparent',
+        backgroundColor: myTheme.palette.text.secondary,
         margin: '16px',
+        '&:hover': {
+            backgroundColor: myTheme.palette.secondary.main,
+        },
     },
     loginButtonsContainer: {
         margin: '16px',

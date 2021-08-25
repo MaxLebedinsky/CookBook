@@ -12,8 +12,8 @@ import {chooseDish} from "../../../redux/dish/actions";
 // преобразование данных из поля created_at в строку вида "23.12.2020 17:53"
 export const getDateString = (string) => {
     let date = new Date(Date.parse(string));
-    return (`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}
-     ${date.getHours()}:${date.getMinutes()}`);
+    return (`${('0'+date.getDate()).slice(-2)}.${('0'+(date.getMonth()+1)).slice(-2)}.${date.getFullYear()} в 
+    ${('0'+date.getHours()).slice(-2)}:${('0'+date.getMinutes()).slice(-2)}`);
 }
 
 export const DishCard = ({dish}) => {
