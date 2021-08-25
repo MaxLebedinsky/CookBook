@@ -26,13 +26,13 @@ export const FilterIngredients = () => {
 
    const handleKeyPressPlusIng = (e) => {
       if (e.key === 'Enter') {
-         dispatch(includeIngredients(plusIngredients.split(' ')));
+         dispatch(includeIngredients(plusIngredients.length > 0 ? plusIngredients.split(' ') : ""));
       }
    };
 
    const handleKeyPressMinusIng = (e) => {
       if (e.key === 'Enter') {
-         dispatch(excludeIngredients(minusIngredients.split(' ')));
+         dispatch(excludeIngredients(minusIngredients.length > 0 ? minusIngredients.split(' ') : ""));
       }
    }
 
@@ -63,7 +63,7 @@ export const FilterIngredients = () => {
          >
             <Fade in={ open }>
                <div className={ classes.paper }>
-                  <div className={classes.ingredientsWrap}>
+                  <div className={ classes.ingredientsWrap }>
                      <label
                         className={ classes.ingredientsLabel }
                         htmlFor="include"
@@ -79,7 +79,7 @@ export const FilterIngredients = () => {
                         onKeyPress={ handleKeyPressPlusIng }
                      />
                   </div>
-                  <div className={classes.ingredientsWrap}>
+                  <div>
                      <label
                         className={ classes.ingredientsLabel }
                         htmlFor="exclude"
