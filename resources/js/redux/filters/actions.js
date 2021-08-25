@@ -5,6 +5,7 @@ export const INCLUDE_INGREDIENTS = 'FILTERS::INCLUDE_INGREDIENTS';
 export const EXCLUDE_INGREDIENTS = 'FILTERS::EXCLUDE_INGREDIENTS';
 export const USER_ID = 'FILTERS::USER_ID';
 export const FILTER_CATEGORY_VALUE = 'FILTERS::FILTER_CATEGORY_VALUE';
+export const FILTER_ORDER_VALUE = 'FILTERS::FILTER_ORDER_VALUE';
 
 export const searchTitle = search => ({
    type: SEARCH_TITLE,
@@ -39,4 +40,9 @@ export const userId = id => ({
 export const filterCategoryValue = value => ({
    type: FILTER_CATEGORY_VALUE,
    payload: value,
-})
+});
+
+export const filterOrderValue = value => ({
+   type: FILTER_ORDER_VALUE,
+   payload: value,
+});

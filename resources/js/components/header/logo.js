@@ -7,7 +7,8 @@ import {
     filterCategory,
     includeIngredients,
     excludeIngredients,
-    filterCategoryValue
+    filterCategoryValue,
+    filterOrderValue,
 } from '../../redux/filters/actions';
 import { useDispatch } from "react-redux";
 
@@ -18,11 +19,12 @@ const Logo = () => {
 
     const handleResetFilters = () => {
         dispatch(searchTitle(''));
-        dispatch(filterOrder('rating'));
+        dispatch(filterOrder('created_at'));
         dispatch(filterCategory(''));
         dispatch(includeIngredients([]));
         dispatch(excludeIngredients([]));
         dispatch(filterCategoryValue(''))
+        dispatch(filterOrderValue('created_at'))
     };
 
     return (

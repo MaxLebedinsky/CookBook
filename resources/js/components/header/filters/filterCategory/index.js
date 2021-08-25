@@ -12,7 +12,6 @@ export const FilterCategory = () => {
 
    const classes = useStyles();
    const dispatch = useDispatch();
-   // const [category, setCategory] = useState('');
    const category = useSelector(state => state.filters.filterCategoryValue);
    const categories = useSelector(state => state.categories.categoryList);
 

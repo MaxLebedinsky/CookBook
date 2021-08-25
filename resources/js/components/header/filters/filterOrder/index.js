@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from '../styled';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { useDispatch } from 'react-redux';
-import { filterOrder } from '../../../../redux/filters/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterOrder, filterOrderValue } from '../../../../redux/filters/actions';
 
 
 const ordersList = [
@@ -17,14 +17,14 @@ export const FilterOrder = () => {
 
    const classes = useStyles();
    const dispatch = useDispatch();
-   const [order, setOrder] = useState('rating');
+   const order = useSelector(state => state.filters.filterOrderValue);
 
    useEffect(() => {
       dispatch(filterOrder(order))
    }, [order])
 
    const handleChange = (event) => {
-      setOrder(event.target.value);
+      dispatch(filterOrderValue(event.target.value));
    };
 
    return (
@@ -36,7 +36,7 @@ export const FilterOrder = () => {
             className={ classes.selectEmpty }
             inputProps={ { 'aria-label': 'Without label' } }
          >
-            <MenuItem value="rating" disabled>
+            <MenuItem value="created_at" disabled>
                Сортировка
             </MenuItem>
             {
