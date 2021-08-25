@@ -6,7 +6,8 @@ import {
     filterOrder,
     filterCategory,
     includeIngredients,
-    excludeIngredients
+    excludeIngredients,
+    filterCategoryValue
 } from '../../redux/filters/actions';
 import { useDispatch } from "react-redux";
 
@@ -21,6 +22,7 @@ const Logo = () => {
         dispatch(filterCategory(''));
         dispatch(includeIngredients([]));
         dispatch(excludeIngredients([]));
+        dispatch(filterCategoryValue(''))
     };
 
     return (

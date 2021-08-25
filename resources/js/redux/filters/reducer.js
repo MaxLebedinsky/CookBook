@@ -5,6 +5,7 @@ import {
    INCLUDE_INGREDIENTS,
    EXCLUDE_INGREDIENTS,
    USER_ID,
+   FILTER_CATEGORY_VALUE,
 } from "./actions";
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
    includeIngredients: [],
    excludeIngredietns: [],
    userId: "",
-
+   filterCategoryValue: '',
 }
 
 export const filtersReducer = (state = initialState, action) => {
@@ -54,6 +55,12 @@ export const filtersReducer = (state = initialState, action) => {
             ...state,
             userId: action.payload,
          };
+      }
+      case FILTER_CATEGORY_VALUE: {
+         return {
+            ...state,
+            filterCategoryValue: action.payload,
+         }
       }
       default:
          return state;

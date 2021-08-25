@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from '../styled';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterCategory } from '../../../../redux/filters/actions';
+import { filterCategory, filterCategoryValue } from '../../../../redux/filters/actions';
 
 
 
@@ -12,15 +12,16 @@ export const FilterCategory = () => {
 
    const classes = useStyles();
    const dispatch = useDispatch();
-   const [category, setCategory] = useState('');
-   const categories = useSelector(state => state.categories.categoryList)
+   // const [category, setCategory] = useState('');
+   const category = useSelector(state => state.filters.filterCategoryValue);
+   const categories = useSelector(state => state.categories.categoryList);
 
    useEffect(() => {
       dispatch(filterCategory(category))
    }, [category])
 
    const handleChange = (event) => {
-      setCategory(event.target.value);
+      dispatch(filterCategoryValue(event.target.value));
    };
 
    return (
