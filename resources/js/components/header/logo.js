@@ -21,14 +21,13 @@ const Logo = () => {
         dispatch(filterCategory(''));
         dispatch(includeIngredients([]));
         dispatch(excludeIngredients([]));
-        window.location.reload();
     };
 
     return (
         <Link
             to="/"
             className={ classes.logo }
-            onClick={ () => handleResetFilters }
+            onClick={ handleResetFilters }
         >
             <svg xmlns="http://www.w3.org/2000/svg" width="120" viewBox="0 0 119.41 113.04" fill="white">
                 <polygon points="100.65 83.63 117.68 83.63 111.91 74.92 111.74 74.66 111.91 74.41 117.68 65.6 106.16 65.6 106.16 64.66 118.54 

@@ -39,7 +39,6 @@ export const DishCardList = () => {
     useEffect(() => {
         setIsFilter(true);
         dispatch(getDishes(filterEndpoint));
-        console.log(filterEndpoint)
     }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
 
     const handleShowMore = () => {
