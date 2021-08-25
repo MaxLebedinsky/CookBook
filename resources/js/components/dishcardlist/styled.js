@@ -10,8 +10,7 @@ export const useStyles = makeStyles((theme) => ({
       // flexGrow: '1',
    },
    showMoreButton:{
-      backgroundColor:'#3F51B5',
-      color:'white'
+      margin: theme.spacing(2, 0, 2),
    },
    [theme.breakpoints.down(400)]: {
       listItem:{

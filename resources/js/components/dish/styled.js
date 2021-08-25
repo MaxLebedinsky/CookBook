@@ -20,8 +20,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     desc: {
        padding: 16,
-       margin: "0 auto",
+      //  margin: "0 auto",
        textAlign: 'left',
+       alignSelf: 'flex-start',
     },
     data: {
        lineHeight: '1.8em',

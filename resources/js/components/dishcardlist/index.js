@@ -91,8 +91,10 @@ export const DishCardList = () => {
                         }
                     </ul>
                     { isLastPage ? <></> :
-                        <Button className={ classes.showMoreButton } onClick={ handleShowMore } variant="contained">Больше
-                            рецептов</Button>
+                        <Button className={ classes.showMoreButton } onClick={ handleShowMore } 
+                            variant="contained" color="secondary">
+                                Показать ещё
+                        </Button>
                     }</>
                 :
                 <></>
