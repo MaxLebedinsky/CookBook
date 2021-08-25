@@ -4,6 +4,12 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
+    appbar: {
+        paddingBottom: 12,
+        [theme.breakpoints.up('768')]: {
+            paddingBottom: 25,
+        },
+    },
     toolbar: {
         display: 'block',
         width: '70%',

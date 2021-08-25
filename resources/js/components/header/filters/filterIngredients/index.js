@@ -63,7 +63,7 @@ export const FilterIngredients = () => {
          >
             <Fade in={ open }>
                <div className={ classes.paper }>
-                  <div>
+                  <div className={classes.ingredientsWrap}>
                      <label
                         className={ classes.ingredientsLabel }
                         htmlFor="include"
@@ -79,7 +79,7 @@ export const FilterIngredients = () => {
                         onKeyPress={ handleKeyPressPlusIng }
                      />
                   </div>
-                  <div>
+                  <div className={classes.ingredientsWrap}>
                      <label
                         className={ classes.ingredientsLabel }
                         htmlFor="exclude"

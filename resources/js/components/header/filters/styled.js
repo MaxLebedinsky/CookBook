@@ -4,6 +4,14 @@ export const useStyles = makeStyles((theme) => ({
    wrap: {
       display: 'flex',
       margin: '0 auto',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      minHeight: 120,
+      [theme.breakpoints.up(768)]: {
+         minWidth: 490,
+         flexDirection: 'initial',
+         minHeight: 'auto',
+      },
    },
    root: {
       '& > *': {
@@ -12,11 +20,11 @@ export const useStyles = makeStyles((theme) => ({
       },
    },
    formControl: {
-      margin: theme.spacing(1),
+      // margin: theme.spacing(1),
       minWidth: 150,
    },
    selectEmpty: {
-      marginTop: theme.spacing(2),
+      // marginTop: theme.spacing(2),
       backgroundColor: "#fff",
       paddingLeft: 5,
    },
@@ -33,6 +41,16 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       justifyContent: 'space-around',
       minWidth: '40%',
+      minHeight: 220,
+      flexDirection: 'column',
+      [theme.breakpoints.up(768)]: {
+         minWidth: 460,
+         flexDirection: 'initial',
+         minHeight: 'auto',
+      },
+   },
+   ingredientsWrap: {
+      margin: '0 auto',
    },
    button: {
       minWidth: 150,
@@ -44,5 +62,6 @@ export const useStyles = makeStyles((theme) => ({
       letterSpacing: 1,
       textTransform: 'uppercase',
       font: '700 10px/13px PT Serif,Georgia,serif',
-   }
+   },
+   // [theme.breakpoints,up]
 }));

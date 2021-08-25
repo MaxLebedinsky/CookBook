@@ -37,7 +37,7 @@ const Header = () => {
             <Modal open={ modal } onClose={ handleCloseModal }>
                 <div className={ classes.modal }>{ modalText }</div>
             </Modal>
-            <AppBar position="static">
+            <AppBar position="static" className={classes.appbar}>
                 <Box className={ classes.topNav }>
                     <Access/>
                     <Button href="/add-dish" onClick={ addClickHandler } className={ classes.addButton } variant="text">
