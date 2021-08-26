@@ -17,8 +17,6 @@ export const myTheme = createTheme({
       text: {
           primary: '#442617',
           secondary: '#a6907b',
-        // primary: '#cc2617',
-        // secondary: '#dd907b',
       },
     },
   });
@@ -72,7 +70,7 @@ export  const useStyles = makeStyles((theme) => ({
         fontSize: '2em',
     },
     form_button: {
-        // textTransform: 'none',
+
         color: myTheme.palette.primary.light,
         backgroundColor: myTheme.palette.text.secondary,
         '&:hover': {

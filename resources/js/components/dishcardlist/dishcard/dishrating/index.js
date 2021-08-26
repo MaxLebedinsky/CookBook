@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { useStyles } from './styled';
@@ -6,8 +6,17 @@ import { useStyles } from './styled';
 export const DishRating = (props) => {
     const baseValue = {...props}.rating;
     const changeable = {...props}.changeable;
-    const [value, setValue] = React.useState(baseValue);
+    const [value, setValue] = useState(baseValue);
     const classes = useStyles();
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        setValue(event.target.value);
+    }
+
+    useEffect(() => {
+        setValue(baseValue);
+    }, [baseValue]);
 
     return (
         <span className={classes.root}>
@@ -17,10 +26,7 @@ export const DishRating = (props) => {
                 value={value}
                 precision={0.5}
                 size="small"
-                onChange={(event, newValue) => {
-                    event.preventDefault();
-                    setValue(newValue);
-                }}
+                onChange= { handleChange }
             />
             <Typography 
                 component="span" 

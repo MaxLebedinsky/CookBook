@@ -49,7 +49,6 @@ export const AddDishForm = () => {
 
     const postDish = async (dish) => {
         setUploadFinished(false);
-        // console.log('id before post: ', userData);
         dish.dish.user_id = userData.id;
         let response = await fetch('/api/full-dishes', {
             method: 'POST',
@@ -210,9 +209,6 @@ export const AddDishForm = () => {
 
     const handleChange = (event) => {
         switch (event.target.name) {
-            // case 'id-delete' :
-            //     setIdDelete(event.target.value);
-            //     break;
             case 'title' :
                 setDish({ ...dish, dish:{ ...dish.dish, title: event.target.value }});
                 // setDish({...dish, title: event.target.value});
