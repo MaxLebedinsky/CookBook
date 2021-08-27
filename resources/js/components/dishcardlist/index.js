@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Layout from "../layout";
 import { Button } from '@material-ui/core';
 import { getDishes } from "../../redux/dishes/actions";
+import {isHeaderBig} from "../../redux/header/actions";
 
 export const DishCardList = () => {
     const dispatch = useDispatch();
@@ -40,6 +41,10 @@ export const DishCardList = () => {
         setIsFilter(true);
         dispatch(getDishes(filterEndpoint));
     }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
+
+    useEffect(()=>{
+       dispatch(isHeaderBig(true))
+    },[])
 
     const handleShowMore = () => {
         setIsFilter(false)
