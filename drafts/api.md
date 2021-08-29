@@ -1223,3 +1223,26 @@ Fields: ```excludes[]```
 Response
 Ответ аналогичен полному блюду с пагинацией
 
+
+***Сохранение рейтинга блюда***
+
+Сохраняем значение рейтинга в таблицу. Если уже было - обновим. Пересчитаем новое среднее значение,
+сохраним в таблицу dishes и вернем на фронт. В случае ошибки - код возврата будет 400.
+
+Header:
+```Bearer token: 9|BpoBMzkDYk36ltIlEL4a5enaZ6mLdXtdQhcxlxTI```
+
+Request POST ```/api/dish_rating/```
+
+Fields: ```dish_id```
+Fields: ```rating```
+Encode: ```form-data```
+
+Response
+```json
+{
+    "data": {
+        "rating": 3.2
+    }
+}
+```
