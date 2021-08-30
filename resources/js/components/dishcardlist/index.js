@@ -12,6 +12,7 @@ export const DishCardList = () => {
     const classes = useStyles();
     const dishes = useSelector(state => state.dishes.dishes);
     const links = useSelector(state => state.dishes.links);
+    const status = useSelector(state => state.dishes.request.status);
     const [loadedDishes, setLoadedDishes] = useState([]);
     const [isLastPage, setIsLastPage] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -42,8 +43,13 @@ export const DishCardList = () => {
         dispatch(getDishes(filterEndpoint));
     }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
 
+    useEffect(() => {
+        console.log('status: ', status);
+        if (status === 1) { setIsLoaded(false)}
+        else (setIsLoaded(true));
+    }, [status]);
+
     const handleShowMore = () => {
-        console.log('more dishes begin');
         setIsFilter(false)
         if (links.next === null) {
             setIsLastPage(true)
@@ -51,7 +57,6 @@ export const DishCardList = () => {
             setIsLastPage(false)
             dispatch(getDishes(`${filterEndpoint}&page=${links.next.slice(-1)}`))
         }
-        console.log('more dishes end');
     }
 
     useEffect(() => {
