@@ -6,6 +6,7 @@ import Layout from "../layout";
 import { Button } from '@material-ui/core';
 import { getDishes } from "../../redux/dishes/actions";
 import { LoaderModal } from '../adddishform/loadermodal';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export const DishCardList = () => {
     const dispatch = useDispatch();
@@ -99,14 +100,19 @@ export const DishCardList = () => {
                             ))
                         }
                     </ul>
-                    { isLastPage ? <></> :
+                    { isLastPage || loader ? <></> :
                         <Button className={ classes.showMoreButton } onClick={ handleShowMore }
                             variant="contained" color="secondary">
                             Показать ещё
                         </Button>
                     }
                     {
-                        loader ? <LoaderModal open={ loader } message="Загрузка рецептов..." /> : <></>
+                        loader ?
+                            <div className={ classes.root }>
+                                <CircularProgress color="secondary" />
+                            </div>
+                            :
+                            <></>
                     }
                 </>
                 :
