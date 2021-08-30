@@ -46,7 +46,6 @@ export const DishCardList = () => {
     }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
 
     useEffect(() => {
-        console.log('status: ', status);
         if (status === 1) { setLoader(true) }
         else (setLoader(false));
     }, [status]);
@@ -108,7 +107,7 @@ export const DishCardList = () => {
                     }
                     {
                         loader ?
-                            <div className={ classes.root }>
+                            <div className={ classes.circular }>
                                 <CircularProgress color="secondary" />
                             </div>
                             :
