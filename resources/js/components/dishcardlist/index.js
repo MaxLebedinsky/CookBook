@@ -17,6 +17,7 @@ export const DishCardList = () => {
     const [isLastPage, setIsLastPage] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isFilter, setIsFilter] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const filterCategory = useSelector(state => state.filters.filterCategory);
     const filterOrder = useSelector(state => state.filters.filterOrder);
@@ -45,8 +46,8 @@ export const DishCardList = () => {
 
     useEffect(() => {
         console.log('status: ', status);
-        if (status === 1) { setIsLoaded(false)}
-        else (setIsLoaded(true));
+        if (status === 1) { setLoader(true) }
+        else (setLoader(false));
     }, [status]);
 
     const handleShowMore = () => {
@@ -99,14 +100,18 @@ export const DishCardList = () => {
                         }
                     </ul>
                     { isLastPage ? <></> :
-                        <Button className={ classes.showMoreButton } onClick={ handleShowMore } 
+                        <Button className={ classes.showMoreButton } onClick={ handleShowMore }
                             variant="contained" color="secondary">
-                                Показать ещё
+                            Показать ещё
                         </Button>
-                    }</>
+                    }
+                    {
+                        loader ? <LoaderModal open={ loader } message="Загрузка рецептов..." /> : <></>
+                    }
+                </>
                 :
-                // <>Загрузка рецептов...</>
-                <LoaderModal open={ !isLoaded } message="Загрузка рецептов..." />
+                <LoaderModal open={ loader } message="Загрузка рецептов..." />
+
             }
         </Layout>
     )
