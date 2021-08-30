@@ -108,7 +108,11 @@ export  const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(6, 2, 6),
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        '&:focus': {
+            outline: 'none',
+            border: 'none',
+        }
     },
     dialogText: {
         margin: theme.spacing(4, 'auto'),

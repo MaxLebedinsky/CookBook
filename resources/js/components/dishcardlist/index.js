@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Layout from "../layout";
 import { Button } from '@material-ui/core';
 import { getDishes } from "../../redux/dishes/actions";
+import { LoaderModal } from '../adddishform/loadermodal';
 
 export const DishCardList = () => {
     const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export const DishCardList = () => {
     }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
 
     const handleShowMore = () => {
+        console.log('more dishes begin');
         setIsFilter(false)
         if (links.next === null) {
             setIsLastPage(true)
@@ -49,6 +51,7 @@ export const DishCardList = () => {
             setIsLastPage(false)
             dispatch(getDishes(`${filterEndpoint}&page=${links.next.slice(-1)}`))
         }
+        console.log('more dishes end');
     }
 
     useEffect(() => {
@@ -97,7 +100,8 @@ export const DishCardList = () => {
                         </Button>
                     }</>
                 :
-                <>Загрузка рецептов...</>
+                // <>Загрузка рецептов...</>
+                <LoaderModal open={ !isLoaded } message="Загрузка рецептов..." />
             }
         </Layout>
     )
