@@ -42,6 +42,7 @@ export const DishCard = ({dish}) => {
                         {dish.title.slice(0, MAX_TITLE_LENGTH - 1)}
                     </Typography>
                     <Typography
+                        component="div"
                         color="textSecondary"
                         className={classes.data}>
                         Рейтинг:<DishRating rating={+dish.rating.toFixed(1)} changeable={false}/><br/>

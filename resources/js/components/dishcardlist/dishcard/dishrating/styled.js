@@ -15,5 +15,25 @@ export const useStyles = makeStyles((theme) => ({
             margin: '0 2px',
             fontSize: '0.83rem',
         },
+    },
+    modal: {
+      margin: '20% auto',
+      width: 300,
+      backgroundColor: theme.palette.background.paper,
+      textAlign: 'center',
+      lineHeight: '1.5em',
+      borderRadius: 10,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(6, 2, 6),
+      boxSizing: 'border-box',
+      '&:focus': {
+        border: 'none',
+        outline: 'none',
+      }
+    },
+    circular: {
+      position: 'fixed',
+      top: '50%',
+      left: '48%',
     }
   }));

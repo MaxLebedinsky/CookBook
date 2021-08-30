@@ -28,8 +28,8 @@ export const Dish = () => {
                     <Typography color="textSecondary" className={classes.data}>
                         {dish.description}<br/><br/>
                     </Typography>
-                    <Typography color="textPrimary" className={classes.data}>
-                        Рейтинг:<DishRating rating={+dish.rating.toFixed(1)} changeable={true}/><br/>
+                    <Typography component="div" color="textPrimary" className={classes.data}>
+                        Рейтинг:<DishRating rating={+dish.rating.toFixed(1)} dishId={dish.id} changeable={true}/><br/>
                         Сложность:<DishComplexity complexity={dish.complexity}/><br/>
                         Категория: <b>{dish.category.name.slice(0, MAX_CAT_NAME_LENGTH - 1)}</b><br/>
                         Автор: <b>{dish.user.name}</b><br/>
