@@ -5,6 +5,7 @@ import Login from "./login"
 import Logout from "./logout";
 import {useDispatch, useSelector} from "react-redux";
 import {isLogin, isLogout, loggedUserData} from "../../../redux/access/actions";
+import { CircularProgress } from '@material-ui/core';
 
 const Access = () => {
     const [open, setOpen] = React.useState(false);
@@ -18,9 +19,11 @@ const Access = () => {
     const [token, setToken] = useState("")
     const loginStatus = useSelector(state => state.access.loginStatus)
     const dispatch = useDispatch();
+    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
         if (sessionStorage.getItem('authToken')) {
+            setLoader(true);
             setToken(sessionStorage.getItem('authToken'))
             window.axios.get('/auth/me', {
                     headers: {
@@ -30,9 +33,11 @@ const Access = () => {
             )
                 .then((response) => {
                     dispatch(loggedUserData(response.data.data))
+                    setLoader(false);
                 })
                 .catch((error) => {
                     console.log(error);
+                    setLoader(false);
                 });
         }
         if (token !== "") {
@@ -50,7 +55,15 @@ const Access = () => {
             </Button>
             {loginStatus ? <Logout open={open} onClose={handleClose} setToken={setToken} token={token}/> :
                 <Login open={open} onClose={handleClose} setToken={setToken} token={token}/>}
-        </div>
+            {
+                loader ?
+                    <div className={ classes.circular }>
+                        <CircularProgress color="secondary" />
+                    </div>
+                    :
+                    <></>
+            }
+</div>
     );
 }
 export default Access;

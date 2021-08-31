@@ -22,6 +22,12 @@ export const useStyles = makeStyles(() => ({
         display: "flex",
         justifyContent: "space-between"
     },
+    circular: {
+        position: 'fixed',
+        top: '40%',
+        left: '48%',
+        zIndex: 99,
+    },
     modalLink: {
         '&:hover': {
             color: myTheme.palette.secondary.main,
