@@ -12,6 +12,11 @@ export const useStyles = makeStyles((theme) => ({
    showMoreButton:{
       margin: theme.spacing(2, 0, 2),
    },
+   circular: {
+      position: 'fixed',
+      top: '40%',
+      left: '48%',
+   },
    [theme.breakpoints.down(400)]: {
       listItem:{
          maxWidth: 300,

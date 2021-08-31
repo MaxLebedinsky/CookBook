@@ -41,6 +41,10 @@ Route::prefix('categories')
 Route::prefix('measures')
     ->group(base_path('routes/api/measures.php'));
 
+// register dish_rating endpoints
+Route::prefix('dish_rating')
+    ->group(base_path('routes/api/dish_rating.php'));
+
 Route::any('/{any?}', function () {
     return response()->json([
         'success' => false,

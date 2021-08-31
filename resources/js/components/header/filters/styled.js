@@ -57,10 +57,10 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     filtersContainer: {
-        display: 'flex',
+        [theme.breakpoints.up(768)]: {display: 'flex',
         justifyContent: 'space-around',
     },
-    modalTitle: {
+    },modalTitle: {
         textAlign: 'center',
         margin: theme.spacing(1, 0, 3),
         textTransform: 'uppercase',
@@ -85,16 +85,32 @@ export const useStyles = makeStyles((theme) => ({
         display: 'block',
         textAlign: 'center',
         marginBottom: 15,
-        // letterSpacing: 1,
+
         textTransform: 'uppercase',
         color: myTheme.palette.text.primary,
-        // font: '700 10px/13px PT Serif,Georgia,serif',
+        },
+   textfield: {
+      display: 'block',
+      margin: '0 auto',
+      maxWidth: 210,
+   },
+   textfieldplus: {
+      marginBottom: 30,
+      [theme.breakpoints.up(768)]: {
+         marginBottom: 0,
+      },
+   },
+   prompt: {
+      color: '#808080',
+      fontSize: 'small',
     },
     ingredientsButtonsWrap: {
         display: 'flex',
         marginTop: 15,
         justifyContent: 'space-around',
-        width: '100%',
+        width: '100%',[theme.breakpoints.up(768)]: {
+         justifyContent: 'initial',
+      },
     },
     ingredientsButton: {
         display: 'block',
@@ -103,6 +119,10 @@ export const useStyles = makeStyles((theme) => ({
         '&:hover': {
             backgroundColor: myTheme.palette.secondary.main,
         },
-    }
-    // [theme.breakpoints,up]
+    },
+   ingredientsButtonReset: {
+     [theme.breakpoints.up(768)]: {
+         margin: '0 10px',
+      },
+   }
 }));
