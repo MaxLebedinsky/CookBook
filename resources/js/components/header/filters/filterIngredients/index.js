@@ -39,12 +39,14 @@ export const FilterIngredients = () => {
    const handleSetIngredients = () => {
       dispatch(includeIngredients(plusIngredients.length > 0 ? plusIngredients.split(' ') : ""));
       dispatch(excludeIngredients(minusIngredients.length > 0 ? minusIngredients.split(' ') : ""));
+      setOpen(false);
    };
 
    const handleKeyPress = (e) => {
       if (e.key === 'Enter') {
          dispatch(includeIngredients(plusIngredients.split(' ')));
          dispatch(excludeIngredients(minusIngredients.split(' ')));
+         setOpen(false);
       }
    };
 
