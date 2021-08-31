@@ -39,8 +39,16 @@ export const FilterIngredients = () => {
    const handleSetIngredients = () => {
       dispatch(includeIngredients(plusIngredients.length > 0 ? plusIngredients.split(' ') : ""));
       dispatch(excludeIngredients(minusIngredients.length > 0 ? minusIngredients.split(' ') : ""));
+      setOpen(false);
    };
 
+   const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+         dispatch(includeIngredients(plusIngredients.split(' ')));
+         dispatch(excludeIngredients(minusIngredients.split(' ')));
+         setOpen(false);
+      }
+   };
 
    const handleOpen = () => {
       setOpen(true);
@@ -81,11 +89,13 @@ export const FilterIngredients = () => {
                            содержащие
                         </label>
                         <TextField
+                           className={ `${classes.textfield} ${classes.textfieldplus}` }
                            id="include"
                            value={ plusIngredients }
                            label="+ Ингредиенты"
                            variant="outlined"
                            onChange={ handleChangePlusIng }
+                           onKeyPress={ handleKeyPress }
                            color="secondary"
                         />
                      </div>
@@ -97,29 +107,32 @@ export const FilterIngredients = () => {
                            не содержащие
                         </label>
                         <TextField
+                           className={ classes.textfield }
                            id="exclude"
                            value={ minusIngredients }
                            label="– Ингредиенты"
                            variant="outlined"
                            onChange={ handleChangeMinusIng }
+                           onKeyPress={ handleKeyPress }
                            color="secondary"
                         />
                      </div>
                   </div>
+                  <span className={ classes.prompt }>* Если ингредиентов больше одного, разделите их пробелом</span>
                   <div className={ classes.ingredientsButtonsWrap }>
                      <Button
                         variant="contained"
-                        className={ classes.ingredientsButton }
+                        className={ `${classes.ingredientsButton} ${classes.ingredientsButtonReset}` }
                         onClick={ handleReset }
                      >
-                        Cброс
+                        Cбросить
                      </Button>
                      <Button
                         variant="contained"
                         className={ classes.ingredientsButton }
                         onClick={ handleSetIngredients }
                      >
-                        Поиск
+                        Применить
                      </Button>
 
                   </div>

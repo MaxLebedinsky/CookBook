@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Box, CardContent, CardMedia, List, ListItem, Typography} from '@material-ui/core';
 import {Card} from 'reactstrap';
 import {DishRating} from '../dishcardlist/dishcard/dishrating';
@@ -7,11 +7,17 @@ import {getDateString} from '../dishcardlist/dishcard';
 import {MAX_CAT_NAME_LENGTH} from './const';
 import {useStyles} from './styled';
 import Layout from "../layout";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {isHeaderSmall} from "../../redux/header/actions";
 
 export const Dish = () => {
     const classes = useStyles();
     const dish = useSelector(state => state.dish.chosenDish);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(isHeaderSmall(false))
+    }, [])
 
     return (
         <Layout>
