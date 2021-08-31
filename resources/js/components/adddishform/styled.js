@@ -140,6 +140,9 @@ export  const useStyles = makeStyles((theme) => ({
         color: 'tomato',
         marginLeft: 'auto',
     },
+    stepDesc: {
+        maxWidth: '70%',
+    },
     stepsListItem: {
         display: 'flex',
         marginBottom: theme.spacing(2),

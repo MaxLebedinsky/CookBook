@@ -15,8 +15,6 @@ export const useStyles = makeStyles((theme) => ({
       overflow: 'hidden',
     },
     image: {
-      //  width: 365,
-      //  margin: theme.spacing(2, 0),
       objectFit: 'cover',
     },
     title: {
@@ -67,6 +65,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     stepText: {
        padding: 0,
+       maxWidth: '80%'
     },
     
     [theme.breakpoints.down(374)]: {

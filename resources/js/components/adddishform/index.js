@@ -414,7 +414,7 @@ export const AddDishForm = () => {
                                     <img src={ item.imagePreviewUrl } className={ classes.stepImagePreview } 
                                     width="100" height="75" alt="Step image"/>
                                 </div>
-                                <span className={ classes.fullWidth }>{ item.text }</span>
+                                <span className={ classes.stepDesc }>{ item.text }</span>
                                 <IconButton 
                                 onClick={ handleDelStepClick } 
                                 id={ index } 
