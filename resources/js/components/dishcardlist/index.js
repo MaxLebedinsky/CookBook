@@ -7,6 +7,7 @@ import { Button } from '@material-ui/core';
 import { getDishes } from "../../redux/dishes/actions";
 import { LoaderModal } from '../adddishform/loadermodal';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {isHeaderBig} from "../../redux/header/actions";
 
 export const DishCardList = () => {
     const dispatch = useDispatch();
@@ -49,6 +50,10 @@ export const DishCardList = () => {
         if (status === 1) { setLoader(true) }
         else (setLoader(false));
     }, [status]);
+    
+    useEffect(()=>{
+       dispatch(isHeaderBig(true))
+    },[])
 
     const handleShowMore = () => {
         setIsFilter(false)

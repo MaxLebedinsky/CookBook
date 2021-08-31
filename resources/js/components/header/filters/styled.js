@@ -6,12 +6,16 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       margin: '0 auto 16px',
       flexDirection: 'column',
+      width: '30%',
       justifyContent: 'space-between',
       minHeight: 120,
       [theme.breakpoints.up(768)]: {
          minWidth: 490,
          flexDirection: 'initial',
          minHeight: 'auto',
+      },
+      [theme.breakpoints.up(300)]: {
+         alignItems: 'center',
       },
    },
    root: {
