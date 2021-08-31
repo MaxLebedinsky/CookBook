@@ -16,11 +16,13 @@ export const Dish = () => {
     return (
         <Layout>
             <Card className={classes.root}>
-                <CardMedia className={classes.image}
-                           component="img"
-                           alt={dish.title}
-                           image={dish.big_img}
-                />
+                <Box className={classes.imageContainer}>
+                    <CardMedia className={classes.image}
+                            component="img"
+                            alt={dish.title}
+                            image={dish.big_img}
+                    />
+                </Box>
                 <CardContent className={classes.desc}>
                     <Typography component="h1" className={classes.title} color="textPrimary">
                         {dish.title}
@@ -63,10 +65,14 @@ export const Dish = () => {
                 {dish.dish_steps.map((item) => (
                     <ListItem className={classes.stepItem} key={item.id}>
                         <Card className={classes.stepItem}>
-                            <CardMedia className={classes.stepImage}
-                                       component="img"
-                                       alt={`шаг №${item.step_number}`}
-                                       image={item.img}/>
+                            <Box className={classes.stepImageContainer}>
+                                <CardMedia className={classes.stepImage}
+                                        component="img"
+                                        width="150"
+                                        height="112"
+                                        alt={`шаг №${item.step_number}`}
+                                        image={item.img}/>
+                            </Box>
                             <CardContent className={classes.stepText}>
                                 <Typography color="textPrimary">
                                     {item.step_number}{`. `}

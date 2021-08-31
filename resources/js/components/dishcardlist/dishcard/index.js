@@ -34,6 +34,8 @@ export const DishCard = ({dish}) => {
             <Card className={classes.root}>
                 <CardMedia className={classes.image}
                            component="img"
+                           width="130"
+                           height="100"
                            alt={dish.title}
                            image={dish.small_img}
                 />

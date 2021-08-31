@@ -408,9 +408,12 @@ export const AddDishForm = () => {
                 <div id="steps-list" className={ classes.ingredientsList }>
                     { stepsArr.length === 0 ? <></> :
                         stepsArr.map((item, index) => (
-                            <Typography className={ classes.stepsListItem } key={ index } color="textPrimary">
+                            <Typography component="div" className={ classes.stepsListItem } key={ index } color="textPrimary">
                                 <span>{ index + 1 }. </span>
-                                <img src={ item.imagePreviewUrl } className={ classes.stepImagePreview } alt="Step image"/>
+                                <div className={ classes.stepImagePreviewContainer }>
+                                    <img src={ item.imagePreviewUrl } className={ classes.stepImagePreview } 
+                                    width="100" height="75" alt="Step image"/>
+                                </div>
                                 <span className={ classes.fullWidth }>{ item.text }</span>
                                 <IconButton 
                                 onClick={ handleDelStepClick } 

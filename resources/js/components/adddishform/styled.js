@@ -138,19 +138,21 @@ export  const useStyles = makeStyles((theme) => ({
         padding: 0,
         marginBottom: '-2px',
         color: 'tomato',
+        marginLeft: 'auto',
     },
     stepsListItem: {
         display: 'flex',
-        justifyContent: 'space-between',
         marginBottom: theme.spacing(2),
         alignItems: 'flex-start',
     },
-    fullWidth: {
-        width: '100%',
+    stepImagePreviewContainer: {
+        width: 100,
+        height: 75,
+        overflow: 'hidden',
+        margin: theme.spacing(0, 1),
     },
     stepImagePreview: {
-        width: '100px',
-        margin: theme.spacing(0, 1),
+        objectFit: 'cover',
     },
     dots: {
         flexGrow: 0.9,
