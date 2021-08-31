@@ -1,4 +1,4 @@
-import { Button, TextField, FormControlLabel, RadioGroup, Radio, Dialog, CircularProgress,
+import { Button, TextField, FormControlLabel, RadioGroup, Radio, Dialog,
     FormControl, Modal, Select, MenuItem, InputLabel, Typography, Box, IconButton} from '@material-ui/core';
 import { ArrowBackIos, Check, FolderOpen, HighlightOff, PhotoCamera} from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
@@ -7,6 +7,7 @@ import { ADMIN_USER_ID, MAX_FILE_SIZE, TEST_DISH_FOR_POST } from '../dish/const'
 import { DeleteDish } from './deleteDish';
 import { myTheme, useStyles } from './styled';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { LoaderModal } from './loadermodal';
 
 export const AddDishForm = () => {
     const classes = useStyles();
@@ -26,6 +27,7 @@ export const AddDishForm = () => {
 
     useEffect(()=> {
         getMeasures();
+        setUploadFinished(true);
     }, []);
 
     const handleOpenModal = (text) => {
@@ -49,9 +51,8 @@ export const AddDishForm = () => {
 
     const postDish = async (dish) => {
         setUploadFinished(false);
-        console.log('id before post: ', userData);
         dish.dish.user_id = userData.id;
-        let response = await fetch('/api/full-dishes/', {
+        let response = await fetch('/api/full-dishes', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
@@ -96,6 +97,7 @@ export const AddDishForm = () => {
                 return;
             }
         }
+        setUploadFinished(true);
     };
 
     const formDataIsValid = (dish) => {
@@ -210,9 +212,6 @@ export const AddDishForm = () => {
 
     const handleChange = (event) => {
         switch (event.target.name) {
-            // case 'id-delete' :
-            //     setIdDelete(event.target.value);
-            //     break;
             case 'title' :
                 setDish({ ...dish, dish:{ ...dish.dish, title: event.target.value }});
                 // setDish({...dish, title: event.target.value});
@@ -260,12 +259,7 @@ export const AddDishForm = () => {
                 Добавить ещё один рецепт
             </Button>
         </Dialog>
-        <Modal open={ !uploadFinished }>
-            <div className={ classes.modal }>
-                <CircularProgress className= { classes.loader } disableShrink color="secondary" thickness={5}/>
-                Сохранение рецепта...
-            </div>
-        </Modal>
+        <LoaderModal open={ !uploadFinished } message="Сохранение рецепта..."/>
         <Box className={ classes.formHeader }>
             <Button href="/" className= { classes.form_button } variant="contained" startIcon={ <ArrowBackIos/> } >
                 На главную

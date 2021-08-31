@@ -5,16 +5,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import Layout from "../layout";
 import { Button } from '@material-ui/core';
 import { getDishes } from "../../redux/dishes/actions";
+import { LoaderModal } from '../adddishform/loadermodal';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export const DishCardList = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const dishes = useSelector(state => state.dishes.dishes);
     const links = useSelector(state => state.dishes.links);
+    const status = useSelector(state => state.dishes.request.status);
     const [loadedDishes, setLoadedDishes] = useState([]);
     const [isLastPage, setIsLastPage] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isFilter, setIsFilter] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const filterCategory = useSelector(state => state.filters.filterCategory);
     const filterOrder = useSelector(state => state.filters.filterOrder);
@@ -40,6 +44,11 @@ export const DishCardList = () => {
         setIsFilter(true);
         dispatch(getDishes(filterEndpoint));
     }, [filterCategory, filterOrder, searchTitle, includeIngredients, excludeIngredients, userId])
+
+    useEffect(() => {
+        if (status === 1) { setLoader(true) }
+        else (setLoader(false));
+    }, [status]);
 
     const handleShowMore = () => {
         setIsFilter(false)
@@ -90,14 +99,24 @@ export const DishCardList = () => {
                             ))
                         }
                     </ul>
-                    { isLastPage ? <></> :
-                        <Button className={ classes.showMoreButton } onClick={ handleShowMore } 
+                    { isLastPage || loader ? <></> :
+                        <Button className={ classes.showMoreButton } onClick={ handleShowMore }
                             variant="contained" color="secondary">
-                                Показать ещё
+                            Показать ещё
                         </Button>
-                    }</>
+                    }
+                    {
+                        loader ?
+                            <div className={ classes.circular }>
+                                <CircularProgress color="secondary" />
+                            </div>
+                            :
+                            <></>
+                    }
+                </>
                 :
-                <>Загрузка рецептов...</>
+                <LoaderModal open={ loader } message="Загрузка рецептов..." />
+
             }
         </Layout>
     )

@@ -17,8 +17,6 @@ export const myTheme = createTheme({
       text: {
           primary: '#442617',
           secondary: '#a6907b',
-        // primary: '#cc2617',
-        // secondary: '#dd907b',
       },
     },
   });
@@ -72,7 +70,7 @@ export  const useStyles = makeStyles((theme) => ({
         fontSize: '2em',
     },
     form_button: {
-        // textTransform: 'none',
+
         color: myTheme.palette.primary.light,
         backgroundColor: myTheme.palette.text.secondary,
         '&:hover': {
@@ -110,7 +108,11 @@ export  const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(6, 2, 6),
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        '&:focus': {
+            outline: 'none',
+            border: 'none',
+        }
     },
     dialogText: {
         margin: theme.spacing(4, 'auto'),
