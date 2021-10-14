@@ -23,6 +23,8 @@ export const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
         marginBottom: 6,
         lineHeight: '1.3em',
+        maxHeight: 40,
+        overflow: 'hidden',
     },
     desc: {
         padding: 0,

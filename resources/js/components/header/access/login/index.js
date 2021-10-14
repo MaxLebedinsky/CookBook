@@ -57,7 +57,7 @@ const Login = (props) => {
                     <form className={classes.loginForm} onSubmit={handleLogin}>
                         <TextField type="email" id="email-input" label="Email" value={email} 
                                 onChange={handleEmail} color="secondary" className={ classes.modalInput }/> <br/>
-                        <TextField type="password" id="password-input" label="Password" value={password}
+                        <TextField type="password" id="password-input" label="Пароль" value={password}
                                 onChange={handlePassword} color="secondary" className={ classes.modalInput }/> <br/>
                         <div className={classes.loginButtonsContainer}>
                             <Button variant='contained' type="submit" color="secondary">Войти</Button>

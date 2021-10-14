@@ -8,9 +8,14 @@ export const useStyles = makeStyles((theme) => ({
        flexDirection: 'column',
        alignItems: 'center',
     },
+    imageContainer: {
+      width: 365,
+      height: 273,
+      margin: theme.spacing(2, 0),
+      overflow: 'hidden',
+    },
     image: {
-       width: 365,
-       margin: theme.spacing(2, 0),
+      objectFit: 'cover',
     },
     title: {
        fontWeight: 700,
@@ -49,12 +54,18 @@ export const useStyles = makeStyles((theme) => ({
        position: 'relative',
        bottom: 4,
     },
+    stepImageContainer: {
+      width: 150,
+      height: 112,
+      overflow: 'hidden',
+      marginBottom: 8,
+    },
     stepImage: {
-       width: 150,
-       marginBottom: 10,
+       objectFit: 'cover',
     },
     stepText: {
        padding: 0,
+       maxWidth: '80%'
     },
     
     [theme.breakpoints.down(374)]: {
@@ -64,17 +75,18 @@ export const useStyles = makeStyles((theme) => ({
        title: {
           fontSize: '1.2em',
        },
-       image: {
+       imageContainer: {
           width: 300,
+          height: 225,
        }
     },
     [theme.breakpoints.up(425)]: {
        root: {
           maxWidth: 800,
        },
-       image: {
-          width: 640,
-          maxWidth: '90%',
+       imageContainer: {
+          width: 400,
+          height: 300,
        },
        list: {
           maxWidth: 800,
@@ -85,8 +97,12 @@ export const useStyles = makeStyles((theme) => ({
           display: 'flex',
           alignItems: 'flex-start',
        },
-       stepImage: {
+       stepImageContainer: {
           marginRight: '20px',
        },
+       imageContainer: {
+         width: 640,
+         height: 480,
+      },
     },
  }));

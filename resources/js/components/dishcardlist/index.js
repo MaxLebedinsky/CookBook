@@ -104,7 +104,7 @@ export const DishCardList = () => {
                             ))
                         }
                     </ul>
-                    { isLastPage || loader ? <></> :
+                    { isLastPage ? <></> :
                         <Button className={ classes.showMoreButton } onClick={ handleShowMore }
                             variant="contained" color="secondary">
                             Показать ещё

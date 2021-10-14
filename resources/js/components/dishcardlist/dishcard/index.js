@@ -34,6 +34,8 @@ export const DishCard = ({dish}) => {
             <Card className={classes.root}>
                 <CardMedia className={classes.image}
                            component="img"
+                           width="130"
+                           height="100"
                            alt={dish.title}
                            image={dish.small_img}
                 />
@@ -42,6 +44,7 @@ export const DishCard = ({dish}) => {
                         {dish.title.slice(0, MAX_TITLE_LENGTH - 1)}
                     </Typography>
                     <Typography
+                        component="div"
                         color="textSecondary"
                         className={classes.data}>
                         Рейтинг:<DishRating rating={+dish.rating.toFixed(1)} changeable={false}/><br/>

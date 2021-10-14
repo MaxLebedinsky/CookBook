@@ -17,6 +17,10 @@ export const useStyles = makeStyles((theme) => ({
       top: '40%',
       left: '48%',
    },
+   title: {
+      maxHeight: 40,
+      overflow: 'hidden',
+   },
    [theme.breakpoints.down(400)]: {
       listItem:{
          maxWidth: 300,
